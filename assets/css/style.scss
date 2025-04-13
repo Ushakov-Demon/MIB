@@ -1,4 +1,5 @@
 @import 'mixin';
+@import 'fonts';
 @import 'icons';
 @import 'filter';
 
@@ -7,20 +8,17 @@
     --bg: #F2F2F2;
     --container_padding: 50px;
     --container: 1380px;
-    --font: "Onest", Helvetica, Arial, Verdana, sans-serif;
-    --text_color: #020202;
+    --font: "Gilroy", Helvetica, Arial, Verdana, sans-serif;
+    --text_color: #262626;
     --color_white: #fff;
-    --color_black: #020202;
-    --color_grey: #3E3F43;
-    --color_grey_2: #2F3138;
-    --color_primary: #EF3E33;
-    --color_secondary: #2F3138;
-    --color_link: #020202;
-    --color_green: #19B44F;
+    --color_black: #000000;
+    --color_grey: #E5E5E5;
+    --color_primary: #5E9CB9;
+    --color_secondary: #262626;
+    --color_link: #262626;
     --color_error: #EF3E33;
-    --color_yellow: #F4BF11;
 
-    --header_height: 104px;
+    --header_height: 120px;
     --item_size: 56px;
     --max_size_m: 400px;
     --max_size_s: 600px;
@@ -49,6 +47,7 @@
 
     @include m(mobile) {
         --container_padding: 24px;
+        --header_height: 188px;
     }
 
     @include m(tablet_h) {
@@ -440,18 +439,22 @@ header.site-header {
     line-height: 1;
     padding: var(--padding_m) 0;
     transition: all .5s ease;
-    background-color: var(--color_secondary);
+    background-color: var(--color_w);
     border-bottom: 1px solid var(--color_grey);
+
+    .home & {
+        background-color: transparent;
+    }
 
     .container {
         max-width: 100%;
     }
 
     .logo-link {
-        color: var(--color_white);
+        color: var(--text_color);
 
         &:hover {
-            color: var(--color_white);
+            color: var(--text_color);
         }
 
         &[href="#"] {
@@ -501,12 +504,12 @@ header.site-header {
         img {
             display: block;
             width: 100%;
-            max-width: 80px;
+            max-width: 280px;
         }
 
         .logo-link {
             display: block;
-            color: var(--color_white);
+            color: var(--text_color);
 
             &:hover {
                 color: var(--color_primary);
@@ -538,14 +541,7 @@ header.site-header {
                 padding: 0;
                 position: relative;
                 font-size: var(--font_size_p1);
-
-                @include min1024 {
-                    color: var(--color_white);
-                }
-
-                @include max1024 {
-                    color: var(--text_color);
-                }
+                color: var(--text_color);
 
                 &[aria-current="page"] {
                     cursor: default;
@@ -1013,7 +1009,7 @@ header.site-header {
 }
 
 footer {
-    background-color: var(--color_grey);
+    background-color: var(--color_black);
     padding: 50px 0;
     color: var(--color_white);
 

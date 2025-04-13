@@ -3,20 +3,6 @@
 	$copyright = get_theme_mod('copyright', '');
 ?>
 
-	<section class="section section-subscribe">
-		<div class="container">
-			<div class="section-title">
-				<?php _e('Підпишіться на розсилку'); ?>
-			</div>
-
-			<?php echo do_shortcode( '[contact-form-7 id="6424b04"]' ); ?>
-
-			<div class="text">
-				<?php _e('Лише корисна інформація. Без нав’язливого спаму.'); ?>
-			</div>
-		</div>
-	</section>
-
 	<footer class="footer">
 		<div class="container">
 
@@ -46,7 +32,7 @@
 
 				<div class="col col-2 footer-menu-container">
 					<div class="footer-menu">
-						<div class="label"><?php _e('Продукція')?></div>
+						<div class="label"><?php _e('Розділ')?></div>
 						<?php
 							wp_nav_menu(
 								array(
@@ -56,7 +42,7 @@
 						?>
 					</div>
 					<div class="footer-menu">
-						<div class="label"><?php _e('Компанія')?></div>
+						<div class="label"><?php _e('Навчання')?></div>
 						<?php
 							wp_nav_menu(
 								array(
@@ -66,7 +52,7 @@
 						?>
 					</div>
 					<div class="footer-menu">
-						<div class="label"><?php _e('Інформація')?></div>
+						<div class="label"><?php _e('Про бізнес школу')?></div>
 						<?php
 							wp_nav_menu(
 								array(
