@@ -36,7 +36,7 @@ function create_programs_post_type() {
         'label'               => 'Програма навчання',
         'description'         => 'Програми навчання',
         'labels'              => $labels,
-        'supports'            => array('title', 'editor', 'thumbnail', 'excerpt', 'custom-fields'),
+        'supports'            => array('title', 'editor', 'thumbnail', 'excerpt'),
         'taxonomies'          => array('category', 'post_tag'),
         'hierarchical'        => false,
         'public'              => true,
