@@ -153,6 +153,32 @@ function custom_posts_gutenberg_blocks() {
         include_once __THEME_DIR__ . '/template-parts/sections/programs-previews-section.php';
     } );
 
+    Block::make( 'actuality_posts_section', __( 'Mixed posts previews' ) )
+        ->set_inner_blocks( false )
+        ->set_category( 'mib' )
+        ->set_mode( 'both' )
+        ->set_icon( 'randomize' )
+        ->add_fields( array(
+            Field::make( 'separator', 'actuality_posts_sep', __( 'Mixed posts previews' ) ),
+            Field::make( 'text', 'actuality_posts_per_page', __( 'Posts per page' ) )
+                ->set_width( 33 )
+                ->set_attribute( 'type', 'number' )
+                ->set_default_value( $def_per_page ),
+            Field::make( 'text', 'actuality_posts_link_text', __( 'Link text' ) )
+                ->set_width( 33 )
+                ->set_default_value( 'Всі записи' ),
+            Field::make( 'text', 'actuality_posts_link', __( 'Link' ) )
+                ->set_width( 33 ),
+            Field::make( 'text', 'actuality_posts_title', __( 'Section title' ) )
+                ->set_default_value( 'Актуальне' ),
+            Field::make( 'textarea', 'actuality_posts_desc', __( 'Section Desription' ) )
+        ) )
+        ->set_render_callback( function ( $fields, $attributes, $inner_blocks ) {
+            extract( $fields );
+        
+        include_once __THEME_DIR__ . '/template-parts/sections/actuality_previews-section.php';
+    } );
+
     // ==== Manager Contact Block
     Block::make('manager_contact_block', __('Contact Manager'))
     ->add_fields(array(
@@ -171,7 +197,6 @@ function custom_posts_gutenberg_blocks() {
             ->set_required(true),
         Field::make('select', 'contact_form_id', __('Contact Form 7'))
             ->add_options(function() {
-                // Получаем все формы Contact Form 7
                 $forms = array();
                 if (function_exists('wpcf7_contact_form')) {
                     $args = array('post_type' => 'wpcf7_contact_form', 'posts_per_page' => -1);
@@ -194,7 +219,6 @@ function custom_posts_gutenberg_blocks() {
     ->set_render_callback(function($fields, $attributes, $inner_blocks) {
         extract($fields);
         
-        // Include the template for rendering
         include_once __THEME_DIR__ . '/template-parts/sections/manager-contact-section.php';
     });
 }

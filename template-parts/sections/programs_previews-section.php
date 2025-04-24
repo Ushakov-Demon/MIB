@@ -1,55 +1,52 @@
 <?php
 $programs = apply_filters( 'mib_get_posts', 'programs', $programs_per_page );
-
 ?>
 <section class="programs">
-
-    <div class="container">
-        <div class="section-heiding">
+    <div class="section-heiding">
+        <?php
+        if ( ! empty( $programs_section_small_text ) ) :
+            ?>
+            <span class="pre-text">
+                <?php echo esc_html( $programs_section_small_text )?>
+            </span>
             <?php
-            if ( ! empty( $programs_section_small_text ) ) :
+        endif;
+        ?>
+
+        <div>
+            <?php
+            if ( ! empty( $programs_section_title ) ) :
                 ?>
-                <span class="pre-text">
-                    <?php echo esc_html( $programs_section_small_text )?>
-                </span>
+                <h2 class="section-title">
+                    <?php echo esc_html( $programs_section_title )?>
+                </h2>
                 <?php
             endif;
+
+            if ( ! empty( $programs_section_link_text ) && ! empty( $programs_section_link ) ) :
             ?>
-
-            <div>
-                <?php
-                if ( ! empty( $programs_section_title ) ) :
-                    ?>
-                    <h2 class="section-title">
-                        <?php echo esc_html( $programs_section_title )?>
-                    </h2>
-                    <?php
-                endif;
-
-                if ( ! empty( $programs_section_link_text ) && ! empty( $programs_section_link ) ) :
-                ?>
-                    <a href="<?php echo esc_url( $programs_section_link )?>" class="link_to">
-                        <?php echo esc_html( $programs_section_link_text )?>
-                    </a>
-                <?php
-                endif;
-                ?>
-            </div>
-
-            <?php
-            if ( ! empty( $programs_section_desc ) ) :
-            ?>
-            <div class="hending-desc">
-                <?php
-                echo esc_html( $programs_section_desc );
-                ?>
-            </div>
+                <a href="<?php echo esc_url( $programs_section_link )?>" class="link_to">
+                    <?php echo esc_html( $programs_section_link_text )?>
+                </a>
             <?php
             endif;
             ?>
         </div>
 
-        <div class="section-body">
+        <?php
+        if ( ! empty( $programs_section_desc ) ) :
+        ?>
+        <div class="hending-desc">
+            <?php
+            echo esc_html( $programs_section_desc );
+            ?>
+        </div>
+        <?php
+        endif;
+        ?>
+    </div>
+
+    <div class="section-body">
         <?php
             if ($programs->have_posts()):
                 while($programs->have_posts()):
@@ -83,6 +80,5 @@ $programs = apply_filters( 'mib_get_posts', 'programs', $programs_per_page );
                 echo __('Items not found');
             endif;
             ?>
-        </div>
     </div>
 </section>
