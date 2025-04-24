@@ -1,6 +1,11 @@
 <?php
-	$opening_hours = get_theme_mod('opening_hours');
-	$copyright = get_theme_mod('copyright', '');
+	$copyright = get_translatable_theme_mod('copyright', '');
+
+	$current_lang = get_locale();
+
+	if( function_exists( 'pll_current_language' ) ) {
+		$current_lang = pll_current_language();
+	}
 ?>
 
 	<footer class="footer">
@@ -9,60 +14,67 @@
 			<div class="row">
 
 				<div class="col col-1 footer-info-container">
-					<?php if ($opening_hours) : ?>
-						<div class="footer-opening-hours">
-							<?php echo nl2br(esc_html($opening_hours)); ?>
-						</div>
-					<?php endif; ?>
-
-					<div class="footer-phone">
-						<?php get_template_part( 'template-parts/blocks/block', 'phone' ); ?>
-					</div>
-
-					<div class="footer-social">
-						<?php get_template_part( 'template-parts/blocks/block', 'social-links' ); ?>
-					</div>
-
-					<?php if ($copyright) : ?>
-						<div class="footer-copyright">
-							<?php echo do_shortcode(nl2br(esc_html($copyright))); ?>
-						</div>
-					<?php endif; ?>
+					<?php get_template_part( 'template-parts/blocks/block', 'logo' ); ?>
 				</div>
 
 				<div class="col col-2 footer-menu-container">
 					<div class="footer-menu">
-						<div class="label"><?php _e('Розділ')?></div>
+						<div class="label"><?php pll_e('Section', 'baza')?></div>
 						<?php
 							wp_nav_menu(
 								array(
-									'menu' => '33',
+									'menu' => '10',
+									'depth' => 1,
+									'lang' => $current_lang,
 								)
 							);
 						?>
 					</div>
 					<div class="footer-menu">
-						<div class="label"><?php _e('Навчання')?></div>
+						<div class="label"><?php pll_e('Study', 'baza')?></div>
 						<?php
 							wp_nav_menu(
 								array(
-									'menu' => '34',
+									'menu' => '25',
+									'depth' => 1,
+									'lang' => $current_lang,
 								)
 							);
 						?>
 					</div>
 					<div class="footer-menu">
-						<div class="label"><?php _e('Про бізнес школу')?></div>
+						<div class="label"><?php pll_e('About business school', 'baza')?></div>
 						<?php
 							wp_nav_menu(
 								array(
-									'menu' => '35',
+									'menu' => '12',
+									'depth' => 1,
+									'lang' => $current_lang,
 								)
 							);
 						?>
+					</div>
+					<div class="footer-menu footer-menu-contacts">
+						<?php get_template_part('template-parts/blocks/block', 'contacts'); ?>
 					</div>
 				</div>
 
+			</div>
+		</div>
+		
+		<div class="footer-after">
+			<div class="container">
+				<?php if ($copyright) : ?>
+					<div class="footer-after-col footer-copyright">
+						<?php echo do_shortcode(nl2br(esc_html($copyright))); ?>
+					</div>
+				<?php endif; ?>
+				<div class="footer-after-col">
+					<div class="footer-social">
+						<?php get_template_part( 'template-parts/blocks/block', 'social-links', array('show_icons' => true) ); ?>
+					</div>
+					<?php custom_language_switcher(); ?>
+				</div>
 			</div>
 		</div>
 	</footer>

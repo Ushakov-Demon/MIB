@@ -186,4 +186,8 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
+require get_template_directory() . '/inc/post-type.php';
+
 require get_template_directory() . '/inc/custom-fields/index.php';
+
+require get_template_directory() . '/inc/strings.php';

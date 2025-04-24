@@ -1,121 +1,5 @@
 @import 'icons';
 
-@mixin m ($breakpoint) {
-    @if $breakpoint ==desktop {
-        @media (min-width: 768px) {
-            @content;
-        }
-    }
-
-    @if $breakpoint ==tablet {
-        @media (min-width: 768px) and (max-width: 1200px) {
-            @content;
-        }
-    }
-
-    @if $breakpoint ==tablet_p {
-        @media (min-width: 768px) and (max-width: 991px) {
-            @content;
-        }
-    }
-
-    @if $breakpoint ==tablet_h {
-        @media (min-width: 992px) and (max-width: 1200px) {
-            @content;
-        }
-    }
-
-    @if $breakpoint ==mobile {
-        @media (max-width: 767px) {
-            @content;
-        }
-    }
-
-    @if $breakpoint ==min992 {
-        @media (min-width: 992px) {
-            @content;
-        }
-    }
-
-    @if $breakpoint ==max991 {
-        @media (max-width: 991px) {
-            @content;
-        }
-    }
-
-    @if $breakpoint ==min1024 {
-        @media (min-width: 1025px) {
-            @content;
-        }
-    }
-
-    @if $breakpoint ==max1024 {
-        @media (max-width: 1024px) {
-            @content;
-        }
-    }
-
-    @if $breakpoint ==max1200 {
-        @media (max-width: 1199px) {
-            @content;
-        }
-    }
-
-    @if $breakpoint ==min1200 {
-        @media (min-width: 1200px) {
-            @content;
-        }
-    }
-
-    @if $breakpoint ==min1400 {
-        @media (min-width: 1400px) {
-            @content;
-        }
-    }
-
-    @if $breakpoint ==max390 {
-        @media (max-width: 390px) {
-            @content;
-        }
-    }
-
-    @if $breakpoint ==max320 {
-        @media (max-width: 320px) {
-            @content;
-        }
-    }
-
-    @if $breakpoint ==min2000 {
-        @media (min-width: 2000px) {
-            @content;
-        }
-    }
-
-    @if $breakpoint ==min_1200_max_1325 {
-        @media (min-width: 1200px) and (max-width: 1325px) {
-            @content;
-        }
-    }
-
-    @if $breakpoint ==min1325 {
-        @media (min-width: 1325px) {
-            @content;
-        }
-    }
-
-    @if $breakpoint ==min1440 {
-        @media (min-width: 1440px) {
-            @content;
-        }
-    }
-
-    @if $breakpoint ==min1440h {
-        @media (min-height: 1440px) {
-            @content;
-        }
-    }
-}
-
 @mixin mobile {
     @media (max-width: 767px) {
         @content;
@@ -170,14 +54,20 @@
     }
 }
 
+@mixin max1400 {
+    @media (max-width: 1400px) {
+        @content;
+    }
+}
+
 @mixin min1260 {
     @media (min-width: 1260px) {
         @content;
     }
 }
 
-@mixin max1326 {
-    @media (max-width: 1326px) {
+@mixin max320 {
+    @media (max-width: 320px) {
         @content;
     }
 }
@@ -280,25 +170,13 @@
     }
 }
 
-@mixin button-secondary {
-    background-color: var(--color_secondary);
-    border-color: var(--color_grey);
-    color: var(--color_white);
-
-    &:focus,
-    &:hover {
-        border-color: var(--color_primary);
-        background-color: var(--color_primary);
-    }
-}
-
 @mixin button() {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: var(--padding_s);
-    gap: var(--gap_s);
+    padding: 18.65px 40px;
+    gap: 10px;
     background: var(--color_primary);
     border-radius: var(--radius);
     user-select: none;
@@ -306,69 +184,32 @@
     color: var(--color_white);
     cursor: pointer;
     transition: all .3s ease;
-    line-height: 1;
+    line-height: 1.2;
+    font-size: 14px;
+    font-weight: 500;
 
-    i {
-        color: var(--color_white);
-        font-size: 24px;
-        position: relative;
-        margin: -1px;
+    span {
+        line-height: 1;
     }
 
-    &::before,
     &::after {
-        color: var(--color_white);
-        font-size: 24px;
-        position: relative;
-        margin: -1px;
-    }
-
-    svg {
-        line-height: 0;
-        position: relative;
-        margin: -1px 0;
+        content: "\e909";
     }
 
     &:focus,
     &:hover {
-        background-color: var(--color_secondary);
+        background-color: var(--color_primary_2);
+        border-color: var(--color_primary_2);
         color: var(--color_white);
     }
 
-    &.button-secondary {
-        @include button-secondary;
-    }
-}
+    &[disabled],
+    .disabled {
+        background-color: var(--color_grey) !important;
+        color: var(--color_secondary) !important;
 
-@mixin field_icon($icon, $color) {
-    position: relative !important;
-    
-    &::before {
-        content: $icon;
-        font-family: 'icons' !important;
-        speak: never;
-        font-style: normal;
-        font-weight: normal;
-        font-variant: normal;
-        text-transform: none;
-        line-height: 1;
-        font-size: 24px;
-        color: $color;
-        position: absolute;
-        z-index: 10;
-        top: 50%;
-        transform: translate(0, -50%);
-        left: var(--padding_xs);
-    }
-
-    select,
-    input {
-        padding-left: calc(var(--padding_s) + 24px) !important;
-    }
-
-    &.woocommerce-invalid-required-field {
-        &::before {
-            color: var(--color_error) !important;
+        &::after {
+            color: var(--color_white) !important;
         }
     }
 }

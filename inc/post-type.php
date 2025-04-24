@@ -1,0 +1,60 @@
+<?php
+
+// Register Custom Post Type - Programs
+function create_programs_post_type() {
+    $labels = array(
+        'name'                  => 'Програми навчання',
+        'singular_name'         => 'Програма навчання',
+        'menu_name'             => 'Програми навчання',
+        'name_admin_bar'        => 'Програма навчання',
+        'archives'              => 'Архіви програм',
+        'attributes'            => 'Атрибути програми',
+        'parent_item_colon'     => 'Батьківська програма:',
+        'all_items'             => 'Всі програми',
+        'add_new_item'          => 'Додати нову програму',
+        'add_new'               => 'Додати нову',
+        'new_item'              => 'Нова програма',
+        'edit_item'             => 'Редагувати програму',
+        'update_item'           => 'Оновити програму',
+        'view_item'             => 'Переглянути програму',
+        'view_items'            => 'Переглянути програми',
+        'search_items'          => 'Пошук програм',
+        'not_found'             => 'Не знайдено',
+        'not_found_in_trash'    => 'Не знайдено в кошику',
+        'featured_image'        => 'Головне зображення',
+        'set_featured_image'    => 'Встановити головне зображення',
+        'remove_featured_image' => 'Видалити головне зображення',
+        'use_featured_image'    => 'Використати як головне зображення',
+        'insert_into_item'      => 'Вставити в програму',
+        'uploaded_to_this_item' => 'Завантажено до цієї програми',
+        'items_list'            => 'Список програм',
+        'items_list_navigation' => 'Навігація по списку програм',
+        'filter_items_list'     => 'Фільтрувати список програм',
+    );
+    
+    $args = array(
+        'label'               => 'Програма навчання',
+        'description'         => 'Програми навчання',
+        'labels'              => $labels,
+        'supports'            => array('title', 'editor', 'thumbnail', 'excerpt', 'custom-fields'),
+        'taxonomies'          => array('category', 'post_tag'),
+        'hierarchical'        => false,
+        'public'              => true,
+        'show_ui'             => true,
+        'show_in_menu'        => true,
+        'menu_position'       => 21, // Just after Pages (20)
+        'menu_icon'           => 'dashicons-welcome-learn-more', // Academic cap icon
+        'show_in_admin_bar'   => true,
+        'show_in_nav_menus'   => true,
+        'can_export'          => true,
+        'has_archive'         => true,
+        'exclude_from_search' => false,
+        'publicly_queryable'  => true,
+        'capability_type'     => 'page',
+        'show_in_rest'        => true,
+    );
+    
+    register_post_type('programs', $args);
+}
+
+add_action('init', 'create_programs_post_type', 0);
