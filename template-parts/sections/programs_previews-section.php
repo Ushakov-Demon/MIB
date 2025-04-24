@@ -1,6 +1,5 @@
 <?php
 $programs = apply_filters( 'mib_get_posts', 'programs', $programs_per_page );
-
 ?>
 <section class="programs">
     <div class="section-heiding">
@@ -63,6 +62,7 @@ $programs = apply_filters( 'mib_get_posts', 'programs', $programs_per_page );
         <?php
             endwhile;
         else:
+            // TODO: Need create && include template
             echo __( 'Items not found' );
         endif;
         ?>

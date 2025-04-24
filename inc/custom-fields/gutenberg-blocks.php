@@ -119,4 +119,30 @@ function custom_posts_gutenberg_blocks() {
         
         include_once __THEME_DIR__ . '/template-parts/sections/programs_previews-section.php';
     } );
+
+    Block::make( 'actuality_posts_section', __( 'Mixed posts previews' ) )
+        ->set_inner_blocks( false )
+        ->set_category( 'mib' )
+        ->set_mode( 'both' )
+        ->set_icon( 'randomize' )
+        ->add_fields( array(
+            Field::make( 'separator', 'actuality_posts_sep', __( 'Mixed posts previews' ) ),
+            Field::make( 'text', 'actuality_posts_per_page', __( 'Posts per page' ) )
+                ->set_width( 33 )
+                ->set_attribute( 'type', 'number' )
+                ->set_default_value( $def_per_page ),
+            Field::make( 'text', 'actuality_posts_link_text', __( 'Link text' ) )
+                ->set_width( 33 )
+                ->set_default_value( 'Всі записи' ),
+            Field::make( 'text', 'actuality_posts_link', __( 'Link' ) )
+                ->set_width( 33 ),
+            Field::make( 'text', 'actuality_posts_title', __( 'Section title' ) )
+                ->set_default_value( 'Актуальне' ),
+            Field::make( 'textarea', 'actuality_posts_desc', __( 'Section Desription' ) )
+        ) )
+        ->set_render_callback( function ( $fields, $attributes, $inner_blocks ) {
+            extract( $fields );
+        
+        include_once __THEME_DIR__ . '/template-parts/sections/actuality_previews-section.php';
+    } );
 }
