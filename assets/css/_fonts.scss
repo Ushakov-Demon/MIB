@@ -190,7 +190,7 @@
 }
 
 .menu-item-back a::before,
-.button::after,
+a.button::after, .button::after, button[type=submit]::after, input[type=submit]::after,
 [class^="icon-"],
 [class*=" icon-"] {
     display: inline-block;

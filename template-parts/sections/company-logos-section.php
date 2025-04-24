@@ -17,10 +17,10 @@ if ( empty( $items ) ) return;
 <section class="section section-company-logos">
     <div class="container">
         <?php if ( ! empty( $heading ) ) : ?>
-            <div class="section-title"><?php echo esc_html( $heading ); ?></div>
+            <div class="section-title"><?php echo wp_kses_post( $heading ); ?></div>
         <?php endif; ?>
         
-        <div class="items" id="company-logos-items">
+        <div class="items owl-carousel" id="company-logos-items">
             <?php foreach ( $items as $item ) : 
                 $logo_id = $item['logo'] ?? 0;
                 $name = $item['name'] ?? '';

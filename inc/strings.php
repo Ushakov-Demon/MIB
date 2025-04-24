@@ -19,6 +19,8 @@ function register_customizer_strings_for_polylang() {
         'About us',
         'Study programs',
         'Search',
+        'Send Again',
+        'Learn more',
     );
     
     foreach ($strings as $string) {

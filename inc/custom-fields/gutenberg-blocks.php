@@ -9,6 +9,7 @@ function custom_posts_gutenberg_blocks() {
     $home_url      = home_url();
     $blog_page     = get_option( 'page_for_posts' );
     $blog_page_url = ! is_null( $blog_page ) && ! empty( $blog_page ) ? get_the_permalink( $blog_page ) : $home_url;
+    $current_lang  = function_exists('pll_current_language') ? pll_current_language() : '';
 
     // ==== Main top Variative
     Block::make( 'main_top_variative',  __( 'Main HERO' ) )
@@ -104,8 +105,40 @@ function custom_posts_gutenberg_blocks() {
             Field::make( 'text', 'programs_section_link_text', __( 'Link text' ) )
                 ->set_width( 33 )
                 ->set_default_value( 'Всі програми' ),
-            Field::make( 'text', 'programs_section_link', __( 'Link' ) )
-                ->set_width( 33 ),
+
+            // Field::make( 'text', 'programs_section_link', __( 'Link' ) )
+            //     ->set_width( 33 ),
+
+            Field::make('select', 'programs_section_link', __('Link to Page'))
+            ->set_width(33)
+            ->add_options(function() {
+
+                $current_lang  = function_exists('pll_current_language') ? pll_current_language() : '';
+
+                add_filter('mib_get_posts', function($args) use ($current_lang) {
+                    if (function_exists('pll_get_post_language') && !empty($current_lang)) {
+                        $args['lang'] = $current_lang;
+                    }
+                    $args['orderby'] = 'title';
+                    $args['order'] = 'ASC';
+                    return $args;
+                });
+                
+                $pages_query = mib_get_posts('page', -1, 1);
+                $options = ['' => __('- Select Page -')];
+                
+                if ($pages_query->have_posts()) {
+                    while ($pages_query->have_posts()) {
+                        $pages_query->the_post();
+                        $options[get_the_ID()] = get_the_title();
+                    }
+                    wp_reset_postdata();
+                }
+                
+                return $options;
+            })
+            ->set_help_text(__('Select the page to link to from the button')),
+
             Field::make( 'text', 'programs_section_small_text', __( 'Section small text' ) )
                 ->set_default_value( 'Програми навчання' )
                 ->set_width( 50 ),
@@ -117,6 +150,51 @@ function custom_posts_gutenberg_blocks() {
         ->set_render_callback( function ( $fields, $attributes, $inner_blocks ) {
             extract( $fields );
         
-        include_once __THEME_DIR__ . '/template-parts/sections/programs_previews-section.php';
+        include_once __THEME_DIR__ . '/template-parts/sections/programs-previews-section.php';
     } );
+
+    // ==== Manager Contact Block
+    Block::make('manager_contact_block', __('Contact Manager'))
+    ->add_fields(array(
+        Field::make('separator', 'manager_contact_sep', __('Contact Manager')),
+        Field::make('text', 'manager_contact_heading', __('Section Heading'))
+            ->set_default_value(__('Contact our manager')),
+        Field::make('image', 'manager_avatar', __('Manager Avatar'))
+            ->set_width(30)
+            ->set_type(array('image'))
+            ->set_required(true),
+        Field::make('text', 'manager_name', __('Manager Name'))
+            ->set_width(35)
+            ->set_required(true),
+        Field::make('text', 'manager_position', __('Manager Position'))
+            ->set_width(35)
+            ->set_required(true),
+        Field::make('select', 'contact_form_id', __('Contact Form 7'))
+            ->add_options(function() {
+                // Получаем все формы Contact Form 7
+                $forms = array();
+                if (function_exists('wpcf7_contact_form')) {
+                    $args = array('post_type' => 'wpcf7_contact_form', 'posts_per_page' => -1);
+                    $cf7Forms = get_posts($args);
+                    
+                    foreach ($cf7Forms as $form) {
+                        $forms[$form->ID] = $form->post_title;
+                    }
+                }
+                return $forms;
+            })
+            ->set_required(true)
+            ->set_help_text(__('Select a Contact Form 7 form'))
+    ))
+    ->set_inner_blocks(false)
+    ->set_description(__('A block to display manager contact with form'))
+    ->set_icon('businessman')
+    ->set_category('mib')
+    ->set_mode('both')
+    ->set_render_callback(function($fields, $attributes, $inner_blocks) {
+        extract($fields);
+        
+        // Include the template for rendering
+        include_once __THEME_DIR__ . '/template-parts/sections/manager-contact-section.php';
+    });
 }

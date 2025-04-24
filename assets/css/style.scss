@@ -13,6 +13,7 @@
     --font: "Gilroy", Helvetica, Arial, Verdana, sans-serif;
     --text_color: #262626;
     --color_white: #fff;
+    --color_light_gray: #F9F9F9;
     --color_black: #000000;
     --color_charcoal: #2D323B;
     --color_grey: #E5E5E5;
@@ -1833,12 +1834,13 @@ footer {
 }
 
 .section {
-    padding-top: var(--padding_l);
-    padding-bottom: var(--padding_l);
+    
+    padding-top: 100px;
+    padding-bottom: 100px;
 
     @include mobile {
-        padding-top: var(--padding_m);
-        padding-bottom: var(--padding_m);
+        padding-top: 80px;
+        padding-bottom: 80px;
     }
 
     .container {
@@ -1848,8 +1850,13 @@ footer {
     }
 
     .section-title {
-        font-size: var(--font_size_h1);
+        font-size: 32px;
         font-weight: 500;
+        color: var(--color_black);
+
+        @include mobile {
+            font-size: 28px;
+        }
     }
 
     &.section-main {
@@ -2049,6 +2056,113 @@ footer {
                 @include tablet-p {
                     min-width: 70vw;
                     padding-right: var(--gap_m);
+                }
+            }
+        }
+    }
+
+    &.section-company-logos {
+
+        .section-title {
+            text-align: center;
+            @include container;
+        }
+
+        .container {
+            gap: 56px;
+            max-width: 100%;
+            padding: 0;
+        }
+
+        .items {
+            .item {
+                height: 56px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                filter: grayscale(100%);
+                opacity: .5;
+                transition: all .5s ease;
+
+                &:hover {
+                    opacity: 1;
+                    filter: grayscale(0%);
+                }
+
+                img {
+                    max-width: 100%;
+                    max-height: auto;
+                    width: 100%;
+                    height: auto;
+                    align-self: center;
+                }
+            }
+        }
+    }
+
+    &.section-manager-contact {
+        background-color: var(--color_light_gray);
+
+        .container {
+            max-width: 1190px;
+        }
+
+        .section-title {
+            margin-bottom: 75px;
+
+            @include mobile {
+                text-align: center;
+                margin-bottom: 40px;
+            }
+        }
+
+        .manager-contact-wrapper {
+            display: grid;
+            align-items: flex-start;
+            grid-template-columns: calc(100% / 3) 1fr;
+
+            @include mobile {
+                display: flex;
+                flex-direction: column;
+                gap: 40px;
+            }
+
+            .manager-info {
+                max-width: 180px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                text-align: center;
+                line-height: 1.1;
+                gap: 16px;
+
+                @include mobile {
+                    align-self: center;
+                }
+
+                .manager-avatar {
+                    img {
+                        max-width: 124px;
+                        height: 124px;
+                        min-width: 124px;
+                        width: 124px;
+                        object-fit: cover;
+                        border-radius: 50%;
+                    }
+                }
+
+                .manager-name {
+                    font-size: 16px;
+                    font-weight: 600;
+                }
+
+                .manager-position {
+                    font-size: 13px;
+                    font-weight: 300;
+                    opacity: .6;
+                    margin-top: 5px;
                 }
             }
         }
@@ -2381,26 +2495,6 @@ footer {
 
 .owl-carousel {
 
-    &:not(.bestsellers):not(.products) {
-        padding-left: calc(var(--item_size) + var(--padding_m));
-        padding-right: calc(var(--item_size) + var(--padding_m));
-
-        .owl-nav {
-
-            button.owl-next,
-            button.owl-prev {
-
-                position: absolute;
-                top: 50%;
-                transform: translate(0, -50%);
-            }
-
-            button.owl-prev {
-                transform: translate(0, -50%) rotate(180deg);
-            }
-        }
-    }
-
     .owl-stage {
         display: flex;
         flex-wrap: wrap;
@@ -2492,47 +2586,18 @@ footer {
 
     .wpcf7-form {
         display: grid;
-        align-items: center;
-        gap: var(--gap_s);
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
         position: relative;
         margin: 0 auto;
 
+        @include mobile {
+            display: flex;
+            flex-direction: column;
+        }
+
         span {
             display: block;
-        }
-        
-        .section-subscribe & {
-            max-width: 444px;
-            grid-template-columns: 1fr auto;
-
-            @include mobile {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .section-single-vacancie &,
-        .section-vacancies &,
-        .section-contacts & {
-
-            h2, h3, h4 {
-                width: auto !important;
-            }
-            
-            @include desktop {
-                grid-template-columns: repeat(2, 1fr);
-
-                > *:not(.field-phone):not(.field-email) {
-                    grid-column: span 2;
-                }
-            }
-
-            @include mobile {
-                grid-template-columns: repeat(1, 1fr);
-
-                > * {
-                    width: 100%;
-                }
-            }
         }
 
         &.invalid {
@@ -2554,18 +2619,9 @@ footer {
                 background-color: var(--bg);
                 opacity: .5;
 
-                .section-contacts &,
-                .section-single-vacancie &,
-                .section-vacancies & {
-                    margin: calc(var(--padding_m) * -1);
-                }
-            }
-
-            .section-subscribe & {
-
-                &::before {
-                    background-color: var(--color_secondary);
-                }
+                .section-manager-contact & {
+                    background-color: var(--color_light_gray);
+                };
             }
 
             .wpcf7-submit {
@@ -2576,16 +2632,9 @@ footer {
     }
 
     .wpcf7-response-output {
-        text-align: center;
+        text-align: left;
         grid-column: span 2;
-        color: var(--color_primary);
-
-        .section-contacts &,
-        .section-single-vacancie &,
-        .section-vacancies & {
-            max-width: 80%;
-            margin: 0 auto;
-        }
+        color: var(--color_error);
     }
 
     .wpcf7-form-control-wrap {
@@ -2594,6 +2643,22 @@ footer {
                 color: var(--text_color);
             }
         }
+    }
+
+    .form-submit {
+        
+        @include desktop {
+            margin-top: 18px;
+        }
+
+        @include mobile {
+            text-align: center;
+        }
+    }
+
+    .wpcf7-submit,
+    [data-name="acceptance"] {
+        grid-column: span 2;
     }
 
     .wpcf7-response-output:empty,
@@ -2622,7 +2687,22 @@ footer {
         height: var(--item_size);
     }
 
-    .wpcf7-form-control:not(.wpcf7-submit) {
+    .wpcf7-acceptance {
+
+        .wpcf7-list-item {
+            label {
+                @include checkbox;
+
+                font-size: 14px;
+            }
+        }
+
+        a {
+            text-decoration: underline;
+        }
+    }
+
+    .wpcf7-form-control:not(.wpcf7-submit):not(.optional) {
 
         @include input;
 

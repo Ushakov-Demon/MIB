@@ -200,6 +200,24 @@ add_filter('block_categories_all', function($categories, $post) {
     return $categories;
 }, 10, 2);
 
+// CF7
+remove_filter( 'the_content', 'wpautop' );
+add_filter( 'wpcf7_autop_or_not', '__return_false' );
+
+add_filter('wpcf7_form_elements', 'replace_cf7_submit_with_button');
+function replace_cf7_submit_with_button($html) {
+    $pattern = '/<input class="(.*?)wpcf7-submit(.*?)" type="submit" value="([^"]*)"(.*?)>/';
+    $replacement = '<div class="form-submit"><button class="button $1wpcf7-submit$2"$4>$3</button></div>';
+    $html = preg_replace($pattern, $replacement, $html);
+    return $html;
+}
+
+function enqueue_cf7_custom_scripts() {
+    wp_enqueue_script('cf7-custom-script', trailingslashit( get_stylesheet_directory_uri() ) . 'assets/js/forms.js', array('jquery'), false, true);
+    wp_add_inline_script('cf7-custom-script', 'var sendAgainTranslation = "' . (function_exists('pll__') ? pll__('Send Again') : 'Send Again') . '";', 'before');
+ }
+ add_action('wp_enqueue_scripts', 'enqueue_cf7_custom_scripts');
+
 // Cusom color
 function custom_gutenberg_colors() {
     add_theme_support('editor-color-palette', array(

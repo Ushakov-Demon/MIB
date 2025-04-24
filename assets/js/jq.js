@@ -4,9 +4,12 @@ jQuery(document).ready(function ($) {
 		languageCotainer = '.language',
 		timeout;
 
+	let sliderSpeed = 2500;
+	let nextPrevButton = '';
+
 	body.addClass('ready');
 
-	$('input[name="phone"]').inputmask('+38(999)999-99-99');
+	$('input[name="phone"], input[name="your-phone"]').inputmask('+99(999)999-99-99');
 
 	$(document).on('click', '.menu-toggle', function() {
 		if ($(this).hasClass('active')) {
@@ -200,4 +203,46 @@ jQuery(document).ready(function ($) {
 	}
 
 	animateCount();
+
+	let carouselCompanyLogos = $('#company-logos-items');
+
+	carouselCompanyLogos.owlCarousel({
+		items: 2,
+		navSpeed: sliderSpeed,
+		margin: 0,
+		nav: false,
+		dots: false,
+		loop: true,
+		navText: [nextPrevButton, nextPrevButton],
+		mouseDrag: true,
+		touchDrag: true,
+		dragEndSpeed: sliderSpeed,
+		dotsSpeed: sliderSpeed,
+		autoHeight: true,
+		autoplay: true,
+		autoplaySpeed: sliderSpeed,
+		autoplayTimeout: 2500,
+		autoplayHoverPause: true,
+		responsive: {
+			0: {
+				items: 2,
+				loop: true,
+			},
+			768: {
+				items: 4,
+				margin: 0,
+				loop: true,
+			},
+			1024: {
+				items: 6,
+				loop: true,
+				stagePadding: 120,
+			},
+			1200: {
+				items: 8,
+				margin: 0,
+				stagePadding: 140,
+			}
+		}
+	});
 });

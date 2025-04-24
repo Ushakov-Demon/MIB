@@ -109,19 +109,29 @@
                 content: '';
                 position: absolute;
                 left: 0;
-                top: 0;
+                top: -1.5px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 width: 16px;
                 min-width: 16px;
                 height: 16px;
-                border-radius: 4px;
+                border-radius: 2px;
                 border: 1px solid var(--color_secondary);
                 transition: .3s ease;
                 color: var(--color_white);
                 font-size: 0px;
-                text-indent: -2px;
+                text-indent: -1px;
+
+                font-family: 'mib' !important;
+                speak: never;
+                font-style: normal;
+                font-weight: normal;
+                font-variant: normal;
+                text-transform: none;
+                line-height: 1;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
             }
     
             &:hover {
@@ -137,9 +147,9 @@
             +label {
     
                 &:before {
-                    content: "\e914";
-                    background-color: var(--color_primary);
-                    border-color: var(--color_primary);
+                    content: "\e911";
+                    background-color: var(--color_secondary);
+                    border-color: var(--color_secondary);
                     color: var(--color_white);
                     font-size: 16px;
                 }
@@ -149,24 +159,31 @@
 }
 
 @mixin input() {
-    font-size: var(--font_size_p1);
+    font-size: 14px;
     font-weight: 400;
     color: var(--color_black);
     background-color: var(--color_white);
     border-radius: var(--radius);
     border: 1px solid var(--color_white);
     line-height: 1;
-    height: var(--item_size);
+    height: 48px;
     width: 100%;
     display: block;
     font-family: var(--font);
-    padding: var(--padding_s);
+    padding: 16px 22px 13px;
     transition: all .5s ease;
+    font-size: 14px;
+
+    &:hover,
+    &:focus {
+        border-color: var(--color_primary);
+    }
 
     &::placeholder {
-        color: var(--color_black);
+        color: var(--color_grey_3);
         font-family: var(--font);
         font-weight: 400;
+        font-size: 14px;
     }
 }
 
