@@ -179,6 +179,31 @@ function custom_posts_gutenberg_blocks() {
         include_once __THEME_DIR__ . '/template-parts/sections/actuality_previews-section.php';
     } );
 
+    Block::make( 'accreditations_posts_section', __( 'Accreditations previews' ) )
+        ->set_inner_blocks( false )
+        ->set_category( 'mib' )
+        ->set_mode( 'both' )
+        ->set_icon( 'media-document' )
+        ->add_fields( array(
+            Field::make( 'separator', 'accreditations_posts_sep', __( 'Accreditations previews' ) ),
+            Field::make( 'text', 'accreditations_posts_per_page', __( 'Posts per page' ) )
+                ->set_width( 33 )
+                ->set_attribute( 'type', 'number' )
+                ->set_default_value( $def_per_page ),
+            Field::make( 'text', 'accreditations_posts_link_text', __( 'Link text' ) )
+                ->set_width( 33 )
+                ->set_default_value( 'Всі Акредитації' ),
+            Field::make( 'text', 'accreditations_posts_link', __( 'Link' ) )
+                ->set_width( 33 ),
+            Field::make( 'text', 'accreditations_posts_title', __( 'Section title' ) )
+                ->set_default_value( 'Акредитації' ),
+        ) )
+        ->set_render_callback( function ( $fields, $attributes, $inner_blocks ) {
+            extract( $fields );
+        
+        include_once __THEME_DIR__ . '/template-parts/sections/accreditations_previews-section.php';
+    } );
+
     // ==== Manager Contact Block
     Block::make('manager_contact_block', __('Contact Manager'))
     ->add_fields(array(

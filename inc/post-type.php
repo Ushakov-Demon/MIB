@@ -105,9 +105,62 @@ function create_programs_post_type() {
         'capability_type'     => 'page',
         'show_in_rest'        => true,
     );
+
+    $accreditations_labels = array(
+        'name'                  => __( 'Акредитації' ),
+        'singular_name'         => __( 'Акредитація' ),
+        'menu_name'             => __( 'Акредитації' ),
+        'name_admin_bar'        => __( 'Акредитація' ),
+        'archives'              => __( 'Архіви акредитацій' ),
+        'attributes'            => __( 'Атрибути акредитацій' ),
+        'parent_item_colon'     => __( 'Батьківська акредитація:' ),
+        'all_items'             => __( 'Всі акредитації' ),
+        'add_new_item'          => __( 'Додати нову акредитацію' ),
+        'add_new'               => __( 'Додати нову' ),
+        'new_item'              => __( 'Нова акредитація' ),
+        'edit_item'             => __( 'Редагувати акредитацію' ),
+        'update_item'           => __( 'Оновити акредитацію' ),
+        'view_item'             => __( 'Переглянути акредитацію' ),
+        'view_items'            => __( 'Переглянути акредитації' ),
+        'search_items'          => __( 'Пошук акредитацій' ),
+        'not_found'             => __( 'Не знайдено' ),
+        'not_found_in_trash'    => __( 'Не знайдено в кошику' ),
+        'featured_image'        => __( 'Головне зображення' ),
+        'set_featured_image'    => __( 'Встановити головне зображення' ),
+        'remove_featured_image' => __( 'Видалити головне зображення' ),
+        'use_featured_image'    => __( 'Використати як головне зображення' ),
+        'insert_into_item'      => __( 'Вставити в акредитацію' ),
+        'uploaded_to_this_item' => __( 'Завантажено до цієї акредитації' ),
+        'items_list'            => __( 'Список акредитацій' ),
+        'items_list_navigation' => __( 'Навігація по списку акредитацій' ),
+        'filter_items_list'     => __( 'Фільтрувати список акредитацій' ),
+    );
+    
+    $accreditations_args = array(
+        'label'               => __( 'Акредитації' ),
+        'description'         => '',
+        'labels'              => $accreditations_labels,
+        'supports'            => array('title', 'editor', 'thumbnail', 'excerpt'),
+        // 'taxonomies'          => array('category', 'post_tag'),
+        'hierarchical'        => false,
+        'public'              => true,
+        'show_ui'             => true,
+        'show_in_menu'        => true,
+        'menu_position'       => 21,
+        'menu_icon'           => 'dashicons-media-document',
+        'show_in_admin_bar'   => true,
+        'show_in_nav_menus'   => true,
+        'can_export'          => true,
+        'has_archive'         => true,
+        'exclude_from_search' => false,
+        'publicly_queryable'  => true,
+        'capability_type'     => 'page',
+        'show_in_rest'        => true,
+    );
     
     register_post_type('programs', $args);
     register_post_type('events', $events_args);
+    register_post_type('accreditations', $accreditations_args);
 }
 
 add_action('init', 'create_programs_post_type', 0);
