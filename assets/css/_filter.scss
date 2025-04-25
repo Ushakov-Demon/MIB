@@ -1,0 +1,112 @@
+.wpc-edit-filter-set,
+.wpc-widget-close-container,
+.wpc-filters-widget-controls-container,
+.wpc-filter-header,
+.wpc-filter-chips-list .wpc-filter-chip:not(.wpc-chip-reset-all),
+.wpc-custom-selected-terms,
+.wpc-filters-ul-list .wpc-label-item input,
+.wpc-chip-remove-icon,
+body:not(.wpc_is_filter_request) .wpc-filters-widget-top-container {
+    display: none !important;
+}
+
+.wpc-spinner {
+    &.is-active {
+        background-color: rgba(255, 255, 255, .3);
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 999;
+        display: block;
+    }
+}
+
+.wpc-filters-widget-containers-wrapper {
+    .section-news & {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+}
+
+.wpc-filter-chips-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    .wpc-filter-chip {
+        a {
+            // @include filter_button;
+        }
+    }
+}
+
+.wpc-filters-ul-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    &.wpc-filters-labels {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+
+        .wpc-label-item {
+            outline: none !important;
+
+            &.wpc-term-id-83 {
+                label {
+                    &::before {
+                        content: "\e904";
+                    }
+                }
+            }
+
+            &.wpc-term-id-85 {
+                label {
+                    &::before {
+                        content: "\e906";
+                    }
+                }
+            }
+            
+            label {
+                // @include filter_button;
+
+                &:before {
+                    font-size: 20px;
+                    color: var(--color_black);
+                    position: relative;
+                }
+
+                span,
+                a {
+                    background-color: transparent !important;
+                    line-height: 1;
+                }
+
+                a {
+                    position: relative;
+                    display: block;
+                    text-align: center;
+                    transition: all .3s ease;
+                }
+            }
+
+            &.wpc-term-selected {
+                label {
+                    background-color: var(--color_primary);
+                    border-color: var(--color_primary);
+                    color: var(--color_white);
+
+                    &::before {
+                        color: var(--color_white);
+                    }
+                }
+            }
+        }
+    }
+}

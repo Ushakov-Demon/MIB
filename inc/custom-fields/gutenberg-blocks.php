@@ -4,6 +4,37 @@ use Carbon_Fields\Field;
 
 add_action( 'carbon_fields_register_fields', 'custom_posts_gutenberg_blocks' );
 
+function get_pages_options_for_select_field($width = 33, $field_name = 'link', $field_label = 'Link to Page', $help_text = 'Select the page') {
+    return Field::make('select', $field_name, __($field_label))
+        ->set_width($width)
+        ->add_options(function() {
+            $current_lang = function_exists('pll_current_language') ? pll_current_language() : '';
+
+            add_filter('mib_get_posts', function($args) use ($current_lang) {
+                if (function_exists('pll_get_post_language') && !empty($current_lang)) {
+                    $args['lang'] = $current_lang;
+                }
+                $args['orderby'] = 'title';
+                $args['order'] = 'ASC';
+                return $args;
+            });
+            
+            $pages_query = mib_get_posts('page', -1, 1);
+            $options = ['' => __('- Select Page -')];
+            
+            if ($pages_query->have_posts()) {
+                while ($pages_query->have_posts()) {
+                    $pages_query->the_post();
+                    $options[get_the_ID()] = get_the_title();
+                }
+                wp_reset_postdata();
+            }
+            
+            return $options;
+        })
+        ->set_help_text(__($help_text));
+}
+
 function custom_posts_gutenberg_blocks() {
     $def_per_page  = get_option( 'posts_per_page' );
     $home_url      = home_url();
@@ -88,7 +119,7 @@ function custom_posts_gutenberg_blocks() {
             extract( $fields );
         
         // Include the template for rendering
-        include_once __THEME_DIR__ . '/template-parts/sections/company-logos-section.php';
+        include_once __THEME_DIR__ . '/template-parts/sections/company_logos-section.php';
     } );
 
     // ==== Training programs
@@ -109,35 +140,7 @@ function custom_posts_gutenberg_blocks() {
             // Field::make( 'text', 'programs_section_link', __( 'Link' ) )
             //     ->set_width( 33 ),
 
-            Field::make('select', 'programs_section_link', __('Link to Page'))
-            ->set_width(33)
-            ->add_options(function() {
-
-                $current_lang  = function_exists('pll_current_language') ? pll_current_language() : '';
-
-                add_filter('mib_get_posts', function($args) use ($current_lang) {
-                    if (function_exists('pll_get_post_language') && !empty($current_lang)) {
-                        $args['lang'] = $current_lang;
-                    }
-                    $args['orderby'] = 'title';
-                    $args['order'] = 'ASC';
-                    return $args;
-                });
-                
-                $pages_query = mib_get_posts('page', -1, 1);
-                $options = ['' => __('- Select Page -')];
-                
-                if ($pages_query->have_posts()) {
-                    while ($pages_query->have_posts()) {
-                        $pages_query->the_post();
-                        $options[get_the_ID()] = get_the_title();
-                    }
-                    wp_reset_postdata();
-                }
-                
-                return $options;
-            })
-            ->set_help_text(__('Select the page to link to from the button')),
+            get_pages_options_for_select_field(33, 'programs_section_link', 'Link to Page', 'Select the page'),
 
             Field::make( 'text', 'programs_section_small_text', __( 'Section small text' ) )
                 ->set_default_value( 'Програми навчання' )
@@ -150,7 +153,7 @@ function custom_posts_gutenberg_blocks() {
         ->set_render_callback( function ( $fields, $attributes, $inner_blocks ) {
             extract( $fields );
         
-        include_once __THEME_DIR__ . '/template-parts/sections/programs-previews-section.php';
+        include_once __THEME_DIR__ . '/template-parts/sections/programs_previews-section.php';
     } );
 
     Block::make( 'actuality_posts_section', __( 'Mixed posts previews' ) )
@@ -167,8 +170,11 @@ function custom_posts_gutenberg_blocks() {
             Field::make( 'text', 'actuality_posts_link_text', __( 'Link text' ) )
                 ->set_width( 33 )
                 ->set_default_value( 'Всі записи' ),
-            Field::make( 'text', 'actuality_posts_link', __( 'Link' ) )
-                ->set_width( 33 ),
+            // Field::make( 'text', 'actuality_posts_link', __( 'Link' ) )
+            //     ->set_width( 33 ),
+
+            get_pages_options_for_select_field(33, 'actuality_posts_link', 'Link to Page', 'Select the page'),
+                
             Field::make( 'text', 'actuality_posts_title', __( 'Section title' ) )
                 ->set_default_value( 'Актуальне' ),
             Field::make( 'textarea', 'actuality_posts_desc', __( 'Section Desription' ) )
@@ -219,6 +225,6 @@ function custom_posts_gutenberg_blocks() {
     ->set_render_callback(function($fields, $attributes, $inner_blocks) {
         extract($fields);
         
-        include_once __THEME_DIR__ . '/template-parts/sections/manager-contact-section.php';
+        include_once __THEME_DIR__ . '/template-parts/sections/manager_contact-section.php';
     });
 }

@@ -9,7 +9,7 @@ add_filter( 'mib_get_alternating_posts', 'mib_get_alternating_posts', 10 );
  * 
  * @return object WP_Query
  */
-function mib_get_posts( array|string $post_type = 'post', int $per_page = 0, int $page = 1 ) {
+function mib_get_posts( $post_type = 'post', int $per_page = 0, int $page = 1 ) {
     if ( 0 == $per_page ) {
         $per_page = get_option( 'posts_per_page' );
     }

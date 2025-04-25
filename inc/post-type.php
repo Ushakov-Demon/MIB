@@ -1,8 +1,7 @@
 <?php
 
-// Register Custom Post Type - Programs
-function create_programs_post_type() {
-    $labels = array(
+function create_custom_post_types_and_taxonomies() {
+    $programs_labels = array(
         'name'                  => 'Програми навчання',
         'singular_name'         => 'Програма навчання',
         'menu_name'             => 'Програми навчання',
@@ -32,18 +31,18 @@ function create_programs_post_type() {
         'filter_items_list'     => 'Фільтрувати список програм',
     );
     
-    $args = array(
+    $programs_args = array(
         'label'               => 'Програма навчання',
         'description'         => 'Програми навчання',
-        'labels'              => $labels,
+        'labels'              => $programs_labels,
         'supports'            => array('title', 'editor', 'thumbnail', 'excerpt'),
-        'taxonomies'          => array('category', 'post_tag'),
+        'taxonomies'          => array('program_category', 'post_tag'),
         'hierarchical'        => false,
         'public'              => true,
         'show_ui'             => true,
         'show_in_menu'        => true,
-        'menu_position'       => 21, // Just after Pages (20)
-        'menu_icon'           => 'dashicons-welcome-learn-more', // Academic cap icon
+        'menu_position'       => 21,
+        'menu_icon'           => 'dashicons-welcome-learn-more',
         'show_in_admin_bar'   => true,
         'show_in_nav_menus'   => true,
         'can_export'          => true,
@@ -89,7 +88,7 @@ function create_programs_post_type() {
         'description'         => '',
         'labels'              => $events_labels,
         'supports'            => array('title', 'editor', 'thumbnail', 'excerpt'),
-        'taxonomies'          => array('category', 'post_tag'),
+        'taxonomies'          => array('event_category', 'post_tag'),
         'hierarchical'        => false,
         'public'              => true,
         'show_ui'             => true,
@@ -106,8 +105,56 @@ function create_programs_post_type() {
         'show_in_rest'        => true,
     );
     
-    register_post_type('programs', $args);
+    register_post_type('programs', $programs_args);
     register_post_type('events', $events_args);
+    
+    $program_cat_labels = array(
+        'name'              => 'Категорії програм',
+        'singular_name'     => 'Категорія програми',
+        'search_items'      => 'Шукати категорії програм',
+        'all_items'         => 'Всі категорії програм',
+        'parent_item'       => 'Батьківська категорія програми',
+        'parent_item_colon' => 'Батьківська категорія програми:',
+        'edit_item'         => 'Редагувати категорію програми',
+        'update_item'       => 'Оновити категорію програми',
+        'add_new_item'      => 'Додати нову категорію програми',
+        'new_item_name'     => 'Назва нової категорії програми',
+        'menu_name'         => 'Категорії програм',
+    );
+
+    register_taxonomy('program_category', 'programs', array(
+        'hierarchical'      => true,
+        'labels'            => $program_cat_labels,
+        'show_ui'           => true,
+        'show_admin_column' => true,
+        'query_var'         => true,
+        'rewrite'           => array('slug' => 'program-category'),
+        'show_in_rest'      => true,
+    ));
+    
+    $event_cat_labels = array(
+        'name'              => 'Категорії подій',
+        'singular_name'     => 'Категорія події',
+        'search_items'      => 'Шукати категорії подій',
+        'all_items'         => 'Всі категорії подій',
+        'parent_item'       => 'Батьківська категорія події',
+        'parent_item_colon' => 'Батьківська категорія події:',
+        'edit_item'         => 'Редагувати категорію події',
+        'update_item'       => 'Оновити категорію події',
+        'add_new_item'      => 'Додати нову категорію події',
+        'new_item_name'     => 'Назва нової категорії події',
+        'menu_name'         => 'Категорії подій',
+    );
+
+    register_taxonomy('event_category', 'events', array(
+        'hierarchical'      => true,
+        'labels'            => $event_cat_labels,
+        'show_ui'           => true,
+        'show_admin_column' => true,
+        'query_var'         => true,
+        'rewrite'           => array('slug' => 'event-category'),
+        'show_in_rest'      => true,
+    ));
 }
 
-add_action('init', 'create_programs_post_type', 0);
+add_action('init', 'create_custom_post_types_and_taxonomies', 0);

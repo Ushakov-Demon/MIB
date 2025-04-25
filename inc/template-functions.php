@@ -33,23 +33,33 @@ add_action('admin_enqueue_scripts', 'my_custom_admin_styles');
 
  // Remove styles
 function baza_dev_dequeue_styles() {
-    wp_dequeue_style( 'wooac-frontend' );
     wp_dequeue_style( 'contact-form-7' );
     wp_dequeue_style( 'trp-language-switcher-style' );
-    wp_dequeue_style( 'wqpmb-style' );
-    wp_dequeue_style( 'woocommerce-general' );
-    wp_deregister_style( 'woocommerce-general' );
-    wp_dequeue_style( 'wpc-filter-everything' );
+}
+add_action( 'wp_enqueue_scripts', 'baza_dev_dequeue_styles', 9999999 );
+
+function remove_filter_everything_styles() {
+    wp_dequeue_style('wpc-filter-everything');
     wp_deregister_style('wpc-filter-everything');
-    wp_dequeue_style( 'woocommerce-smallscreen' );
-    wp_deregister_style( 'wqpmb_internal' );
-    wp_dequeue_style( 'woocommerce-layout' );
-    wp_deregister_style( 'woocommerce-layout' );
-    wp_dequeue_style( 'filter-everything-inline' );
-    wp_deregister_style( 'filter-everything-inline' );
+    
+    wp_dequeue_style('filter-everything');
+    wp_deregister_style('filter-everything');
+    
+    wp_dequeue_style('wpc-widgets');
+    wp_deregister_style('wpc-widgets');
+    
+    wp_dequeue_style('filter-everything-pro');
+    wp_deregister_style('filter-everything-pro');
+    
+    wp_dequeue_style('filter-everything-inline');
+    wp_deregister_style('filter-everything-inline');
+    
+    wp_dequeue_style('filter-everything.min.css');
+    wp_deregister_style('filter-everything.min.css');
 }
 
-add_action( 'wp_enqueue_scripts', 'baza_dev_dequeue_styles', 9999999 );
+add_action('wp_enqueue_scripts', 'remove_filter_everything_styles', 100);
+add_action('wp_print_styles', 'remove_filter_everything_styles', 100);
 
 // Allow SVG uploads
 function allow_svg_uploads($mimes) {
@@ -92,28 +102,55 @@ function sanitize_svg($svg_content) {
     return $svg_content;
 }
 
-// Menu icon
-function get_menu_icon_html($attachment_id, $alt_text = '') {
-    if (!$attachment_id) {
+// Get SVG
+function get_svg($attachment_id_or_url, $alt_text = '') {
+    if (!$attachment_id_or_url) {
         return '';
     }
     
-    $mime_type = get_post_mime_type($attachment_id);
-    $icon_html = '';
+    $is_svg = false;
+    $svg_content = null;
+    $image_url = null;
     
-    if ($mime_type === 'image/svg+xml') {
-        $file_path = get_attached_file($attachment_id);
+    if (is_numeric($attachment_id_or_url)) {
+        $attachment_id = $attachment_id_or_url;
+        $mime_type = get_post_mime_type($attachment_id);
         
-        if ($file_path && file_exists($file_path)) {
-            $svg_content = file_get_contents($file_path);
-            $icon_html = '<span class="menu-icon menu-svg">' . sanitize_svg($svg_content) . '</span>';
+        if ($mime_type === 'image/svg+xml') {
+            $is_svg = true;
+            $file_path = get_attached_file($attachment_id);
+            
+            if ($file_path && file_exists($file_path)) {
+                $svg_content = file_get_contents($file_path);
+            }
+        } else {
+            $image_url = wp_get_attachment_image_url($attachment_id, 'thumbnail');
         }
     } else {
-        $image_url = wp_get_attachment_image_url($attachment_id, 'thumbnail');
-        $icon_html = '<img src="' . esc_url($image_url) . '" class="menu-icon menu-img" alt="' . esc_attr($alt_text) . '">';
+        $file_extension = pathinfo($attachment_id_or_url, PATHINFO_EXTENSION);
+        
+        if (strtolower($file_extension) === 'svg') {
+            $is_svg = true;
+            $upload_dir = wp_upload_dir();
+            $file_path = str_replace($upload_dir['baseurl'], $upload_dir['basedir'], $attachment_id_or_url);
+            
+            if (file_exists($file_path)) {
+                $svg_content = file_get_contents($file_path);
+            } else {
+                $image_url = $attachment_id_or_url;
+            }
+        } else {
+            $image_url = $attachment_id_or_url;
+        }
     }
     
-    return $icon_html;
+    if ($is_svg && $svg_content) {
+        return '<span class="icon">' . sanitize_svg($svg_content) . '</span>';
+    } elseif ($image_url) {
+        return '<img src="' . esc_url($image_url) . '" class="icon ' . ($is_svg ? 'icon-svg' : 'icon-img') . '" alt="' . esc_attr($alt_text) . '">';
+    }
+    
+    return '';
 }
  
 // Menu icon
@@ -122,7 +159,7 @@ add_filter('walker_nav_menu_start_el', 'custom_menu_icon_walker', 10, 4);
         $icon_id = carbon_get_nav_menu_item_meta($item->ID, 'menu_item_icon');
 
         if (!empty($icon_id)) {
-            $icon_html = get_menu_icon_html($icon_id, $item->title);
+            $icon_html = get_svg($icon_id, $item->title);
             
             if ($icon_html) {
                 $item_output = str_replace('<a', '<a class="has-menu-icon"', $item_output);

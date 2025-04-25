@@ -21,6 +21,11 @@ function register_customizer_strings_for_polylang() {
         'Search',
         'Send Again',
         'Learn more',
+        'Read more',
+        'All',
+        'News',
+        'Events',
+        'All posts',
     );
     
     foreach ($strings as $string) {

@@ -174,7 +174,7 @@ require get_template_directory() . '/inc/template-tags.php';
  */
 require get_template_directory() . '/inc/template-functions.php';
 
-require get_template_directory() . '/inc/custon-actions.php';
+require get_template_directory() . '/inc/custom-actions.php';
 
 /**
  * Customizer additions.

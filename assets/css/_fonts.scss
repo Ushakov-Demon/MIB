@@ -180,17 +180,24 @@
 
 @font-face {
     font-family: 'mib';
-    src:
-        url('../fonts/mib.ttf?nvf19l') format('truetype'),
-        url('../fonts/mib.woff?nvf19l') format('woff'),
-        url('../fonts/mib.svg?nvf19l#mib') format('svg');
+    src:  url('../fonts/mib.eot?up6jh1');
+    src:  url('../fonts/mib.eot?up6jh1#iefix') format('embedded-opentype'),
+        url('../fonts/mib.ttf?up6jh1') format('truetype'),
+        url('../fonts/mib.woff?up6jh1') format('woff'),
+        url('../fonts/mib.svg?up6jh1#mib') format('svg');
     font-weight: normal;
     font-style: normal;
     font-display: block;
 }
 
+header.site-header .menu li.menu-item-has-children a::after,
+.filter a::before,
+.category-link::before,
+.category::before,
 .menu-item-back a::before,
 a.button::after, .button::after, button[type=submit]::after, input[type=submit]::after,
+.section-link::after,
+.show-more-link::after,
 [class^="icon-"],
 [class*=" icon-"] {
     display: inline-block;
@@ -205,44 +212,48 @@ a.button::after, .button::after, button[type=submit]::after, input[type=submit]:
     -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-comment:before {
+.icon-arrow:before {
     content: "\e900";
 }
 
-.icon-close:before {
+.icon-comment:before {
     content: "\e901";
 }
 
-.icon-search:before {
+.icon-close:before {
     content: "\e902";
 }
 
-.icon-event:before {
+.icon-search:before {
     content: "\e903";
 }
 
-.icon-news:before {
+.icon-event:before {
     content: "\e904";
 }
 
-.icon-article:before {
+.icon-news:before {
     content: "\e905";
 }
 
-.icon-arrow-left:before {
+.icon-article:before {
     content: "\e906";
 }
 
-.icon-arrow-bottom:before {
+.icon-arrow-left:before {
     content: "\e907";
 }
 
-.icon-arrow-top:before {
+.icon-arrow-bottom:before {
     content: "\e908";
 }
 
-.icon-arrow-right:before {
+.icon-arrow-top:before {
     content: "\e909";
+}
+
+.icon-arrow-right:before {
+    content: "\e90a";
 }
 
 .icon-check:before {
@@ -251,4 +262,10 @@ a.button::after, .button::after, button[type=submit]::after, input[type=submit]:
 
 .icon-arrow-45:before {
     content: "\e913";
+}
+
+.section-link::after,
+.show-more-link::after,
+.icon-arrow-right:before {
+    content: "\e90a";
 }

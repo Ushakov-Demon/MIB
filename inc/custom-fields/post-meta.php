@@ -11,7 +11,6 @@ function custom_posts_meta_data() {
         ->set_priority( 'high' )
         ->add_fields( array(
             Field::make( 'image', 'tr_program_icon', __( 'Add icon' ) )
-                ->set_value_type( 'url' )
         ) );
 
     // ==== EVENTS post type
