@@ -26,6 +26,7 @@ function register_customizer_strings_for_polylang() {
         'News',
         'Events',
         'All posts',
+        'View certificate',
     );
     
     foreach ($strings as $string) {

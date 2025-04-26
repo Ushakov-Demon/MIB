@@ -51,11 +51,11 @@ $programs = apply_filters( 'mib_get_posts', 'programs', $programs_per_page );
                     if ($programs->have_posts()):
                         while($programs->have_posts()):
                             $programs->the_post();
-                            $post_ID = get_the_ID();
-                            $title = get_the_title();
+                            $post_ID        = get_the_ID();
+                            $title          = get_the_title();
                             $post_permalink = get_the_permalink();
-                            $icon_url = get_post_meta($post_ID, '_tr_program_icon', true);
-                            $desc = get_the_excerpt($post_ID);
+                            $image          = get_post_meta($post_ID, '_tr_program_icon', true);
+                            $desc           = get_the_excerpt($post_ID);
 
                             include get_template_directory() . '/template-parts/blocks/block-item.php';
 

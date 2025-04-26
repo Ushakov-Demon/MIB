@@ -124,7 +124,7 @@ function get_svg($attachment_id_or_url, $alt_text = '') {
                 $svg_content = file_get_contents($file_path);
             }
         } else {
-            $image_url = wp_get_attachment_image_url($attachment_id, 'thumbnail');
+            $image_url = wp_get_attachment_image_url($attachment_id, 'medium');
         }
     } else {
         $file_extension = pathinfo($attachment_id_or_url, PATHINFO_EXTENSION);

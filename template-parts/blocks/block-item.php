@@ -1,8 +1,19 @@
 <div class="item">
-    <?php if (!empty($icon_url)): ?>
-        <a class="image" href="<?php echo esc_url($post_permalink); ?>">
-            <?php echo get_svg(esc_url($icon_url), esc_attr($title)); ?>
-        </a>
+
+    <?php if ($image): ?>
+        <div class="image">
+            <?php 
+                echo wp_get_attachment_image(
+                    $image,
+                    'medium',
+                    false,
+                    array(
+                        'class' => 'block-item-img',
+                        'loading' => 'lazy',
+                    )
+                );
+            ?>
+        </div>
     <?php endif; ?>
     
     <h2 class="title">
@@ -17,7 +28,11 @@
 
     <div class="item-footer">
         <a href="<?php echo esc_url($post_permalink); ?>" class="show-more-link">
-            <?php pll_e('Learn more', 'baza'); ?>
+            <?php if (!empty($button_text)): ?>
+                <?php pll_e($button_text, 'baza'); ?>
+                <?php else: ?>
+                <?php pll_e('Learn more', 'baza'); ?>
+            <?php endif; ?>
         </a>
     </div>
 </div>

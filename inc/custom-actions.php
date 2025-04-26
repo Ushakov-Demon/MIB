@@ -9,14 +9,14 @@ add_filter( 'mib_get_alternating_posts', 'mib_get_alternating_posts', 10 );
  * 
  * @return object WP_Query
  */
-function mib_get_posts( $post_type = 'post', int $per_page = 0, int $page = 1 ) {
+function mib_get_posts( $post_type = 'post', int $per_page = 0, int $page = 1, $post_status = 'publish' ) {
     if ( 0 == $per_page ) {
         $per_page = get_option( 'posts_per_page' );
     }
 
     $posts_q_args = [
         'post_type'      => $post_type,
-        'post_status'    => 'publish',
+        'post_status'    => $post_status,
         'order_by'       => 'date',
         'order'          => 'DESC',
         'posts_per_page' => $per_page,
