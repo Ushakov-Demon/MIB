@@ -1,5 +1,9 @@
 <?php
+add_action( 'init', 'mib_register_taxomomies', 10 );
 
+function get_icon_base64 ( $name ) {
+    return file_get_contents( get_template_directory_uri() . "/assets/images/icons_base64/$name.txt" );
+};
 function create_custom_post_types_and_taxonomies() {
     $programs_labels = array(
         'name'                  => 'Програми навчання',
@@ -159,6 +163,84 @@ function create_custom_post_types_and_taxonomies() {
     
     register_post_type('programs', $programs_args);
     register_post_type('events', $events_args);
+
+    register_post_type( 'teachers', [
+        'label' => null,
+        'labels' => [
+            'name'                  => __( 'Викладачі' ),
+            'singular_name'         => __( 'Викладач' ),
+            'add_new'               => __( 'Додати нового викладача' ),
+            'add_new_item'          => __( 'Додати викладача' ),
+            'edit_item'             => __( 'Редагувати викладача' ),
+            'new_item'              => __( 'Новий викладач' ),
+            'view_item'             => __( 'Переглянути викладача' ),
+            'search_items'          => __( 'Пошук викладачів' ),
+            'not_found'             => __( 'Не знайдено викладачів' ),
+            'not_found_in_trash'    => __( 'Не знайдено викладачів в корзині' ),
+            'menu_name'             => __( 'Викладачі' ),
+        ],
+        'description'         => '',
+        'public'              => true,
+        'publicly_queryable'  => true,
+        'show_in_menu'        => true,
+        'show_in_rest'        => true,
+        'rest_base'           => null,
+        'show_in_nav_menus'   => true,
+        'menu_icon'           => get_icon_base64( "teachers" ),
+        'hierarchical'        => false,
+        'supports'            => ['title', 'thumbnail', 'excerpt', 'editor'], // 'title','editor','author','thumbnail','excerpt','trackbacks','custom-fields','comments','revisions','page-attributes','post-formats'
+        'taxonomies'          => [],
+        'has_archive'         => true,
+        'rewrite'             => true,
+        'query_var'           => true,
+    ] );
+
+    register_post_type( 'students', [
+        'label' => null,
+        'labels' => [
+            'name'                  => __( 'Випускники' ),
+            'singular_name'         => __( 'Випускник' ),
+            'add_new'               => __( 'Додати нового випускника' ),
+            'add_new_item'          => __( 'Додати випускника' ),
+            'edit_item'             => __( 'Редагувати випускника' ),
+            'new_item'              => __( 'Новий випускник' ),
+            'view_item'             => __( 'Переглянути випускника' ),
+            'search_items'          => __( 'Пошук випускників' ),
+            'not_found'             => __( 'Не знайдено випускників' ),
+            'not_found_in_trash'    => __( 'Не знайдено випускників в корзині' ),
+            'menu_name'             => __( 'Випускники' ),
+        ],
+        'description'         => '',
+        'public'              => true,
+        'publicly_queryable'  => true,
+        'show_in_menu'        => true,
+        'show_in_rest'        => true,
+        'rest_base'           => null,
+        'show_in_nav_menus'   => true,
+        'menu_icon'           => get_icon_base64( "student" ),
+        'hierarchical'        => false,
+        'supports'            => ['title', 'thumbnail', 'excerpt'], // 'title','editor','author','thumbnail','excerpt','trackbacks','custom-fields','comments','revisions','page-attributes','post-formats'
+        'taxonomies'          => [],
+        'has_archive'         => true,
+        'rewrite'             => true,
+        'query_var'           => true,
+    ] );
+}
+
+function mib_register_taxomomies() {
+    register_taxonomy( 'companies', ['teachers', 'students'], [
+        'labels' => [
+            'name'          => __( 'Companies' ),
+            'singular_name' => __( 'Company' ),
+            'add_new_item'  => __( 'Add new company' ),
+            'new_item_name' => __( 'New company' ),
+            'menu_name'     => __( 'Companies' ),
+        ],
+        'public'              => true,
+        'hierarchical'        => true,
+        'show_in_rest'        => true,
+        'show_admin_column'   => true,
+    ]);
 }
 
 add_action('init', 'create_custom_post_types_and_taxonomies', 0);

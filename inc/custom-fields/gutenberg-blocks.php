@@ -94,23 +94,8 @@ function custom_posts_gutenberg_blocks() {
             Field::make( 'separator', 'company_logos_sep', __( 'Our Clients' ) ),
             Field::make( 'text', 'company_logos_heading', __( 'Section Heading' ) )
                 ->set_default_value( __( 'Our clients already include employees of these companies' ) ),
-            Field::make( 'complex', 'company_logos_items', __( 'Company Items' ) )
-                ->add_fields( array(
-                    Field::make( 'image', 'logo', __( 'Company Logo' ) )
-                        ->set_width( 30 )
-                        ->set_type( array( 'image' ) )
-                        ->set_required( true ),
-                    Field::make( 'text', 'name', __( 'Company Name' ) )
-                        ->set_width( 30 )
-                        ->set_required( true ),
-                    Field::make( 'text', 'url', __( 'Company URL' ) )
-                        ->set_width( 40 )
-                        ->set_help_text( __( 'Full URL including https://' ) )
-                ) )
-                ->set_layout( 'tabbed-horizontal' )
-                ->set_min( 1 )
+
         ) )
-        ->set_inner_blocks( false )
         ->set_description( __( 'A block to display company logos with links' ) )
         ->set_icon( 'groups' )
         ->set_category( 'mib' )

@@ -80,17 +80,3 @@ function mib_get_alternating_posts( int $per_page = 0, int $page = 1 ): array {
 
     return $alternating_posts;
 }
-
-// Приклад використання:
-// $alternating_posts_result = mib_get_alternating_posts( 5, 2 );
-
-// if ( ! empty( $alternating_posts_result ) ) {
-//     foreach ( $alternating_posts_result as $post ) {
-//         setup_postdata( $post );
-//         echo '<h2><a href="' . get_permalink() . '">' . get_the_title() . ' (' . get_post_type() . ')</a></h2>';
-//         the_excerpt();
-//     }
-//     wp_reset_postdata();
-// } else {
-//     echo '<p>Не знайдено жодних постів.</p>';
-// }

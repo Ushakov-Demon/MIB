@@ -159,6 +159,17 @@ function baza_admin_scripts() {
 }
 add_action( 'admin_enqueue_scripts', 'baza_admin_scripts' );
 
+$currencies = [
+    'GBP' => '£',
+    'USD' => '$',
+    'EUR' => '€',
+    'UAH' => '₴',
+];
+
+if ( ! defined( 'MIB_CURRENCIES' ) ) {
+    define( 'MIB_CURRENCIES', $currencies );
+}
+
 /**
  * Implement the Custom Header feature.
  */
