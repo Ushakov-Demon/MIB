@@ -3346,6 +3346,9 @@ footer .footer-after .footer-after-col {
   border-color: var(--color_secondary) !important;
   background-color: var(--color_secondary) !important;
 }
+.wpcf7 .wpcf7-form.sent .wpcf7-response-output {
+  color: var(--color_primary);
+}
 .wpcf7 .wpcf7-response-output {
   text-align: left;
   grid-column: span 2;
@@ -3517,9 +3520,6 @@ footer .footer-after .footer-after-col {
 }
 .wpcf7 .wpcf7-form-control:not(.wpcf7-submit):not(.optional).wpcf7-not-valid::placeholder {
   color: var(--color_error);
-}
-.wpcf7.sent .wpcf7-response-output {
-  margin-top: var(--gap_m);
 }
 
 .category-title-container .page-title {

@@ -144,7 +144,7 @@ function create_custom_post_types_and_taxonomies() {
         'description'         => '',
         'labels'              => $accreditations_labels,
         'supports'            => array('title', 'editor', 'thumbnail', 'excerpt'),
-        // 'taxonomies'          => array('accreditations_category', 'post_tag'),
+        'taxonomies'          => array('accreditation_category', 'post_tag'),
         'hierarchical'        => false,
         'public'              => true,
         'show_ui'             => true,
@@ -163,6 +163,7 @@ function create_custom_post_types_and_taxonomies() {
     
     register_post_type('programs', $programs_args);
     register_post_type('events', $events_args);
+    register_post_type('accreditations', $accreditations_args);
 
     register_post_type( 'teachers', [
         'label' => null,
@@ -188,8 +189,8 @@ function create_custom_post_types_and_taxonomies() {
         'show_in_nav_menus'   => true,
         'menu_icon'           => get_icon_base64( "teachers" ),
         'hierarchical'        => false,
-        'supports'            => ['title', 'thumbnail', 'excerpt', 'editor'], // 'title','editor','author','thumbnail','excerpt','trackbacks','custom-fields','comments','revisions','page-attributes','post-formats'
-        'taxonomies'          => [],
+        'supports'            => ['title', 'thumbnail', 'excerpt', 'editor'],
+        'taxonomies'          => ['teacher_category', 'companies'],
         'has_archive'         => true,
         'rewrite'             => true,
         'query_var'           => true,
@@ -219,8 +220,8 @@ function create_custom_post_types_and_taxonomies() {
         'show_in_nav_menus'   => true,
         'menu_icon'           => get_icon_base64( "student" ),
         'hierarchical'        => false,
-        'supports'            => ['title', 'thumbnail', 'excerpt'], // 'title','editor','author','thumbnail','excerpt','trackbacks','custom-fields','comments','revisions','page-attributes','post-formats'
-        'taxonomies'          => [],
+        'supports'            => ['title', 'thumbnail', 'excerpt'],
+        'taxonomies'          => ['student_category', 'companies'],
         'has_archive'         => true,
         'rewrite'             => true,
         'query_var'           => true,
@@ -228,13 +229,124 @@ function create_custom_post_types_and_taxonomies() {
 }
 
 function mib_register_taxomomies() {
+    register_taxonomy( 'program_category', ['programs'], [
+        'labels' => [
+            'name'              => 'Категорії програм',
+            'singular_name'     => 'Категорія програми',
+            'search_items'      => 'Пошук категорій програм',
+            'all_items'         => 'Всі категорії програм',
+            'parent_item'       => 'Батьківська категорія програми',
+            'parent_item_colon' => 'Батьківська категорія програми:',
+            'edit_item'         => 'Редагувати категорію програми',
+            'update_item'       => 'Оновити категорію програми',
+            'add_new_item'      => 'Додати нову категорію програми',
+            'new_item_name'     => 'Назва нової категорії програми',
+            'menu_name'         => 'Категорії програм',
+        ],
+        'public'              => true,
+        'hierarchical'        => true,
+        'show_in_rest'        => true,
+        'show_admin_column'   => true,
+        'rewrite'             => array('slug' => 'program-category'),
+    ]);
+
+    register_taxonomy( 'event_category', ['events'], [
+        'labels' => [
+            'name'              => 'Категорії подій',
+            'singular_name'     => 'Категорія події',
+            'search_items'      => 'Пошук категорій подій',
+            'all_items'         => 'Всі категорії подій',
+            'parent_item'       => 'Батьківська категорія події',
+            'parent_item_colon' => 'Батьківська категорія події:',
+            'edit_item'         => 'Редагувати категорію події',
+            'update_item'       => 'Оновити категорію події',
+            'add_new_item'      => 'Додати нову категорію події',
+            'new_item_name'     => 'Назва нової категорії події',
+            'menu_name'         => 'Категорії подій',
+        ],
+        'public'              => true,
+        'hierarchical'        => true,
+        'show_in_rest'        => true,
+        'show_admin_column'   => true,
+        'rewrite'             => array('slug' => 'event-category'),
+    ]);
+
+    register_taxonomy( 'accreditation_category', ['accreditations'], [
+        'labels' => [
+            'name'              => 'Категорії акредитацій',
+            'singular_name'     => 'Категорія акредитації',
+            'search_items'      => 'Пошук категорій акредитацій',
+            'all_items'         => 'Всі категорії акредитацій',
+            'parent_item'       => 'Батьківська категорія акредитації',
+            'parent_item_colon' => 'Батьківська категорія акредитації:',
+            'edit_item'         => 'Редагувати категорію акредитації',
+            'update_item'       => 'Оновити категорію акредитації',
+            'add_new_item'      => 'Додати нову категорію акредитації',
+            'new_item_name'     => 'Назва нової категорії акредитації',
+            'menu_name'         => 'Категорії акредитацій',
+        ],
+        'public'              => true,
+        'hierarchical'        => true,
+        'show_in_rest'        => true,
+        'show_admin_column'   => true,
+        'rewrite'             => array('slug' => 'accreditation-category'),
+    ]);
+
+    register_taxonomy( 'teacher_category', ['teachers'], [
+        'labels' => [
+            'name'              => 'Категорії викладачів',
+            'singular_name'     => 'Категорія викладача',
+            'search_items'      => 'Пошук категорій викладачів',
+            'all_items'         => 'Всі категорії викладачів',
+            'parent_item'       => 'Батьківська категорія викладача',
+            'parent_item_colon' => 'Батьківська категорія викладача:',
+            'edit_item'         => 'Редагувати категорію викладача',
+            'update_item'       => 'Оновити категорію викладача',
+            'add_new_item'      => 'Додати нову категорію викладача',
+            'new_item_name'     => 'Назва нової категорії викладача',
+            'menu_name'         => 'Категорії викладачів',
+        ],
+        'public'              => true,
+        'hierarchical'        => true, 
+        'show_in_rest'        => true,
+        'show_admin_column'   => true,
+        'rewrite'             => array('slug' => 'teacher-category'),
+    ]);
+
+    register_taxonomy( 'student_category', ['students'], [
+        'labels' => [
+            'name'              => 'Категорії випускників',
+            'singular_name'     => 'Категорія випускника',
+            'search_items'      => 'Пошук категорій випускників',
+            'all_items'         => 'Всі категорії випускників',
+            'parent_item'       => 'Батьківська категорія випускника',
+            'parent_item_colon' => 'Батьківська категорія випускника:',
+            'edit_item'         => 'Редагувати категорію випускника',
+            'update_item'       => 'Оновити категорію випускника',
+            'add_new_item'      => 'Додати нову категорію випускника',
+            'new_item_name'     => 'Назва нової категорії випускника',
+            'menu_name'         => 'Категорії випускників',
+        ],
+        'public'              => true,
+        'hierarchical'        => true,
+        'show_in_rest'        => true,
+        'show_admin_column'   => true,
+        'rewrite'             => array('slug' => 'student-category'),
+    ]);
+
     register_taxonomy( 'companies', ['teachers', 'students'], [
         'labels' => [
-            'name'          => __( 'Companies' ),
-            'singular_name' => __( 'Company' ),
-            'add_new_item'  => __( 'Add new company' ),
-            'new_item_name' => __( 'New company' ),
-            'menu_name'     => __( 'Companies' ),
+            'name'              => 'Компанії',
+            'singular_name'     => 'Компанія',
+            'search_items'      => 'Пошук компаній',
+            'all_items'         => 'Всі компанії',
+            'parent_item'       => 'Батьківська компанія',
+            'parent_item_colon' => 'Батьківська компанія:',
+            'edit_item'         => 'Редагувати компанію',
+            'update_item'       => 'Оновити компанію',
+            'add_new_item'      => 'Додати нову компанію',
+            'new_item_name'     => 'Назва нової компанії',
+            'menu_name'         => 'Компанії',
         ],
         'public'              => true,
         'hierarchical'        => true,
