@@ -140,7 +140,7 @@ function create_custom_post_types_and_taxonomies() {
         'description'         => '',
         'labels'              => $accreditations_labels,
         'supports'            => array('title', 'editor', 'thumbnail', 'excerpt'),
-        // 'taxonomies'          => array('category', 'post_tag'),
+        // 'taxonomies'          => array('accreditations_category', 'post_tag'),
         'hierarchical'        => false,
         'public'              => true,
         'show_ui'             => true,
@@ -157,8 +157,8 @@ function create_custom_post_types_and_taxonomies() {
         'show_in_rest'        => true,
     );
     
-    register_post_type('programs', $args);
+    register_post_type('programs', $programs_args);
     register_post_type('events', $events_args);
 }
 
-add_action('init', 'create_programs_post_type', 0);
+add_action('init', 'create_custom_post_types_and_taxonomies', 0);
