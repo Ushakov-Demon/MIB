@@ -2331,6 +2331,7 @@ footer {
                     line-height: 1.1;
                     margin: 0;
 
+                    span,
                     a {
                         display: block;
                         font-size: 28px;
@@ -2459,9 +2460,10 @@ footer {
                     line-height: 1.1;
                     margin: 0;
 
+                    span,
                     a {
                         display: block;
-                        font-size: 28px;
+                        font-size: 24px;
                         color: var(--color_link);
 
                         @include mobile {

@@ -2532,16 +2532,19 @@ footer .footer-after .footer-after-col {
   line-height: 1.1;
   margin: 0;
 }
+.section.section-programs .items .item .title span,
 .section.section-programs .items .item .title a {
   display: block;
   font-size: 28px;
   color: var(--color_link);
 }
 @media (max-width: 767px) {
+  .section.section-programs .items .item .title span,
   .section.section-programs .items .item .title a {
     font-size: 24px;
   }
 }
+.section.section-programs .items .item .title span:hover,
 .section.section-programs .items .item .title a:hover {
   color: var(--color_primary);
 }
@@ -2647,16 +2650,19 @@ footer .footer-after .footer-after-col {
   line-height: 1.1;
   margin: 0;
 }
+.section.section-accreditations .items .item .title span,
 .section.section-accreditations .items .item .title a {
   display: block;
-  font-size: 28px;
+  font-size: 24px;
   color: var(--color_link);
 }
 @media (max-width: 767px) {
+  .section.section-accreditations .items .item .title span,
   .section.section-accreditations .items .item .title a {
     font-size: 24px;
   }
 }
+.section.section-accreditations .items .item .title span:hover,
 .section.section-accreditations .items .item .title a:hover {
   color: var(--color_primary);
 }

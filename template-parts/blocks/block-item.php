@@ -1,4 +1,4 @@
-<div class="item">
+<div class="item"><!-- TODO: status pending -->
 
     <?php if ($image): ?>
         <div class="image">
@@ -17,6 +17,7 @@
     <?php endif; ?>
     
     <h2 class="title">
+        <!-- TODO: a or span status pending -->
         <a href="<?php echo esc_url($post_permalink); ?>">
             <?php echo esc_html($title); ?>
         </a>
@@ -26,6 +27,7 @@
         <div class="excerpt"><?php echo wp_kses_post($desc); ?></div>
     <?php endif; ?>
 
+    <!-- TODO: if not pending -->
     <div class="item-footer">
         <a href="<?php echo esc_url($post_permalink); ?>" class="show-more-link">
             <?php if (!empty($button_text)): ?>
