@@ -2,7 +2,7 @@
 $title_text_tag_before = isset( $is_announcing ) && $is_announcing ? "<span>" : "<a href=" . esc_url($post_permalink) . ">";
 $title_text_tag_after  = isset( $is_announcing ) && $is_announcing ? "</span>" : "</a>" ;
 ?>
-<div class="item <?php echo isset( $announcing ) ?? $announcing?>">
+<div class="item<?php echo $announcing?>">
     <?php if ($image): ?>
         <div class="image">
             <?php 

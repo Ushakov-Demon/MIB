@@ -1,5 +1,5 @@
 <?php
-$alternating_posts = apply_filters( 'mib_get_alternating_posts', $actuality_posts_per_page, 2 );
+$alternating_posts = apply_filters( 'mib_get_alternating_posts', $actuality_posts_per_page );
 ?>
 
 <section class="section section-news">
@@ -28,7 +28,7 @@ $alternating_posts = apply_filters( 'mib_get_alternating_posts', $actuality_post
         </div>
 
         <div class="section-filter">
-            <ul class="filter" id="filter-news" data-page="<?php echo get_the_ID()?>">
+            <ul class="filter" id="filter-news" data-page="<?php echo get_the_ID()?>" data-per-page="<?php echo $actuality_posts_per_page?>">
                 <li class="item filter-all active" data-target="all"><a href="#"><span><?php pll_e('All', 'baza'); ?></span></a></li>
                 <li class="item filter-news" data-target="news"><a href="#"><span><?php pll_e('News', 'baza'); ?></span></a></li>
                 <li class="item filter-events" data-target="events"><a href="#"><span><?php pll_e('Events', 'baza'); ?></span></a></li>
