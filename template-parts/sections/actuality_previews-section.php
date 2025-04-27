@@ -28,10 +28,10 @@ $alternating_posts = apply_filters( 'mib_get_alternating_posts', $actuality_post
         </div>
 
         <div class="section-filter">
-            <ul class="filter" id="filter-news">
-                <li class="item filter-all active"><a href="#"><span><?php pll_e('All', 'baza'); ?></span></a></li>
-                <li class="item filter-news"><a href="#"><span><?php pll_e('News', 'baza'); ?></span></a></li>
-                <li class="item filter-events"><a href="#"><span><?php pll_e('Events', 'baza'); ?></span></a></li>
+            <ul class="filter" id="filter-news" data-page="<?php echo get_the_ID()?>">
+                <li class="item filter-all active" data-target="all"><a href="#"><span><?php pll_e('All', 'baza'); ?></span></a></li>
+                <li class="item filter-news" data-target="news"><a href="#"><span><?php pll_e('News', 'baza'); ?></span></a></li>
+                <li class="item filter-events" data-target="events"><a href="#"><span><?php pll_e('Events', 'baza'); ?></span></a></li>
             </ul>
             <a class="section-link" href="<?php echo esc_url( get_permalink( $actuality_posts_link ) ); ?>"><?php pll_e('All posts', 'baza'); ?></a>
         </div>

@@ -266,4 +266,30 @@ jQuery(document).ready(function ($) {
 			}
 		}
 	});
+
+	$(document).on('click', '#filter-news .item', function(e){
+		e.preventDefault();
+		let $this       = $(this);
+		let filterTaget = $this.data('target');
+		let page        = $this.parent().data('page');
+
+		if ( $this.hasClass( 'active' ) ) return;
+
+		$this.parent().find( '.active' ).removeClass( 'active' );
+		$this.addClass( 'active' );
+
+		$.ajax({
+			type : 'POST',
+			dataType : 'json',
+			url : dataObj['ajaxUrl'],
+			data : {
+				action : 'custom_post_type_filter',
+				filterTaget : filterTaget,
+				currentPage : page,
+			},
+			success : function (response) {
+				$this.closest( 'section' ).find( '.sort-items' ).html(response);
+			}
+		});
+	});
 });

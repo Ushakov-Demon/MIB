@@ -1,8 +1,8 @@
 <?php
-$title_text_tag_before = $is_announcing ? "<span>" : "<a href=" . esc_url($post_permalink) . ">";
-$title_text_tag_after  = $is_announcing ? "</span>" : "</a>" ;
+$title_text_tag_before = isset( $is_announcing ) && $is_announcing ? "<span>" : "<a href=" . esc_url($post_permalink) . ">";
+$title_text_tag_after  = isset( $is_announcing ) && $is_announcing ? "</span>" : "</a>" ;
 ?>
-<div class="item <?php echo $announcing?>">
+<div class="item <?php echo isset( $announcing ) ?? $announcing?>">
     <?php if ($image): ?>
         <div class="image">
             <?php 
@@ -32,7 +32,7 @@ $title_text_tag_after  = $is_announcing ? "</span>" : "</a>" ;
     <?php endif; ?>
 
     <?php
-    if ( ! $is_announcing ) :
+    if ( ! isset( $is_announcing ) || ! $is_announcing ) :
     ?>
     <div class="item-footer">
         <a href="<?php echo esc_url($post_permalink); ?>" class="show-more-link">
