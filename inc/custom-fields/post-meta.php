@@ -13,6 +13,14 @@ function custom_posts_meta_data() {
             Field::make( 'image', 'tr_program_icon', __( 'Add icon' ) )
         ) );
 
+    Container::make( 'post_meta', __( 'Announcement' ) )
+        ->where( 'post_type', '=', 'programs' )
+        ->set_context( 'side' )
+        ->set_priority( 'high' )
+        ->add_fields( array(
+            Field::make( 'checkbox', 'tr_program_is_announce', __( 'Is announcement' ) )
+        ) );
+
     Container::make( 'post_meta', __( 'Training course data' ) )
         ->where( 'post_type', '=', 'programs' )
         ->add_tab( __( 'Main' ), array(
