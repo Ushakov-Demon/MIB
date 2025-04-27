@@ -84,17 +84,13 @@ function mib_get_alternating_posts( int $per_page = 0, int $page = 1 ): array {
 }
 
 function mib_custom_post_type_filter(){
-    if ( ! isset( $_POST['filterTaget'] ) ) return;
+    if ( ! isset( $_POST['filterTaget'] ) || ! isset( $_POST['perPage'] ) ) return;
 
     $current   = isset( $_POST['currentPage'] ) ?? $_POST['currentPage'];
     $post_type = false;
     $posts     = false;
-    $per_page  = get_option( 'posts_per_page' );
+    $per_page  = intval( $_POST['perPage'] );
     $output    = "";
-
-    if ( $current ) {
-        $per_page = get_post_meta( $current, '_actuality_posts_per_page', true );
-    }
 
     switch ( $_POST['filterTaget'] ) {
         case "news" :

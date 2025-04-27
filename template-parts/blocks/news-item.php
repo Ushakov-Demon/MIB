@@ -21,18 +21,26 @@ $image_alt = get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true) ?: $
     <?php endif; ?>
     
     <div class="meta">
-        <?php if (!empty($shedule_date)): ?>
-            <!-- category or category-link -->
+        <?php
+            if ( "events" == $post_type ) :
+                ?>
 
-            <span class="category">
-                <?php pll_e('Events', 'baza'); ?>
-            </span>
+                <span class="category">
+                    <?php pll_e('Events', 'baza'); ?>
+                </span>
 
-            <div class="date">
-                <?php echo esc_html(date_i18n(get_option('date_format') . ', ' . get_option('time_format'), strtotime($shedule_date))); ?>
-            </div>
+                <?php
+                if ( ! empty( $shedule_date ) ):
+                ?>
+
+                <div class="date">
+                    <?php echo esc_html(date_i18n(get_option('date_format') . ', ' . get_option('time_format'), strtotime($shedule_date))); ?>
+                </div>
             
-            <?php else: ?>
+                <?php
+                endif;
+            else:
+            ?>
                 <span class="category">
                     <?php pll_e('News', 'baza'); ?>
                 </span>

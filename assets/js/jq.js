@@ -272,6 +272,7 @@ jQuery(document).ready(function ($) {
 		let $this       = $(this);
 		let filterTaget = $this.data('target');
 		let page        = $this.parent().data('page');
+		let perPage     = $this.parent().data('per-page');
 
 		if ( $this.hasClass( 'active' ) ) return;
 
@@ -286,6 +287,7 @@ jQuery(document).ready(function ($) {
 				action : 'custom_post_type_filter',
 				filterTaget : filterTaget,
 				currentPage : page,
+				perPage     : perPage, 
 			},
 			success : function (response) {
 				$this.closest( 'section' ).find( '.sort-items' ).html(response);
