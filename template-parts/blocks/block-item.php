@@ -1,8 +1,5 @@
-<?php
-$title_text_tag_before = $is_announcing ? "<span>" : "<a href=" . esc_url($post_permalink) . ">";
-$title_text_tag_after  = $is_announcing ? "</span>" : "</a>" ;
-?>
-<div class="item <?php echo $announcing?>">
+<div class="item"><!-- TODO: status pending -->
+
     <?php if ($image): ?>
         <div class="image">
             <?php 
@@ -20,20 +17,17 @@ $title_text_tag_after  = $is_announcing ? "</span>" : "</a>" ;
     <?php endif; ?>
     
     <h2 class="title">
-        <?php 
-        echo $title_text_tag_before;
-            echo esc_html($title);
-        echo $title_text_tag_after;
-        ?>
+        <!-- TODO: a or span status pending -->
+        <a href="<?php echo esc_url($post_permalink); ?>">
+            <?php echo esc_html($title); ?>
+        </a>
     </h2>
     
     <?php if (!empty($desc)): ?>
         <div class="excerpt"><?php echo wp_kses_post($desc); ?></div>
     <?php endif; ?>
 
-    <?php
-    if ( ! $is_announcing ) :
-    ?>
+    <!-- TODO: if not pending -->
     <div class="item-footer">
         <a href="<?php echo esc_url($post_permalink); ?>" class="show-more-link">
             <?php if (!empty($button_text)): ?>
@@ -43,7 +37,4 @@ $title_text_tag_after  = $is_announcing ? "</span>" : "</a>" ;
             <?php endif; ?>
         </a>
     </div>
-    <?php
-    endif;
-    ?>
 </div>

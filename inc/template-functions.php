@@ -440,3 +440,38 @@ function add_menu_level_class($classes, $item, $args, $depth) {
     return $classes;
 }
 add_filter('nav_menu_css_class', 'add_menu_level_class', 10, 4);
+
+/**
+* Function to automatically highlight text between asterisks with a span
+* 
+* @param string $text The text to process
+* @return string Processed text with highlights
+*/
+function highlight_text_with_stars($text) {
+    if (!is_string($text)) {
+        return $text;
+    }
+    
+    // Find text between asterisks and replace with span
+    $pattern = '/\*(.*?)\*/';
+    $replacement = '<span class="highlight">$1</span>';
+    
+    return preg_replace($pattern, $replacement, $text);
+ }
+ 
+ /**
+ * Extended get_theme_mod with automatic text highlighting
+ * 
+ * @param string $name Theme mod name
+ * @param mixed $default Default value
+ * @return mixed Theme mod value with highlighted text
+ */
+ function get_themed_mod($name, $default = false) {
+    $value = get_theme_mod($name, $default);
+    
+    if (is_string($value)) {
+        return highlight_text_with_stars($value);
+    }
+    
+    return $value;
+ }

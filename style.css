@@ -395,7 +395,7 @@ h6 {
 }
 
 p {
-	margin-bottom: 1.5em;
+	margin-bottom: var(--block_spacing);
 }
 
 dfn,
@@ -406,11 +406,11 @@ i {
 }
 
 blockquote {
-	margin: 0 1.5em;
+	margin: 0 var(--block_spacing);
 }
 
 address {
-	margin: 0 0 1.5em;
+	margin: 0 0 var(--block_spacing);
 }
 
 pre {

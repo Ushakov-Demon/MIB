@@ -29,6 +29,15 @@ function register_customizer_strings_for_polylang() {
         'View certificate',
         'Completed',
         'More details',
+        'Return to main page',
+        'The address is incorrectly entered or this page no longer exists on the site',
+        'Page not found',
+        'Error',
+        'Address',
+        'multichannel',
+        'Phone for education program inquiries',
+        'We are on social',
+        'Phone of the School of NPQ',
     );
     
     foreach ($strings as $string) {

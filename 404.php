@@ -11,14 +11,11 @@ Template Name: 404
         <div class="container container-404">
         <div class="container">
             <div class="block-404">
-                <h2><?php _e('Помилка'); ?></h2>
-                <p><?php _e('Сторінку не знайдено'); ?></p>
-            </div>
-            <div class="block-404-footer">
-                <p><?php _e('Неправильно набрано адресу або такої сторінки на сайті більше не існує.'); ?></p>
+                <h1><?php pll_e('Page not found', 'baza'); ?></h1>
+                <p><?php pll_e('The address is incorrectly entered or this page no longer exists on the site', 'baza'); ?>.</p>
                 <div class="return-to">
                     <a class="button go-home" href="<?php echo esc_url(home_url()); ?>">
-                        <?php _e('На головну'); ?>
+                        <?php pll_e('Return to main page', 'baza'); ?>
                     </a>
                 </div>
             </div>

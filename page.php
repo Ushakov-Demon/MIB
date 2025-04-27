@@ -15,16 +15,15 @@ $is_home = is_front_page();
         </div>
     </div>
 
-    <div class="header-title">
+    <section class="section section-page">
         <div class="container">
             <h1><?php the_title(); ?></h1>
-        </div>
-    </div>
-    
-    <?php if (get_the_content()) : ?>
-        <?php the_content(); ?>
-    <?php endif; ?>
 
+            <?php if (get_the_content()) : ?>
+                <?php the_content(); ?>
+            <?php endif; ?>
+        </div>
+    </section>
 </main>
 
 <?php

@@ -1,0 +1,429 @@
+/* Paragraph */
+.wp-block-paragraph {
+    margin-bottom: var(--block_spacing);
+    line-height: 1.6;
+}
+
+/* Headings */
+.wp-block-heading {
+    margin-top: 0;
+    margin-bottom: var(--block_spacing);
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--color_secondary);
+}
+
+h1.wp-block-heading {
+    font-size: var(--font_size_h1);
+}
+
+h2.wp-block-heading {
+    font-size: var(--font_size_h2);
+}
+
+h3.wp-block-heading {
+    font-size: var(--font_size_h3);
+}
+
+h4.wp-block-heading {
+    font-size: var(--font_size_h4);
+}
+
+h5.wp-block-heading {
+    font-size: var(--font_size_h5);
+}
+
+h6.wp-block-heading {
+    font-size: var(--font_size_h6);
+    text-transform: uppercase;
+}
+
+/* Lists */
+.wp-block-list {
+    margin: 0 0 var(--block_spacing) 2em;
+    
+    li {
+        margin-bottom: 0.5em;
+    }
+    
+    ul, ol {
+        margin-top: 0.5em;
+    }
+}
+
+.wp-block-list.is-style-default {
+    list-style-type: disc;
+    
+    ul {
+        list-style-type: circle;
+        
+        ul {
+            list-style-type: square;
+        }
+    }
+}
+
+.wp-block-list ol {
+    list-style-type: decimal;
+    
+    ol {
+        list-style-type: lower-alpha;
+        
+        ol {
+            list-style-type: lower-roman;
+        }
+    }
+}
+
+/* Quote */
+.wp-block-quote {
+    background-color: var(--color_khaki_2);
+    padding: 32px;
+    display: flex;
+    gap: 28px;
+    font-size: 15px;
+    line-height: 1.5;
+
+    @include mobile {
+        grid-column: span 2;
+    }
+
+    &::before {
+        content: "\e90b";
+        font-size: 18px;
+    }
+    
+    cite {
+        display: block;
+        margin-top: 0.5em;
+        font-size: 0.875em;
+        font-style: normal;
+        font-weight: 500;
+    }
+}
+
+.wp-block-quote.is-style-large {
+    font-size: 1.25em;
+    
+    cite {
+        font-size: 0.8em;
+    }
+}
+
+/* Verse */
+.wp-block-verse {
+    font-family: var(--font);
+    font-style: italic;
+    padding: 1em;
+    background-color: var(--color_light_gray);
+    white-space: pre-wrap;
+    margin-bottom: var(--block_spacing);
+}
+
+/* Preformatted text */
+.wp-block-preformatted {
+    font-family: monospace;
+    background-color: var(--color_light_gray_2);
+    padding: 1em;
+    margin: 0 0 var(--block_spacing);
+    overflow: auto;
+    white-space: pre-wrap;
+    font-size: 0.875em;
+}
+
+/* Code */
+.wp-block-code {
+    font-family: monospace;
+    background-color: var(--color_light_gray_2);
+    border-radius: 3px;
+    padding: 1em;
+    margin: 0 0 var(--block_spacing);
+    overflow: auto;
+    
+    code {
+        display: block;
+        white-space: pre;
+        overflow-x: auto;
+        font-size: 0.875em;
+    }
+}
+
+/* Separator */
+.wp-block-separator {
+    height: 1px;
+    background-color: var(--color_grey);
+    border: 0;
+    margin: var(--block_spacing) 0;
+    
+    &.is-style-wide {
+        height: 1px;
+    }
+    
+    &.is-style-dots {
+        height: auto;
+        background: none;
+        text-align: center;
+        line-height: 1;
+        letter-spacing: 0.5em;
+        
+        &:before {
+            content: "\00b7 \00b7 \00b7";
+            font-size: 2em;
+            color: var(--color_grey_4);
+        }
+    }
+}
+
+/* Table */
+.wp-block-table {
+    width: 100%;
+    margin: 0 0 var(--block_spacing);
+    border-collapse: collapse;
+    
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    
+    th, td {
+        border: 1px solid var(--color_grey);
+        padding: 0.5em;
+    }
+    
+    th {
+        background-color: var(--color_light_gray_2);
+        font-weight: 600;
+        text-align: left;
+    }
+    
+    tr:nth-child(even) {
+        background-color: var(--color_light_gray);
+    }
+    
+    &.is-style-stripes {
+        border-bottom: none;
+        
+        tbody tr:nth-child(odd) {
+            background-color: var(--color_light_gray);
+        }
+        
+        th, td {
+            border: none;
+        }
+    }
+}
+
+/* Button */
+.wp-block-button {
+    margin-bottom: var(--block_spacing);
+    
+    .wp-block-button__link {
+        all: unset;
+
+        @include button;
+    }
+    
+    &.is-style-fill .wp-block-button__link {
+        background-color: var(--color_primary);
+        color: var(--color_white);
+        
+        &:hover, &:focus {
+            background-color: var(--color_primary_2);
+        }
+    }
+    
+    &.is-style-outline .wp-block-button__link {
+        background-color: transparent;
+        border: 2px solid var(--color_primary);
+        color: var(--color_primary);
+        
+        &:hover, &:focus {
+            background-color: var(--color_primary);
+            color: var(--color_white);
+        }
+    }
+}
+
+/* Image */
+.wp-block-image {
+    margin-bottom: var(--block_spacing);
+    
+    img {
+        max-width: 100%;
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+    
+    figcaption {
+        font-size: 0.875em;
+        margin-top: 0.5em;
+        text-align: center;
+        color: var(--color_grey_3);
+    }
+    
+    &.alignleft {
+        float: left;
+        margin-right: 1.5em;
+    }
+    
+    &.alignright {
+        float: right;
+        margin-left: 1.5em;
+    }
+    
+    &.aligncenter {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+/* Media and text */
+.wp-block-media-text {
+    display: grid;
+    grid-template-columns: 50% 1fr;
+    grid-template-rows: auto;
+    grid-column-gap: var(--block_spacing);
+    margin-bottom: var(--block_spacing);
+    
+    &.has-media-on-the-right {
+        grid-template-columns: 1fr 50%;
+    }
+    
+    .wp-block-media-text__media {
+        img, video {
+            max-width: 100%;
+            height: auto;
+        }
+    }
+    
+    .wp-block-media-text__content {
+        padding: 1em 0;
+    }
+    
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+        grid-row-gap: var(--block_spacing);
+        
+        &.has-media-on-the-right {
+            grid-template-columns: 1fr;
+        }
+        
+        .wp-block-media-text__media {
+            grid-row: 1;
+        }
+        
+        .wp-block-media-text__content {
+            grid-row: 2;
+        }
+    }
+}
+
+/* Columns */
+.wp-block-columns {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: var(--block_spacing);
+    gap: var(--block_spacing);
+    
+    .wp-block-column {
+        flex-grow: 1;
+        min-width: 0;
+        word-break: break-word;
+        overflow-wrap: break-word;
+    }
+    
+    @media (max-width: 768px) {
+        flex-direction: column;
+        
+        .wp-block-column {
+            margin-bottom: var(--block_spacing);
+            
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+
+/* Group */
+.wp-block-group {
+    margin-bottom: var(--block_spacing);
+    
+    &.has-background {
+        padding: var(--block_spacing);
+        border-radius: 4px;
+    }
+}
+
+/* Text alignments */
+.has-text-align-left {
+    text-align: left;
+}
+
+.has-text-align-center {
+    text-align: center;
+}
+
+.has-text-align-right {
+    text-align: right;
+}
+
+/* Font sizes */
+.has-small-font-size {
+    font-size: 0.875em;
+}
+
+.has-medium-font-size {
+    font-size: 1.125em;
+}
+
+.has-large-font-size {
+    font-size: 1.5em;
+}
+
+.has-x-large-font-size {
+    font-size: 2em;
+}
+
+/* Colors */
+.has-primary-color {
+    color: var(--color_primary);
+}
+
+.has-primary-background-color {
+    background-color: var(--color_primary);
+}
+
+.has-secondary-color {
+    color: var(--color_secondary);
+}
+
+.has-secondary-background-color {
+    background-color: var(--color_secondary);
+}
+
+.has-gray-color {
+    color: var(--color_grey_3);
+}
+
+.has-gray-background-color {
+    background-color: var(--color_light_gray);
+}
+
+.has-white-color {
+    color: var(--color_white);
+}
+
+.has-white-background-color {
+    background-color: var(--color_white);
+}
+
+.has-black-color {
+    color: var(--color_black);
+}
+
+.has-black-background-color {
+    background-color: var(--color_black);
+}

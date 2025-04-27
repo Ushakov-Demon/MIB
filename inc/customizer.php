@@ -119,6 +119,31 @@ function baza_customize_register( $wp_customize ) {
         'type'    => 'text',
     ));
 
+    // NPQ
+    $wp_customize->add_setting('phone_4', array(
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_text_field',
+        'transport'         => 'refresh',
+    ));
+
+    $wp_customize->add_control('phone_4', array(
+        'label'   => __('Phone NPQ'),
+        'section' => 'site_info',
+        'type'    => 'text',
+    ));
+
+    $wp_customize->add_setting('phone_5', array(
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_text_field',
+        'transport'         => 'refresh',
+    ));
+
+    $wp_customize->add_control('phone_5', array(
+        'label'   => __('Phone NPQ 2'),
+        'section' => 'site_info',
+        'type'    => 'text',
+    ));
+
     // Email 1
     $wp_customize->add_setting('email', array(
         'default'           => '',

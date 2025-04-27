@@ -2,6 +2,7 @@
 @import 'fonts';
 @import 'icons';
 @import 'filter';
+@import 'wp';
 
 :root {
     --cubic_bezier: cubic-bezier(0.1, 0.6, 0, 1);
@@ -53,11 +54,14 @@
     --padding_m: 24px;
     --padding_l: 48px;
 
+    --block_spacing: 40px;
+
     --font_size_h1: 40px;
-    --font_size_h2: 48px;
-    --font_size_h3: 36px;
-    --font_size_h4: 24px;
+    --font_size_h2: 32px;
+    --font_size_h3: 26px;
+    --font_size_h4: 20px;
     --font_size_h5: 16px;
+    --font_size_h6: 14px;
 
     --font_size_p1: 16px;
     --font_size_p2: 14px;
@@ -552,6 +556,7 @@ button[type="submit"] {
         transition: all .5s var(--cubic_bezier);
         border-radius: 16px;
         background-color: var(--color_white);
+        box-shadow: 0 0 15px 5px rgba(0, 0, 0, .05);
 
         footer & {
             top: unset;
@@ -710,7 +715,6 @@ header.site-header {
     padding: 38px 0;
     transition: all .5s ease;
     background-color: var(--color_w);
-    border-bottom: 1px solid var(--color_grey);
 
     @include max1024 {
         padding: 22px 0;
@@ -845,6 +849,7 @@ header.site-header {
                     animation-duration: var(--animation-duration);
                     animation-fill-mode: both;
                     display: flex;
+                    box-shadow: 0 0 15px 5px rgba(0, 0, 0, .05);
                 }
 
                 @include max1024 {
@@ -1688,6 +1693,102 @@ header.site-header {
     }
 }
 
+.block-page-contacts {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    @include mobile {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .block {
+        padding: 56px 0;
+        border-top: 1px solid rgba(0, 0, 0, .1);
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        font-weight: 500;
+
+        @include mobile {
+            padding: 32px 0;
+        }
+
+        .highlight {
+            display: block;
+            opacity: .4;
+            transition: all .5s ease;
+        }
+
+        &:hover {
+            .highlight {
+                opacity: 1;
+            }
+        }
+
+        .label {
+            font-size: 24px;
+            font-weight: 500;
+        }
+
+        .phone {
+            font-size: 32px;
+            font-weight: 500;
+
+            @include mobile {
+                font-size: 28px;
+            }
+        }
+
+        &.block-social {
+            grid-column: span 2;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+
+            @include mobile {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .social-links {
+                a {
+                    width: 36px;
+                    height: 36px;
+                    border-radius: 50%;
+                    background-color: var(--color_primary);
+                    color: var(--color_white);
+
+                    svg {
+                        height: 18px;
+                    }
+                }
+            }
+        }
+
+        &.block-additional {
+            gap: 0;
+            grid-column: span 2;
+
+            a {
+                color: var(--color_primary);
+                font-weight: 400;
+
+                &:hover {
+                    color: var(--color_secondary);
+                }
+            }
+
+            .contacts-block {
+                display: inline-block;
+            }
+
+            p  {
+                margin: 0;
+            }
+        }
+    }
+}
+
 footer {
     background-color: var(--color_black);
     padding: 65px 0 0;
@@ -1807,7 +1908,7 @@ footer {
 }
 
 .breadcrumb-container {
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.02) 0%, rgba(153, 153, 153, 0) 100%);
+    background: linear-gradient(180deg, #F7F7F6 0%, #FBFBFB 100%);
     padding: var(--padding_s) 0;
 
     .container {
@@ -1876,6 +1977,39 @@ footer {
         @include mobile {
             font-size: 28px;
         }
+    }
+
+    &.section-page {
+        padding-top: 64px;
+        color: var(--color_secondary);
+
+        @include mobile {
+            padding-top: 32px;
+            padding-bottom: 32px;
+        }
+
+        a {
+            color: var(--color_secondary);
+
+            &:hover {
+                color: var(--color_primary);
+                text-decoration: none;
+            }
+        }
+        
+        .container {
+            max-width: var(--container_main);
+            display: block;
+
+            .wp-block-site-logo {
+                margin: calc(var(--block_spacing) * 2) 0;
+            }
+
+            p {
+                margin-top: 0;
+            }
+        }
+
     }
 
     &.section-main {
@@ -3040,42 +3174,18 @@ footer {
     }
 }
 
-.wp-block-button__link {
-    all: unset;
-
-    @include button;
-
-    color: var(--color_white) !important;
-    padding: calc(var(--padding_s) + 3px);
-}
-
-.wp-block-list {
+.block-404 {
     display: flex;
     flex-direction: column;
-    gap: var(--gap_s);
-    list-style: none;
-    margin: 0;
-    padding: 0;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    max-width: 410px;
+    margin: 0 auto;
 
-    li {
-        display: flex;
-        gap: 4px;
-
-        &::before {
-            display: inline-block;
-            position: relative;
-            top: -2px;
-        }
-    }
-}
-
-.wp-block-image {
-    margin-bottom: var(--padding_m);
-
-    img {
-        display: block;
-        max-width: 100%;
-        border-radius: var(--radius);
+    h1 {
+        margin: 0;
+        font-size: 32px;
     }
 }
 

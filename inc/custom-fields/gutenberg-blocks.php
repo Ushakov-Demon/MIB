@@ -253,4 +253,18 @@ function custom_posts_gutenberg_blocks() {
         // Include the template for rendering
         include_once __THEME_DIR__ . '/template-parts/sections/students-section.php';
     } );
+
+    // ==== Contacts Block
+    Block::make( 'contacts_block', __( 'Contacts' ) )
+        ->add_fields( array(
+            Field::make( 'separator', 'contacts_sep', __( 'Contacts Block' ) ),
+
+        ) )
+        ->set_icon( 'phone' )
+        ->set_category( 'mib' )
+        ->set_mode( 'both' )
+        ->set_render_callback( function ( $fields, $attributes, $inner_blocks ) {
+            
+        include_once __THEME_DIR__ . '/template-parts/blocks/block-page-contacts.php';
+    } );
 }

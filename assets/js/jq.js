@@ -255,13 +255,13 @@ jQuery(document).ready(function ($) {
 				loop: true,
 			},
 			1024: {
-				items: 6,
+				items: 5,
 				loop: true,
 				stagePadding: 120,
 			},
 			1200: {
-				items: 8,
-				margin: 0,
+				items: 7,
+				margin: 30,
 				stagePadding: 140,
 			}
 		}
