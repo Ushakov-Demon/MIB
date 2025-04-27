@@ -5,7 +5,7 @@ jQuery(document).ready(function ($) {
 		timeout;
 
 	let sliderSpeed = 2500;
-	let nextPrevButton = '';
+	let nextPrevButton = '<i class="icon-arrow"></i>';
 
 	body.addClass('ready');
 
@@ -203,6 +203,27 @@ jQuery(document).ready(function ($) {
 	}
 
 	animateCount();
+
+	let carouselStudentsItems = $('#students-items');
+
+	carouselStudentsItems.owlCarousel({
+		items: 1,
+		navSpeed: 1000,
+		margin: 0,
+		nav: true,
+		dots: true,
+		loop: true,
+		navText: [nextPrevButton, nextPrevButton],
+		mouseDrag: true,
+		touchDrag: true,
+		dragEndSpeed: 1000,
+		dotsSpeed: 1000,
+		autoHeight: true,
+		autoplay: false,
+		autoplaySpeed: 1000,
+		autoplayTimeout: 2500,
+		autoplayHoverPause: true,
+	});
 
 	let carouselCompanyLogos = $('#company-logos-items');
 

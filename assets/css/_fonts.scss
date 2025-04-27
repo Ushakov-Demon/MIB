@@ -180,16 +180,17 @@
 
 @font-face {
     font-family: 'mib';
-    src:  url('../fonts/mib.eot?up6jh1');
-    src:  url('../fonts/mib.eot?up6jh1#iefix') format('embedded-opentype'),
-        url('../fonts/mib.ttf?up6jh1') format('truetype'),
-        url('../fonts/mib.woff?up6jh1') format('woff'),
-        url('../fonts/mib.svg?up6jh1#mib') format('svg');
+    src:
+        url('../fonts/mib.ttf?ikyxek') format('truetype'),
+        url('../fonts/mib.woff?ikyxek') format('woff'),
+        url('../fonts/mib.svg?ikyxek#mib') format('svg');
     font-weight: normal;
     font-style: normal;
     font-display: block;
 }
 
+.section-students .name::after,
+.quote::before,
 header.site-header .menu li.menu-item-has-children a::after,
 .filter a::before,
 .category-link::before,
@@ -202,7 +203,6 @@ a.button::after, .button::after, button[type=submit]::after, input[type=submit]:
 [class*=" icon-"] {
     display: inline-block;
     font-family: 'mib' !important;
-    speak: never;
     font-style: normal;
     font-weight: normal;
     font-variant: normal;
@@ -210,6 +210,14 @@ a.button::after, .button::after, button[type=submit]::after, input[type=submit]:
     line-height: 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-comments:before {
+    content: "\e90c";
+}
+
+.icon-quote:before {
+    content: "\e90b";
 }
 
 .icon-arrow:before {
