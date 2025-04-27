@@ -20,10 +20,11 @@ $title_text_tag_after  = isset( $is_announcing ) && $is_announcing ? "</span>" :
     <?php endif; ?>
     
     <h2 class="title">
-        <!-- TODO: a or span status pending -->
-        <a href="<?php echo esc_url($post_permalink); ?>">
-            <?php echo esc_html($title); ?>
-        </a>
+        <?php 
+        echo $title_text_tag_before;
+            echo esc_html($title);
+        echo $title_text_tag_after;
+        ?>
     </h2>
     
     <?php if (!empty($desc)): ?>
@@ -42,4 +43,7 @@ $title_text_tag_after  = isset( $is_announcing ) && $is_announcing ? "</span>" :
             <?php endif; ?>
         </a>
     </div>
+    <?php
+    endif;
+    ?>
 </div>
