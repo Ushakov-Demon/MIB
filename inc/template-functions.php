@@ -445,32 +445,20 @@ function add_menu_level_class($classes, $item, $args, $depth) {
 }
 add_filter('nav_menu_css_class', 'add_menu_level_class', 10, 4);
 
-/**
-* Function to automatically highlight text between asterisks with a span
-* 
-* @param string $text The text to process
-* @return string Processed text with highlights
-*/
+// Function to automatically highlight text between asterisks with a span
 function highlight_text_with_stars($text) {
     if (!is_string($text)) {
         return $text;
     }
     
-    // Find text between asterisks and replace with span
     $pattern = '/\*(.*?)\*/';
     $replacement = '<span class="highlight">$1</span>';
     
     return preg_replace($pattern, $replacement, $text);
- }
+}
  
- /**
- * Extended get_theme_mod with automatic text highlighting
- * 
- * @param string $name Theme mod name
- * @param mixed $default Default value
- * @return mixed Theme mod value with highlighted text
- */
- function get_themed_mod($name, $default = false) {
+// Extended get_theme_mod with automatic text highlighting
+function get_themed_mod($name, $default = false) {
     $value = get_theme_mod($name, $default);
     
     if (is_string($value)) {
@@ -478,4 +466,59 @@ function highlight_text_with_stars($text) {
     }
     
     return $value;
- }
+}
+
+// Modify gallery block
+function modify_gallery_block_html($block_content, $block) {
+    if ($block['blockName'] === 'core/gallery') {
+        $pattern = '/<figure class="(.*?)wp-block-gallery(.*?)">/';
+        $replacement = '<figure class="wp-block-gallery owl-carousel">';
+        $block_content = preg_replace($pattern, $replacement, $block_content);
+    }
+    return $block_content;
+}
+
+add_filter('render_block', 'modify_gallery_block_html', 10, 2);
+
+// Share article
+function share_article_buttons() {
+    $current_url = esc_url(get_permalink());
+    $post_title = get_the_title();
+    $post_excerpt = get_the_excerpt();
+    $copy_text = pll__('Copy link', 'baza');
+    $copied_text = pll__('Link copied', 'baza');
+    
+    $thumbnail_id = get_post_thumbnail_id();
+    $thumbnail_url = wp_get_attachment_image_url($thumbnail_id, 'large');
+    
+    $facebook_url = 'https://www.facebook.com/sharer/sharer.php?u=' . urlencode($current_url) . 
+                   '&t=' . urlencode($post_title);
+    
+    $linkedin_url = 'https://www.linkedin.com/sharing/share-offsite/?url=' . urlencode($current_url) . 
+                   '&title=' . urlencode($post_title) . 
+                   '&summary=' . urlencode($post_excerpt);
+    
+    $share_html = '
+    <div class="block block-share-article">
+        <div class="block-title">' . pll__('Share the article') . '</div>
+        <div class="share-buttons">
+            <a href="' . $facebook_url . '" target="_blank" class="share-btn facebook-btn">
+                <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2.78125 16H5.71875V8.84375H8L8.375 6H5.71875V4.03125C5.71875 3.59375 5.78125 3.25 5.96875 3.03125C6.15625 2.78125 6.5625 2.65625 7.125 2.65625H8.625V0.125C8.0625 0.0625 7.3125 0 6.4375 0C5.3125 0 4.4375 0.34375 3.78125 1C3.09375 1.65625 2.78125 2.5625 2.78125 3.75V6H0.375V8.84375H2.78125V16Z" fill="currentColor"/>
+                </svg>
+            </a>
+            <a href="' . $linkedin_url . '" target="_blank" class="share-btn linkedin-btn">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3.125 14V4.65625H0.21875V14H3.125ZM1.6875 3.375C2.125 3.375 2.53125 3.21875 2.875 2.875C3.1875 2.5625 3.375 2.15625 3.375 1.6875C3.375 1.25 3.1875 0.84375 2.875 0.5C2.53125 0.1875 2.125 0 1.6875 0C1.21875 0 0.8125 0.1875 0.5 0.5C0.15625 0.84375 0 1.25 0 1.6875C0 2.15625 0.15625 2.5625 0.5 2.875C0.8125 3.21875 1.21875 3.375 1.6875 3.375ZM14 14V8.875C14 7.4375 13.7812 6.375 13.375 5.6875C12.8125 4.84375 11.875 4.40625 10.5312 4.40625C9.84375 4.40625 9.28125 4.59375 8.78125 4.90625C8.3125 5.1875 7.96875 5.53125 7.78125 5.9375H7.75V4.65625H4.96875V14H7.84375V9.375C7.84375 8.65625 7.9375 8.09375 8.15625 7.71875C8.40625 7.21875 8.875 6.96875 9.5625 6.96875C10.2188 6.96875 10.6562 7.25 10.9062 7.8125C11.0312 8.15625 11.0938 8.6875 11.0938 9.4375V14H14Z" fill="currentColor"/>
+                </svg>
+            </a>
+            <a href="#" class="share-btn copy-link-btn" data-url="' . $current_url . '" data-copy-text="' . $copy_text . '" data-copied-text="' . $copied_text . '">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9.8125 6.1875C9.46875 5.84375 9.09375 5.59375 8.6875 5.375C8.53125 5.3125 8.375 5.34375 8.25 5.46875L8.125 5.59375C7.84375 5.84375 7.6875 6.1875 7.65625 6.53125C7.625 6.6875 7.71875 6.84375 7.84375 6.9375C8.125 7.0625 8.375 7.21875 8.5625 7.4375C9.59375 8.46875 9.59375 10.125 8.5625 11.1562L6.21875 13.5C5.1875 14.5312 3.53125 14.5312 2.5 13.5C1.46875 12.4688 1.46875 10.8125 2.5 9.78125L3.9375 8.34375C4.03125 8.25 4.0625 8.125 4.03125 8C3.9375 7.625 3.90625 7.21875 3.875 6.8125C3.875 6.5 3.46875 6.34375 3.25 6.5625C2.875 6.9375 2.28125 7.53125 1.28125 8.53125C-0.4375 10.25 -0.4375 13.0312 1.28125 14.7188C2.96875 16.4375 5.75 16.4375 7.46875 14.7188C10.0312 12.1562 9.90625 12.2812 10.0938 12.0312C11.5 10.3438 11.4062 7.78125 9.8125 6.1875ZM14.6875 1.3125C13 -0.40625 10.2188 -0.40625 8.5 1.3125C5.9375 3.875 6.0625 3.75 5.875 4C4.46875 5.6875 4.5625 8.25 6.15625 9.84375C6.5 10.1875 6.875 10.4375 7.28125 10.6562C7.4375 10.7188 7.59375 10.6875 7.71875 10.5625L7.84375 10.4375C8.125 10.1875 8.28125 9.84375 8.3125 9.5C8.34375 9.34375 8.25 9.1875 8.125 9.09375C7.84375 8.96875 7.59375 8.8125 7.40625 8.59375C6.375 7.5625 6.375 5.90625 7.40625 4.875L9.75 2.53125C10.7812 1.5 12.4375 1.5 13.4688 2.53125C14.5 3.5625 14.5 5.21875 13.4688 6.25L12.0312 7.6875C11.9375 7.78125 11.9062 7.90625 11.9375 8.03125C12.0312 8.40625 12.0625 8.8125 12.0938 9.21875C12.0938 9.53125 12.5 9.6875 12.7188 9.46875C13.0938 9.09375 13.6875 8.5 14.6875 7.5C16.4062 5.78125 16.4062 3 14.6875 1.3125Z" fill="currentColor"/>
+                </svg>
+            </a>
+        </div>
+    </div>';
+    
+    return $share_html;
+}

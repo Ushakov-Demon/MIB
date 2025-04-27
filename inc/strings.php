@@ -39,6 +39,11 @@ function register_customizer_strings_for_polylang() {
         'We are on social',
         'Phone of the School of NPQ',
         'Latest events',
+        'Author',
+        'Copy link',
+        'Link copied',
+        'Current',
+        'View more results',
     );
     
     foreach ($strings as $string) {

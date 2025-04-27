@@ -204,6 +204,29 @@ jQuery(document).ready(function ($) {
 
 	animateCount();
 
+	let carouselWpBlockGalleries = $('.wp-block-gallery');
+
+	carouselWpBlockGalleries.each(function() {
+		$(this).owlCarousel({
+			items: 1,
+			navSpeed: 1000,
+			margin: 0,
+			nav: true,
+			dots: true,
+			loop: true,
+			navText: [nextPrevButton, nextPrevButton],
+			mouseDrag: true,
+			touchDrag: true,
+			dragEndSpeed: 1000,
+			dotsSpeed: 1000,
+			autoHeight: true,
+			autoplay: false,
+			autoplaySpeed: 1000,
+			autoplayTimeout: 2500,
+			autoplayHoverPause: true,
+		});
+	});
+
 	let carouselStudentsItems = $('#students-items');
 
 	carouselStudentsItems.owlCarousel({
@@ -293,5 +316,23 @@ jQuery(document).ready(function ($) {
 				$this.closest( 'section' ).find( '.sort-items' ).html(response);
 			}
 		});
+	});
+
+	$('.copy-link-btn').click(function(e) {
+		e.preventDefault();
+		var url = $(this).data('url');
+		var tempInput = $('<input>');
+		$('body').append(tempInput);
+		tempInput.val(url).select();
+		
+		document.execCommand('copy');
+		tempInput.remove();
+		
+		var originalText = $(this).html();
+		$(this).html($(this).data('copied-text'));
+		
+		setTimeout(function() {
+			$('.copy-link-btn').html(originalText);
+		}, 2000);
 	});
 });

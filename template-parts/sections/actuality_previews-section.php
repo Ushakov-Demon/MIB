@@ -5,6 +5,9 @@ $alternating_posts = apply_filters( 'mib_get_alternating_posts', $actuality_post
 <section class="section section-news">
     <div class="container">
 
+        <?php
+        if ( !is_post_type_archive() ) :
+        ?>
         <div class="section-heiding">
             <?php
             if ( ! empty( $actuality_posts_title ) ) :
@@ -26,6 +29,9 @@ $alternating_posts = apply_filters( 'mib_get_alternating_posts', $actuality_post
             endif;
             ?>
         </div>
+        <?php
+        endif;
+        ?>
 
         <div class="section-filter">
             <ul class="filter" id="filter-news" data-page="<?php echo get_the_ID()?>" data-per-page="<?php echo $actuality_posts_per_page?>">
@@ -33,7 +39,13 @@ $alternating_posts = apply_filters( 'mib_get_alternating_posts', $actuality_post
                 <li class="item filter-news" data-target="news"><a href="#"><span><?php pll_e('News', 'baza'); ?></span></a></li>
                 <li class="item filter-events" data-target="events"><a href="#"><span><?php pll_e('Events', 'baza'); ?></span></a></li>
             </ul>
+            <?php
+            if( !is_post_type_archive() ): 
+            ?>
             <a class="section-link" href="<?php echo esc_url( get_permalink( $actuality_posts_link ) ); ?>"><?php pll_e('All posts', 'baza'); ?></a>
+            <?php
+            endif;
+            ?>
         </div>
 
         <div class="items-wrapper">

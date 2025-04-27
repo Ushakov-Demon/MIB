@@ -27,6 +27,8 @@ $accreditations = apply_filters( 'mib_get_posts', 'accreditations', $accreditati
                         $desc           = get_the_excerpt( $post_ID );
                         $image          = get_post_thumbnail_id( $post_ID );
                         $button_text    = 'View certificate';
+                        $is_announcing  = 'yes' == get_post_meta($post_ID, '_tr_program_is_announce', true);
+                        $announcing     = $is_announcing ? ' pending' : '';
 
                         include get_template_directory() . '/template-parts/blocks/block-item.php';
 

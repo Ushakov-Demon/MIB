@@ -1,7 +1,9 @@
 <?php
 get_header();
 
-$alternating_posts = apply_filters( 'mib_get_alternating_posts', 4, 2 );
+$actuality_posts_per_page = 2;
+$actuality_posts_title = pll__('Current', 'baza');
+$alternating_posts = apply_filters( 'mib_get_alternating_posts', $actuality_posts_per_page, 2 );
 ?>
 
 	<main id="primary" class="site-main">
@@ -41,40 +43,47 @@ $alternating_posts = apply_filters( 'mib_get_alternating_posts', 4, 2 );
 				
 				<div class="content-wrapper">
 					<div class="side">
-						<div class="block">
+
+						<div class="block block-last-events">
 							<div class="block-title">
 								<?php pll_e('Latest events', 'baza')?>
 							</div>
-							<div class="items items-last-events">
-							<?php
-								if ( ! empty( $alternating_posts ) ):
-									foreach ( $alternating_posts as $item ) :
-										$post_ID        = $item->ID;
-										$post_type      = $item->post_type;
-										$shedule_date   = 'events' == $post_type ? get_post_meta( $item->ID, '_event_shedule_date', true ) : '';
-										$thumbnail      = false;
-										$title          = $item->post_title;
-										$excerpt        = $item->post_excerpt;
-										$permalink      = get_the_permalink( $item->ID );
-							
-									include get_template_directory() . '/template-parts/blocks/news-item.php';
 
-									endforeach;
-								else:
-									echo __( 'Items not found' );
-								endif;
+							<div class="items items-last-events">
+								<?php
+									if ( ! empty( $alternating_posts ) ):
+										foreach ( $alternating_posts as $item ) :
+											$post_ID        = $item->ID;
+											$post_type      = $item->post_type;
+											$shedule_date   = 'events' == $post_type ? get_post_meta( $item->ID, '_event_shedule_date', true ) : '';
+											$title          = $item->post_title;
+											$permalink      = get_the_permalink( $item->ID );
+								
+										include get_template_directory() . '/template-parts/blocks/news-item-small.php';
+
+										endforeach;
+									else:
+										echo __( 'Items not found' );
+									endif;
 								?>
 							</div>
 						</div>
+
 					</div>
 					<div class="content">
 						<?php if (get_the_content()) : ?>
 							<?php the_content(); ?>
 						<?php endif; ?>
+
+						<?php include get_template_directory() . '/template-parts/blocks/block-autor.php'; ?>
+
+						<?php echo share_article_buttons(); ?>
 					</div>
 				</div>
 			</div>
 		</section>
+
+		<?php include get_template_directory() . '/template-parts/sections/actuality_previews-section.php'; ?>
 		
 	</main>
 
