@@ -1,5 +1,8 @@
-<div class="item"><!-- TODO: status pending -->
-
+<?php
+$title_text_tag_before = isset( $is_announcing ) && $is_announcing ? "<span>" : "<a href=" . esc_url($post_permalink) . ">";
+$title_text_tag_after  = isset( $is_announcing ) && $is_announcing ? "</span>" : "</a>" ;
+?>
+<div class="item <?php echo isset( $announcing ) ?? $announcing?>">
     <?php if ($image): ?>
         <div class="image">
             <?php 
@@ -27,7 +30,9 @@
         <div class="excerpt"><?php echo wp_kses_post($desc); ?></div>
     <?php endif; ?>
 
-    <!-- TODO: if not pending -->
+    <?php
+    if ( ! isset( $is_announcing ) || ! $is_announcing ) :
+    ?>
     <div class="item-footer">
         <a href="<?php echo esc_url($post_permalink); ?>" class="show-more-link">
             <?php if (!empty($button_text)): ?>
