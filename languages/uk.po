@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: MIB\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-04-18 13:36+0000\n"
-"PO-Revision-Date: 2025-04-18 13:38+0000\n"
+"PO-Revision-Date: 2025-04-27 21:05+0000\n"
 "Last-Translator: \n"
 "Language-Team: Українська\n"
 "Language: uk\n"
@@ -32,6 +32,9 @@ msgstr "Про бізнес школу"
 #: functions.php:133
 msgid "Add widgets here."
 msgstr ""
+
+msgid "Archives"
+msgstr "Новини"
 
 #. Name of the template
 #: contacts.php:2

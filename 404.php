@@ -1,9 +1,3 @@
-<?php
-/*
-Template Name: 404
-*/
-?>
-
 <?php get_header(); ?>
 
 <main id="main" class="site-main page-404">

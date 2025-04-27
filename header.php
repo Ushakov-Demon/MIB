@@ -83,6 +83,7 @@
 						<?php
 							wp_nav_menu( array(
 								'menu' => 10,
+								'theme_location' => 'primary',
 								'depth' => 3,
 								'lang' => $current_lang,
 							) );

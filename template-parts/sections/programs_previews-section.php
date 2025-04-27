@@ -18,7 +18,10 @@ $programs = apply_filters( 'mib_get_posts', 'programs', $programs_per_page );
             if ( ! empty( $programs_section_title ) ) :
                 ?>
                 <div class="section-title">
-                    <?php echo esc_html( $programs_section_title )?>
+                    <?php 
+                        $processed_heading = preg_replace('/\*(.*?)\*/', '<span>$1</span>', $programs_section_title);
+                        echo $processed_heading;
+                    ?>
                 </div>
                 <?php
             endif;

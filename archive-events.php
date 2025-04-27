@@ -1,4 +1,5 @@
 <?php
+
 get_header();
 
 $actuality_posts_per_page = 24;
@@ -22,16 +23,42 @@ $alternating_posts = apply_filters( 'mib_get_alternating_posts', $actuality_post
         <div class="hero-header-wrapper">
 
             <div class="container">
-                <h1><?php the_archive_title(); ?></h1>
+                <h1 class="hero-header-title"><?php the_archive_title(); ?></h1>
+                <?php include get_template_directory() . '/template-parts/blocks/block-archive-description-from-menu.php'; ?>
             </div>
         </div>
     </div>
 
-    <?php include get_template_directory() . '/template-parts/sections/actuality_previews-section.php'; ?>
+    <section class="section section-news">
+		<div class="container">
+			
+			<div class="items-wrapper">
+				<div class="items">
+					<?php
+					if ( ! empty( $alternating_posts ) ):
+						foreach ( $alternating_posts as $item ) :
+							$post_ID        = $item->ID;
+							$post_type      = $item->post_type;
+							$shedule_date   = 'events' == $post_type ? get_post_meta( $item->ID, '_event_shedule_date', true ) : '';
+							$thumbnail      = get_the_post_thumbnail_url( $item->ID );
+							$title          = $item->post_title;
+							$excerpt        = $item->post_excerpt;
+							$permalink      = get_the_permalink( $item->ID );
+				
+						include get_template_directory() . '/template-parts/blocks/news-item.php';
 
-    <div class="more-posts">
-        <a class="view-more-link"><?php pll_e('View more results', 'baza'); ?></a>
-    </div>
+						endforeach;
+					else:
+						echo __( 'Items not found' );
+					endif;
+					?>
+				</div>
+			</div>
+
+			<?php include get_template_directory() . '/template-parts/blocks/block-show-more.php'; ?>
+
+		</div>
+	</section>
 
 </main>
 

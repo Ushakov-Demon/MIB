@@ -1,81 +1,66 @@
 <?php
+
 get_header();
+
+$actuality_posts_per_page = 24;
+$alternating_posts = apply_filters( 'mib_get_alternating_posts', $actuality_posts_per_page, 2 );
 ?>
-<div class="header-title">
-	<div class="container">
-		<h1><?php echo __('Блог компанії'); ?></h1>
-	</div>
-</div>
-<section class="section section-news">
-	<div class="container">
-		<div class="article-items">
-			<?php
-			$args = array(
-				'posts_per_page' => 9,
-				'post_type' => 'post',
-				'post_status' => 'publish',
-				'orderby' => 'date',
-				'order' => 'DESC',
-			);
-			
-			$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-			$args['paged'] = $paged;
 
-			$query = new WP_Query($args);
+<main id="primary" class="site-main">
+
+    <div class="hero-header">
+        
+        <div class="breadcrumb-container">
+            <div class="container">
+                <?php
+                    if ( function_exists('yoast_breadcrumb') ) {
+                        yoast_breadcrumb( '<div id="breadcrumbs">','</div>' );
+                    }
+                ?>
+            </div>
+        </div>
+
+        <div class="hero-header-wrapper">
+
+            <div class="container">
+                <h1 class="hero-header-title"><?php echo get_the_title( get_queried_object_id() ); ?></h1>
+                <?php include get_template_directory() . '/template-parts/blocks/block-archive-description-from-menu.php'; ?>
+            </div>
+        </div>
+    </div>
+
+	<section class="section section-news">
+		<div class="container">
 			
-			if ($query->have_posts()) :
-				while ($query->have_posts()) : $query->the_post();
+			<div class="items-wrapper">
+				<div class="items">
+					<?php
+					if ( ! empty( $alternating_posts ) ):
+						foreach ( $alternating_posts as $item ) :
+							$post_ID        = $item->ID;
+							$post_type      = $item->post_type;
+							$shedule_date   = 'events' == $post_type ? get_post_meta( $item->ID, '_event_shedule_date', true ) : '';
+							$thumbnail      = get_the_post_thumbnail_url( $item->ID );
+							$title          = $item->post_title;
+							$excerpt        = $item->post_excerpt;
+							$permalink      = get_the_permalink( $item->ID );
+				
+						include get_template_directory() . '/template-parts/blocks/news-item.php';
+
+						endforeach;
+					else:
+						echo __( 'Items not found' );
+					endif;
 					?>
-					<div class="article-item<?php if (is_sticky()) echo ' sticky'; ?>">
-						<div class="article-item-wrapper">
-							<?php if (has_post_thumbnail()) : ?>
-								<div class="article-image">
-									<a href="<?php the_permalink(); ?>">
-										<img src="<?php the_post_thumbnail_url('medium'); ?>" alt="<?php the_title_attribute(); ?>">
-									</a>
-								</div>
-							<?php endif; ?>
-							<div class="article-info">
-								<div class="article-title">
-									<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-								</div>
-								<div class="article-excerpt">
-									<?php the_excerpt(); ?>
-								</div>
-								<div class="article-footer">
-									<div class="article-date">
-										<?php echo get_the_date('d.m.Y'); ?>
-									</div>
-									<div class="article-more">
-										<a href="<?php the_permalink(); ?>"><?php echo __('Читати далі'); ?></a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				<?php 
-				endwhile;
-				wp_reset_postdata();
-				?>
-		</div>
+				</div>
+			</div>
 
-		<div class="pagination">
-			<?php
-			$big = 999999999;
+			<?php include get_template_directory() . '/template-parts/blocks/block-show-more.php'; ?>
 
-			echo paginate_links(array(
-				'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
-				'format' => '%#%/',
-				'current' => max(1, get_query_var('paged')),
-				'total' => $query->max_num_pages,
-				'prev_text' => '',
-				'next_text' => '',
-			));
-			?>
 		</div>
-		<?php endif; ?>
-	</div>
-</section>
+	</section>
+
+</main>
 
 <?php
 get_footer();
