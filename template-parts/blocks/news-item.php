@@ -4,7 +4,8 @@ $image_alt = get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true) ?: $
 ?>
 
 <div class="item<?php if (!empty($shedule_date)): ?> item-shedule<?php endif; ?>">
-    <?php if (!empty($thumbnail_id)): ?>
+    
+    <?php if (!empty($thumbnail_id && $thumbnail != false)): ?>
         <a class="image" href="<?php echo esc_url($permalink); ?>">
             <?php 
             echo wp_get_attachment_image(

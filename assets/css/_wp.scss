@@ -40,14 +40,20 @@ h6.wp-block-heading {
 
 /* Lists */
 .wp-block-list {
-    margin: 0 0 var(--block_spacing) 2em;
+    margin: 0 0 var(--block_spacing) 0;
+    padding: 0 0 0 15px;
     
     li {
-        margin-bottom: 0.5em;
+        margin-bottom: 8px;
+
+        &::marker {
+            color: var(--color_primary);
+        }
     }
     
     ul, ol {
-        margin-top: 0.5em;
+        margin: 0 0 8px;
+        padding: 0 0 0 15px;
     }
 }
 
@@ -256,10 +262,13 @@ h6.wp-block-heading {
     }
     
     figcaption {
-        font-size: 0.875em;
-        margin-top: 0.5em;
+        display: block;
+        font-size: 14px;
         text-align: center;
-        color: var(--color_grey_3);
+        opacity: .6;
+        border-bottom: 1px solid var(--color_light_gray_3);
+        padding: 20px 0;
+        margin: 0;
     }
     
     &.alignleft {

@@ -96,6 +96,8 @@ function mib_custom_post_type_filter(){
         $per_page = get_post_meta( $current, '_actuality_posts_per_page', true );
     }
 
+    var_dump($per_page);
+
     switch ( $_POST['filterTaget'] ) {
         case "news" :
             $post_type = "post";

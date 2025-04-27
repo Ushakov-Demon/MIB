@@ -38,6 +38,7 @@ function register_customizer_strings_for_polylang() {
         'Phone for education program inquiries',
         'We are on social',
         'Phone of the School of NPQ',
+        'Latest events',
     );
     
     foreach ($strings as $string) {

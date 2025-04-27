@@ -357,13 +357,18 @@ h6.wp-block-heading {
 
 /* Lists */
 .wp-block-list {
-  margin: 0 0 var(--block_spacing) 2em;
+  margin: 0 0 var(--block_spacing) 0;
+  padding: 0 0 0 15px;
 }
 .wp-block-list li {
-  margin-bottom: 0.5em;
+  margin-bottom: 8px;
+}
+.wp-block-list li::marker {
+  color: var(--color_primary);
 }
 .wp-block-list ul, .wp-block-list ol {
-  margin-top: 0.5em;
+  margin: 0 0 8px;
+  padding: 0 0 0 15px;
 }
 
 .wp-block-list.is-style-default {
@@ -584,10 +589,13 @@ h6.wp-block-heading {
   display: block;
 }
 .wp-block-image figcaption {
-  font-size: 0.875em;
-  margin-top: 0.5em;
+  display: block;
+  font-size: 14px;
   text-align: center;
-  color: var(--color_grey_3);
+  opacity: 0.6;
+  border-bottom: 1px solid var(--color_light_gray_3);
+  padding: 20px 0;
+  margin: 0;
 }
 .wp-block-image.alignleft {
   float: left;
@@ -755,6 +763,7 @@ h6.wp-block-heading {
   --color_white: #fff;
   --color_light_gray: #F9F9F9;
   --color_light_gray_2: #F5F5F5;
+  --color_light_gray_3: #C7CBD2;
   --color_black: #000000;
   --color_charcoal: #2D323B;
   --color_grey: #E5E5E5;
@@ -2666,6 +2675,42 @@ footer .footer-after .footer-after-col {
   margin: calc(var(--block_spacing) * 2) 0;
 }
 .section.section-page .container p {
+  margin-top: 0;
+}
+.section.section-single {
+  padding-top: 64px;
+  color: var(--color_secondary);
+  --block_spacing: 56px;
+}
+@media (max-width: 767px) {
+  .section.section-single {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+}
+.section.section-single .hero-featured-image img {
+  width: 100%;
+  display: block;
+  height: 444px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.section.section-single a {
+  color: var(--color_primary);
+  text-decoration: underline;
+}
+.section.section-single a:hover {
+  color: var(--color_primary);
+  text-decoration: none;
+}
+.section.section-single .container {
+  max-width: var(--container_main);
+  display: block;
+}
+.section.section-single .container .wp-block-site-logo {
+  margin: calc(var(--block_spacing) * 2) 0;
+}
+.section.section-single .container p {
   margin-top: 0;
 }
 .section.section-main {
