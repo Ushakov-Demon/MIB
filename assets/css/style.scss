@@ -2337,6 +2337,11 @@ footer {
                 filter: grayscale(100%);
                 opacity: .5;
                 transition: all .5s ease;
+                padding: 70px 0;
+
+                @include mobile {
+                    padding: 50px 0;
+                }
 
                 &:hover {
                     opacity: 1;
@@ -2345,9 +2350,8 @@ footer {
 
                 img {
                     max-width: 100%;
-                    max-height: auto;
-                    width: 100%;
-                    height: auto;
+                    width: auto;
+                    height: 40px;
                     align-self: center;
                 }
             }
@@ -3154,7 +3158,6 @@ footer {
                 .item {
                     padding-top: 32px;
                     padding-bottom: 32px;
-                    gap: 64px;
 
                     &:not(:last-child) {
                         border-bottom: 1px solid rgba(0, 0, 0, .1);
@@ -3208,17 +3211,21 @@ footer {
                             display: flex;
                             align-items: center;
                             gap: 12px;
-
-                            &::after {
-                                content: "\e90c";
-                                color: var(--color_khaki);
-                            }
                         }
 
                         .position {
                             font-size: 15px;
                             opacity: .4;
                             padding-left: 22px;
+                        }
+                    }
+
+                    .logo {
+                        svg,
+                        img {
+                            display: block;
+                            height: 30px;
+                            max-width: 122px;
                         }
                     }
                 }

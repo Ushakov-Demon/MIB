@@ -538,3 +538,20 @@ add_filter('get_the_archive_title', function ($title) {
     }
     return $title;
 });
+
+// CF7 form list
+add_filter( 'mib_get_cf7_forms_options', 'mib_get_cf7_forms_options_callback' );
+function mib_get_cf7_forms_options_callback( $options ) {
+    $options = array( '' => __( 'Select a form' ) );
+
+    if ( class_exists( 'WPCF7_ContactForm' ) ) {
+
+        $forms = WPCF7_ContactForm::find();
+        if ( $forms ) {
+            foreach ( $forms as $form ) {
+                $options[ $form->id() ] = $form->title();
+            }
+        }
+    }
+    return $options;
+}

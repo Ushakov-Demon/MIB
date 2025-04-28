@@ -4,38 +4,6 @@ use Carbon_Fields\Field;
 
 add_action( 'carbon_fields_register_fields', 'custom_posts_gutenberg_blocks' );
 
-// TODO: Removed this function
-function get_pages_options_for_select_field($width = 33, $field_name = 'link', $field_label = 'Link to Page', $help_text = 'Select the page') {
-    return Field::make('select', $field_name, __($field_label))
-        ->set_width($width)
-        ->add_options(function() {
-            $current_lang = function_exists('pll_current_language') ? pll_current_language() : '';
-
-            add_filter('mib_get_posts', function($args) use ($current_lang) {
-                if (function_exists('pll_get_post_language') && !empty($current_lang)) {
-                    $args['lang'] = $current_lang;
-                }
-                $args['orderby'] = 'title';
-                $args['order'] = 'ASC';
-                return $args;
-            });
-            
-            $pages_query = mib_get_posts('page', -1, 1);
-            $options = ['' => __('- Select Page -')];
-            
-            if ($pages_query->have_posts()) {
-                while ($pages_query->have_posts()) {
-                    $pages_query->the_post();
-                    $options[get_the_ID()] = get_the_title();
-                }
-                wp_reset_postdata();
-            }
-            
-            return $options;
-        })
-        ->set_help_text(__($help_text));
-}
-
 function custom_posts_gutenberg_blocks() {
     $def_per_page  = get_option( 'posts_per_page' );
     $home_url      = home_url();
@@ -43,6 +11,7 @@ function custom_posts_gutenberg_blocks() {
     $blog_page_url = ! is_null( $blog_page ) && ! empty( $blog_page ) ? get_the_permalink( $blog_page ) : $home_url;
     $current_lang  = function_exists('pll_current_language') ? pll_current_language() : '';
     $pages_options = apply_filters( 'mib_get_posts_list_options', 'page' );
+    $cf7_options   = apply_filters( 'mib_get_cf7_forms_options', [] );
 
     // ==== Main top Variative
     Block::make( 'main_top_variative',  __( 'Main HERO' ) )
@@ -124,11 +93,9 @@ function custom_posts_gutenberg_blocks() {
                 ->set_width( 33 )
                 ->set_default_value( 'Всі програми' ),
 
-            // Field::make( 'text', 'programs_section_link', __( 'Link' ) )
-            //     ->set_width( 33 ),
-
-            // TODO: Removed this function
-            get_pages_options_for_select_field(33, 'programs_section_link', 'Link to Page', 'Select the page'),
+            Field::make( 'select', 'programs_section_link', __( 'Link' ) )
+                ->set_width( 33 )
+                ->add_options( $pages_options ),
 
             Field::make( 'text', 'programs_section_small_text', __( 'Section small text' ) )
                 ->set_default_value( 'Програми навчання' )
@@ -212,21 +179,9 @@ function custom_posts_gutenberg_blocks() {
             ->set_width(35)
             ->set_required(true),
         Field::make('select', 'contact_form_id', __('Contact Form 7'))
-            ->add_options(function() {
-                $forms = array();
-                // TODO: Removed this logic
-                if (function_exists('wpcf7_contact_form')) {
-                    $args = array('post_type' => 'wpcf7_contact_form', 'posts_per_page' => -1);
-                    $cf7Forms = get_posts($args);
-                    
-                    foreach ($cf7Forms as $form) {
-                        $forms[$form->ID] = $form->post_title;
-                    }
-                }
-                return $forms;
-            })
+            ->add_options( $cf7_options )
             ->set_required(true)
-            ->set_help_text(__('Select a Contact Form 7 form'))
+            ->set_help_text(__('Select a Contact Form 7 form')),
     ))
     ->set_inner_blocks(false)
     ->set_description(__('A block to display manager contact with form'))

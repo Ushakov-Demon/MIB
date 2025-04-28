@@ -66,12 +66,11 @@
     ?>
 
     <div class="item-footer">
-
-        <!-- TODO: if list not owl remove completed -->
+        <div class="completed">
         <?php
         if ( ! empty( $courses ) ) :
             ?>
-            <div class="completed">
+            
                 <div class="label">
                     <?php pll_e('Completed', 'baza'); ?>:
                 </div>
@@ -90,11 +89,11 @@
                     endforeach;
                     ?>
                 </div>
-            </div>
+            
             <?php
         endif;
         ?>
-
+        </div>
         <a class="show-more-link" href="#"><?php pll_e('More details', 'baza'); ?></a>
         
     </div>
