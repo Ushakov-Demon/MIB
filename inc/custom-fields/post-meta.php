@@ -11,15 +11,15 @@ function custom_posts_meta_data() {
         ->set_priority( 'high' )
         ->add_fields( array(
             Field::make( 'image', 'tr_program_icon', __( 'Add icon' ) )
-        ) );
+    ) );
 
     Container::make( 'post_meta', __( 'Announcement' ) )
-        ->where( 'post_type', '=', 'programs' )
+        ->where( 'post_type', 'IN', ['programs', 'accreditations'] )
         ->set_context( 'side' )
         ->set_priority( 'high' )
         ->add_fields( array(
             Field::make( 'checkbox', 'tr_program_is_announce', __( 'Is announcement' ) )
-        ) );
+    ) );
 
     Container::make( 'post_meta', __( 'Training course data' ) )
         ->where( 'post_type', '=', 'programs' )
@@ -54,7 +54,7 @@ function custom_posts_meta_data() {
                         'post_type' => 'students',
                     )
                 ) ),
-        ) );
+    ) );
 
     // ==== EVENTS post type
     Container::make( 'post_meta', __( 'Event shedule date' ) )
@@ -63,12 +63,20 @@ function custom_posts_meta_data() {
         ->set_priority( 'high' )
         ->add_fields( array(
             Field::make( 'date_time', 'event_shedule_date', __( 'Choice date and time' ) )
-        ) );
+    ) );
 
-    // ==== TEATCHERS POST type
+    // ==== TEATCHERS post type
     Container::make( 'post_meta', __( 'Teatcher data' ) )
         ->where( 'post_type', '=', 'teachers' )
         ->add_fields( array(
             Field::make( 'textarea', 'positions_in_companies', __( 'Positions in companies' ) ),
-        ) );
+    ) );
+
+    // ==== STUDENT post type
+    Container::make( 'post_meta', __( 'Student data' ) )
+        ->where( 'post_type', '=', 'students' )
+        ->add_fields( array(
+            Field::make( 'textarea', 'st_positions_in_companies', __( 'Positions in companies' ) ),
+            Field::make( 'textarea', 'st_reviwe_message', __( 'Reviwe message' ) ),
+    ) );
 }

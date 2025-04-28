@@ -57,9 +57,9 @@ $programs = apply_filters( 'mib_get_posts', 'programs', $programs_per_page );
                             $post_ID        = get_the_ID();
                             $title          = get_the_title();
                             $post_permalink = get_the_permalink();
-                            $image          = get_post_meta($post_ID, '_tr_program_icon', true);
-                            $desc           = get_the_excerpt($post_ID);
-                            $is_announcing  = 'yes' == get_post_meta($post_ID, '_tr_program_is_announce', true);
+                            $image          = get_post_meta( $post_ID, '_tr_program_icon', true );
+                            $desc           = get_the_excerpt( $post_ID );
+                            $is_announcing  = 'yes' == get_post_meta( $post_ID, '_tr_program_is_announce', true );
                             $announcing     = $is_announcing ? ' pending' : '';
 
                             include get_template_directory() . '/template-parts/blocks/block-item.php';

@@ -4,6 +4,7 @@ use Carbon_Fields\Field;
 
 add_action( 'carbon_fields_register_fields', 'custom_posts_gutenberg_blocks' );
 
+// TODO: Removed this function
 function get_pages_options_for_select_field($width = 33, $field_name = 'link', $field_label = 'Link to Page', $help_text = 'Select the page') {
     return Field::make('select', $field_name, __($field_label))
         ->set_width($width)
@@ -41,6 +42,7 @@ function custom_posts_gutenberg_blocks() {
     $blog_page     = get_option( 'page_for_posts' );
     $blog_page_url = ! is_null( $blog_page ) && ! empty( $blog_page ) ? get_the_permalink( $blog_page ) : $home_url;
     $current_lang  = function_exists('pll_current_language') ? pll_current_language() : '';
+    $pages_options = apply_filters( 'mib_get_posts_list_options', 'page' );
 
     // ==== Main top Variative
     Block::make( 'main_top_variative',  __( 'Main HERO' ) )
@@ -125,6 +127,7 @@ function custom_posts_gutenberg_blocks() {
             // Field::make( 'text', 'programs_section_link', __( 'Link' ) )
             //     ->set_width( 33 ),
 
+            // TODO: Removed this function
             get_pages_options_for_select_field(33, 'programs_section_link', 'Link to Page', 'Select the page'),
 
             Field::make( 'text', 'programs_section_small_text', __( 'Section small text' ) )
@@ -155,11 +158,8 @@ function custom_posts_gutenberg_blocks() {
             Field::make( 'text', 'actuality_posts_link_text', __( 'Link text' ) )
                 ->set_width( 33 )
                 ->set_default_value( 'Всі записи' ),
-            // Field::make( 'text', 'actuality_posts_link', __( 'Link' ) )
-            //     ->set_width( 33 ),
-
-            get_pages_options_for_select_field(33, 'actuality_posts_link', 'Link to Page', 'Select the page'),
-                
+            Field::make( 'text', 'actuality_posts_link', __( 'Link' ) )
+                ->set_width( 33 ),
             Field::make( 'text', 'actuality_posts_title', __( 'Section title' ) )
                 ->set_default_value( 'Актуальне' ),
             Field::make( 'textarea', 'actuality_posts_desc', __( 'Section Desription' ) )
@@ -214,6 +214,7 @@ function custom_posts_gutenberg_blocks() {
         Field::make('select', 'contact_form_id', __('Contact Form 7'))
             ->add_options(function() {
                 $forms = array();
+                // TODO: Removed this logic
                 if (function_exists('wpcf7_contact_form')) {
                     $args = array('post_type' => 'wpcf7_contact_form', 'posts_per_page' => -1);
                     $cf7Forms = get_posts($args);
@@ -242,7 +243,24 @@ function custom_posts_gutenberg_blocks() {
     Block::make( 'students_block', __( 'Students' ) )
         ->add_fields( array(
             Field::make( 'separator', 'students_sep', __( 'Students' ) ),
-
+            Field::make( 'text', 'students_section_title', __( 'Section title' ) )
+                ->set_default_value( 'Випускники' ),
+            Field::make( 'text', 'students_per_page', __( 'Students per page' ) )
+                ->set_width( 50 )
+                ->set_attribute( 'type', 'number' )
+                ->set_default_value( $def_per_page ),
+            Field::make( 'select', 'students_section_items_view_style', __( 'View style' ) )
+                ->add_options( array(
+                    'grid'     => __( 'Grid' ),
+                    'slider' => __( 'Slider' ),
+                ) )
+                ->set_width( 50 ),
+            Field::make( 'text', 'students_section_link_text', __( 'Section link text' ) )
+                ->set_width( 50 )
+                ->set_default_value( 'Всі випускники' ),
+            Field::make( 'select', 'students_section_link_to', __( 'Page for link' ) )
+                ->set_width( 50 )
+                ->add_options( $pages_options ),
         ) )
         ->set_icon( 'groups' )
         ->set_category( 'mib' )
@@ -250,8 +268,8 @@ function custom_posts_gutenberg_blocks() {
         ->set_render_callback( function ( $fields, $attributes, $inner_blocks ) {
             extract( $fields );
         
-        // Include the template for rendering
-        include_once __THEME_DIR__ . '/template-parts/sections/students-section.php';
+            // Include the template for rendering
+            include_once __THEME_DIR__ . '/template-parts/sections/students-section.php';
     } );
 
     // ==== Contacts Block

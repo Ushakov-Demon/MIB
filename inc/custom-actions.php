@@ -3,6 +3,8 @@ add_filter( 'mib_get_posts'                         , 'mib_get_posts', 10 );
 add_filter( 'mib_get_alternating_posts'             , 'mib_get_alternating_posts', 10 );
 add_action( 'wp_ajax_custom_post_type_filter'       , 'mib_custom_post_type_filter' );
 add_action( 'wp_ajax_nopriv_custom_post_type_filter', 'mib_custom_post_type_filter' );
+add_filter( 'mib_get_posts_list_options'            , 'mib_get_posts_list_options' );
+add_filter( 'mib_get_posts_relationships'           , 'mib_get_posts_relationships' );
 
 /**
  * @param array|string $post_type optional. Default 'post'.
@@ -24,6 +26,10 @@ function mib_get_posts( $post_type = 'post', int $per_page = 0, int $page = 1, $
         'posts_per_page' => $per_page,
         'paged'          => $page,
     ];
+
+    if ( function_exists( 'pll_current_language' ) && ! empty( pll_current_language() ) ) {
+        $posts_q_args['lang'] = pll_current_language();
+    }
 
     $posts = new WP_Query( $posts_q_args );
 
@@ -133,4 +139,55 @@ function mib_custom_post_type_filter(){
     }
 
     wp_send_json( $output );
+}
+
+function mib_get_posts_list_options( $post_type ) {
+    $posts = mib_get_posts( $post_type, -1 );
+    $out   = [
+        '' => __( 'Select page' ),
+    ];
+    if ( $posts->posts && ! empty( $posts->posts ) ) {
+        foreach( $posts->posts as $post ) {
+            $out[$post->ID] = $post->post_title;
+        }
+    }
+
+    return $out;
+}
+
+/**
+ * @param array $args  Must have items : 
+ * int||str 'post_id' - ID current post, 
+ * str 'post_type' - corrent post_type , 
+ * str 'to_post_type' - The type of post in which we are looking for an occurrence, 
+ * str 'field' - The name of the field in which we are looking for an entry
+ */
+function mib_get_posts_relationships( $args ) {
+    extract( $args );
+
+    if ( ! isset( $to_post_type ) ) {
+        $to_post_type = 'programs';
+    }
+
+    $search_value = sprintf( 'post:%s:%d', $post_type, $post_id );
+    $search_array = array( 'value' => $search_value, 'id' => $post_id, 'type' => 'post', 'subtype' => $post_type );
+
+    $params = [
+        'post_type'  => $to_post_type,
+        'meta_query' => array(
+            'relation' => 'OR',
+            array(
+                'key'     => $field,
+                'value'   => serialize( array( $search_array ) ),
+                'compare' => 'LIKE',
+            ),
+            array(
+                'key'     => $field,
+                'value'   => $search_value,
+                'compare' => 'LIKE',
+            ),
+        ),
+    ];
+
+    return get_posts( $params );
 }
