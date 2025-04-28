@@ -40,6 +40,13 @@ function custom_posts_gutenberg_blocks() {
                     )
                 ) ),
             Field::make( 'text', 'main_top_heading_text', __( 'h1' ) ),
+            Field::make('select', 'main_top_version', __('Select Version'))
+                ->add_options( array(
+                    '' => __( 'Select a version' ),
+                    'home' => __( 'Home' ),
+                    'black' => __( 'Black', ),
+                    'white' => __( 'White', )
+                ) ),
             Field::make( 'rich_text', 'main_bottom_text', __( 'First text' ) ),
             Field::make( 'rich_text', 'main_bottom_second_text', __( 'Second text' ) ),
             Field::make( 'text', 'main_bottom_button_text', __( 'Button text' ) )

@@ -130,6 +130,10 @@ ol.wp-block-list {
     }
 }
 
+.wp-block-site-logo {
+    margin: calc(var(--block_spacing) * 2) 0;
+}
+
 /* Quote */
 .wp-block-quote {
     background-color: var(--color_khaki_2);

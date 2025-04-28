@@ -4,15 +4,11 @@ get_header();
 
 <main id="primary" class="site-main">
 
-	<div class="breadcrumb-container">
-		<div class="container">
-			<?php
-				if ( function_exists('yoast_breadcrumb') ) {
-					yoast_breadcrumb( '<div id="breadcrumbs">','</div>' );
-				}
-			?>
-		</div>
-	</div>
+	<?php
+        if ( function_exists('yoast_breadcrumb') ) {
+            yoast_breadcrumb( '<div class="breadcrumb-container"><div class="container"><div id="breadcrumbs">','</div></div></div>' );
+        }
+    ?>
 
 	<section class="section section-category-hero">
 		<div class="container">

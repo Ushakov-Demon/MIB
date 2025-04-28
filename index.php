@@ -8,26 +8,11 @@ $alternating_posts = apply_filters( 'mib_get_alternating_posts', $actuality_post
 
 <main id="primary" class="site-main">
 
-    <div class="hero-header">
-        
-        <div class="breadcrumb-container">
-            <div class="container">
-                <?php
-                    if ( function_exists('yoast_breadcrumb') ) {
-                        yoast_breadcrumb( '<div id="breadcrumbs">','</div>' );
-                    }
-                ?>
-            </div>
-        </div>
-
-        <div class="hero-header-wrapper">
-
-            <div class="container">
-                <h1 class="hero-header-title"><?php echo get_the_title( get_queried_object_id() ); ?></h1>
-                <?php include get_template_directory() . '/template-parts/blocks/block-archive-description-from-menu.php'; ?>
-            </div>
-        </div>
-    </div>
+	<?php
+        if ( function_exists('yoast_breadcrumb') ) {
+            yoast_breadcrumb( '<div class="breadcrumb-container"><div class="container"><div id="breadcrumbs">','</div></div></div>' );
+        }
+    ?>
 
 	<section class="section section-news">
 		<div class="container">

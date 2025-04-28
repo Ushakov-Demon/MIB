@@ -1,10 +1,21 @@
 <?php
+    $is_home = is_front_page();
+
     $main_top_heading_text = !empty($main_top_heading_text) ? $main_top_heading_text : get_the_title();
     $main_top_heading_media;
     $main_top_heading_bg;
     $main_top_heading_media_before_text;
+    $main_top_version;
 ?>
-<section class="section section-main">
+<section class="section section-main<?php if (!empty($main_top_version)) : ?> version-<?php echo $main_top_version; ?><?php endif; ?>">
+    
+    <?php if( !$is_home ) :?>
+        <?php
+            if ( function_exists('yoast_breadcrumb') ) {
+                yoast_breadcrumb( '<div class="breadcrumb-container"><div class="container"><div id="breadcrumbs">','</div></div></div>' );
+            }
+        ?>
+    <?php endif; ?>
 
     <div class="container">
         
@@ -28,12 +39,12 @@
                 <?php endif; ?>
 
                 <?php if (!empty($main_top_heading_text)) : ?>
-                    <h1 class="section-title">
+                    <div class="section-title">
                         <?php 
                         $processed_heading = preg_replace('/\*(.*?)\*/', '<span>$1</span>', $main_top_heading_text);
                         echo $processed_heading;
                         ?>
-                    </h1>
+                    </div>
                 <?php endif; ?>
 
                 <?php
