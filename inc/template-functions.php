@@ -555,3 +555,12 @@ function mib_get_cf7_forms_options_callback( $options ) {
     }
     return $options;
 }
+
+// Add black class in body
+function add_black_page_body_class( $classes ) {
+    if ( 'yes' == get_post_meta( get_the_ID(), '_ps_black_page', true ) ) {
+        $classes[] = 'mib-black-page';
+    }
+    return $classes;
+}
+add_filter( 'body_class', 'add_black_page_body_class' );

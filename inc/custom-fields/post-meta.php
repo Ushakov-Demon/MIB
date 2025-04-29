@@ -79,4 +79,14 @@ function custom_posts_meta_data() {
             Field::make( 'textarea', 'st_positions_in_companies', __( 'Positions in companies' ) ),
             Field::make( 'textarea', 'st_reviwe_message', __( 'Reviwe message' ) ),
     ) );
+
+    // ==== PAGE post type
+    // add_black_page_body_class function
+    Container::make( 'post_meta', __( 'Page settings' ) )
+        ->where( 'post_type', 'IN', ['page'] )
+        ->set_context( 'side' )
+        ->set_priority( 'high' )
+        ->add_fields( array(
+            Field::make( 'checkbox', 'ps_black_page', __( 'Black Page Design' ) )
+    ) );
 }

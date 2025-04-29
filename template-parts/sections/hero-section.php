@@ -62,9 +62,11 @@
             <?php if(!empty($main_bottom_button_text)) :
                 $processed_button_text = preg_replace('/\*(.*?)\*/', '<span>$1</span>', $main_bottom_button_text);
                 ?>
-                <a href="<?php echo esc_url($main_bottom_button_link); ?>" class="button">
-                    <span><?php echo $processed_button_text; ?></span>
-                </a>
+                <div class="buttons">
+                    <a href="<?php echo esc_url($main_bottom_button_link); ?>" class="button">
+                        <span><?php echo $processed_button_text; ?></span>
+                    </a>
+                </div>
                 <?php
             endif;
 

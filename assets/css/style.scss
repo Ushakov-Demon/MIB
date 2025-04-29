@@ -158,6 +158,28 @@ body {
     &.nav-active {
         overflow: hidden !important;
     }
+
+    &.mib-black-page {
+        background-color: var(--color_secondary);
+
+        #page {
+
+            &::before {
+                    content: '';
+                    display: block;
+                    background-image: url('../images/black-page-bg.svg');
+                    width: 1728px;
+                    height: 1058px;
+                    position: absolute;
+                    z-index: 0;
+                    right: -50%;
+                    top: -30%;
+                    transform: scale(calc(1 + var(--scroll) * 0.1));
+                    transform-origin: center center;
+                    transition: transform 3s var(--cubic_bezier);
+                }
+            }
+        }
 }
 
 :focus {
@@ -312,6 +334,10 @@ h6 {
     color: var(--text_color);
     line-height: 1.2;
     font-weight: 600;
+
+    .mib-black-page & {
+        color: var(--color_white);
+    }
 }
 
 h1 {
@@ -340,6 +366,7 @@ h5 {
     display: flex;
     flex-direction: column;
     padding: 0 !important;
+    overflow: hidden;
 }
 
 .site-main {
@@ -369,6 +396,10 @@ h5 {
             color: var(--color_primary);
             text-decoration: none;
         }
+    }
+
+    .mib-black-page & {
+        color: var(--color_grey_4);
     }
 }
 
@@ -534,6 +565,7 @@ button[type="submit"] {
                 display: inline-block;
             }
 
+            .mib-black-page &,
             .home & {
                 color: var(--color_white);
             }
@@ -696,6 +728,7 @@ button[type="submit"] {
             }
         }
 
+        .mib-black-page &,
         footer &,
         .home & {
             color: var(--color_white);
@@ -710,6 +743,7 @@ button[type="submit"] {
                 }
             }
 
+            .mib-black-page &,
             footer &,
             .home & {
                 color: var(--color_white);
@@ -826,6 +860,7 @@ header.site-header {
                     flex: 1;
                 }
 
+                .mib-black-page &,
                 .home & {
                     color: var(--color_white);
                 }
@@ -954,6 +989,7 @@ header.site-header {
                         &:hover {
                             color: var(--color_primary);
 
+                            .mib-black-page &,
                             .home & {
                                 color: var(--color_primary);
                             }
@@ -965,6 +1001,7 @@ header.site-header {
                             }
                         }
 
+                        .mib-black-page &,
                         .home & {
                             color: var(--text_color);
                         }
@@ -1386,6 +1423,7 @@ header.site-header {
                 border-radius: 1px;
                 transition: all .5s ease;
 
+                .mib-black-page &,
                 .home & {
                     background-color: var(--color_white);
                 }
@@ -1426,6 +1464,7 @@ header.site-header {
             color: var(--color_primary);
         }
 
+        .mib-black-page &,
         .home & {
             color: var(--color_white);
 
@@ -1809,6 +1848,8 @@ footer {
     padding: 65px 0 0;
     color: var(--color_grey);
     font-size: 14px;
+    position: relative;
+    z-index: 1;
 
     a {
         color: var(--color_grey);
@@ -1931,6 +1972,7 @@ footer {
     position: relative;
     margin-bottom: var(--block_spacing);
 
+    .mib-black-page &,
     .section-main & {
         background: transparent;
     }
@@ -2003,6 +2045,10 @@ footer {
 
         @include mobile {
             font-size: 28px;
+        }
+
+        .mib-black-page & {
+            color: var(--color_white);
         }
     }
 
@@ -2308,6 +2354,12 @@ footer {
                     background-color: transparent;
                     border-color: rgba(255, 255, 255, 0.2);
                     padding: 14.5px 40px;
+
+                    &.active,
+                    &:hover {
+                        background-color: var(--color_primary);
+                        border-color: var(--color_primary);
+                    }
                 }
             }
         }

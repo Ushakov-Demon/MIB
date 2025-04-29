@@ -204,6 +204,29 @@ jQuery(document).ready(function ($) {
 
 	animateCount();
 
+	let carouselHistory = $('#history-timeline-items');
+
+	carouselHistory.each(function() {
+		$(this).owlCarousel({
+			items: 1,
+			navSpeed: 1000,
+			margin: 0,
+			nav: true,
+			dots: true,
+			loop: true,
+			navText: [nextPrevButton, nextPrevButton],
+			mouseDrag: true,
+			touchDrag: true,
+			dragEndSpeed: 1000,
+			dotsSpeed: 1000,
+			autoHeight: true,
+			autoplay: false,
+			autoplaySpeed: 1000,
+			autoplayTimeout: 2500,
+			autoplayHoverPause: true,
+		});
+	});
+
 	let carouselWpBlockGalleries = $('.wp-block-gallery');
 
 	carouselWpBlockGalleries.each(function() {

@@ -950,6 +950,23 @@ body {
 body.overflow-hidden, body.nav-active {
   overflow: hidden !important;
 }
+body.mib-black-page {
+  background-color: var(--color_secondary);
+}
+body.mib-black-page #page::before {
+  content: "";
+  display: block;
+  background-image: url("../images/black-page-bg.svg");
+  width: 1728px;
+  height: 1058px;
+  position: absolute;
+  z-index: 0;
+  right: -50%;
+  top: -30%;
+  transform: scale(calc(1 + var(--scroll) * 0.1));
+  transform-origin: center center;
+  transition: transform 3s var(--cubic_bezier);
+}
 
 :focus {
   outline: none !important;
@@ -1146,6 +1163,14 @@ h6 {
   line-height: 1.2;
   font-weight: 600;
 }
+.mib-black-page h1,
+.mib-black-page h2,
+.mib-black-page h3,
+.mib-black-page h4,
+.mib-black-page h5,
+.mib-black-page h6 {
+  color: var(--color_white);
+}
 
 h1 {
   margin-top: 0;
@@ -1173,6 +1198,7 @@ h5 {
   display: flex;
   flex-direction: column;
   padding: 0 !important;
+  overflow: hidden;
 }
 
 .site-main {
@@ -1197,6 +1223,9 @@ h5 {
 .site-main a:hover {
   color: var(--color_primary);
   text-decoration: none;
+}
+.mib-black-page .site-main {
+  color: var(--color_grey_4);
 }
 
 strong {
@@ -1409,7 +1438,7 @@ button[type=submit] {
   line-height: 1;
   display: inline-block;
 }
-.home .language > .active > a {
+.mib-black-page .language > .active > a, .home .language > .active > a {
   color: var(--color_white);
 }
 header .language > .active > a img {
@@ -1550,7 +1579,7 @@ footer .site-branding img {
     color: var(--color_white);
   }
 }
-footer .site-branding .logo-link, .home .site-branding .logo-link {
+.mib-black-page .site-branding .logo-link, footer .site-branding .logo-link, .home .site-branding .logo-link {
   color: var(--color_white);
 }
 .site-branding .logo-link:hover {
@@ -1561,7 +1590,7 @@ footer .site-branding .logo-link, .home .site-branding .logo-link {
     color: var(--color_white);
   }
 }
-footer .site-branding .logo-link:hover, .home .site-branding .logo-link:hover {
+.mib-black-page .site-branding .logo-link:hover, footer .site-branding .logo-link:hover, .home .site-branding .logo-link:hover {
   color: var(--color_white);
 }
 
@@ -1674,7 +1703,8 @@ header.site-header div.menu > ul > li a span:not(.icon),
 header.site-header ul.menu > li a span:not(.icon) {
   flex: 1;
 }
-.home header.site-header div.menu > ul > li a,
+.mib-black-page header.site-header div.menu > ul > li a, .home header.site-header div.menu > ul > li a,
+.mib-black-page header.site-header ul.menu > li a,
 .home header.site-header ul.menu > li a {
   color: var(--color_white);
 }
@@ -1802,7 +1832,8 @@ header.site-header div.menu > ul > li > .sub-menu li a:hover,
 header.site-header ul.menu > li > .sub-menu li a:hover {
   color: var(--color_primary);
 }
-.home header.site-header div.menu > ul > li > .sub-menu li a:hover,
+.mib-black-page header.site-header div.menu > ul > li > .sub-menu li a:hover, .home header.site-header div.menu > ul > li > .sub-menu li a:hover,
+.mib-black-page header.site-header ul.menu > li > .sub-menu li a:hover,
 .home header.site-header ul.menu > li > .sub-menu li a:hover {
   color: var(--color_primary);
 }
@@ -1810,7 +1841,8 @@ header.site-header div.menu > ul > li > .sub-menu li a span b,
 header.site-header ul.menu > li > .sub-menu li a span b {
   font-weight: 600;
 }
-.home header.site-header div.menu > ul > li > .sub-menu li a,
+.mib-black-page header.site-header div.menu > ul > li > .sub-menu li a, .home header.site-header div.menu > ul > li > .sub-menu li a,
+.mib-black-page header.site-header ul.menu > li > .sub-menu li a,
 .home header.site-header ul.menu > li > .sub-menu li a {
   color: var(--text_color);
 }
@@ -2191,7 +2223,7 @@ header.site-header .menu-toggle .icon-menu::before, header.site-header .menu-tog
   border-radius: 1px;
   transition: all 0.5s ease;
 }
-.home header.site-header .menu-toggle .icon-menu::before, .home header.site-header .menu-toggle .icon-menu::after {
+.mib-black-page header.site-header .menu-toggle .icon-menu::before, .home header.site-header .menu-toggle .icon-menu::before, .mib-black-page header.site-header .menu-toggle .icon-menu::after, .home header.site-header .menu-toggle .icon-menu::after {
   background-color: var(--color_white);
 }
 header.site-header .menu-toggle .icon-menu::after {
@@ -2216,10 +2248,10 @@ header.site-header .search-toggle {
 header.site-header .search-toggle:hover {
   color: var(--color_primary);
 }
-.home header.site-header .search-toggle {
+.mib-black-page header.site-header .search-toggle, .home header.site-header .search-toggle {
   color: var(--color_white);
 }
-.home header.site-header .search-toggle:hover {
+.mib-black-page header.site-header .search-toggle:hover, .home header.site-header .search-toggle:hover {
   color: var(--color_primary);
 }
 header.site-header .search {
@@ -2560,6 +2592,8 @@ footer {
   padding: 65px 0 0;
   color: var(--color_grey);
   font-size: 14px;
+  position: relative;
+  z-index: 1;
 }
 footer a {
   color: var(--color_grey);
@@ -2672,7 +2706,7 @@ footer .footer-after .footer-after-col {
   position: relative;
   margin-bottom: var(--block_spacing);
 }
-.section-main .breadcrumb-container {
+.mib-black-page .breadcrumb-container, .section-main .breadcrumb-container {
   background: transparent;
 }
 .breadcrumb-container .container {
@@ -2734,6 +2768,9 @@ footer .footer-after .footer-after-col {
   .section .section-title {
     font-size: 28px;
   }
+}
+.mib-black-page .section .section-title {
+  color: var(--color_white);
 }
 .section.section-single {
   margin-top: 0;
@@ -3011,6 +3048,10 @@ footer .footer-after .footer-after-col {
 }
 .section.section-main.version-black .buttons .button::after, .section.section-main.version-white .buttons .button::after {
   display: none !important;
+}
+.section.section-main.version-black .buttons .button.active, .section.section-main.version-black .buttons .button:hover, .section.section-main.version-white .buttons .button.active, .section.section-main.version-white .buttons .button:hover {
+  background-color: var(--color_primary);
+  border-color: var(--color_primary);
 }
 .section.section-main.version-white {
   background-color: var(--color_light_gray);

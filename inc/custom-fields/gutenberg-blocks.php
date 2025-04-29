@@ -247,4 +247,41 @@ function custom_posts_gutenberg_blocks() {
             
         include_once __THEME_DIR__ . '/template-parts/blocks/block-page-contacts.php';
     } );
+
+    // ==== Company History Block
+    Block::make('company_history', __('Company History'))
+    ->add_fields(array(
+        Field::make('separator', 'history_sep', __('Company History Block')),
+        
+        Field::make('text', 'history_title', __('Title'))
+            ->set_width(100),
+            
+        Field::make('rich_text', 'history_description', __('Description'))
+            ->set_width(100),
+            
+        Field::make('complex', 'history_items', __('History Timeline'))
+            ->add_fields(array(
+                Field::make('text', 'history_item_year', __('Year'))
+                    ->set_width(15)
+                    ->set_required(true),
+                    
+                Field::make('image', 'history_item_image', __('Image'))
+                    ->set_width(25)
+                    ->set_type(array('image')),
+                    
+                Field::make('rich_text', 'history_item_description', __('Description'))
+                    ->set_width(60)
+                    ->set_required(true),
+            ))
+            ->set_header_template('<%- history_item_year %>')
+            ->set_layout('tabbed-vertical')
+    ))
+    ->set_icon('calendar')
+    ->set_category('mib')
+    ->set_mode('both')
+    ->set_render_callback(function($fields, $attributes, $inner_blocks) {
+        extract( $fields );
+
+        include_once __THEME_DIR__ . '/template-parts/sections/company_history-section.php';
+    });
 }

@@ -5,27 +5,33 @@ $alternating_posts = apply_filters( 'mib_get_alternating_posts', $actuality_post
 <section class="section section-news">
     <div class="container">
 
-        <div class="section-heiding">
-            <?php
+        <?php
             if ( ! empty( $actuality_posts_title ) ) :
-            ?>
-            <div class="section-title">
-                <?php echo esc_html( $actuality_posts_title )?>
-            </div>
-            <?php
-            endif;
-
-            if ( ! empty( $actuality_posts_desc ) ) :
-            ?>
-            <div class="section-description">
+        ?>
+            <div class="section-heiding">
                 <?php
-                echo nl2br( $actuality_posts_desc );
+                if ( ! empty( $actuality_posts_title ) ) :
+                ?>
+                <div class="section-title">
+                    <?php echo esc_html( $actuality_posts_title )?>
+                </div>
+                <?php
+                endif;
+
+                if ( ! empty( $actuality_posts_desc ) ) :
+                ?>
+                <div class="section-description">
+                    <?php
+                    echo nl2br( $actuality_posts_desc );
+                    ?>
+                </div>
+                <?php
+                endif;
                 ?>
             </div>
-            <?php
-            endif;
-            ?>
-        </div>
+        <?php
+        endif;
+        ?>
 
         <div class="section-filter">
             <ul class="filter" id="filter-news" data-page="<?php echo get_the_ID()?>" data-per-page="<?php echo $actuality_posts_per_page?>">
