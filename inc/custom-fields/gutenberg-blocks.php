@@ -5,6 +5,9 @@ use Carbon_Fields\Field;
 add_action( 'carbon_fields_register_fields', 'custom_posts_gutenberg_blocks' );
 
 function custom_posts_gutenberg_blocks() {
+    $post_id            = isset( $_GET['post'] ) ? intval( $_GET['post'] ) : false;
+    $events_arhive_page = get_option( '_events_arhive_page' );
+
     $def_per_page  = get_option( 'posts_per_page' );
     $home_url      = home_url();
     $blog_page     = get_option( 'page_for_posts' );
@@ -17,6 +20,9 @@ function custom_posts_gutenberg_blocks() {
     Block::make( 'main_top_variative',  __( 'Main HERO' ) )
         ->add_fields( array (
             Field::make( 'separator', 'main_top_variative_sep', __( 'Main HERO' ) ),
+            Field::make( 'text', 'current_page_id' )
+                ->set_default_value( $post_id )
+                ->set_attribute( 'readOnly', true ),
             Field::make( 'file', 'main_top_heading_media_before_text', __( 'Hending media before all text' ) )
                 ->set_width( 33 )
                 ->set_type( 
@@ -39,19 +45,41 @@ function custom_posts_gutenberg_blocks() {
                         'compare' => '=',
                     )
                 ) ),
-            Field::make( 'text', 'main_top_heading_text', __( 'h1' ) ),
-            Field::make('select', 'main_top_version', __('Select Version'))
+            Field::make( 'text', 'main_top_heading_text', __( 'h1' ) )
+                ->set_default_value( the_title( $post_id) ),
+            Field::make( 'select', 'main_top_version', __('Select Version' ))
                 ->add_options( array(
                     '' => __( 'Select a version' ),
                     'home' => __( 'Home' ),
                     'black' => __( 'Black', ),
                     'white' => __( 'White', )
                 ) ),
-            Field::make( 'rich_text', 'main_bottom_text', __( 'First text' ) ),
-            Field::make( 'rich_text', 'main_bottom_second_text', __( 'Second text' ) ),
+            Field::make( 'rich_text', 'main_bottom_text', __( 'Description text' ) ),
+            Field::make( 'rich_text', 'main_bottom_second_text', __( 'Second text' ) )
+                ->set_conditional_logic( array(
+                    array(
+                        'field'   => 'current_page_id',
+                        'value'   => $events_arhive_page,
+                        'compare' => '!=',
+                    )
+                ) ),
             Field::make( 'text', 'main_bottom_button_text', __( 'Button text' ) )
+                ->set_conditional_logic( array(
+                    array(
+                        'field'   => 'current_page_id',
+                        'value'   => $events_arhive_page,
+                        'compare' => '!=',
+                    )
+                ) )    
                 ->set_width( 50 ),
             Field::make( 'text', 'main_bottom_button_link', __( 'Button link' ) )
+                ->set_conditional_logic( array(
+                    array(
+                        'field'   => 'current_page_id',
+                        'value'   => $events_arhive_page,
+                        'compare' => '!=',
+                    )
+                ) )
                 ->set_default_value( $blog_page_url )        
                 ->set_width( 50 ),
         ) )

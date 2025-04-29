@@ -6,6 +6,7 @@ add_action( 'wp_ajax_nopriv_custom_post_type_filter', 'mib_custom_post_type_filt
 add_filter( 'mib_get_posts_list_options'            , 'mib_get_posts_list_options' );
 add_filter( 'mib_get_posts_relationships'           , 'mib_get_posts_relationships' );
 add_filter( 'mib_has_gutenberg_block'               , 'mib_has_gutenberg_block', 10 , 2 );
+add_filter( 'mib_get_course_categories'             , 'mib_get_course_categories' );
 
 /**
  * @param array|string $post_type optional. Default 'post'.
@@ -205,4 +206,13 @@ function mib_has_gutenberg_block( string $content, string $block_name ) {
     $pattern            = sprintf( '/%s/', $escaped_block_name );
 
     return (bool) preg_match( $pattern, $content );
+}
+
+function mib_get_course_categories() {
+    $args = [
+        'hide_empty' => false,
+        'taxonomy'   => 'program_category',
+    ];
+
+    return get_terms( $args );
 }
