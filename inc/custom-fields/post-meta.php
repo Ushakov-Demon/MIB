@@ -4,6 +4,14 @@ use Carbon_Fields\Field;
 add_action( 'carbon_fields_register_fields', 'custom_posts_meta_data' );
 
 function custom_posts_meta_data() {
+    $date_format     = get_option( 'date_format' );
+    $period_options  = [
+        'days'   => 'Days',
+        'weeks'  => 'Weeks',
+        'months' => 'Months',
+        'years'  => 'Years',
+    ];
+
     // ==== PROGRAMS post type
     Container::make( 'post_meta', __( 'Training course icon' ) )
         ->where( 'post_type', '=', 'programs' )
@@ -39,7 +47,23 @@ function custom_posts_meta_data() {
                 ->set_width( 50 ),
             Field::make( 'text', 'tr_program_sale_price_date_end', __( 'Apply sale price before date' ) )
                 ->set_width( 50 ),
-            Field::make( 'separator', 'program_members_sep', __( 'Members' ) ),
+        ) )
+        ->add_tab( __( 'Shedule & format' ), array(
+            Field::make( 'date', 'tr_program_date_start', __( 'Date start' ) )
+                ->set_storage_format( $date_format )
+                ->set_width( 33 ),
+            Field::make( 'text', 'tr_program_period_length', __( 'Course length' ) )
+                ->set_attribute( 'type', 'number' )
+                ->set_attribute( 'min', '1' )
+                ->set_default_value( 5 )
+                ->set_width( 33 ),
+            Field::make( 'select', 'tr_program_period', __( 'Period' ) )
+                ->add_options( $period_options )
+                ->set_default_value( 'months' )
+                ->set_width( 33 ),
+            Field::make( 'text', 'tr_program_format',  __( 'Format' ) )
+         ) )
+        ->add_tab( __( 'Members' ) , array(
             Field::make( 'association', 'tr_program_teatchers', __( 'Teatchers' ) )
                 ->set_types( array(
                     array(
@@ -54,7 +78,7 @@ function custom_posts_meta_data() {
                         'post_type' => 'students',
                     )
                 ) ),
-    ) );
+        ) );
 
     // ==== EVENTS post type
     Container::make( 'post_meta', __( 'Event shedule date' ) )
