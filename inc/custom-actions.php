@@ -5,6 +5,7 @@ add_action( 'wp_ajax_custom_post_type_filter'       , 'mib_custom_post_type_filt
 add_action( 'wp_ajax_nopriv_custom_post_type_filter', 'mib_custom_post_type_filter' );
 add_filter( 'mib_get_posts_list_options'            , 'mib_get_posts_list_options' );
 add_filter( 'mib_get_posts_relationships'           , 'mib_get_posts_relationships' );
+add_filter( 'mib_has_gutenberg_block'               , 'mib_has_gutenberg_block', 10 , 2 );
 
 /**
  * @param array|string $post_type optional. Default 'post'.
@@ -190,4 +191,18 @@ function mib_get_posts_relationships( $args ) {
     ];
 
     return get_posts( $params );
+}
+
+/**
+* Checks if the specified Gutenberg block is present in the content.
+*
+* @param string $content The page content string.
+* @param string $block_name The name of the block to look for (e.g. 'main-top-variative' or 'main-top' ...).
+* @return bool True if the block is found, false otherwise.
+*/
+function mib_has_gutenberg_block( string $content, string $block_name ) {
+    $escaped_block_name = str_replace( '/', '\\/', $block_name );
+    $pattern            = sprintf( '/%s/', $escaped_block_name );
+
+    return (bool) preg_match( $pattern, $content );
 }
