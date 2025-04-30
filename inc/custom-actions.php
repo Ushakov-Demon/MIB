@@ -48,9 +48,13 @@ function mib_get_posts( $post_type = 'post', int $per_page = 0, int $page = 1, $
 *
 * @return array Array of WP_Post objects where 'post' and 'programs' posts alternate.
 */
-function mib_get_alternating_posts( int $per_page = 0, int $page = 1 ): array {
+function mib_get_alternating_posts( int $per_page = 0, int $page = 1 ) : array {
     if ( 0 == $per_page ) {
         $per_page = get_option( 'posts_per_page' );
+    }
+
+    if ( 0 > ( $per_page % 2 ) ) {
+        $per_page += 1;
     }
 
     $post_posts = new WP_Query( [
@@ -58,7 +62,7 @@ function mib_get_alternating_posts( int $per_page = 0, int $page = 1 ): array {
         'post_status'    => 'publish',
         'orderby'        => 'date',
         'order'          => 'DESC',
-        'posts_per_page' => $per_page,
+        'posts_per_page' => $per_page/2,
         'paged'          => $page,
     ] );
 
@@ -67,21 +71,29 @@ function mib_get_alternating_posts( int $per_page = 0, int $page = 1 ): array {
         'post_status'    => 'publish',
         'orderby'        => 'date',
         'order'          => 'DESC',
-        'posts_per_page' => $per_page,
+        'posts_per_page' => $per_page/2,
         'paged'          => $page,
     ] );
+
+    $max_pages = [
+        $post_posts->max_num_pages,
+        $program_posts->max_num_pages,
+    ];
 
     $alternating_posts = [];
     $i = 0;
     $j = 0;
 
+    $alternating_posts['max_num_pages'] = max( $max_pages );
+    $alternating_posts['page']          = $page;
+
     while ( $i < count( $post_posts->posts ) || $j < count( $program_posts->posts ) ) {
         if ( isset( $post_posts->posts[ $i ] ) ) {
-            $alternating_posts[] = $post_posts->posts[ $i ];
+            $alternating_posts['posts'][] = $post_posts->posts[ $i ];
             $i++;
         }
         if ( isset( $program_posts->posts[ $j ] ) ) {
-            $alternating_posts[] = $program_posts->posts[ $j ];
+            $alternating_posts['posts'][] = $program_posts->posts[ $j ];
             $j++;
         }
     }
@@ -94,11 +106,12 @@ function mib_get_alternating_posts( int $per_page = 0, int $page = 1 ): array {
 function mib_custom_post_type_filter(){
     if ( ! isset( $_POST['filterTaget'] ) || ! isset( $_POST['perPage'] ) ) return;
 
-    $current   = isset( $_POST['currentPage'] ) ?? $_POST['currentPage'];
+    $current   = isset( $_POST['pageId'] ) ?? $_POST['pageId'];
     $post_type = false;
     $posts     = false;
     $per_page  = intval( $_POST['perPage'] );
     $output    = "";
+    $page_num  = $_POST['pageNum'];
 
     switch ( $_POST['filterTaget'] ) {
         case "news" :
@@ -115,13 +128,14 @@ function mib_custom_post_type_filter(){
     }
 
     if ( $post_type ) {
-        $query = mib_get_posts( $post_type, $per_page );
+        $query = mib_get_posts( $post_type, $per_page, $page_num );
 
         if ( $query->have_posts() ) {
             $posts = $query->posts;
         }
     } else {
-        $posts = mib_get_alternating_posts( $per_page );
+        $res   = mib_get_alternating_posts( $per_page, $page_num );
+        $posts = $res["posts"];
     }
 
     if ( ! empty( $posts ) ) {
@@ -137,6 +151,10 @@ function mib_custom_post_type_filter(){
 
             include get_template_directory() . '/template-parts/blocks/news-item.php';
         endforeach;
+
+        if ( isset( $_POST['isPaginavi'] ) && 'true' == $_POST['isPaginavi']  ) {
+            include get_template_directory() . '/template-parts/blocks/block-show-more.php';
+        }
         $output = ob_get_clean();
     }
 

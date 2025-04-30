@@ -1,6 +1,8 @@
 <?php
+    $post_id               = get_the_ID(); 
     $is_home               = is_front_page();
-    $is_events_arhive      = get_the_ID() == get_option( '_events_arhive_page' );
+    $is_events_arhive      = $post_id == get_option( '_events_arhive_page' );
+    $is_programs_achive    = $post_id == get_option( '_programs_arhive_page' );
     $main_top_heading_text = !empty($main_top_heading_text) ? $main_top_heading_text : get_the_title();
 ?>
 <section class="section section-main<?php if (!empty($main_top_version)) : ?> version-<?php echo $main_top_version; ?><?php endif; ?>">
@@ -64,7 +66,7 @@
                     </a>
                 </div>
                 <?php
-                elseif ($is_events_arhive) :
+                elseif ($is_programs_achive) :
                 
                  include_once get_template_directory() . '/template-parts/blocks/block-programs-categories-buttons.php';   
             endif;

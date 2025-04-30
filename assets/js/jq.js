@@ -313,32 +313,54 @@ jQuery(document).ready(function ($) {
 		}
 	});
 
-	$(document).on('click', '#filter-news .item', function(e){
-		e.preventDefault();
-		let $this       = $(this);
-		let filterTaget = $this.data('target');
-		let page        = $this.parent().data('page');
-		let perPage     = $this.parent().data('per-page');
-
-		if ( $this.hasClass( 'active' ) ) return;
-
-		$this.parent().find( '.active' ).removeClass( 'active' );
-		$this.addClass( 'active' );
+	function ajaxResponsePosts( element ) {
+		section     = element.closest('section');
+		filterTaget = section.find( '#filter-news .active' ).data('target');
+		pageId      = section.data('page_id');
+		perPage     = section.data('per-page');
+		maxPages    = section.data('max-pages');
+		pageNum     = section.data('current-page_num');
+		isPaginavi  = section.hasClass( 'pagination' );
 
 		$.ajax({
-			type : 'POST',
+			type 	 : 'POST',
 			dataType : 'json',
-			url : dataObj['ajaxUrl'],
-			data : {
-				action : 'custom_post_type_filter',
+			url 	 : dataObj['ajaxUrl'],
+			data     : {
+				action 		: 'custom_post_type_filter',
 				filterTaget : filterTaget,
-				currentPage : page,
-				perPage     : perPage, 
+				pageId      : pageId,
+				perPage     : perPage,
+				pageNum     : pageNum,
+				maxPages    : maxPages,
+				isPaginavi  : isPaginavi, 
 			},
 			success : function (response) {
-				$this.closest( 'section' ).find( '.sort-items' ).html(response);
+				section.find( '.sort-items' ).html(response);
 			}
 		});
+
+		return true;
+	}
+
+	$(document).on('click', '#filter-news .item', function(e){
+		e.preventDefault();
+
+		if ( $(this).hasClass( 'active' ) ) return;
+
+		$(this).parent().find( '.active' ).removeClass( 'active' );
+		$(this).addClass( 'active' );
+
+		ajaxResponsePosts( $(this) );
+	});
+
+	$(document).on('click', '.view-more-link', function(e){
+		e.preventDefault();
+
+		let currentPageNum = $(this).closest( 'section' ).data( 'current-page_num' );
+		ajaxResponsePosts( $(this) );
+
+		$(this).closest( 'section' ).data( 'current-page_num', parseInt( currentPageNum )+1 );
 	});
 
 	$('.copy-link-btn').click(function(e) {
