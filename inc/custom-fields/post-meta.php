@@ -12,6 +12,10 @@ function custom_posts_meta_data() {
         'years'  => 'Years',
     ];
 
+    $members_activities_options = apply_filters( 'mib_get_array_by_option', 'activity_list', 'activity_item' );
+    $members_statuses_options   = apply_filters( 'mib_get_array_by_option', 'member_statuses_list', 'statuses_item' );
+    $members_cities_options     = apply_filters( 'mib_get_array_by_option', 'cities_list', 'city_item' );
+
     // ==== PROGRAMS post type
     Container::make( 'post_meta', __( 'Training course icon' ) )
         ->where( 'post_type', '=', 'programs' )
@@ -94,12 +98,22 @@ function custom_posts_meta_data() {
         ->where( 'post_type', '=', 'teachers' )
         ->add_fields( array(
             Field::make( 'textarea', 'positions_in_companies', __( 'Positions in companies' ) ),
+            Field::make( 'textarea', 'teach_reviwe_message', __( 'Reviwe message' ) ),
     ) );
 
     // ==== STUDENT post type
     Container::make( 'post_meta', __( 'Student data' ) )
         ->where( 'post_type', '=', 'students' )
         ->add_fields( array(
+            Field::make( 'select', 'st_activity', __( 'Activity' ) )
+                ->add_options( $members_activities_options )
+                ->set_width( 33 ),
+            Field::make( 'select', 'st_status', __( 'Status' ) )
+                ->add_options( $members_statuses_options )
+                ->set_width( 33 ),
+            Field::make( 'select', 'st_city', __( 'City' ) )
+                ->add_options( $members_cities_options )
+                ->set_width( 33 ),
             Field::make( 'textarea', 'st_positions_in_companies', __( 'Positions in companies' ) ),
             Field::make( 'textarea', 'st_reviwe_message', __( 'Reviwe message' ) ),
     ) );

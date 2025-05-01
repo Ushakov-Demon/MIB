@@ -14,5 +14,36 @@ function theme_options_fields(){
                 ->add_options( $pages_options ),
             Field::make( 'select', 'programs_arhive_page', __( 'Programs arhive page' ) )
                 ->add_options( $pages_options ),
+            Field::make( 'separator', 'members_vars_sep', __( 'Members attributes' ) ),
+            Field::make( 'complex', 'activity_list', __( 'Fields of activity' ) )
+                ->add_fields( array(
+                    Field::make( 'text', 'activity_item', __( 'Activity' ) )
+                ) )
+                ->set_collapsed( true )
+                ->set_header_template( '
+                    <% if (activity_item) { %>
+                        <%- activity_item %>
+                    <% } %>
+                ' ),
+            Field::make( 'complex', 'member_statuses_list', __( 'Statuses' ) )
+                ->add_fields( array(
+                    Field::make( 'text', 'statuses_item', __( 'Status' ) )
+                ) )
+                ->set_collapsed( true )
+                ->set_header_template( '
+                    <% if (statuses_item) { %>
+                        <%- statuses_item %>
+                    <% } %>
+                ' ),
+            Field::make( 'complex', 'cities_list', __( 'Cities' ) )
+                ->add_fields( array(
+                    Field::make( 'text', 'city_item', __( 'City' ) )
+                ) )
+                ->set_collapsed( true )
+                ->set_header_template( '
+                    <% if (city_item) { %>
+                        <%- city_item %>
+                    <% } %>
+                ' ),
         ) );
 };

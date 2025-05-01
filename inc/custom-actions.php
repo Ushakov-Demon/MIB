@@ -5,8 +5,9 @@ add_action( 'wp_ajax_custom_post_type_filter'       , 'mib_custom_post_type_filt
 add_action( 'wp_ajax_nopriv_custom_post_type_filter', 'mib_custom_post_type_filter' );
 add_filter( 'mib_get_posts_list_options'            , 'mib_get_posts_list_options' );
 add_filter( 'mib_get_posts_relationships'           , 'mib_get_posts_relationships' );
-add_filter( 'mib_has_gutenberg_block'               , 'mib_has_gutenberg_block', 10 , 2 );
+add_filter( 'mib_has_gutenberg_block'               , 'mib_has_gutenberg_block', 10, 2 );
 add_filter( 'mib_get_course_categories'             , 'mib_get_course_categories' );
+add_filter( 'mib_get_array_by_option'               , 'mib_get_array_by_option', 10, 2 );
 
 /**
  * @param array|string $post_type optional. Default 'post'.
@@ -233,4 +234,26 @@ function mib_get_course_categories() {
     ];
 
     return get_terms( $args );
+}
+
+/**
+ * Make options array for select, by custom theme option value
+ * Theme option must by create in Carbon Fields , and must have type 'complex'
+ * 
+ * @param string $option_name: option name
+ * @param string $item_key: item key name
+ * 
+ * @return array
+ */
+function mib_get_array_by_option( string $option_name, string $item_key ) : array {
+    $options = carbon_get_theme_option( $option_name );
+
+    $out = [ '' => __( 'Select an option' ) ];
+
+    if ( is_array( $options ) ) {
+        foreach ( $options as $option ) {
+            $out[$option[$item_key]] = $option[$item_key];
+        }
+    }
+    return $out;
 }

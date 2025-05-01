@@ -220,7 +220,7 @@ function create_custom_post_types_and_taxonomies() {
         'show_in_nav_menus'   => true,
         'menu_icon'           => get_icon_base64( "student" ),
         'hierarchical'        => false,
-        'supports'            => ['title', 'thumbnail', 'excerpt'],
+        'supports'            => ['title', 'thumbnail', 'excerpt', 'editor' ],
         'taxonomies'          => ['student_category', 'companies'],
         'has_archive'         => true,
         'rewrite'             => true,
