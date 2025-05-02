@@ -93,6 +93,122 @@ function custom_posts_meta_data() {
             Field::make( 'date_time', 'event_shedule_date', __( 'Choice date and time' ) )
     ) );
 
+    Container::make( 'post_meta', __( 'Event data' ) )
+        ->where( 'post_type', '=', 'events' )
+        ->add_fields( array(
+            Field::make( 'separator', 'event_plan_sep', __( 'Plan' ) ),
+            Field::make( 'textarea', 'event_plan_title', __( 'Title plan section' ) ),
+            Field::make( 'complex', 'event_plan', __( 'Event plan list' ) )
+                ->set_collapsed( true )
+                ->add_fields( array( 
+                    Field::make( 'text', 'plan_item_time_between', __( 'Time' ) )
+                        ->set_width( 25 ),
+                    Field::make( 'text', 'plan_item_time_topic', __( 'Topic' ) )
+                        ->set_width( 75 ),
+                    Field::make( 'select', 'plan_item_have_presenter', __( 'Have presenter' ) )
+                        ->add_options( array(
+                            'yes' => __( 'Yes' ),
+                            'no'  => __( 'No' ),
+                        ) )
+                        ->set_default_value( 'yes' )
+                        ->set_width( 50 ),
+                    Field::make( 'select', 'plan_item_presenter_member', __( 'Select from members or add manualy' ) )
+                        ->add_options( array(
+                            'member'    => __( 'Select from members' ),
+                            'manualy'   => __( 'Add manualy' ),
+                        ) )
+                        ->set_default_value( 'member' )
+                        ->set_conditional_logic( array(
+                            array(
+                                'field'   => 'plan_item_have_presenter',
+                                'compare' => '!=',
+                                'value'   => 'no',
+                            )
+                        ) )
+                        ->set_width( 50 ),
+                    Field::make( 'image', 'plan_item_icon', __( 'Item icon' ) )
+                        ->set_width( 50 )
+                        ->set_conditional_logic( array(
+                            array(
+                                'field'   => 'plan_item_have_presenter',
+                                'compare' => '=',
+                                'value'   => 'no',
+                            ),
+                        ) ),
+                    Field::make( 'association', 'plan_item_presenter', __( 'Presenter' ) )
+                        ->set_max( 1 )
+                        ->set_types( array(
+                            array(
+                                'type'      => 'post',
+                                'post_type' => 'teachers',
+                            ),
+                            array(
+                                'type'      => 'post',
+                                'post_type' => 'students',
+                            )
+                        ) )
+                        ->set_conditional_logic( array(
+                            array(
+                                'field'   => 'plan_item_have_presenter',
+                                'compare' => '!=',
+                                'value'   => 'no',
+                            ),
+                            array(
+                                'field'   => 'plan_item_presenter_member',
+                                'compare' => '=',
+                                'value'   => 'member',
+                            )
+                        ) ),
+                        Field::make( 'image', 'presenter_icon', __( 'Presenter icon' ) )
+                            ->set_width( 25 )
+                            ->set_conditional_logic( array(
+                                array(
+                                    'field'   => 'plan_item_have_presenter',
+                                    'compare' => '!=',
+                                    'value'   => 'no',
+                                ),
+                                array(
+                                    'field'   => 'plan_item_presenter_member',
+                                    'compare' => '=',
+                                    'value'   => 'manualy',
+                                )
+                            ) ),
+                        Field::make( 'text', 'presenter_name', __( 'Presenter name' ) )
+                            ->set_width( 37 )
+                            ->set_conditional_logic( array(
+                                array(
+                                    'field'   => 'plan_item_have_presenter',
+                                    'compare' => '!=',
+                                    'value'   => 'no',
+                                ),
+                                array(
+                                    'field'   => 'plan_item_presenter_member',
+                                    'compare' => '=',
+                                    'value'   => 'manualy',
+                                )
+                            ) ),
+                        Field::make( 'text', 'presenter_message', __( 'Presenter message' ) )
+                            ->set_width( 37 )
+                            ->set_conditional_logic( array(
+                                array(
+                                    'field'   => 'plan_item_have_presenter',
+                                    'compare' => '!=',
+                                    'value'   => 'no',
+                                ),
+                                array(
+                                    'field'   => 'plan_item_presenter_member',
+                                    'compare' => '=',
+                                    'value'   => 'manualy',
+                                )
+                            ) ),
+                ) )
+                ->set_header_template( '
+                            <% if (plan_item_time_topic) { %>
+                                <%- plan_item_time_topic %>
+                            <% } %>
+                        ' ),
+        ) );
+
     // ==== TEATCHERS post type
     Container::make( 'post_meta', __( 'Teatcher data' ) )
         ->where( 'post_type', '=', 'teachers' )
