@@ -91,7 +91,7 @@ function create_custom_post_types_and_taxonomies() {
         'label'               => __( 'Події' ),
         'description'         => '',
         'labels'              => $events_labels,
-        'supports'            => array('title', 'editor', 'thumbnail', 'excerpt'),
+        'supports'            => array('title', 'thumbnail', 'excerpt'),
         'taxonomies'          => array('event_category', 'post_tag'),
         'hierarchical'        => false,
         'public'              => true,

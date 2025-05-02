@@ -96,8 +96,48 @@ function custom_posts_meta_data() {
     Container::make( 'post_meta', __( 'Event data' ) )
         ->where( 'post_type', '=', 'events' )
         ->add_fields( array(
+            // About talk block
+            Field::make( 'separator', 'about_talk_sep', __( 'About talk' ) ),
+            Field::make( 'textarea', 'about_talk_title', __( 'Title block' ) ),
+            Field::make( 'complex', 'about_talk_list', __( 'Topics' ) )
+                ->set_collapsed( true )
+                ->add_fields( array(
+                    Field::make( 'text', 'about_talk_topic', __( 'Single topic' ) )
+                ) )
+                ->set_header_template( '
+                    <% if (about_talk_topic) { %>
+                        <%- about_talk_topic %>
+                    <% } %>
+                ' ),
+            // Invitation block
+            Field::make( 'separator', 'invitation_sep', __( 'Invitation' ) ),
+            Field::make( 'text', 'invitation_block_title', __( 'Title' ) )
+                ->set_default_value( 'Запрошуємо' ),
+            Field::make( 'complex', 'invitations', __( 'invitations list' ) )
+                ->set_collapsed( true )
+                ->add_fields( array(
+                    Field::make( 'image', 'invite_icon', __( 'Icon' ) )
+                        ->set_width( 25 ),
+                    Field::make( 'textarea', 'invite_text', __( 'Text' ) )
+                        ->set_width( 75 ),
+                ) )
+                ->set_header_template( '
+                    <% if (invite_text) { %>
+                        <%- invite_text %>
+                    <% } %>
+                ' ),
+            // Brief announcement
+            Field::make( 'separator', 'announcement_sep', __( 'Brief announcement' ) ),
+            Field::make( 'textarea', 'announcement_title', __( 'Title block' ) ),
+            Field::make( 'rich_text', 'announcement_content', __( 'Desc content' ) ),
+            Field::make( 'image', 'special_guest_icon', __( 'Special guest icon' ) )
+                ->set_width( 25 ),
+            Field::make( 'textarea', 'special_guest_text', __( 'Special guest text' ) )
+                ->set_width( 75 ),
+            // Plan block
             Field::make( 'separator', 'event_plan_sep', __( 'Plan' ) ),
-            Field::make( 'textarea', 'event_plan_title', __( 'Title plan section' ) ),
+            Field::make( 'textarea', 'event_plan_title', __( 'Title plan section' ) )
+                ->set_default_value( 'План зустрічі' ),
             Field::make( 'complex', 'event_plan', __( 'Event plan list' ) )
                 ->set_collapsed( true )
                 ->add_fields( array( 
