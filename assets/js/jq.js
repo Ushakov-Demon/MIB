@@ -204,27 +204,56 @@ jQuery(document).ready(function ($) {
 
 	animateCount();
 
-	let carouselHistory = $('#history-timeline-items');
+	let carouselHistory = $('#history-timeline-items'),
+		carouselHistoryNav = $('#history-timeline-nav');
 
-	carouselHistory.each(function() {
-		$(this).owlCarousel({
-			items: 1,
-			navSpeed: 1000,
-			margin: 0,
-			nav: true,
-			dots: true,
-			loop: true,
-			navText: [nextPrevButton, nextPrevButton],
-			mouseDrag: true,
-			touchDrag: true,
-			dragEndSpeed: 1000,
-			dotsSpeed: 1000,
-			autoHeight: true,
-			autoplay: false,
-			autoplaySpeed: 1000,
-			autoplayTimeout: 2500,
-			autoplayHoverPause: true,
-		});
+	carouselHistory.owlCarousel({
+		items: 1,
+		navSpeed: 1000,
+		margin: 0,
+		nav: false,
+		dots: false,
+		loop: true,
+		navText: [nextPrevButton, nextPrevButton],
+		mouseDrag: true,
+		touchDrag: true,
+		dragEndSpeed: 1000,
+		dotsSpeed: 1000,
+		autoHeight: true,
+		autoplay: false,
+		autoplaySpeed: 1000,
+		autoplayTimeout: 2500,
+		autoplayHoverPause: true,
+		responsive: {
+			0: {
+				items: 1,
+				stagePadding: 50,
+			},
+			768: {
+				items: 3,
+				stagePadding: 0,
+			},
+			1024: {
+				items: 4,
+				stagePadding: 0,
+			},
+			1200: {
+				items: 5,
+				stagePadding: 0,
+			}
+		}
+	});
+
+	carouselHistoryNav.find('.owl-prev').click(function() {
+		if (!$(this).hasClass('disabled')) {
+			carouselHistory.trigger('prev.owl.carousel', 1000);
+		}
+	});
+
+	carouselHistoryNav.find('.owl-next').click(function() {
+		if (!$(this).hasClass('disabled')) {
+			carouselHistory.trigger('next.owl.carousel', 1000);
+		}
 	});
 
 	let carouselWpBlockGalleries = $('.wp-block-gallery');
@@ -247,6 +276,7 @@ jQuery(document).ready(function ($) {
 			autoplaySpeed: 1000,
 			autoplayTimeout: 2500,
 			autoplayHoverPause: true,
+			lazyLoad: true,
 		});
 	});
 
