@@ -35,8 +35,10 @@ function custom_posts_meta_data() {
 
     Container::make( 'post_meta', __( 'Training course data' ) )
         ->where( 'post_type', '=', 'programs' )
-        ->add_tab( __( 'Main' ), array(
-            Field::make( 'separator', 'program_prices_sep', __( 'Prices' ) ),
+        ->add_tab( __('Main'), array(
+            Field::make( 'text', 'tr_program_language', __( 'Language' ) ),
+        ) )
+        ->add_tab( __( 'Prices' ), array(
             Field::make( 'text', 'tr_program_regular_price', __( 'Price' ) )
                 ->set_attribute( 'type', 'number' )
                 ->set_width( 33 ),
@@ -49,7 +51,7 @@ function custom_posts_meta_data() {
             Field::make( 'text', 'tr_program_sale_price', __( 'Sale price' ) )
                 ->set_attribute( 'type', 'number' )
                 ->set_width( 50 ),
-            Field::make( 'text', 'tr_program_sale_price_date_end', __( 'Apply sale price before date' ) )
+            Field::make( 'date', 'tr_program_sale_price_date_end', __( 'Apply sale price before date' ) )
                 ->set_width( 50 ),
         ) )
         ->add_tab( __( 'Shedule & format' ), array(
@@ -65,7 +67,7 @@ function custom_posts_meta_data() {
                 ->add_options( $period_options )
                 ->set_default_value( 'months' )
                 ->set_width( 33 ),
-            Field::make( 'text', 'tr_program_format',  __( 'Format' ) )
+            Field::make( 'text', 'tr_program_format',  __( 'Format' ) ),
          ) )
         ->add_tab( __( 'Members' ) , array(
             Field::make( 'association', 'tr_program_teatchers', __( 'Teatchers' ) )
