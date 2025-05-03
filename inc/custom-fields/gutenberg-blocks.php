@@ -5,6 +5,10 @@ use Carbon_Fields\Field;
 add_action( 'carbon_fields_register_fields', 'custom_posts_gutenberg_blocks' );
 
 function custom_posts_gutenberg_blocks() {
+    $post_id               = isset( $_GET['post'] ) ? intval( $_GET['post'] ) : false;
+    $events_arhive_page    = get_option( '_events_arhive_page' );
+    $programs_arhive_page  = get_option( '_programs_arhive_page' );
+
     $def_per_page  = get_option( 'posts_per_page' );
     $home_url      = home_url();
     $blog_page     = get_option( 'page_for_posts' );
@@ -17,6 +21,9 @@ function custom_posts_gutenberg_blocks() {
     Block::make( 'main_top_variative',  __( 'Main HERO' ) )
         ->add_fields( array (
             Field::make( 'separator', 'main_top_variative_sep', __( 'Main HERO' ) ),
+            Field::make( 'text', 'current_page_id' )
+                ->set_default_value( $post_id )
+                ->set_attribute( 'readOnly', true ),
             Field::make( 'file', 'main_top_heading_media_before_text', __( 'Hending media before all text' ) )
                 ->set_width( 33 )
                 ->set_type( 
@@ -31,27 +38,60 @@ function custom_posts_gutenberg_blocks() {
                 ->set_width( 33 )
                 ->set_type( 
                     array( 'image' )
-                )
-                ->set_conditional_logic( array(
-                    array(
-                        'field' => 'main_top_heading_type',
-                        'value' => 'media',
-                        'compare' => '=',
-                    )
-                ) ),
-            Field::make( 'text', 'main_top_heading_text', __( 'h1' ) ),
-            Field::make('select', 'main_top_version', __('Select Version'))
+                ),
+            Field::make( 'text', 'main_top_heading_text', __( 'h1' ) )
+                ->set_default_value( the_title( $post_id) ),
+            Field::make( 'select', 'main_top_version', __('Select Version' ))
                 ->add_options( array(
                     '' => __( 'Select a version' ),
                     'home' => __( 'Home' ),
                     'black' => __( 'Black', ),
                     'white' => __( 'White', )
                 ) ),
-            Field::make( 'rich_text', 'main_bottom_text', __( 'First text' ) ),
-            Field::make( 'rich_text', 'main_bottom_second_text', __( 'Second text' ) ),
+            Field::make( 'rich_text', 'main_bottom_text', __( 'Description text' ) ),
+            Field::make( 'rich_text', 'main_bottom_second_text', __( 'Second text' ) )
+                ->set_conditional_logic( array(
+                    'relation' => 'OR',
+                    array(
+                        'field'   => 'current_page_id',
+                        'value'   => $events_arhive_page,
+                        'compare' => '!=',
+                    ),
+                    array(
+                        'field'   => 'current_page_id',
+                        'value'   => $programs_arhive_page,
+                        'compare' => '!=',
+                    )
+                ) ),
             Field::make( 'text', 'main_bottom_button_text', __( 'Button text' ) )
+                ->set_conditional_logic( array(
+                    'relation' => 'OR',
+                    array(
+                        'field'   => 'current_page_id',
+                        'value'   => $events_arhive_page,
+                        'compare' => '!=',
+                    ),
+                    array(
+                        'field'   => 'current_page_id',
+                        'value'   => $programs_arhive_page,
+                        'compare' => '!=',
+                    )
+                ) )    
                 ->set_width( 50 ),
             Field::make( 'text', 'main_bottom_button_link', __( 'Button link' ) )
+                ->set_conditional_logic( array(
+                    'relation' => 'OR',
+                    array(
+                        'field'   => 'current_page_id',
+                        'value'   => $events_arhive_page,
+                        'compare' => '!=',
+                    ),
+                    array(
+                        'field'   => 'current_page_id',
+                        'value'   => $programs_arhive_page,
+                        'compare' => '!=',
+                    )
+                ) )
                 ->set_default_value( $blog_page_url )        
                 ->set_width( 50 ),
         ) )
@@ -126,14 +166,20 @@ function custom_posts_gutenberg_blocks() {
         ->add_fields( array(
             Field::make( 'separator', 'actuality_posts_sep', __( 'Mixed posts previews' ) ),
             Field::make( 'text', 'actuality_posts_per_page', __( 'Posts per page' ) )
-                ->set_width( 33 )
+                ->set_width( 20 )
                 ->set_attribute( 'type', 'number' )
                 ->set_default_value( $def_per_page ),
+            Field::make( 'select', 'actuality_posts_section_pagination', __( 'Pagination' ) )
+                ->set_width( 20 )
+                ->add_options( array(
+                    'off' => __( 'Off' ),
+                    'on'  => __( 'On' ),
+                ) ),
             Field::make( 'text', 'actuality_posts_link_text', __( 'Link text' ) )
-                ->set_width( 33 )
+                ->set_width( 30 )
                 ->set_default_value( 'Всі записи' ),
             Field::make( 'text', 'actuality_posts_link', __( 'Link' ) )
-                ->set_width( 33 ),
+                ->set_width( 30 ),
             Field::make( 'text', 'actuality_posts_title', __( 'Section title' ) )
                 ->set_default_value( 'Актуальне' ),
             Field::make( 'textarea', 'actuality_posts_desc', __( 'Section Desription' ) )

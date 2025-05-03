@@ -1,11 +1,9 @@
 <?php
-    $is_home = is_front_page();
-
+    $post_id               = get_the_ID(); 
+    $is_home               = is_front_page();
+    $is_events_arhive      = $post_id == get_option( '_events_arhive_page' );
+    $is_programs_achive    = $post_id == get_option( '_programs_arhive_page' );
     $main_top_heading_text = !empty($main_top_heading_text) ? $main_top_heading_text : get_the_title();
-    $main_top_heading_media;
-    $main_top_heading_bg;
-    $main_top_heading_media_before_text;
-    $main_top_version;
 ?>
 <section class="section section-main<?php if (!empty($main_top_version)) : ?> version-<?php echo $main_top_version; ?><?php endif; ?>">
     
@@ -59,7 +57,7 @@
                 ?>
             </div>
 
-            <?php if(!empty($main_bottom_button_text)) :
+            <?php if(!empty($main_bottom_button_text)&&!$is_events_arhive) :
                 $processed_button_text = preg_replace('/\*(.*?)\*/', '<span>$1</span>', $main_bottom_button_text);
                 ?>
                 <div class="buttons">
@@ -68,15 +66,18 @@
                     </a>
                 </div>
                 <?php
+                elseif ($is_programs_achive) :
+                
+                 include_once get_template_directory() . '/template-parts/blocks/block-programs-categories-buttons.php';   
             endif;
 
-            if(!empty($main_bottom_second_text)) :
+            if(!empty($main_bottom_second_text)&&!$is_events_arhive) :
                 $processed_second_text = preg_replace('/\*(.*?)\*/', '<span>$1</span>', $main_bottom_second_text);
                 ?>
                 <div class="text text-after">
                     <?php echo $processed_second_text; ?>
                 </div>
-                <?php
+                <?php                    
             endif;
             ?>
         </div>

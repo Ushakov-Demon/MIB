@@ -12,6 +12,10 @@ function custom_posts_meta_data() {
         'years'  => 'Years',
     ];
 
+    $members_activities_options = apply_filters( 'mib_get_array_by_option', 'activity_list', 'activity_item' );
+    $members_statuses_options   = apply_filters( 'mib_get_array_by_option', 'member_statuses_list', 'statuses_item' );
+    $members_cities_options     = apply_filters( 'mib_get_array_by_option', 'cities_list', 'city_item' );
+
     // ==== PROGRAMS post type
     Container::make( 'post_meta', __( 'Training course icon' ) )
         ->where( 'post_type', '=', 'programs' )
@@ -89,17 +93,183 @@ function custom_posts_meta_data() {
             Field::make( 'date_time', 'event_shedule_date', __( 'Choice date and time' ) )
     ) );
 
+    Container::make( 'post_meta', __( 'Event data' ) )
+        ->where( 'post_type', '=', 'events' )
+        ->add_fields( array(
+            // About talk block
+            Field::make( 'separator', 'about_talk_sep', __( 'About talk' ) ),
+            Field::make( 'textarea', 'about_talk_title', __( 'Title block' ) ),
+            Field::make( 'complex', 'about_talk_list', __( 'Topics' ) )
+                ->set_collapsed( true )
+                ->add_fields( array(
+                    Field::make( 'text', 'about_talk_topic', __( 'Single topic' ) )
+                ) )
+                ->set_header_template( '
+                    <% if (about_talk_topic) { %>
+                        <%- about_talk_topic %>
+                    <% } %>
+                ' ),
+            // Invitation block
+            Field::make( 'separator', 'invitation_sep', __( 'Invitation' ) ),
+            Field::make( 'text', 'invitation_block_title', __( 'Title' ) )
+                ->set_default_value( 'Запрошуємо' ),
+            Field::make( 'complex', 'invitations', __( 'invitations list' ) )
+                ->set_collapsed( true )
+                ->add_fields( array(
+                    Field::make( 'image', 'invite_icon', __( 'Icon' ) )
+                        ->set_width( 25 ),
+                    Field::make( 'textarea', 'invite_text', __( 'Text' ) )
+                        ->set_width( 75 ),
+                ) )
+                ->set_header_template( '
+                    <% if (invite_text) { %>
+                        <%- invite_text %>
+                    <% } %>
+                ' ),
+            // Brief announcement
+            Field::make( 'separator', 'announcement_sep', __( 'Brief announcement' ) ),
+            Field::make( 'textarea', 'announcement_title', __( 'Title block' ) ),
+            Field::make( 'rich_text', 'announcement_content', __( 'Desc content' ) ),
+            Field::make( 'image', 'special_guest_icon', __( 'Special guest icon' ) )
+                ->set_width( 25 ),
+            Field::make( 'textarea', 'special_guest_text', __( 'Special guest text' ) )
+                ->set_width( 75 ),
+            // Plan block
+            Field::make( 'separator', 'event_plan_sep', __( 'Plan' ) ),
+            Field::make( 'textarea', 'event_plan_title', __( 'Title plan section' ) )
+                ->set_default_value( 'План зустрічі' ),
+            Field::make( 'complex', 'event_plan', __( 'Event plan list' ) )
+                ->set_collapsed( true )
+                ->add_fields( array( 
+                    Field::make( 'text', 'plan_item_time_between', __( 'Time' ) )
+                        ->set_width( 25 ),
+                    Field::make( 'text', 'plan_item_time_topic', __( 'Topic' ) )
+                        ->set_width( 75 ),
+                    Field::make( 'select', 'plan_item_have_presenter', __( 'Have presenter' ) )
+                        ->add_options( array(
+                            'yes' => __( 'Yes' ),
+                            'no'  => __( 'No' ),
+                        ) )
+                        ->set_default_value( 'yes' )
+                        ->set_width( 50 ),
+                    Field::make( 'select', 'plan_item_presenter_member', __( 'Select from members or add manualy' ) )
+                        ->add_options( array(
+                            'member'    => __( 'Select from members' ),
+                            'manualy'   => __( 'Add manualy' ),
+                        ) )
+                        ->set_default_value( 'member' )
+                        ->set_conditional_logic( array(
+                            array(
+                                'field'   => 'plan_item_have_presenter',
+                                'compare' => '!=',
+                                'value'   => 'no',
+                            )
+                        ) )
+                        ->set_width( 50 ),
+                    Field::make( 'image', 'plan_item_icon', __( 'Item icon' ) )
+                        ->set_width( 50 )
+                        ->set_conditional_logic( array(
+                            array(
+                                'field'   => 'plan_item_have_presenter',
+                                'compare' => '=',
+                                'value'   => 'no',
+                            ),
+                        ) ),
+                    Field::make( 'association', 'plan_item_presenter', __( 'Presenter' ) )
+                        ->set_max( 1 )
+                        ->set_types( array(
+                            array(
+                                'type'      => 'post',
+                                'post_type' => 'teachers',
+                            ),
+                            array(
+                                'type'      => 'post',
+                                'post_type' => 'students',
+                            )
+                        ) )
+                        ->set_conditional_logic( array(
+                            array(
+                                'field'   => 'plan_item_have_presenter',
+                                'compare' => '!=',
+                                'value'   => 'no',
+                            ),
+                            array(
+                                'field'   => 'plan_item_presenter_member',
+                                'compare' => '=',
+                                'value'   => 'member',
+                            )
+                        ) ),
+                        Field::make( 'image', 'presenter_icon', __( 'Presenter icon' ) )
+                            ->set_width( 25 )
+                            ->set_conditional_logic( array(
+                                array(
+                                    'field'   => 'plan_item_have_presenter',
+                                    'compare' => '!=',
+                                    'value'   => 'no',
+                                ),
+                                array(
+                                    'field'   => 'plan_item_presenter_member',
+                                    'compare' => '=',
+                                    'value'   => 'manualy',
+                                )
+                            ) ),
+                        Field::make( 'text', 'presenter_name', __( 'Presenter name' ) )
+                            ->set_width( 37 )
+                            ->set_conditional_logic( array(
+                                array(
+                                    'field'   => 'plan_item_have_presenter',
+                                    'compare' => '!=',
+                                    'value'   => 'no',
+                                ),
+                                array(
+                                    'field'   => 'plan_item_presenter_member',
+                                    'compare' => '=',
+                                    'value'   => 'manualy',
+                                )
+                            ) ),
+                        Field::make( 'text', 'presenter_message', __( 'Presenter message' ) )
+                            ->set_width( 37 )
+                            ->set_conditional_logic( array(
+                                array(
+                                    'field'   => 'plan_item_have_presenter',
+                                    'compare' => '!=',
+                                    'value'   => 'no',
+                                ),
+                                array(
+                                    'field'   => 'plan_item_presenter_member',
+                                    'compare' => '=',
+                                    'value'   => 'manualy',
+                                )
+                            ) ),
+                ) )
+                ->set_header_template( '
+                            <% if (plan_item_time_topic) { %>
+                                <%- plan_item_time_topic %>
+                            <% } %>
+                        ' ),
+        ) );
+
     // ==== TEATCHERS post type
     Container::make( 'post_meta', __( 'Teatcher data' ) )
         ->where( 'post_type', '=', 'teachers' )
         ->add_fields( array(
             Field::make( 'textarea', 'positions_in_companies', __( 'Positions in companies' ) ),
+            Field::make( 'textarea', 'teach_reviwe_message', __( 'Reviwe message' ) ),
     ) );
 
     // ==== STUDENT post type
     Container::make( 'post_meta', __( 'Student data' ) )
         ->where( 'post_type', '=', 'students' )
         ->add_fields( array(
+            Field::make( 'select', 'st_activity', __( 'Activity' ) )
+                ->add_options( $members_activities_options )
+                ->set_width( 33 ),
+            Field::make( 'select', 'st_status', __( 'Status' ) )
+                ->add_options( $members_statuses_options )
+                ->set_width( 33 ),
+            Field::make( 'select', 'st_city', __( 'City' ) )
+                ->add_options( $members_cities_options )
+                ->set_width( 33 ),
             Field::make( 'textarea', 'st_positions_in_companies', __( 'Positions in companies' ) ),
             Field::make( 'textarea', 'st_reviwe_message', __( 'Reviwe message' ) ),
     ) );
