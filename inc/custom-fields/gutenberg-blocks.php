@@ -214,6 +214,186 @@ function custom_posts_gutenberg_blocks() {
         include_once __THEME_DIR__ . '/template-parts/sections/accreditations_previews-section.php';
     } );
 
+    Block::make( 'program_page_tabs', __( 'Program page tabs' ) )
+        ->set_inner_blocks( false )
+        ->set_category( 'mib' )
+        ->set_mode( 'both' )
+        ->set_icon( 'welcome-write-blog' )
+        ->add_tab( __( 'About tab' ), array(
+            Field::make( 'complex', 'about_tab_content' )
+                ->add_fields( 'accriditation_block', array(
+                    Field::make( 'checkbox', 'add_accriditation_block', __( 'Add Accrititation block' ) )
+                        ->set_default_value( 'yes' )
+                        ->help_text( __( 'Add Accreditation block installed in Training course data->Main->Accreditation.' ) ),
+                ) )
+                ->add_fields( 'editor_block', array(
+                    Field::make( 'rich_text', 'free_content', __( 'Free content' ) ),
+                ) )
+                ->add_fields( 'advantages', array(
+                    Field::make( 'image', 'advantages_block_image', __( 'Side image' ) )
+                        ->set_width( 25 ),
+                    Field::make( 'text', 'advantages_block_title', __( 'Block title' ) )
+                        ->set_width( 75 ),
+                    Field::make( 'complex', 'advantages_block_repeater', __( 'Advantages repeater' ) )
+                        ->set_collapsed( true )
+                        ->add_fields( array(
+                            Field::make( 'text', 'advantage_title', __( 'Title' ) ),
+                            Field::make( 'textarea', 'advantage_cont', __( 'Content' ) ),
+                        ) )
+                        ->set_header_template( '
+                            <% if (advantage_title) { %>
+                                <%- advantage_title %>
+                            <% } %>
+                        ' )
+                        ->setup_labels( array(
+                            'plural_name'   => 'Advantages',
+                            'singular_name' => 'Advantage',
+                        ) ),
+                ) )
+                ->add_fields( 'results_course', array(
+                    Field::make( 'text', 'results_course_title', __( 'Title' ) )
+                        ->set_width( 75 ),
+                    Field::make( 'image', 'results_course_block_image', __( 'Bottom image block' ) )
+                        ->set_width( 25 ),
+                    Field::make( 'complex', 'results_diplomas', __( 'Diplomas' ) )
+                        ->set_collapsed( true )
+                        ->add_fields( array(
+                            Field::make( 'file', 'sample_diploma', __( 'Sample diploma' ) )
+                                ->set_width( 25 ),
+                            Field::make( 'textarea', 'diploma_desc', __( 'Description' ) )
+                                ->set_width( 75 ),
+                        ) )
+                        ->setup_labels( array(
+                            'plural_name'   => 'Diplomas',
+                            'singular_name' => 'Diploma',
+                        ) ),
+                    Field::make( 'complex', 'results_course_repeater', __( 'Results list' ) )
+                        ->set_collapsed( true )
+                        ->add_fields( array(
+                            Field::make( 'textarea', 'result_content', __( 'Result' ) ),
+                            Field::make( 'textarea', 'result_condition', __( 'Condition' ) )
+                        ) )
+                        ->set_header_template( '
+                            <% if (result_content) { %>
+                                <%- result_content %>
+                            <% } %>
+                        ' )
+                        ->setup_labels( array(
+                            'plural_name'   => 'Results',
+                            'singular_name' => 'Result',
+                        ) )
+                ) )
+                ->add_fields( 'program_content', array(
+                    Field::make( 'text', 'program_content_title', __( 'Title' ) ),
+                    Field::make( 'text', 'program_content_subtitle', __( 'Subtitle' ) ),
+                    Field::make( 'complex', 'program_content_items', __( 'Modules' ) )
+                        ->set_collapsed( true )
+                        ->add_fields( array(
+                            Field::make( 'text', 'assessment_type', __( 'Type of assessment' ) )
+                                ->set_width( 50 ),
+                            Field::make( 'text', 'assessment_time', __( 'Time of assessment' ) )
+                                ->set_width( 50 ),
+                            Field::make( 'rich_text', 'program_item_content', __( 'Content' ) )
+                        ) )
+                        ->setup_labels( array(
+                            'plural_name'   => 'Modules',
+                            'singular_name' => 'Module',
+                        ) )
+                ) )
+                ->add_fields( 'documents_upon_completion', array(
+                    Field::make( 'text', 'duc_title', __( 'Title' ) ),
+                    Field::make( 'complex', 'duc_documents_list', __( 'Documents' ) )
+                        ->set_collapsed( true )
+                        ->add_fields( array(
+                            Field::make( 'file', 'duc_item_file', __( 'Doc file' ) )
+                                ->set_width( 25 ),
+                            Field::make( 'text', 'duc_item_name', __( 'Name' ) )
+                                ->set_width( 75 ),
+                        ) )
+                        ->set_header_template( '
+                            <% if (duc_item_name) { %>
+                                <%- duc_item_name %>
+                            <% } %>
+                        ' )
+                        ->setup_labels( array(
+                            'plural_name'   => 'Documents',
+                            'singular_name' => 'Document',
+                        ) )
+                ) )
+                ->add_fields( 'cost_of_education', array(
+                    Field::make( 'text', 'cod_title', __( 'Title' ) ),
+                    Field::make( 'rich_text', 'cod_description', __( 'Decription' ) ),
+                    Field::make( 'rich_text', 'cod_included_in_coast', __( 'What is included in the payment' ) ),
+                ) )
+                ->add_fields( 'admission_conditions', array(
+                    Field::make( 'text', 'conditions_block_title', __( 'Title' ) ),
+                    Field::make( 'complex', 'conditions_list', __( 'Conditions' ) )
+                        ->set_collapsed( true )
+                        ->add_fields( array(
+                            Field::make( 'text', 'conditions_items_title', __( 'Conditional title' ) ),
+                            Field::make( 'complex', 'conditions_items_elements', __( 'Condition items' ) )
+                                ->set_collapsed( true )
+                                ->add_fields( array(
+                                    Field::make( 'text', 'condition_element', __( 'Condition' ) ),
+                                ) )
+                                ->set_header_template( '
+                                    <% if (condition_element) { %>
+                                        <%- condition_element %>
+                                    <% } %>
+                                ' )
+                                ->setup_labels( array(
+                                    'plural_name'   => 'Conditions',
+                                    'singular_name' => 'Condition',
+                                ) )
+                        ) )
+                        ->set_header_template( '
+                            <% if (conditions_items_title) { %>
+                                <%- conditions_items_title %>
+                            <% } %>
+                        ' )
+                        ->setup_labels( array(
+                            'plural_name'   => 'Conditions Lists',
+                            'singular_name' => 'Condition List',
+                        ) )
+                ) )
+                ->add_fields( 'companies', array(
+                    Field::make( 'association', 'cousre_companies_list', __( 'Companies list' ) )
+                        ->set_types( array(
+                            array(
+                                'type'      => 'post',
+                                'post_type' => 'companies',
+                            )
+                        ) )
+                ) )
+                ->setup_labels( array(
+                    'plural_name'   => 'Sections',
+                    'singular_name' => 'Section',
+                ) )
+        ) )
+        ->add_tab( __( 'Titchers tab' ), array(
+            Field::make( 'checkbox', 'show_titchers', __( 'Show titchers' ) )
+                ->help_text( __( 'The list of teachers set in the Training course data->Members->Teatchers section will be displayed.' ) )
+                ->set_default_value( 'yes' )
+                ->set_width( 25 ),
+            Field::make( 'text', 'titchers_tab_title', __( 'Title' ) )
+                ->set_default_value( 'Викладачі' )
+                ->set_width( 75 ),
+         ) )
+         ->add_tab( __( 'Students tab' ), array(
+            Field::make( 'checkbox', 'show_students', __( 'Show students' ) )
+                ->help_text( __( 'The list of teachers set in the Training course data->Members->Students section will be displayed.' ) )
+                ->set_default_value( 'yes' )
+                ->set_width( 25 ),
+            Field::make( 'text', 'students_tab_title', __( 'Title' ) )
+                ->set_default_value( 'Випускники' )
+                ->set_width( 75 ),
+         ) )
+        ->set_render_callback( function ( $fields, $attributes, $inner_blocks ) {
+            extract( $fields );
+        
+            include_once __THEME_DIR__ . '/template-parts/sections/accreditation_tabs_content.php';
+        } );
+
     // ==== Manager Contact Block
     Block::make('manager_contact_block', __('Contact Manager'))
     ->add_fields(array(
