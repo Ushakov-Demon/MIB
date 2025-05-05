@@ -257,3 +257,67 @@ function mib_get_array_by_option( string $option_name, string $item_key ) : arra
     }
     return $out;
 }
+
+/**
+ * Shows the time interval from now until the specified time.
+ * @param string $date_from, expects date in string format
+ * 
+ * @return array , days and months difference
+ */
+function mib_get_time_difference( string $date_from ) : array {
+    $default_date_format = get_option( 'date_format' );
+    $now                 = date( $default_date_format );
+    $now_u               = strtotime( $now );
+
+    $date_from_u         = strtotime( $date_from );
+    $times_difference_u  = $date_from_u - $now_u;
+    $days_difference     = $times_difference_u / ( 60 * 60 * 24 );
+
+    $out = [
+        'unix_input_date' => $date_from_u,
+        'days'            => floor( $days_difference ),
+        'months'          => 0,
+    ];
+
+    if ( 0 < ( floor( $days_difference / 30 ) ) ) {
+        $out['months'] = round( $days_difference / 30, 1 );
+    }
+
+    return $out;
+}
+
+function mib_get_course_price( int $course_id ) {
+    $reg_price                  = get_post_meta( $course_id, '_tr_program_regular_price', true );
+    $sale_price                 = get_post_meta( $course_id, '_tr_program_sale_price', true );
+    $additional_price           = get_post_meta( $course_id, '_tr_program_additional_price', true );
+
+    $sale_price_date_end        = get_post_meta( $course_id, '_tr_program_sale_price_date_end', true );
+    $additional_price_currency  = get_post_meta( $course_id, '_tr_program_additional_price_currency', true );
+    $time_difference            = ! empty( $sale_price_date_end ) ? mib_get_time_difference( $sale_price_date_end ) : ['days' => -1] ;
+    $label                      = pll__( 'Total amount', 'baza' );
+    $currensy                   = pll__( 'uah', 'baza' );
+    
+    $main_price = $reg_price;
+    $old_price  = false;
+
+    if ( ! empty( $sale_price ) &&
+         intval( $sale_price ) < intval( $reg_price ) &&
+         0 < $time_difference['days']
+        ) {
+            $main_price = $sale_price;
+            $old_price  = $reg_price; 
+        };
+
+    $price_html            = "<span class='price'>{$main_price} {$currensy}</span>" ;
+    $old_price_html        = $old_price ? "<span class='old-price'>{$main_price} {$currensy}</span>" : '';
+    $additional_price_html = ! empty ( $additional_price ) ? "<span class='additional-price'>+{$additional_price} {$additional_price_currency}</span>" : '';
+
+    $html = "<div class='prices'>
+                {$label}
+                {$price_html}
+                {$old_price_html}
+                {$additional_price_html}
+            </div>";
+
+    return $html;  
+}

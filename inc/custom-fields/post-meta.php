@@ -35,8 +35,17 @@ function custom_posts_meta_data() {
 
     Container::make( 'post_meta', __( 'Training course data' ) )
         ->where( 'post_type', '=', 'programs' )
-        ->add_tab( __( 'Main' ), array(
-            Field::make( 'separator', 'program_prices_sep', __( 'Prices' ) ),
+        ->add_tab( __('Main'), array(
+            Field::make( 'text', 'tr_program_language', __( 'Language' ) ),
+            Field::make( 'association', 'tr_progaram_accriditation', __( 'Accriditation' ) )
+                ->set_types( array(
+                    array(
+                        'type'      => 'post',
+                        'post_type' => 'accreditations',
+                    )
+                ) )
+        ) )
+        ->add_tab( __( 'Prices' ), array(
             Field::make( 'text', 'tr_program_regular_price', __( 'Price' ) )
                 ->set_attribute( 'type', 'number' )
                 ->set_width( 33 ),
@@ -49,7 +58,7 @@ function custom_posts_meta_data() {
             Field::make( 'text', 'tr_program_sale_price', __( 'Sale price' ) )
                 ->set_attribute( 'type', 'number' )
                 ->set_width( 50 ),
-            Field::make( 'text', 'tr_program_sale_price_date_end', __( 'Apply sale price before date' ) )
+            Field::make( 'date', 'tr_program_sale_price_date_end', __( 'Apply sale price before date' ) )
                 ->set_width( 50 ),
         ) )
         ->add_tab( __( 'Shedule & format' ), array(
@@ -66,6 +75,7 @@ function custom_posts_meta_data() {
                 ->set_default_value( 'months' )
                 ->set_width( 33 ),
             Field::make( 'text', 'tr_program_format',  __( 'Format' ) )
+                ->set_width( 75 ),
          ) )
         ->add_tab( __( 'Members' ) , array(
             Field::make( 'association', 'tr_program_teatchers', __( 'Teatchers' ) )
@@ -90,7 +100,13 @@ function custom_posts_meta_data() {
         ->set_context( 'side' )
         ->set_priority( 'high' )
         ->add_fields( array(
-            Field::make( 'date_time', 'event_shedule_date', __( 'Choice date and time' ) )
+            Field::make( 'date_time', 'event_shedule_date', __( 'Choice date and time' ) ),
+            Field::make( 'select', 'event_format', __( 'Online || Offline' ) )
+            ->set_width( 25 )
+            ->add_options( array(
+                'online'  => __( 'Online' ),
+                'offline' => __( 'Offlinr' ),
+            ) )
     ) );
 
     Container::make( 'post_meta', __( 'Event data' ) )
@@ -273,6 +289,14 @@ function custom_posts_meta_data() {
             Field::make( 'textarea', 'st_positions_in_companies', __( 'Positions in companies' ) ),
             Field::make( 'textarea', 'st_reviwe_message', __( 'Reviwe message' ) ),
     ) );
+
+    // ==== ACCREDITATION post type
+    Container::make( 'post_meta', __( 'Accreditation data' ) )
+        ->where( 'post_type', '=', 'accreditations' )
+        ->add_fields( array(
+            Field::make( 'image', 'accr_certificate', __( 'Certificate' ) ),
+            Field::make( 'text', 'accr_site_url', __( 'Site url' ) ),
+        ) );
 
     // ==== PAGE post type
     // add_black_page_body_class function
