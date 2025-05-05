@@ -8,11 +8,7 @@
 <section class="section section-main<?php if (!empty($main_top_version)) : ?> version-<?php echo $main_top_version; ?><?php endif; ?>">
     
     <?php if( !$is_home ) :?>
-        <?php
-            if ( function_exists('yoast_breadcrumb') ) {
-                yoast_breadcrumb( '<div class="breadcrumb-container"><div class="container"><div id="breadcrumbs">','</div></div></div>' );
-            }
-        ?>
+        <?php display_breadcrumbs(); ?>
     <?php endif; ?>
 
     <div class="container">

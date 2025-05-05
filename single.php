@@ -8,11 +8,7 @@ $alternating_posts = apply_filters( 'mib_get_alternating_posts', $actuality_post
 
 	<main id="primary" class="site-main">
 
-		<?php
-			if ( function_exists('yoast_breadcrumb') ) {
-				yoast_breadcrumb( '<div class="breadcrumb-container"><div class="container"><div id="breadcrumbs">','</div></div></div>' );
-			}
-		?>
+		<?php display_breadcrumbs(); ?>
 
 		<section class="section section-single">
 			<div class="container">

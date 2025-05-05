@@ -11,20 +11,19 @@ if ( empty( $history_items ) ) return;
             </h1>
         <?php endif; ?>
         
-        
-            <div class="description">
-                <?php if ( ! empty( $history_description ) ) : ?>
-                    <div class="description-text">
-                        <?php echo wp_kses_post( $history_description ); ?>
-                    </div>
-                <?php endif; ?>
-                <div class="owl-outside">
-                    <div class="owl-nav" id="history-timeline-nav">
-                        <button type="button" role="presentation" class="owl-prev"><i class="icon-arrow"></i></button>
-                        <button type="button" role="presentation" class="owl-next"><i class="icon-arrow"></i></button>
-                    </div>
+        <div class="description">
+            <?php if ( ! empty( $history_description ) ) : ?>
+                <div class="description-text">
+                    <?php echo wp_kses_post( $history_description ); ?>
+                </div>
+            <?php endif; ?>
+            <div class="owl-outside">
+                <div class="owl-nav" id="history-timeline-nav">
+                    <button type="button" role="presentation" class="owl-prev"><i class="icon-arrow"></i></button>
+                    <button type="button" role="presentation" class="owl-next"><i class="icon-arrow"></i></button>
                 </div>
             </div>
+        </div>
 
         <div class="items-wrapper">
 

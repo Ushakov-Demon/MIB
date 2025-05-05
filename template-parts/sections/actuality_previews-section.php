@@ -6,7 +6,7 @@ $events_arhive_page    = get_option( '_events_arhive_page' );
 $is_events_achive      = $post_id == $events_arhive_page;
 $max_num_pages         = $alternating_posts['max_num_pages'];
 $current_page_num      = $alternating_posts['page'];
-$pagination_class      = 'on' == $actuality_posts_section_pagination ? ' pagination': '';
+$pagination_class      = isset( $actuality_posts_section_pagination ) && 'on' == $actuality_posts_section_pagination ? ' section-news-list': '';
 ?>
 
 <section class="section section-news<?php echo esc_attr( $pagination_class )?>"
@@ -76,7 +76,7 @@ $pagination_class      = 'on' == $actuality_posts_section_pagination ? ' paginat
                     include get_template_directory() . '/template-parts/blocks/news-item.php';
 
                     endforeach;
-                    if ( 'on' == $actuality_posts_section_pagination && $current_page_num < $max_num_pages ) {
+                    if ( isset($actuality_posts_section_pagination) && 'on' == $actuality_posts_section_pagination && $current_page_num < $max_num_pages ) {
                         include get_template_directory() . '/template-parts/blocks/block-show-more.php';
                     };
                 else:

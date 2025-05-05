@@ -39,7 +39,7 @@ function custom_posts_gutenberg_blocks() {
                 ->set_type( 
                     array( 'image' )
                 ),
-            Field::make( 'text', 'main_top_heading_text', __( 'h1' ) )
+            Field::make( 'text', 'main_top_heading_text', __( 'Title' ) )
                 ->set_default_value( the_title( $post_id) ),
             Field::make( 'select', 'main_top_version', __('Select Version' ))
                 ->add_options( array(

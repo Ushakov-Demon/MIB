@@ -6,7 +6,6 @@
  */
 
 // Scripts and css
-
 function baza_dev_scripts_and_styles() {
 
     // JS
@@ -65,12 +64,28 @@ function remove_filter_everything_styles() {
 add_action('wp_enqueue_scripts', 'remove_filter_everything_styles', 100);
 add_action('wp_print_styles', 'remove_filter_everything_styles', 100);
 
+// Images sizes
+function images_sizes() {
+    add_image_size('hero_event_image', 1200, 800, true);
+}
+add_action('after_setup_theme', 'images_sizes');
+
 // Allow SVG uploads
 function allow_svg_uploads($mimes) {
     $mimes['svg'] = 'image/svg+xml';
     return $mimes;
 }
 add_filter('upload_mimes', 'allow_svg_uploads');
+
+// Breadcrumbs
+function display_breadcrumbs() {
+    if (function_exists('yoast_breadcrumb')) {
+        yoast_breadcrumb(
+            '<div class="breadcrumb-container"><div class="container"><div id="breadcrumbs">',
+            '</div></div></div>'
+        );
+    }
+}
 
 /**
  * Add all favicon and app icon related tags to the site header
@@ -564,3 +579,9 @@ function add_black_page_body_class( $classes ) {
     return $classes;
 }
 add_filter( 'body_class', 'add_black_page_body_class' );
+
+// Remove slugs
+function remove_slug_field() {
+    remove_meta_box('slugdiv', 'events', 'normal');
+}
+add_action('admin_menu', 'remove_slug_field');
