@@ -15,6 +15,7 @@ function custom_posts_gutenberg_blocks() {
     $blog_page_url = ! is_null( $blog_page ) && ! empty( $blog_page ) ? get_the_permalink( $blog_page ) : $home_url;
     $current_lang  = function_exists('pll_current_language') ? pll_current_language() : '';
     $pages_options = apply_filters( 'mib_get_posts_list_options', 'page' );
+    $events_options = apply_filters( 'mib_get_posts_list_options', 'events' );
     $cf7_options   = apply_filters( 'mib_get_cf7_forms_options', [] );
 
     // ==== Main top Variative
@@ -689,4 +690,20 @@ function custom_posts_gutenberg_blocks() {
 
         include_once __THEME_DIR__ . '/template-parts/sections/company_history-section.php';
     });
+
+    // ==== Actuality Event
+    Block::make( 'actuality_event', __( 'Actuality Event' ) )
+        ->add_fields( array(
+            Field::make( 'separator', 'actuality_event_sep', __( 'Actuality Event' ) ),
+            Field::make( 'select', 'actuality_event_link', __( 'Actuality Event' ) )
+            ->set_width( 100 )
+            ->add_options( $events_options ),
+        ) )
+        ->set_icon( 'media-document' )
+        ->set_category( 'mib' )
+        ->set_mode( 'both' )
+        ->set_render_callback( function ( $fields, $attributes, $inner_blocks ) {
+            
+        include_once __THEME_DIR__ . '/template-parts/sections/actuality_event-section.php';
+    } );
 }

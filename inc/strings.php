@@ -46,6 +46,8 @@ function register_customizer_strings_for_polylang() {
         'View more results',
         'Invite',
         'Event plan',
+        'View event',
+        'All events',
     );
     
     foreach ($strings as $string) {

@@ -102,7 +102,7 @@ function create_custom_post_types_and_taxonomies() {
         'show_in_admin_bar'   => true,
         'show_in_nav_menus'   => true,
         'can_export'          => true,
-        'has_archive'         => true,
+        'has_archive'         => false,
         'exclude_from_search' => false,
         'publicly_queryable'  => true,
         'capability_type'     => 'page',

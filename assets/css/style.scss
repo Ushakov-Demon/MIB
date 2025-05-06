@@ -2340,6 +2340,7 @@ footer {
             }
         }
 
+        &.version-hot-event,
         &.version-events,
         &.version-black,
         &.version-white {
@@ -2381,6 +2382,12 @@ footer {
                 @include min1024 {
                     max-width: 50%;
                 }
+
+                &.text-before {
+                    span {
+                        color: var(--color_primary);
+                    }
+                }
             }
 
             .buttons {
@@ -2392,7 +2399,7 @@ footer {
 
                 .button {
 
-                    &:not(.button-register) {
+                    &:not(.button-register):not(.button-view-event) {
                         &::after {
                             display: none !important;
                         }
@@ -2419,6 +2426,7 @@ footer {
             background-repeat: no-repeat;
         }
 
+        &.version-hot-event,
         &.version-events,
         &.version-black {
             background-color: #2A2936;
@@ -2462,6 +2470,7 @@ footer {
             }
         }
 
+        &.version-hot-event,
         &.version-events {
             background: url('../images/hero-black-event.svg'), radial-gradient(41.93% 131.75% at 62.19% 16.78%, #2A2936 0%, #100F15 100%);
             background-position: left top;
@@ -2562,6 +2571,16 @@ footer {
                         }
                     }
                 }
+            }
+        }
+
+        &.version-hot-event {
+            background-image: unset;
+            background-color: var(--color_black);
+            padding-top: calc(var(--block_spacing) * 2);
+
+            + .section-manager-contact {
+                margin-top: calc(var(--block_spacing) * -1);
             }
         }
     }
@@ -4058,6 +4077,24 @@ footer {
                     }
                 }
             }
+        }
+    }
+}
+
+.events-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: var(--block_spacing) 0;
+
+    .title {
+        font-size: 32px;
+        font-weight: 500;
+    }
+
+    a {
+        &:hover {
+            color: var(--color_black);
         }
     }
 }
