@@ -391,7 +391,7 @@ function custom_posts_gutenberg_blocks() {
         ->set_render_callback( function ( $fields, $attributes, $inner_blocks ) {
             extract( $fields );
         
-            include_once __THEME_DIR__ . '/template-parts/sections/accreditation_tabs_content.php';
+            include_once __THEME_DIR__ . '/template-parts/program/tabs/accreditation_tabs_content.php';
         } );
 
     Block::make( 'program_page_tabs', __( 'Program page tabs' ) )

@@ -1,0 +1,1 @@
+<?php echo $tab['cod_title']; ?>

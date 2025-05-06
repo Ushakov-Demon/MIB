@@ -44,6 +44,8 @@ function register_customizer_strings_for_polylang() {
         'Link copied',
         'Current',
         'View more results',
+        'Invite',
+        'Event plan',
     );
     
     foreach ($strings as $string) {

@@ -105,7 +105,7 @@ function custom_posts_meta_data() {
             ->set_width( 25 )
             ->add_options( array(
                 'online'  => __( 'Online' ),
-                'offline' => __( 'Offlinr' ),
+                'offline' => __( 'Offline' ),
             ) )
     ) );
 

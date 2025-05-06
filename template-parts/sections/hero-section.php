@@ -11,11 +11,6 @@
     <?php if( !$is_home ) :?>
         <?php display_breadcrumbs(); ?>
     <?php endif; ?>
-    <?php
-    if ( ! $is_home && function_exists( 'yoast_breadcrumb' ) ):
-        yoast_breadcrumb( '<div class="breadcrumb-container"><div class="container"><div id="breadcrumbs">','</div></div></div>' );
-    endif;
-    ?>
 
     <div class="container">
         <div class="content">
