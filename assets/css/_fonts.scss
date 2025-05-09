@@ -248,9 +248,9 @@
 @font-face {
     font-family: 'mib';
     src:
-        url('../fonts/mib.ttf?g53lsf') format('truetype'),
-        url('../fonts/mib.woff?g53lsf') format('woff'),
-        url('../fonts/mib.svg?g53lsf#mib') format('svg');
+        url('../fonts/mib.ttf?5lwpmv') format('truetype'),
+        url('../fonts/mib.woff?5lwpmv') format('woff'),
+        url('../fonts/mib.svg?5lwpmv#mib') format('svg');
     font-weight: normal;
     font-style: normal;
     font-display: block;
@@ -281,6 +281,34 @@ a.button::after, .button::after, button[type=submit]::after, input[type=submit]:
     line-height: 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-star:before {
+    content: "\e910";
+}
+
+.icon-graduates:before {
+    content: "\e912";
+}
+
+.icon-chalkboard:before {
+    content: "\e914";
+}
+
+.icon-ballot-check:before {
+    content: "\e915";
+}
+
+.icon-landmark:before {
+    content: "\e916";
+}
+
+.icon-users:before {
+    content: "\e917";
+}
+
+.icon-info:before {
+    content: "\e90f";
 }
 
 .item-date span::before,

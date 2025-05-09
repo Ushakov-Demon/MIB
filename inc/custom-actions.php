@@ -312,11 +312,14 @@ function mib_get_course_price( int $course_id ) {
     $old_price_html        = $old_price ? "<span class='old-price'>{$main_price} {$currensy}</span>" : '';
     $additional_price_html = ! empty ( $additional_price ) ? "<span class='additional-price'>+{$additional_price} {$additional_price_currency}</span>" : '';
 
+    // TODO: need add text class='icon-info' data-title
     $html = "<div class='prices'>
-                {$label}
-                {$price_html}
-                {$old_price_html}
-                {$additional_price_html}
+                <div class='label'>{$label}<i class='icon-info' data-title='Програма Executive MBA – створена для досвідчених керівників, які прагнуть розширити межі своїх бізнес-можливостей.'></i></div>
+                <div class='prices-items'>
+                    {$price_html}
+                    {$old_price_html}
+                    {$additional_price_html}
+                </div>
             </div>";
 
     return $html;  

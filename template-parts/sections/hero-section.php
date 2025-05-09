@@ -3,8 +3,9 @@
     $is_home                    = is_front_page();
     $post_type                  = get_post_type( $post_id );
     $is_events_arhive           = $post_id == get_option( '_events_arhive_page' );
-    $is_programs_achive         = $post_id == get_option( '_programs_arhive_page' );
+    $is_programs_archive        = $post_id == get_option( '_programs_arhive_page' );
     $main_top_heading_text      = ! empty( $main_top_heading_text ) ? $main_top_heading_text : get_the_title();
+    $main_top_version          .= ($post_type === 'programs') ? ' version-program' : '';
 ?>
 <section class="section section-main<?php if ( !empty( $main_top_version ) ) : ?> version-<?php echo $main_top_version; ?><?php endif; ?>">
     
@@ -49,6 +50,10 @@
                         </div>
                         <?php
                     endif;
+
+                    if ( "programs" == $post_type ) {
+                        include_once get_template_directory() . '/template-parts/blocks/block-certificate-logo.php';
+                    }
                 ?>
             </div>
 
@@ -61,23 +66,20 @@
                     </a>
                 </div>
                 <?php
-                elseif ( $is_programs_achive ) :
-                
+                elseif ( $is_programs_archive ) :
                     include_once get_template_directory() . '/template-parts/blocks/block-programs-categories-buttons.php';
                 elseif ( "programs" == $post_type ) :
-
                     include_once get_template_directory() . '/template-parts/blocks/hero-single-program-bottom.php';
                     ?>
                     <div class="buttons">
-                        <a href="#form-request" class="button">
+                        <a href="#form-request" class="button button-register">
                             <span>
                                 <?php pll_e( 'Sign up for the program', 'baza' ); ?>
                             </span>
                         </a>
+                        <?php echo mib_get_course_price( $post_id ); ?>
                     </div>
                 <?php
-
-                echo mib_get_course_price( $post_id );
             endif;
 
             if ( ! empty( $main_bottom_second_text ) && ! $is_events_arhive ) :

@@ -67,9 +67,7 @@ get_header();
                     endif;
                 ?>
 
-                <div class="logo">
-                    <img src="http://mib.loc/wp-content/uploads/2025/04/Group-1.svg" alt="">
-                </div>
+                <?php include_once get_template_directory() . '/template-parts/blocks/block-certificate-logo.php'; ?>
 
                 <div class="info">
                     <?php if (!empty($shedule_date_formatted)) : ?>

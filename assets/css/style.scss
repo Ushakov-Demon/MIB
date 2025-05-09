@@ -24,6 +24,7 @@
     --color_grey_2: #333333;
     --color_grey_3: #666666;
     --color_grey_4: #BFBFBF;
+    --color_grey_5: #888888;
     --color_primary: #5E9CB9;
     --color_primary_2: #9EC4D5;
     --color_primary_3: #BFD7E3;
@@ -2583,6 +2584,126 @@ footer {
                 margin-top: calc(var(--block_spacing) * -1);
             }
         }
+
+        &.version-program {
+
+            margin-bottom: 0;
+
+            .content-header {
+                display: grid;
+                align-items: center;
+                grid-template-columns: 50% 1fr;
+                gap: 16px 56px;
+
+                @include mobile {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    gap: 24px;
+                }
+            }
+
+            .section-title {
+                grid-column: span 2;
+
+                @include mobile {
+                    font-size: 40px;
+                }
+            }
+
+            .logo {
+                @include desktop {
+                    padding-left: 56px;
+                    border-left: 1px solid rgba(255, 255, 255, 0.1);
+                }
+
+                img {
+                    max-width: 133px;
+                    height: auto;
+                }
+            }
+
+            .text {
+                max-width: 100%;
+            }
+
+            .buttons {
+                gap: 56px;
+            }
+
+            .hero-short-details {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 48px;
+                margin: var(--block_spacing) 0;
+
+                @include mobile {
+                    gap: 24px;
+                }
+    
+                .item {
+                    display: flex;
+                    flex-direction: column;
+                    color: var(--color_grey_5);
+                    gap: 10px;
+                    font-size: 15px;
+    
+                    strong {
+                        color: var(--color_white);
+                        font-size: 16px;
+                    }
+                }
+            }
+
+            .prices {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+
+                .label {
+                    color: var(--color_grey_5);
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+
+                    i {
+                        line-height: 1;
+                        font-size: 24px;
+                        color: var(--color_grey_4);
+                        transition: all .5s ease;
+
+                        &:hover {
+                            color: var(--color_primary);
+                        }
+                    }
+                }
+
+                .prices-items {
+                    display: flex;
+                    align-items: center;
+                    flex-wrap: wrap;
+                    gap: 16px;
+                    line-height: 1;
+                }
+
+                .price {
+                    color: var(--color_white);
+                    font-size: 24px;
+                    font-weight: 500;
+                }
+
+                .old-price {
+                    text-decoration: line-through;
+                    color: var(--color_grey_3);
+                    font-size: 16px;
+                }
+
+                .additional-price {
+                    color: var(--color_white);
+                    font-size: 16px;
+                }
+            }
+        }
     }
 
     &.section-about-talk {
@@ -2715,6 +2836,7 @@ footer {
         }
     }
 
+    &.section-program-form,
     &.section-event-form {
         background-color: var(--color_khaki);
         background: radial-gradient(66.74% 152.56% at 67.14% 3.75%, #DEDACE 0%, var(--color_khaki_3) 100%);
@@ -2743,6 +2865,10 @@ footer {
         @include mobile {
             padding: 80px 0;
         }
+    }
+
+    &.section-program-form {
+        margin-bottom: calc(var(--block_spacing) * -1);
     }
 
     &.section-articles {
@@ -4079,6 +4205,96 @@ footer {
             }
         }
     }
+}
+
+.program-tabs {
+
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+    padding: 30px calc(var(--container_padding) * 2) 0;
+    background-color: #ECEBE8;
+
+    @include max1024 {
+        overflow-x: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none; 
+        display: flex;
+        flex-direction: column;
+        padding: 30px var(--container_padding) 0;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+
+    .tabs {
+        list-style: none;
+        margin: 0 auto;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 24px;
+        flex: 1;
+        padding: 0 var(--container_padding);
+        max-width: var(--container_main);
+
+        @include max1024 {
+            padding: 0;
+        }
+
+        li { 
+            display: block;
+
+            a {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                opacity: .6;
+                font-size: 15px;
+                border-bottom: 2px solid transparent;
+                padding-bottom: 8px;
+
+                @include max1024 {
+                    white-space: nowrap;
+                }
+
+                &:hover {
+                    opacity: 1;
+                }
+                
+                i {
+                    position: relative;
+                    top: -1px;
+                    font-size: 20px;
+                    line-height: 1;
+                }
+            }
+
+            &.active {
+                a {
+                    color: var(--color_khaki);
+                    cursor: default;
+                    opacity: 1;
+                    font-weight: 600;
+                    border-color: var(--color_khaki);
+                }
+            }
+        }
+    }
+}
+
+.baza-tooltip {
+    position: absolute;
+    background-color: var(--color_khaki);
+    color: var(--color_black);
+    padding: 20px 25px;
+    z-index: 9999;
+    pointer-events: none;
+    display: inline-flex;
+    flex-direction: column;
+    max-width: 300px;
 }
 
 .events-header {

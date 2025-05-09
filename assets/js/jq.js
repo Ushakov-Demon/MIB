@@ -395,19 +395,23 @@ jQuery(document).ready(function ($) {
 
 	$('.copy-link-btn').click(function(e) {
 		e.preventDefault();
-		var url = $(this).data('url');
-		var tempInput = $('<input>');
-		$('body').append(tempInput);
-		tempInput.val(url).select();
-		
-		document.execCommand('copy');
-		tempInput.remove();
-		
-		var originalText = $(this).html();
-		$(this).html($(this).data('copied-text'));
-		
-		setTimeout(function() {
-			$('.copy-link-btn').html(originalText);
-		}, 2000);
-	});
+	
+		let $button = $(this);
+		let url = $button.data('url');
+		let copiedText = $button.data('copied-text');
+		let originalText = $button.html();
+	
+		navigator.clipboard.writeText(url)
+			.then(function() {
+				$button.html(copiedText);
+				setTimeout(function() {
+					$button.html(originalText);
+				}, 2000);
+			})
+			.catch(function(err) {
+				console.error('Copy failed:', err);
+			});
+	});	
+
+	$('[data-title]').initializeTooltip();
 });

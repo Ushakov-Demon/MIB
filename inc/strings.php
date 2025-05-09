@@ -48,6 +48,16 @@ function register_customizer_strings_for_polylang() {
         'Event plan',
         'View event',
         'All events',
+        'Sign up for the program',
+        'UAH',
+        'Total amount',
+        'Share the article',
+        'About the Program',
+        'Teachers',
+        'Graduates',
+        'Program Content',
+        'Admission Requirements',
+        'Listeners',
     );
     
     foreach ($strings as $string) {

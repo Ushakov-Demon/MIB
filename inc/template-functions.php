@@ -14,6 +14,7 @@ function baza_dev_scripts_and_styles() {
     wp_enqueue_script( 'baza-notiny-js', trailingslashit( get_stylesheet_directory_uri() ) . 'assets/js/notiny.min.js', array('jquery'), false);
 	wp_enqueue_script( 'baza-js', trailingslashit( get_stylesheet_directory_uri() ) . 'assets/js/jq.js', array('jquery'), false);
     wp_enqueue_script( 'baza-menu-js', trailingslashit( get_stylesheet_directory_uri() ) . 'assets/js/menu.js', array('jquery'), false);
+    wp_enqueue_script( 'baza-tooltip-js', trailingslashit( get_stylesheet_directory_uri() ) . 'assets/js/tooltip.js', array('jquery'), false);
 
     // CSS
 	wp_enqueue_style( 'baza-owl-carousel', trailingslashit( get_stylesheet_directory_uri() ) . 'assets/css/owl.carousel.min.css', array(), false );
