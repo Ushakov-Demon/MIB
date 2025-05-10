@@ -4,9 +4,6 @@ $view_class = $is_slider ? ' owl-carousel' : '';
 $wrap_id    = $is_slider ? 'students-items' : 'students-wrap';
 $students   = apply_filters( 'mib_get_posts', 'students', $students_per_page );
 
-// echo '<pre>';
-//     var_dump($students->have_posts());
-// echo '</pre>';
 ?>
 <section class="section section-students">
     <div class="container">
@@ -46,7 +43,7 @@ $students   = apply_filters( 'mib_get_posts', 'students', $students_per_page );
                         $courses        = apply_filters( 'mib_get_posts_relationships', array( 'post_type' => 'students', 'post_id' => $item_id, 'field' => 'tr_program_students' ) );
                         $companies      = wp_get_post_terms( $item_id, 'companies' );
 
-                        include get_template_directory() . '/template-parts/blocks/block-student-item.php';
+                        include get_template_directory() . '/template-parts/blocks/block-person-item.php';
                     }
                 }
             ?>

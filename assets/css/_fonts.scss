@@ -248,14 +248,16 @@
 @font-face {
     font-family: 'mib';
     src:
-        url('../fonts/mib.ttf?5lwpmv') format('truetype'),
-        url('../fonts/mib.woff?5lwpmv') format('woff'),
-        url('../fonts/mib.svg?5lwpmv#mib') format('svg');
+        url('../fonts/mib.ttf?hom2hb') format('truetype'),
+        url('../fonts/mib.woff?hom2hb') format('woff'),
+        url('../fonts/mib.svg?hom2hb#mib') format('svg');
     font-weight: normal;
     font-style: normal;
     font-display: block;
 }
 
+.accordion-header::after,
+.program-mission li::before,
 .item-time span::before,
 .item-date span::before,
 .view-more-link::after,
@@ -281,6 +283,15 @@ a.button::after, .button::after, button[type=submit]::after, input[type=submit]:
     line-height: 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-file:before {
+    content: "\e919";
+}
+
+.accordion-header::after,
+.icon-dropdown:before {
+    content: "\e918";
 }
 
 .icon-star:before {
@@ -373,6 +384,7 @@ a.button::after, .button::after, button[type=submit]::after, input[type=submit]:
     content: "\e90a";
 }
 
+.program-mission li::before,
 .icon-check:before {
     content: "\e911";
 }

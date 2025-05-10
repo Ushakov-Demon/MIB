@@ -231,3 +231,158 @@
         }
     }
 }
+
+@mixin presons() {
+    .items {
+
+        &.owl-carousel {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+
+            .owl-stage-outer {
+                grid-column: span 2;
+            }
+
+            .item {
+                border-bottom: 1px solid rgba(0, 0, 0, .1);
+                padding-bottom: 32px;
+            }
+        }
+
+        &:not(.owl-carousel) {
+            display: flex;
+            flex-direction: column;
+
+            .item {
+                padding-top: 32px;
+                padding-bottom: 32px;
+
+                &:not(:last-child) {
+                    border-bottom: 1px solid rgba(0, 0, 0, .1);
+                }
+            }
+        }
+
+        .item {
+            display: grid;
+            grid-template-columns: 96px 1fr;
+            gap: 24px;
+
+            .image {
+                @include desktop {
+                    align-items: center;
+                    grid-row: span 2;
+                }
+
+                img {
+                    display: block;
+                    border-radius: 50%;
+                    width: 96px;
+                    min-width: 96px;
+                    height: 96px;
+                    object-fit: cover;
+                    aspect-ratio: 1;
+                }
+            }
+
+            .heading {
+                display: flex;
+                align-items: center;
+                gap: 32px;
+
+                @include mobile {
+                    flex-direction: column;
+                    align-items: flex-start;
+                }
+
+                .title {
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 5px;
+
+                    .name {
+                        font-size: 18px;
+                        font-weight: bold;
+                        border-left: 6px solid var(--color_primary);
+                        padding-left: 16px;
+                        display: flex;
+                        align-items: center;
+                        gap: 12px;
+                    }
+
+                    .position {
+                        font-size: 15px;
+                        opacity: .4;
+                        padding-left: 22px;
+                    }
+                }
+
+                .logo {
+                    svg,
+                    img {
+                        display: block;
+                        height: 30px;
+                        max-width: 122px;
+                    }
+                }
+            }
+
+            .item-footer {
+                display: flex;
+                align-items: flex-end;
+                justify-content: space-between;
+                grid-column: span 2;
+
+                .label {
+                    font-size: 14px;
+                }
+            }
+
+            .completed {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .completed-items {
+                display: flex;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 16px;
+
+                .completed-item {
+                    display: block;
+                    border: 1px solid rgba(0, 0, 0, 0.1);
+                    border-radius: 20px;
+                    padding: 4px 16px;
+                    color: var(--color_secondary);
+
+                    &:hover {
+                        color: var(--color_primary);
+                        border-color: var(--color_primary);
+                    }
+                }
+            }
+
+            .quote {
+                background-color: var(--color_khaki_2);
+                padding: 32px;
+                display: flex;
+                gap: 28px;
+                font-size: 15px;
+                line-height: 1.5;
+
+                @include mobile {
+                    grid-column: span 2;
+                }
+
+                &::before {
+                    content: "\e90b";
+                    font-size: 18px;
+                }
+            }
+        }
+    }
+}

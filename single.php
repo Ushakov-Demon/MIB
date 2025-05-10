@@ -43,20 +43,20 @@ $alternating_posts = apply_filters( 'mib_get_alternating_posts', $actuality_post
 
 							<div class="items items-last-events">
 								<?php
-									if ( ! empty( $alternating_posts ) ):
+									if ( ! empty( $alternating_posts ) ) :
 										foreach ( $alternating_posts as $item ) :
-											$post_ID        = $item->ID;
-											$post_type      = $item->post_type;
-											$shedule_date   = 'events' == $post_type ? get_post_meta( $item->ID, '_event_shedule_date', true ) : '';
-											$title          = $item->post_title;
-											$permalink      = get_the_permalink( $item->ID );
-								
-										include get_template_directory() . '/template-parts/blocks/news-item-small.php';
-
+									
+											$post_ID      = $item->ID;
+											$post_type    = $item->post_type;
+											$shedule_date = ( $post_type === 'events' ) ? get_post_meta( $post_ID, '_event_shedule_date', true ) : '';
+											$title        = $item->post_title;
+											$permalink    = get_the_permalink( $post_ID );
+									
+											include get_template_directory() . '/template-parts/blocks/news-item-small.php';
 										endforeach;
-									else:
+									else :
 										echo __( 'Items not found' );
-									endif;
+									endif;									
 								?>
 							</div>
 						</div>

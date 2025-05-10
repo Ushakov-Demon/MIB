@@ -706,4 +706,24 @@ function custom_posts_gutenberg_blocks() {
             
         include_once __THEME_DIR__ . '/template-parts/sections/actuality_event-section.php';
     } );
+
+    // ==== Program Form Registration Block
+    Block::make('program_form_registration_block', __('Registration for the program'))
+    ->add_fields(array(
+        Field::make('separator', 'program_form_registration_sep', __('Registration for the program')),
+        Field::make('text', 'program_form_registration_heading', __('Section Heading')),
+        Field::make('select', 'contact_form_id', __('Contact Form 7'))
+            ->add_options( $cf7_options )
+            ->set_required(true)
+            ->set_help_text(__('Select a Contact Form 7 form')),
+    ))
+    ->set_inner_blocks(false)
+    ->set_icon('businessman')
+    ->set_category('mib')
+    ->set_mode('both')
+    ->set_render_callback(function($fields, $attributes, $inner_blocks) {
+        extract($fields);
+        
+        include_once __THEME_DIR__ . '/template-parts/sections/program_form-section.php';
+    });
 }

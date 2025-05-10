@@ -375,6 +375,17 @@ function custom_language_switcher() {
     echo '</ul></li></ul>';
 }
 
+// Translated actuality page ID with Polylang support
+function get_translated_page_id($default_id) {
+
+    if (function_exists('pll_get_post')) {
+        $translated_id = pll_get_post($default_id);
+        return $translated_id ? $translated_id : $default_id;
+    }
+    
+    return $default_id;
+}
+
 // Filter nav menu
 function process_menu_text($text) {
     if (strpos($text, '*') !== false) {

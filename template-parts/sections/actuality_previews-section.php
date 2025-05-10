@@ -7,6 +7,10 @@ $is_events_achive      = $post_id == $events_arhive_page;
 $max_num_pages         = $alternating_posts['max_num_pages'];
 $current_page_num      = $alternating_posts['page'];
 $pagination_class      = isset( $actuality_posts_section_pagination ) && 'on' == $actuality_posts_section_pagination ? ' section-news-list': '';
+$translated_all_posts_page_id = get_translated_page_id(153);
+$all_posts_page_id     = $actuality_posts_link ?? $translated_all_posts_page_id;
+$default_title         = pll__('Actual', 'baza');
+$display_title         = !empty($actuality_posts_title) ? esc_html($actuality_posts_title) : $default_title;
 ?>
 
 <section class="section section-news<?php echo esc_attr( $pagination_class )?>"
@@ -17,19 +21,14 @@ $pagination_class      = isset( $actuality_posts_section_pagination ) && 'on' ==
     <div class="container">
 
         <?php
-            if ( ! empty( $actuality_posts_title ) || ! empty( $actuality_posts_desc ) ) :
+            if (!empty($actuality_posts_title) || !empty($actuality_posts_desc) || empty($actuality_posts_title)) :
                 ?>
                 <div class="section-heiding">
-                    <?php
-                    if ( ! empty( $actuality_posts_title ) ) :
-                        ?>
-                        <div class="section-title">
-                            <?php echo esc_html( $actuality_posts_title )?>
-                        </div>
-                        <?php
-                    endif;
+                    <div class="section-title">
+                        <?php echo esc_html( $display_title )?>
+                    </div>
 
-                    if ( ! empty( $actuality_posts_desc ) ) :
+                    <?php  if ( ! empty( $actuality_posts_desc ) ) :
                         ?>
                         <div class="section-description">
                             <?php
@@ -54,7 +53,7 @@ $pagination_class      = isset( $actuality_posts_section_pagination ) && 'on' ==
             <?php
             if ( ! $is_events_achive ) :
                 ?>
-                <a class="section-link" href="<?php echo esc_url( get_permalink( $actuality_posts_link ) ); ?>"><?php pll_e( 'All posts', 'baza' ); ?></a>
+                <a class="section-link" href="<?php echo esc_url( get_permalink( $all_posts_page_id ) ); ?>"><?php pll_e( 'All posts', 'baza' ); ?></a>
                 <?php
             endif;
             ?>

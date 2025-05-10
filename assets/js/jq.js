@@ -124,22 +124,6 @@ jQuery(document).ready(function ($) {
 		}, 500);
 	});
 
-	// Accordion
-	$('.accordion-header').click(function () {
-		let item = $(this).closest('.accordion-item');
-		let text = item.find('.accordion-content');
-	
-		if (item.hasClass('active')) {
-			item.removeClass('active');
-			text.slideUp(300);
-		} else {
-			$('.accordion-item').removeClass('active');
-			$('.accordion-content').slideUp(300);
-			item.addClass('active');
-			text.slideToggle(300);
-		}
-	});
-
 	// Show more
 	$('.show-more').each(function() {
 		const $container = $(this);
@@ -384,7 +368,7 @@ jQuery(document).ready(function ($) {
 		ajaxResponsePosts( $(this) );
 	});
 
-	$(document).on('click', '.view-more-link', function(e){
+	$(document).on('click', '.more-posts view-more-link', function(e){
 		e.preventDefault();
 
 		let currentPageNum = $(this).closest( 'section' ).data( 'current-page_num' );
@@ -401,17 +385,108 @@ jQuery(document).ready(function ($) {
 		let copiedText = $button.data('copied-text');
 		let originalText = $button.html();
 	
-		navigator.clipboard.writeText(url)
-			.then(function() {
-				$button.html(copiedText);
-				setTimeout(function() {
-					$button.html(originalText);
-				}, 2000);
-			})
-			.catch(function(err) {
-				console.error('Copy failed:', err);
-			});
-	});	
+		if (navigator.clipboard && navigator.clipboard.writeText) {
+			navigator.clipboard.writeText(url)
+				.then(function() {
+					$button.html(copiedText);
+					setTimeout(function() {
+						$button.html(originalText);
+					}, 2000);
+				})
+				.catch(function(err) {
+					console.error('Copy failed:', err);
+				});
+		} else {
+			console.warn('Clipboard API not supported or not allowed.');
+		}
+	});
 
 	$('[data-title]').initializeTooltip();
+
+	function isElementInViewport(el) {
+		let rect = el.getBoundingClientRect();
+		return (
+			rect.top >= 0 &&
+			rect.left >= 0 &&
+			rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+			rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+		);
+	}
+
+	function animateCount() {
+		$('.count-value').each(function () {
+			let $this = $(this);
+
+			if ($this.hasClass('counted')) return;
+
+			if (isElementInViewport(this)) {
+				$this.addClass('counted');
+
+				let target = parseInt($this.data('count') || $this.text(), 10);
+				let duration = $this.data('duration') || 2000;
+
+				if (!$this.data('count')) {
+					$this.data('count', target);
+				}
+
+				$this.text('0');
+
+				$({ Counter: 0 }).animate({
+					Counter: target
+				}, {
+					duration: duration,
+					easing: 'swing',
+					step: function () {
+						$this.text(Math.ceil(this.Counter));
+					},
+					complete: function () {
+						$this.text(target);
+					}
+				});
+			}
+		});
+	}
+
+	animateCount();
+
+	$('.accordion-header').click(function () {
+		let item = $(this).closest('.accordion-item');
+		let text = item.find('.accordion-content');
+
+		if (!item.hasClass('active')) {
+			$('.accordion-item.active')
+				.removeClass('active')
+				.find('.accordion-content')
+				.slideUp(300);
+
+			item.addClass('active');
+			text.slideDown(300);
+		} else {
+			item.removeClass('active');
+			text.slideUp(300);
+		}
+	});
+
+	function initTabs() {
+
+		$('.tabs li a').on('click', function (e) {
+			e.preventDefault();
+
+			let tabId = $(this).attr('href').replace('#', '');
+
+			$('.tabs li').removeClass('active');
+			$(this).parent('li').addClass('active');
+
+			$('.tab-content').removeClass('active');
+			$('#' + tabId).addClass('active');
+		});
+
+		if ($('.tabs li.active a').length > 0) {
+			$('.tabs li.active a').trigger('click');
+		} else if ($('.tabs li:first a').length > 0) {
+			$('.tabs li:first a').trigger('click');
+		}
+	}
+
+	initTabs();
 });

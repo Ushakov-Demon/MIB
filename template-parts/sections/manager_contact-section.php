@@ -1,20 +1,14 @@
 <?php
-/**
- * Template part for displaying the manager contact section
- */
 
-// Exit if accessed directly
 if (!defined('ABSPATH')) exit;
 
-// Get the field values
 $heading = $manager_contact_heading ?? '';
 $avatar_id = $manager_avatar ?? 0;
 $name = $manager_name ?? '';
 $position = $manager_position ?? '';
-$form_id = $contact_form_id ?? 0;
+$form_id = $contact_form_id ?? '';
 
-// Check if we have required info
-if (empty($avatar_id) || empty($name) || empty($form_id)) return;
+if (empty($form_id)) return;
 ?>
 
 <section class="section section-manager-contact">
