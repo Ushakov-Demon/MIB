@@ -327,54 +327,108 @@ jQuery(document).ready(function ($) {
 		}
 	});
 
-	function ajaxResponsePosts( element ) {
-		section     = element.closest('section');
-		filterTaget = section.find( '#filter-news .active' ).data('target');
-		pageId      = section.data('page_id');
-		perPage     = section.data('per-page');
-		maxPages    = section.data('max-pages');
-		pageNum     = section.data('current-page_num');
-		isPaginavi  = section.hasClass( 'pagination' );
-
+	function ajaxResponsePosts(element) {
+		section = element.closest('.section-news');
+		filterTaget = section.find('#filter-news .active').data('target');
+		pageId = section.data('page_id');
+		perPage = section.data('per-page');
+		maxPages = section.data('max-pages');
+		pageNum = section.data('current-page_num');
+		isPaginavi = section.hasClass('pagination');
+		
+		const isLoadMore = element.closest('.more-posts').length > 0;
+		
+		section.addClass('loading');
+	
 		$.ajax({
-			type 	 : 'POST',
-			dataType : 'json',
-			url 	 : dataObj['ajaxUrl'],
-			data     : {
-				action 		: 'custom_post_type_filter',
-				filterTaget : filterTaget,
-				pageId      : pageId,
-				perPage     : perPage,
-				pageNum     : pageNum,
-				maxPages    : maxPages,
-				isPaginavi  : isPaginavi, 
+			type: 'POST',
+			dataType: 'json',
+			url: dataObj['ajaxUrl'],
+			data: {
+				action: 'custom_post_type_filter',
+				filterTaget: filterTaget,
+				pageId: pageId,
+				perPage: perPage,
+				pageNum: pageNum,
+				maxPages: maxPages,
+				isPaginavi: isPaginavi,
+				isLoadMore: isLoadMore
 			},
-			success : function (response) {
-				section.find( '.sort-items' ).html(response);
+			success: function(response) {
+				if (isLoadMore) {
+					section.find('.more-posts').before(response);
+
+					let newItems = section.find('.more-posts').prev();
+                
+					if (newItems.length) {
+						let tempId = 'temp-scroll-target-' + Math.floor(Math.random() * 10000);
+						newItems.attr('id', tempId);
+						
+						if ($.mPageScroll2id && typeof $.mPageScroll2id === 'function') {
+							$.mPageScroll2id('scrollTo', '#' + tempId, {
+								offset: 100,
+								speed: 1500,
+								easing: 'easeOutQuint'
+							});
+						} else {
+							$('html, body').animate({
+								scrollTop: newItems.offset().top - 100
+							}, 1500);
+						}
+						
+						setTimeout(function() {
+							newItems.removeAttr('id');
+						}, 2000);
+					}
+					
+					if (pageNum >= maxPages - 1) {
+						section.find('.more-posts').hide();
+					} else {
+						section.find('.more-posts').show();
+					}
+				} else {
+					section.find('.sort-items').html(response);
+					
+					section.data('current-page_num', 1);
+					
+					if (maxPages > 1) {
+						section.find('.more-posts').show();
+					} else {
+						section.find('.more-posts').hide();
+					}
+				}
+				
+				section.removeClass('loading');
+			},
+			error: function() {
+				section.removeClass('loading');
 			}
 		});
-
+	
 		return true;
 	}
-
-	$(document).on('click', '#filter-news .item', function(e){
+	
+	$(document).on('click', '#filter-news .item', function(e) {
 		e.preventDefault();
+	
+		if ($(this).hasClass('active')) return;
+	
+		$(this).parent().find('.active').removeClass('active');
+		$(this).addClass('active');
 
-		if ( $(this).hasClass( 'active' ) ) return;
-
-		$(this).parent().find( '.active' ).removeClass( 'active' );
-		$(this).addClass( 'active' );
-
-		ajaxResponsePosts( $(this) );
+		$(this).closest('.section-news').data('current-page_num', 1);
+	
+		ajaxResponsePosts($(this));
 	});
-
-	$(document).on('click', '.more-posts view-more-link', function(e){
+	
+	$(document).on('click', '.more-posts .view-more-link', function(e) {
 		e.preventDefault();
-
-		let currentPageNum = $(this).closest( 'section' ).data( 'current-page_num' );
-		ajaxResponsePosts( $(this) );
-
-		$(this).closest( 'section' ).data( 'current-page_num', parseInt( currentPageNum )+1 );
+	
+		let currentPageNum = $(this).closest('.section-news').data('current-page_num');
+		
+		$(this).closest('.section-news').data('current-page_num', parseInt(currentPageNum) + 1);
+		
+		ajaxResponsePosts($(this));
 	});
 
 	$('.copy-link-btn').click(function(e) {
@@ -475,7 +529,7 @@ jQuery(document).ready(function ($) {
 			activateTab(tabId, false);
 		});
 		
-		$(document).on('click', 'a[href^="#"]', function(e) {
+		$(document).on('click', 'a[href^="#tab-"]', function(e) {
 			let tabId = $(this).attr('href').replace('#', '');
 			
 			if ($('#' + tabId).length > 0 && $('#' + tabId).hasClass('tab-content') && !$(this).closest('.tabs').length) {

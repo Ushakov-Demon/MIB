@@ -60,11 +60,13 @@
             <?php if ( "programs" !== $post_type || ! empty( $main_bottom_button_text ) && ! $is_events_arhive ) :
                 $processed_button_text = preg_replace( '/\*(.*?)\*/', '<span>$1</span>', $main_bottom_button_text );
                 ?>
-                <div class="buttons">
-                    <a href="<?php echo esc_url( $main_bottom_button_link ); ?>" class="button">
-                        <span><?php echo $processed_button_text; ?></span>
-                    </a>
-                </div>
+                <?php if ( ! empty( $processed_button_text ) ) : ?>
+                    <div class="buttons">
+                        <a href="<?php echo esc_url( $main_bottom_button_link ); ?>" class="button">
+                            <span><?php echo $processed_button_text; ?></span>
+                        </a>
+                    </div>
+                <?php endif; ?>
                 <?php
                 elseif ( $is_programs_archive ) :
                     include_once get_template_directory() . '/template-parts/blocks/block-programs-categories-buttons.php';

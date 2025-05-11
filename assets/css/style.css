@@ -2506,7 +2506,7 @@ header.site-header .search .search-form .search-submit {
 .dropdown-mobile-menus .menu li a svg path[fill="#262626"] {
   fill: var(--color_white);
 }
-.dropdown-mobile-menus .menu li a:hover, .dropdown-mobile-menus .menu li a:focus {
+.dropdown-mobile-menus .menu li a[aria-current=page], .dropdown-mobile-menus .menu li a:hover, .dropdown-mobile-menus .menu li a:focus {
   color: var(--color_primary);
 }
 .dropdown-mobile-menus .menu li#menu-item-100 svg path[fill="#0E0E0E"] {
@@ -3150,18 +3150,6 @@ footer .footer-after .footer-after-col {
   gap: 12px;
   margin-top: var(--block_spacing);
 }
-.section.section-main.version-hot-event .buttons .button:not(.button-register):not(.button-view-event), .section.section-main.version-events .buttons .button:not(.button-register):not(.button-view-event), .section.section-main.version-black .buttons .button:not(.button-register):not(.button-view-event), .section.section-main.version-white .buttons .button:not(.button-register):not(.button-view-event) {
-  background-color: transparent;
-  border-color: rgba(255, 255, 255, 0.2);
-  padding: 14.5px 40px;
-}
-.section.section-main.version-hot-event .buttons .button:not(.button-register):not(.button-view-event)::after, .section.section-main.version-events .buttons .button:not(.button-register):not(.button-view-event)::after, .section.section-main.version-black .buttons .button:not(.button-register):not(.button-view-event)::after, .section.section-main.version-white .buttons .button:not(.button-register):not(.button-view-event)::after {
-  display: none !important;
-}
-.section.section-main.version-hot-event .buttons .button:not(.button-register):not(.button-view-event).active, .section.section-main.version-hot-event .buttons .button:not(.button-register):not(.button-view-event):hover, .section.section-main.version-events .buttons .button:not(.button-register):not(.button-view-event).active, .section.section-main.version-events .buttons .button:not(.button-register):not(.button-view-event):hover, .section.section-main.version-black .buttons .button:not(.button-register):not(.button-view-event).active, .section.section-main.version-black .buttons .button:not(.button-register):not(.button-view-event):hover, .section.section-main.version-white .buttons .button:not(.button-register):not(.button-view-event).active, .section.section-main.version-white .buttons .button:not(.button-register):not(.button-view-event):hover {
-  background-color: var(--color_primary);
-  border-color: var(--color_primary);
-}
 .section.section-main.version-white {
   background-color: var(--color_light_gray);
   background-image: url("../images/hero-white.svg");
@@ -3207,6 +3195,18 @@ footer .footer-after .footer-after-col {
   display: block;
   -o-object-fit: cover;
      object-fit: cover;
+}
+.section.section-main.version-hot-event .buttons .button:not(.button-register):not(.button-view-event), .section.section-main.version-events .buttons .button:not(.button-register):not(.button-view-event), .section.section-main.version-black .buttons .button:not(.button-register):not(.button-view-event) {
+  background-color: transparent;
+  border-color: rgba(255, 255, 255, 0.2);
+  padding: 14.5px 40px;
+}
+.section.section-main.version-hot-event .buttons .button:not(.button-register):not(.button-view-event)::after, .section.section-main.version-events .buttons .button:not(.button-register):not(.button-view-event)::after, .section.section-main.version-black .buttons .button:not(.button-register):not(.button-view-event)::after {
+  display: none !important;
+}
+.section.section-main.version-hot-event .buttons .button:not(.button-register):not(.button-view-event).active, .section.section-main.version-hot-event .buttons .button:not(.button-register):not(.button-view-event):hover, .section.section-main.version-events .buttons .button:not(.button-register):not(.button-view-event).active, .section.section-main.version-events .buttons .button:not(.button-register):not(.button-view-event):hover, .section.section-main.version-black .buttons .button:not(.button-register):not(.button-view-event).active, .section.section-main.version-black .buttons .button:not(.button-register):not(.button-view-event):hover {
+  background-color: var(--color_primary);
+  border-color: var(--color_primary);
 }
 .section.section-main.version-hot-event, .section.section-main.version-events {
   background: url("../images/hero-black-event.svg"), radial-gradient(41.93% 131.75% at 62.19% 16.78%, #2A2936 0%, #100F15 100%);
@@ -4011,6 +4011,25 @@ footer .footer-after .footer-after-col {
   flex-direction: column;
   justify-content: flex-end;
   margin-top: 18px;
+}
+.section.section-news.loading {
+  position: relative;
+}
+.section.section-news.loading::before {
+  content: "";
+  position: absolute;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  cursor: wait;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.section.section-news.loading * {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 .section.section-news .container {
   gap: 56px;
@@ -5582,6 +5601,80 @@ footer .footer-after .footer-after-col {
   border-left: 6px solid var(--color_primary);
   position: relative;
   top: -1px;
+}
+
+.section-team .items {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 48px 32px;
+}
+@media (min-width: 768px) and (max-width: 1200px) {
+  .section-team .items {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 767px) {
+  .section-team .items {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px 16px;
+  }
+}
+.section-team .items .item {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.section-team .items .item .image {
+  line-height: 1;
+}
+.section-team .items .item .image img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 256/320;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.section-team .items .item .content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-left: 30px;
+  position: relative;
+}
+.section-team .items .item .content::before {
+  display: block;
+  content: "";
+  width: 6px;
+  height: 24px;
+  background-color: var(--color_primary);
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.section-team .items .item .content .name {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+.section-team .items .item .content .position {
+  font-size: 15px;
+  letter-spacing: -0.6px;
+  color: rgba(0, 0, 0, 0.4);
+}
+.section-team .items .item .content .social-links {
+  gap: 16px;
+  margin-top: 8px;
+}
+.section-team .items .item .content .social-links a {
+  color: rgba(0, 0, 0, 0.6);
+  min-width: 24px;
+  min-height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.section-team .items .item .content .social-links a:hover {
+  color: var(--color_primary);
 }
 
 .baza-tooltip {

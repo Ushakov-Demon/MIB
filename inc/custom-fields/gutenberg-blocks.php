@@ -21,89 +21,114 @@ function custom_posts_gutenberg_blocks() {
     // ==== Main top Variative
     Block::make( 'main_top_variative',  __( 'Main HERO' ) )
         ->add_fields( array (
-            Field::make( 'separator', 'main_top_variative_sep', __( 'Main HERO' ) ),
-            Field::make( 'text', 'current_page_id' )
-                ->set_default_value( $post_id )
-                ->set_attribute( 'readOnly', true ),
-            Field::make( 'file', 'main_top_heading_media_before_text', __( 'Hending media before all text' ) )
-                ->set_width( 33 )
-                ->set_type( 
-                    array( 'image' )
+        Field::make( 'separator', 'main_top_variative_sep', __( 'Main HERO' ) ),
+        Field::make( 'text', 'current_page_id' )
+            ->set_default_value( $post_id )
+            ->set_attribute( 'readOnly', true ),
+        Field::make( 'file', 'main_top_heading_media_before_text', __( 'Hending media before all text' ) )
+            ->set_width( 33 )
+            ->set_type( 
+                array( 'image' )
+            )
+            ->set_conditional_logic( array(
+                array(
+                    'field' => 'main_top_version',
+                    'value' => array('home'),
+                    'compare' => 'IN'
+                )
+            ) ),
+        Field::make( 'file', 'main_top_heading_media', __( 'Hending media' ) )
+            ->set_width( 33 )
+            ->set_type( 
+                array( 'image' )
+            )
+            ->set_conditional_logic( array(
+                array(
+                    'field' => 'main_top_version',
+                    'value' => array('home'),
+                    'compare' => 'IN'
+                )
+            ) ),
+        Field::make( 'file', 'main_top_heading_bg', __( 'Background' ) )
+            ->set_width( 33 )
+            ->set_type( 
+                array( 'image' )
+            )
+            ->set_conditional_logic( array(
+                array(
+                    'field' => 'main_top_version',
+                    'value' => array('home'),
+                    'compare' => 'IN'
+                )
+            ) ),
+        Field::make( 'textarea', 'main_top_heading_text', __( 'Title' ) ),
+        Field::make( 'select', 'main_top_version', __('Select Version' ))
+            ->add_options( array(
+                'white' => __( 'White', ),
+                'black' => __( 'Black', ),
+                'home' => __( 'Home' ),
+            ) ),
+        Field::make( 'rich_text', 'main_bottom_text', __( 'Description text' ) ),
+        Field::make( 'rich_text', 'main_bottom_second_text', __( 'Second text' ) )
+            ->set_conditional_logic( array(
+                'relation' => 'OR',
+                array(
+                    'field'   => 'current_page_id',
+                    'value'   => $events_arhive_page,
+                    'compare' => '!=',
                 ),
-            Field::make( 'file', 'main_top_heading_media', __( 'Hending media' ) )
-                ->set_width( 33 )
-                ->set_type( 
-                    array( 'image' )
+                array(
+                    'field'   => 'current_page_id',
+                    'value'   => $programs_arhive_page,
+                    'compare' => '!=',
                 ),
-            Field::make( 'file', 'main_top_heading_bg', __( 'Background' ) )
-                ->set_width( 33 )
-                ->set_type( 
-                    array( 'image' )
+                array(
+                    'field' => 'main_top_version',
+                    'value' => array('home'),
+                    'compare' => 'IN'
+                )
+            ) ),
+        Field::make( 'text', 'main_bottom_button_text', __( 'Button text' ) )
+            ->set_conditional_logic( array(
+                'relation' => 'OR',
+                array(
+                    'field'   => 'current_page_id',
+                    'value'   => $events_arhive_page,
+                    'compare' => '!=',
                 ),
-            Field::make( 'textarea', 'main_top_heading_text', __( 'Title' ) ),
-            Field::make( 'select', 'main_top_version', __('Select Version' ))
-                ->add_options( array(
-                    'white' => __( 'White', ),
-                    'black' => __( 'Black', ),
-                    'home' => __( 'Home' ),
-                ) ),
-            Field::make( 'rich_text', 'main_bottom_text', __( 'Description text' ) ),
-            Field::make( 'rich_text', 'main_bottom_second_text', __( 'Second text' ) )
-                ->set_conditional_logic( array(
-                    'relation' => 'OR',
-                    array(
-                        'field'   => 'current_page_id',
-                        'value'   => $events_arhive_page,
-                        'compare' => '!=',
-                    ),
-                    array(
-                        'field'   => 'current_page_id',
-                        'value'   => $programs_arhive_page,
-                        'compare' => '!=',
-                    )
-                ) ),
-            Field::make( 'text', 'main_bottom_button_text', __( 'Button text' ) )
-                ->set_conditional_logic( array(
-                    'relation' => 'OR',
-                    array(
-                        'field'   => 'current_page_id',
-                        'value'   => $events_arhive_page,
-                        'compare' => '!=',
-                    ),
-                    array(
-                        'field'   => 'current_page_id',
-                        'value'   => $programs_arhive_page,
-                        'compare' => '!=',
-                    )
-                ) )    
-                ->set_width( 50 ),
-            Field::make( 'text', 'main_bottom_button_link', __( 'Button link' ) )
-                ->set_conditional_logic( array(
-                    'relation' => 'OR',
-                    array(
-                        'field'   => 'current_page_id',
-                        'value'   => $events_arhive_page,
-                        'compare' => '!=',
-                    ),
-                    array(
-                        'field'   => 'current_page_id',
-                        'value'   => $programs_arhive_page,
-                        'compare' => '!=',
-                    )
-                ) )
-                ->set_default_value( $blog_page_url )        
-                ->set_width( 50 ),
-        ) )
-        ->set_inner_blocks( false )
-        ->set_description( __( 'This a block for inner in Hero section page' ) )
-        ->set_icon( 'cover-image' )
-        ->set_category( 'mib', __( 'MIB' ), 'smiley' )
-        ->set_mode( 'both' )
-        ->set_render_callback( function ( $fields, $attributes, $inner_blocks ) {
-            extract( $fields );
-    
-            include_once __THEME_DIR__ . '/template-parts/sections/hero-section.php';
-        } );
+                array(
+                    'field'   => 'current_page_id',
+                    'value'   => $programs_arhive_page,
+                    'compare' => '!=',
+                )
+            ) )    
+            ->set_width( 50 ),
+        Field::make( 'text', 'main_bottom_button_link', __( 'Button link' ) )
+            ->set_conditional_logic( array(
+                'relation' => 'OR',
+                array(
+                    'field'   => 'current_page_id',
+                    'value'   => $events_arhive_page,
+                    'compare' => '!=',
+                ),
+                array(
+                    'field'   => 'current_page_id',
+                    'value'   => $programs_arhive_page,
+                    'compare' => '!=',
+                )
+            ) )      
+            ->set_width( 50 ),
+    ) )
+    ->set_inner_blocks( false )
+    ->set_description( __( 'This a block for inner in Hero section page' ) )
+    ->set_icon( 'cover-image' )
+    ->set_category( 'mib', __( 'MIB' ), 'smiley' )
+    ->set_mode( 'both' )
+    ->set_render_callback( function ( $fields, $attributes, $inner_blocks ) {
+        extract( $fields );
+
+        include_once __THEME_DIR__ . '/template-parts/sections/hero-section.php';
+    } );
 
     // ==== Company Logos Repeater Block
     Block::make( 'company_logos_block', __( 'Our Clients' ) )
@@ -177,8 +202,9 @@ function custom_posts_gutenberg_blocks() {
             Field::make( 'text', 'actuality_posts_link_text', __( 'Link text' ) )
                 ->set_width( 30 )
                 ->set_default_value( 'Всі записи' ),
-            Field::make( 'text', 'actuality_posts_link', __( 'Link' ) )
-                ->set_width( 30 ),
+            Field::make( 'select', 'actuality_posts_link', __( 'Link' ) )
+                ->set_width( 30 )
+                ->add_options( $pages_options ),
             Field::make( 'text', 'actuality_posts_title', __( 'Section title' ) )
                 ->set_default_value( 'Актуальне' ),
             Field::make( 'textarea', 'actuality_posts_desc', __( 'Section Desription' ) )
@@ -724,5 +750,33 @@ function custom_posts_gutenberg_blocks() {
         extract($fields);
         
         include_once __THEME_DIR__ . '/template-parts/sections/program_form-section.php';
+    });
+
+    // ==== Team Block
+    Block::make('team_block', __('Team'))
+    ->add_fields(array(
+        Field::make('separator', 'team_sep', __('Team Section')),
+        Field::make('complex', 'team_members', __('Team Members'))
+            ->add_fields(array(
+                Field::make('image', 'avatar', __('Avatar'))
+                    ->set_width(30),
+                Field::make('text', 'name', __('Full Name'))
+                    ->set_width(35),
+                Field::make('text', 'position', __('Position'))
+                    ->set_width(35),
+                Field::make('text', 'linkedin', __('LinkedIn URL'))
+                    ->set_width(50),
+                Field::make('text', 'facebook', __('Facebook URL'))
+                    ->set_width(50),
+            ))
+    ))
+    ->set_inner_blocks(false)
+    ->set_icon('groups')
+    ->set_category('mib')
+    ->set_mode('both')
+    ->set_render_callback(function($fields, $attributes, $inner_blocks) {
+        extract($fields);
+        
+        include_once __THEME_DIR__ . '/template-parts/sections/team-section.php';
     });
 }
