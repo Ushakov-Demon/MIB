@@ -294,8 +294,12 @@ function custom_posts_meta_data() {
     Container::make( 'post_meta', __( 'Accreditation data' ) )
         ->where( 'post_type', '=', 'accreditations' )
         ->add_fields( array(
-            Field::make( 'image', 'accr_certificate', __( 'Certificate' ) ),
-            Field::make( 'text', 'accr_site_url', __( 'Site url' ) ),
+            Field::make( 'image', 'accr_certificate', __( 'Certificate' ) )
+                ->set_width( 33 ),
+            Field::make( 'image', 'accr_white_logo', __( 'Certificate White Logo' ) )
+                ->set_width( 33 ),
+            Field::make( 'text', 'accr_site_url', __( 'Site url' ) )
+                ->set_width( 100 ),
         ) );
 
     // ==== PAGE post type

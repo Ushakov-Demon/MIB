@@ -2,7 +2,6 @@
     <div class="item">
         <div class="count">
             <span class="count-value" data-count="630">630</span>
-            <span class="after-count">+</span>
         </div>
         <div class="label">
             навчальних<br>

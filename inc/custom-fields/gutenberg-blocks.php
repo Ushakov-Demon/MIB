@@ -43,10 +43,9 @@ function custom_posts_gutenberg_blocks() {
             Field::make( 'textarea', 'main_top_heading_text', __( 'Title' ) ),
             Field::make( 'select', 'main_top_version', __('Select Version' ))
                 ->add_options( array(
-                    '' => __( 'Select a version' ),
-                    'home' => __( 'Home' ),
+                    'white' => __( 'White', ),
                     'black' => __( 'Black', ),
-                    'white' => __( 'White', )
+                    'home' => __( 'Home' ),
                 ) ),
             Field::make( 'rich_text', 'main_bottom_text', __( 'Description text' ) ),
             Field::make( 'rich_text', 'main_bottom_second_text', __( 'Second text' ) )

@@ -3239,16 +3239,6 @@ footer .footer-after .footer-after-col {
     font-size: 40px;
   }
 }
-@media (min-width: 768px) {
-  .section.section-main.version-hot-event .logo, .section.section-main.version-events .logo {
-    padding-left: 56px;
-    border-left: 1px solid rgba(255, 255, 255, 0.1);
-  }
-}
-.section.section-main.version-hot-event .logo img, .section.section-main.version-events .logo img {
-  max-width: 133px;
-  height: auto;
-}
 .section.section-main.version-hot-event .text, .section.section-main.version-events .text {
   max-width: 100%;
 }
@@ -3307,6 +3297,25 @@ footer .footer-after .footer-after-col {
 .section.section-main.version-hot-event + .section-manager-contact {
   margin-top: calc(var(--block_spacing) * -1);
 }
+.section.section-main.version-hot-event .logo, .section.section-main.version-events .logo, .section.section-main.version-program .logo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 56px;
+}
+@media (min-width: 768px) {
+  .section.section-main.version-hot-event .logo, .section.section-main.version-events .logo, .section.section-main.version-program .logo {
+    padding-left: 56px;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+.section.section-main.version-hot-event .logo svg,
+.section.section-main.version-hot-event .logo img, .section.section-main.version-events .logo svg,
+.section.section-main.version-events .logo img, .section.section-main.version-program .logo svg,
+.section.section-main.version-program .logo img {
+  max-width: 133px;
+  height: 40px;
+  filter: brightness(0) invert(1);
+}
 .section.section-main.version-program {
   margin-bottom: 0;
 }
@@ -3332,21 +3341,14 @@ footer .footer-after .footer-after-col {
     font-size: 40px;
   }
 }
-@media (min-width: 768px) {
-  .section.section-main.version-program .logo {
-    padding-left: 56px;
-    border-left: 1px solid rgba(255, 255, 255, 0.1);
-  }
-}
-.section.section-main.version-program .logo img {
-  max-width: 133px;
-  height: auto;
-}
 .section.section-main.version-program .text {
   max-width: 100%;
 }
 .section.section-main.version-program .buttons {
   gap: 56px;
+}
+.section.section-main.version-program .buttons .button-register::after {
+  display: none !important;
 }
 .section.section-main.version-program .hero-short-details {
   display: flex;
@@ -4811,7 +4813,8 @@ footer .footer-after .footer-after-col {
 
 .program-accreditation {
   display: grid;
-  grid-template-columns: 65% 1fr;
+  grid-template-columns: 1fr auto;
+  align-items: center;
   color: var(--color_white);
   background-color: var(--color_khaki);
   padding: 24px;
@@ -4821,6 +4824,7 @@ footer .footer-after .footer-after-col {
   .program-accreditation {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
   }
 }
 .program-accreditation .block-title {
@@ -4836,13 +4840,28 @@ footer .footer-after .footer-after-col {
     font-size: 18px;
   }
 }
+.program-accreditation .logo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+@media (min-width: 1024px) {
+  .program-accreditation .logo {
+    grid-row: span 2;
+  }
+}
 @media (max-width: 1023px) {
   .program-accreditation .logo {
     order: 1;
+    margin-bottom: 24px;
   }
 }
+.program-accreditation .logo img {
+  width: auto;
+  height: 40px;
+  filter: brightness(0) invert(1);
+}
 .program-accreditation .show-more-link {
-  grid-column: span 2;
   color: var(--color_white);
 }
 @media (max-width: 1023px) {
@@ -4856,8 +4875,8 @@ footer .footer-after .footer-after-col {
 
 .program-results-mission {
   display: grid;
-  grid-template-columns: 60% 1fr;
-  gap: 10%;
+  grid-template-columns: 57% 1fr;
+  gap: 11.5%;
   margin: calc(var(--block_spacing) * 2) 0;
 }
 @media (max-width: 767px) {
@@ -5049,7 +5068,7 @@ footer .footer-after .footer-after-col {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 47px 0;
+  padding: 32px 0;
   cursor: pointer;
   position: relative;
 }
@@ -5082,7 +5101,7 @@ footer .footer-after .footer-after-col {
 }
 .accordion-items .accordion-item .accordion-content {
   display: none;
-  margin-bottom: 47px;
+  margin-bottom: 32px;
   opacity: 0;
   transition: opacity 0.5s ease;
 }
