@@ -68,6 +68,8 @@ function register_customizer_strings_for_polylang() {
         'Actual',
         'Completion documents',
         'Cost of education',
+        'Teaching methods',
+        'Program structure',
     );
     
     foreach ($strings as $string) {

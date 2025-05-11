@@ -4818,7 +4818,7 @@ footer .footer-after .footer-after-col {
   color: var(--color_white);
   background-color: var(--color_khaki);
   padding: 24px;
-  gap: 8px;
+  gap: 8px 32px;
 }
 @media (max-width: 1023px) {
   .program-accreditation {
@@ -5526,6 +5526,62 @@ footer .footer-after .footer-after-col {
   .tab-content .tab-title {
     font-size: 28px;
   }
+}
+
+.program-teaching-methods {
+  background-color: var(--color_light_gray_4);
+  margin: var(--block_spacing) 0;
+  padding: 40px 32px;
+}
+.program-teaching-methods h3 {
+  margin: 0 0 24px;
+}
+.program-teaching-methods ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.program-teaching-methods ul li {
+  padding: 4px 16px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  line-height: 1.4;
+}
+
+.program-structure {
+  margin: var(--block_spacing) 0;
+}
+.program-structure h3 {
+  margin: 0 0 var(--block_spacing);
+}
+.program-structure ul {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.program-structure ul li {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--color_light_gray_3);
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.program-structure ul li::before {
+  display: block;
+  content: "";
+  width: 0;
+  height: 0;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-left: 6px solid var(--color_primary);
+  position: relative;
+  top: -1px;
 }
 
 .baza-tooltip {

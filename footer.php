@@ -78,8 +78,6 @@
 			</div>
 		</div>
 	</footer>
-
-	<a class="to-top" href="#page"></a>
 </div>
 
 <?php wp_footer(); ?>

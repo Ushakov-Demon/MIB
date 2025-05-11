@@ -38,11 +38,16 @@
 
         <?php 
             include get_template_directory() . '/template-parts/program/blocks/program_content.php';
+            include get_template_directory() . '/template-parts/program/blocks/program_teaching_methods.php';
+            include get_template_directory() . '/template-parts/program/blocks/program_structure.php';
         ?>
     </div>
     <div id="tab-admission-requirements" class="tab-content">
         <h3 class="tab-title"><?php echo pll__('Admission requirements'); ?></h3>
 
+        <?php 
+            include get_template_directory() . '/template-parts/program/blocks/program_admission_requirements.php';
+        ?>
     </div>
     <div id="tab-listeners" class="tab-content">
         <h3 class="tab-title"><?php echo pll__('Listeners'); ?></h3>
