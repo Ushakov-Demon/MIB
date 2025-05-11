@@ -468,25 +468,75 @@ jQuery(document).ready(function ($) {
 	});
 
 	function initTabs() {
-
-		$('.tabs li a').on('click', function (e) {
+		$('.tabs li a').on('click', function(e) {
 			e.preventDefault();
-
+			
 			let tabId = $(this).attr('href').replace('#', '');
-
-			$('.tabs li').removeClass('active');
-			$(this).parent('li').addClass('active');
-
-			$('.tab-content').removeClass('active');
-			$('#' + tabId).addClass('active');
+			activateTab(tabId, false);
 		});
-
-		if ($('.tabs li.active a').length > 0) {
-			$('.tabs li.active a').trigger('click');
-		} else if ($('.tabs li:first a').length > 0) {
-			$('.tabs li:first a').trigger('click');
+		
+		$(document).on('click', 'a[href^="#"]', function(e) {
+			let tabId = $(this).attr('href').replace('#', '');
+			
+			if ($('#' + tabId).length > 0 && $('#' + tabId).hasClass('tab-content') && !$(this).closest('.tabs').length) {
+				e.preventDefault();
+				activateTab(tabId, true);
+			}
+		});
+		
+		function activateTab(tabId, shouldScroll = true) {
+			let tabLink = $('.tabs li a[href="#' + tabId + '"]');
+			
+			if (tabLink.length) {
+				$('.tabs li').removeClass('active');
+				tabLink.parent('li').addClass('active');
+				
+				$('.tab-content').removeClass('active');
+				$('#' + tabId).addClass('active');
+				
+				if (shouldScroll) {
+					$('html, body').animate({
+						scrollTop: $('.tabs').parent().offset().top
+					}, 500);
+				}
+				
+				if (history.pushState) {
+					history.pushState(null, null, '#' + tabId);
+				} else {
+					location.hash = '#' + tabId;
+				}
+			}
 		}
+		
+		function checkUrlHash() {
+			if (window.location.hash) {
+				let tabId = window.location.hash.replace('#', '');
+				
+				if ($('#' + tabId).length > 0 && $('#' + tabId).hasClass('tab-content')) {
+					activateTab(tabId);
+					return true;
+				}
+			}
+			return false;
+		}
+		
+		let hashActivated = checkUrlHash();
+		
+		if (!hashActivated) {
+			if ($('.tabs li.active a').length > 0) {
+				let tabId = $('.tabs li.active a').attr('href').replace('#', '');
+				activateTab(tabId, false);
+			} else if ($('.tabs li:first a').length > 0) {
+				let tabId = $('.tabs li:first a').attr('href').replace('#', '');
+				activateTab(tabId, false);
+			}
+		}
+		
+		$(window).on('hashchange', function() {
+			checkUrlHash();
+		});
 	}
-
+	
 	initTabs();
+
 });

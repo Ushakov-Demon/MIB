@@ -36,6 +36,9 @@
     <div id="tab-program-content" class="tab-content">
         <h3 class="tab-title"><?php echo pll__('Program content'); ?></h3>
 
+        <?php 
+            include get_template_directory() . '/template-parts/program/blocks/program_content.php';
+        ?>
     </div>
     <div id="tab-admission-requirements" class="tab-content">
         <h3 class="tab-title"><?php echo pll__('Admission requirements'); ?></h3>
@@ -44,6 +47,9 @@
     <div id="tab-listeners" class="tab-content">
         <h3 class="tab-title"><?php echo pll__('Listeners'); ?></h3>
 
+        <?php 
+            include get_template_directory() . '/template-parts/program/blocks/program_listeners.php';
+        ?>
     </div>
 </div>
 
