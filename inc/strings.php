@@ -71,6 +71,19 @@ function register_customizer_strings_for_polylang() {
         'Teaching methods',
         'Program structure',
         'Visit accreditation',
+        'Nothing found',
+        'Nothing was found for your request. Please try changing your search query.',
+        'Filter by type',
+        'Search results',
+        'All results',
+        'Filter by type',
+        'Show more',
+        'All news',
+        'All programs',
+        'All teachers',
+        'All students',
+        'Students',
+        'Programs',
     );
     
     foreach ($strings as $string) {

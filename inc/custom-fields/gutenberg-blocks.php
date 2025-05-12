@@ -82,11 +82,6 @@ function custom_posts_gutenberg_blocks() {
                     'value'   => $programs_arhive_page,
                     'compare' => '!=',
                 ),
-                array(
-                    'field' => 'main_top_version',
-                    'value' => array('home'),
-                    'compare' => 'IN'
-                )
             ) ),
         Field::make( 'text', 'main_bottom_button_text', __( 'Button text' ) )
             ->set_conditional_logic( array(
@@ -229,8 +224,9 @@ function custom_posts_gutenberg_blocks() {
             Field::make( 'text', 'accreditations_posts_link_text', __( 'Link text' ) )
                 ->set_width( 33 )
                 ->set_default_value( 'Всі Акредитації' ),
-            Field::make( 'text', 'accreditations_posts_link', __( 'Link' ) )
-                ->set_width( 33 ),
+            Field::make( 'select', 'accreditations_posts_link', __( 'Link' ) )
+                ->set_width( 33 )
+                ->add_options( $pages_options ),
             Field::make( 'text', 'accreditations_posts_title', __( 'Section title' ) )
                 ->set_default_value( 'Акредитації' ),
         ) )
@@ -801,6 +797,6 @@ function custom_posts_gutenberg_blocks() {
     ->set_render_callback(function($fields, $attributes, $inner_blocks) {
         extract($fields);
         
-        include_once __THEME_DIR__ . '/template-parts/sections/accreditations-section.php';
+        include_once __THEME_DIR__ . '/template-parts/sections/accreditations_single-section.php';
     });
 }

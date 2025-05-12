@@ -1,6 +1,6 @@
 <?php 
 if (!empty($accreditation_text) || !empty($certificate_image)) : ?>
-<section class="section section-accreditations">
+<section class="section section-single-accreditations">
     <div class="container">
         <div class="accreditation-info">
             <?php if (!empty($accreditation_text)) : ?>
@@ -16,7 +16,7 @@ if (!empty($accreditation_text) || !empty($certificate_image)) : ?>
                             <?php echo $accreditation_info; ?>
                         </div>
                     <?php endif; ?>
-                    
+
                     <?php if (!empty($accreditation_url)) : ?>
                         <a class="button" href="<?php echo esc_url($accreditation_url); ?>" target="_blank">
                             <?php echo pll__('Visit accreditation'); ?>

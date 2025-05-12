@@ -13,7 +13,7 @@ if (!empty($accreditations)) {
         $accr_post = get_post($accr_id);
         
         $logo_id = carbon_get_post_meta($accr_id, 'accr_white_logo');
-        $site_url = carbon_get_post_meta($accr_id, 'accr_site_url');
+        $site_url = carbon_get_post_meta($accr_id, 'accr_site_url'); // TODO: Change to single acreditaion URL
 
         if (!empty($logo_id)) {
             $logo_url = wp_get_attachment_image_url($logo_id, 'full');

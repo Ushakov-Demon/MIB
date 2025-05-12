@@ -43,6 +43,7 @@ $alternating_posts = apply_filters( 'mib_get_alternating_posts', $actuality_post
 
 							<div class="items items-last-events">
 								<?php
+									// TODO: Need fix ERROR
 									if ( ! empty( $alternating_posts ) ) :
 										foreach ( $alternating_posts as $item ) :
 									

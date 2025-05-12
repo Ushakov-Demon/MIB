@@ -88,29 +88,58 @@ function display_breadcrumbs() {
     }
 }
 
-add_filter('wpseo_breadcrumb_links', 'custom_add_events_breadcrumb_parent');
+add_filter('wpseo_breadcrumb_links', 'universal_add_breadcrumb_parent');
 
-function custom_add_events_breadcrumb_parent($links) {
-    if (is_singular('events')) {
-        $default_page_id = 155;
-        $current_lang = function_exists('pll_current_language') ? pll_current_language() : false;
-        $translated_page_id = function_exists('pll_get_post') ? pll_get_post($default_page_id, $current_lang) : $default_page_id;
-
-        if ($translated_page_id) {
-            $translated_link = get_permalink($translated_page_id);
-            $translated_title = get_the_title($translated_page_id);
-
-            array_splice($links, 1, 0, array(array(
-                'url'  => $translated_link,
-                'text' => $translated_title,
-                'id'   => $translated_page_id
-            )));
+function yoast_search_breadcrumb($links) {
+    if (is_search()) {
+        if (!empty($links)) {
+            array_pop($links);
         }
+
+        $links[] = array(
+            'text' => pll__('Search', 'baza'),
+            'url' => false, 
+            'is_front' => false
+        );
+    }
+    
+    return $links;
+}
+add_filter('wpseo_breadcrumb_links', 'yoast_search_breadcrumb');
+
+function universal_add_breadcrumb_parent($links, $config = array()) {
+
+    if (empty($config)) {
+        $config = array(
+            'events' => 155,
+            'programs' => 148,
+            'accreditations' => 521,
+        );
+    }
+
+    $current_post_type = get_post_type();
+    
+    if (!isset($config[$current_post_type]) || !is_singular($current_post_type)) {
+        return $links;
+    }
+
+    $default_page_id = $config[$current_post_type];
+    $current_lang = function_exists('pll_current_language') ? pll_current_language() : false;
+    $translated_page_id = function_exists('pll_get_post') ? pll_get_post($default_page_id, $current_lang) : $default_page_id;
+
+    if ($translated_page_id) {
+        $translated_link = get_permalink($translated_page_id);
+        $translated_title = get_the_title($translated_page_id);
+
+        array_splice($links, 1, 0, array(array(
+            'url'  => $translated_link,
+            'text' => $translated_title,
+            'id'   => $translated_page_id
+        )));
     }
 
     return $links;
 }
-
 
 /**
  * Add all favicon and app icon related tags to the site header
