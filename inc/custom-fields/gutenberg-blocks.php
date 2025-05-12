@@ -779,4 +779,28 @@ function custom_posts_gutenberg_blocks() {
         
         include_once __THEME_DIR__ . '/template-parts/sections/team-section.php';
     });
+
+    // ==== Accreditations Block
+    Block::make('accreditations_block', __('Accreditations'))
+    ->add_fields(array(
+        Field::make('separator', 'accreditations_sep', __('Accreditations')),
+        Field::make('image', 'certificate_image', __('Certificate Image'))
+            ->set_width(100)
+            ->set_help_text(__('Upload PNG or JPG certificate')),
+        Field::make('rich_text', 'accreditation_text', __('Accreditation Text'))
+            ->set_width(100),
+        Field::make('text', 'accreditation_info', __('Additional Info'))
+            ->set_width(100),
+        Field::make('text', 'accreditation_url', __('Accreditation URL'))
+            ->set_width(100)
+    ))
+    ->set_inner_blocks(false)
+    ->set_icon('awards')
+    ->set_category('mib')
+    ->set_mode('both')
+    ->set_render_callback(function($fields, $attributes, $inner_blocks) {
+        extract($fields);
+        
+        include_once __THEME_DIR__ . '/template-parts/sections/accreditations-section.php';
+    });
 }

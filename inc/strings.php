@@ -70,6 +70,7 @@ function register_customizer_strings_for_polylang() {
         'Cost of education',
         'Teaching methods',
         'Program structure',
+        'Visit accreditation',
     );
     
     foreach ($strings as $string) {

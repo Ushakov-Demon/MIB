@@ -4722,6 +4722,65 @@ footer .footer-after .footer-after-col {
 .section.section-event-plan .items .item .item-content .item-footer .label {
   font-size: 14px;
 }
+.section.section-accreditations .container {
+  display: grid;
+  grid-template-columns: 50% 1fr;
+  gap: 80px;
+}
+@media (max-width: 767px) {
+  .section.section-accreditations .container {
+    display: flex;
+    flex-direction: column;
+  }
+}
+.section.section-accreditations .accreditation-text > * {
+  margin: 0 0 16px;
+}
+.section.section-accreditations .accreditation-text > *:last-child {
+  margin-bottom: 0;
+}
+.section.section-accreditations .accreditation-info h1, .section.section-accreditations .accreditation-info h2, .section.section-accreditations .accreditation-info h3, .section.section-accreditations .accreditation-info h4, .section.section-accreditations .accreditation-info h5 {
+  font-size: 24px;
+}
+@media (max-width: 767px) {
+  .section.section-accreditations .accreditation-info {
+    order: 2;
+  }
+}
+@media (max-width: 767px) {
+  .section.section-accreditations .accreditation-image {
+    order: 1;
+  }
+}
+.section.section-accreditations .accreditation-image .certificate-image {
+  box-shadow: 0px 16px 24px rgba(0, 0, 0, 0.1);
+  line-height: 0;
+  margin-top: -210px;
+}
+.section.section-accreditations .accreditation-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--color_light_gray_3);
+  padding-top: 32px;
+  margin-top: 32px;
+  gap: 24px;
+  font-weight: 600;
+}
+@media (max-width: 767px) {
+  .section.section-accreditations .accreditation-footer {
+    flex-direction: column;
+  }
+}
+
+.single-accreditations .section.section-main {
+  background-image: url("../images/hero-certificate.svg"), radial-gradient(41.93% 131.75% at 62.19% 16.78%, #2A2936 0%, #100F15 100%);
+}
+@media (max-width: 767px) {
+  .single-accreditations .section.section-main {
+    padding-bottom: 210px;
+  }
+}
 
 .program-tabs {
   width: 100vw;
