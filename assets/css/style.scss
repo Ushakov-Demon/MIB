@@ -4315,79 +4315,74 @@ footer {
     }
 }
 
-.accordion-items {
+.accordion-item {
+    border-bottom: 1px solid var(--color_light_gray_3);
+    
+    .accordion-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 32px 0;
+        cursor: pointer;
+        position: relative;
 
-    position: relative;
+        @include mobile {
+            padding: 40px 0;
+        }
 
-    .accordion-item {
-        border-bottom: 1px solid var(--color_light_gray_3);
+        &:after {
+            display: inline-block;
+            margin-left: 30px;
+            line-height: 1;
+            transition: all 1s var(--cubic_bezier);
+            font-size: 12px;
+        }
         
-        .accordion-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 32px 0;
-            cursor: pointer;
-            position: relative;
+        .accordion-title {
+            text-align: left;
+            flex: 1;
+            transition: all .5s ease;
+            font-size: 32px;
+            font-weight: 500;
 
             @include mobile {
-                padding: 40px 0;
+                font-size: 28px;
             }
+        }
+
+        &:hover {
+            .accordion-title {
+                color: var(--color_khaki);
+            }
+        }
+    }
+    
+    .accordion-content {
+        display: none;
+        margin-bottom: 32px;
+        opacity: 0;
+        transition: opacity .5s ease;
+
+        @include mobile {
+            margin-bottom: 40px;
+        }
+    }
+    
+    &.active {
+        .accordion-header {
+            cursor: default;
 
             &:after {
-                display: inline-block;
-                margin-left: 30px;
-                line-height: 1;
-                transition: all 1s var(--cubic_bezier);
-                font-size: 12px;
+                transform: rotate(-180deg);
             }
-            
+
             .accordion-title {
-                text-align: left;
-                flex: 1;
-                transition: all .5s ease;
-                font-size: 32px;
-                font-weight: 500;
-
-                @include mobile {
-                    font-size: 28px;
-                }
-            }
-
-            &:hover {
-                .accordion-title {
-                    color: var(--color_khaki);
-                }
+                color: var(--color_primary);
             }
         }
-        
+
         .accordion-content {
-            display: none;
-            margin-bottom: 32px;
-            opacity: 0;
-            transition: opacity .5s ease;
-
-            @include mobile {
-                margin-bottom: 40px;
-            }
-        }
-        
-        &.active {
-            .accordion-header {
-                cursor: default;
-    
-                &:after {
-                    transform: rotate(-180deg);
-                }
-    
-                .accordion-title {
-                    color: var(--color_primary);
-                }
-            }
-
-            .accordion-content {
-                opacity: 1;
-            }
+            opacity: 1;
         }
     }
 }

@@ -1,4 +1,4 @@
-<div class="accordion-items">
+
 
     <div class="accordion-item">
         <div class="accordion-header"><div class="accordion-title"><?php echo pll__('Completion documents'); ?></div></div>
@@ -88,5 +88,3 @@
             
         </div>
     </div>
-    
-</div>

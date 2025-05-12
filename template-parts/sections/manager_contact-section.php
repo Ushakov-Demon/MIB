@@ -11,7 +11,7 @@ $form_id = $contact_form_id ?? '';
 if (empty($form_id)) return;
 ?>
 
-<section class="section section-manager-contact">
+<section class="section section-manager-contact" id="manager-contact">
     <div class="container">
         
         <div class="manager-contact-wrapper">
