@@ -7,26 +7,29 @@ $students   = apply_filters( 'mib_get_posts', 'students', $students_per_page );
 ?>
 <section class="section section-students">
     <div class="container">
-        <div class="section-title">
-            <span>
-                <?php
-                    pll_e( $students_section_title, 'baza' );
-                ?>                  
-            </span>
-
-            <?php
-            if ( ! empty( $students_section_link_to ) ) :
-                $link = get_permalink( $students_section_link_to );
-                ?>
-                <a class="section-link" href="<?php echo esc_url( $link )?>">
+        
+        <?php if ( ! empty($students_section_title) ) : ?>
+            <div class="section-title">
+                <span>
                     <?php
-                        pll_e( $students_section_link_text, 'baza' );
-                    ?>
-                </a>
+                        pll_e( $students_section_title, 'baza' );
+                    ?>                  
+                </span>
+
                 <?php
-            endif;
-            ?>
-        </div>
+                if ( ! empty( $students_section_link_to ) ) :
+                    $link = get_permalink( $students_section_link_to );
+                    ?>
+                    <a class="section-link" href="<?php echo esc_url( $link )?>">
+                        <?php
+                            pll_e( $students_section_link_text, 'baza' );
+                        ?>
+                    </a>
+                    <?php
+                endif;
+                ?>
+            </div>
+        <?php endif; ?>
 
         <div class="items<?php echo esc_attr( $view_class )?>" id="<?php echo esc_attr( $wrap_id )?>">
             <?php

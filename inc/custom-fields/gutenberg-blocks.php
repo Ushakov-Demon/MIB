@@ -67,7 +67,8 @@ function custom_posts_gutenberg_blocks() {
                 'white' => __( 'White', ),
                 'black' => __( 'Black', ),
                 'home' => __( 'Home' ),
-            ) ),
+            ) )
+            ->set_default_value( 'white' ),
         Field::make( 'rich_text', 'main_bottom_text', __( 'Description text' ) ),
         Field::make( 'rich_text', 'main_bottom_second_text', __( 'Second text' ) )
             ->set_conditional_logic( array(
@@ -799,4 +800,29 @@ function custom_posts_gutenberg_blocks() {
         
         include_once __THEME_DIR__ . '/template-parts/sections/accreditations_single-section.php';
     });
+
+    // ==== Banner 1120x125
+    Block::make('banner_1120_125', __('Banner 1120x125'))
+        ->add_fields(array(
+            Field::make('separator', 'banner_1120x125_sep', __('Banner 1120x125')),
+            Field::make('image', 'banner_image', __('Banner Image'))
+                ->set_width(100)
+                ->set_help_text(__('Upload PNG or JPG image for the banner')),
+            Field::make('text', 'banner_title', __('Banner Title'))
+                ->set_width(100),
+            Field::make('textarea', 'banner_text', __('Banner Text'))
+                ->set_width(100),
+            Field::make('text', 'banner_url', __('Banner URL'))
+                ->set_width(100)
+        ))
+        ->set_inner_blocks(false)
+        ->set_icon('images-alt2')
+        ->set_category('mib')
+        ->set_mode('both')
+        ->set_render_callback(function($fields, $attributes, $inner_blocks) {
+            extract($fields);
+        
+        include_once __THEME_DIR__ . '/template-parts/banners/banner1120x125.php';
+    });
+
 }
