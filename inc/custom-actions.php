@@ -290,7 +290,7 @@ function mib_get_course_price( int $course_id ) {
     $reg_price                  = get_post_meta( $course_id, '_tr_program_regular_price', true );
     $sale_price                 = get_post_meta( $course_id, '_tr_program_sale_price', true );
     $additional_price           = get_post_meta( $course_id, '_tr_program_additional_price', true );
-
+    $excerpt                    = get_the_excerpt( $course_id );
     $sale_price_date_end        = get_post_meta( $course_id, '_tr_program_sale_price_date_end', true );
     $additional_price_currency  = get_post_meta( $course_id, '_tr_program_additional_price_currency', true );
     $time_difference            = ! empty( $sale_price_date_end ) ? mib_get_time_difference( $sale_price_date_end ) : ['days' => -1] ;
@@ -299,6 +299,12 @@ function mib_get_course_price( int $course_id ) {
     
     $main_price = $reg_price;
     $old_price  = false;
+
+    $data_title = "";
+
+    if ( ! empty( $excerpt ) ) {
+        $data_title = " data-title='{$excerpt}'";
+    }
 
     if ( ! empty( $sale_price ) &&
          intval( $sale_price ) < intval( $reg_price ) &&
@@ -309,12 +315,12 @@ function mib_get_course_price( int $course_id ) {
         };
 
     $price_html            = "<span class='price'>{$main_price} {$currensy}</span>" ;
-    $old_price_html        = $old_price ? "<span class='old-price'>{$main_price} {$currensy}</span>" : '';
+    $old_price_html        = $old_price ? "<span class='old-price'>{$old_price} {$currensy}</span>" : '';
     $additional_price_html = ! empty ( $additional_price ) ? "<span class='additional-price'>+{$additional_price} {$additional_price_currency}</span>" : '';
 
     // TODO: need add text class='icon-info' data-title
     $html = "<div class='prices'>
-                <div class='label'>{$label}<i class='icon-info' data-title='Програма Executive MBA – створена для досвідчених керівників, які прагнуть розширити межі своїх бізнес-можливостей.'></i></div>
+                <div class='label'>{$label}<i class='icon-info'{$data_title}></i></div>
                 <div class='prices-items'>
                     {$price_html}
                     {$old_price_html}
