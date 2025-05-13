@@ -12,7 +12,7 @@
                     $image_alt      = get_post_meta( $image_id, '_wp_attachment_image_alt', true );
                     $title          = get_the_title();
                     $position       = get_post_meta( $item_id, '_positions_in_companies', true );
-                    $reviwe_message = get_post_meta( $item_id, '_teach_reviwe_message', true );
+                    $reviwe_message = get_post_meta( $item_id, '_teach_review_message', true );
                     $companies      = wp_get_post_terms( $item_id, 'companies' );
 
                     include get_template_directory() . '/template-parts/blocks/block-person-item.php';

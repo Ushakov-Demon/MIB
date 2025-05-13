@@ -418,6 +418,8 @@ h5 {
     .mib-black-page & {
         color: var(--color_grey_4);
     }
+
+    @include search_form;
 }
 
 a {
@@ -1543,56 +1545,7 @@ header.site-header {
             padding: 0;
         }
         
-        .search-form {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            max-width: 746px;
-            margin: 0 auto;
-            width: 100%;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.4);
-            padding-bottom: 15px;
-            position: relative;
-
-            @include max1024 {
-                @include container;
-                border: 0;
-                padding-bottom: 0;
-            }
-
-            > * {
-                flex: 1;
-            }
-
-            .search-field {
-                width: 100%;
-                border: 0;
-                font-size: 32px;
-                font-weight: 500;
-                background-color: transparent;
-                padding: 0 35px 0 0;
-                height: auto;
-
-                @include max1024 {
-                    font-size: 20px;
-                }
-
-                &::placeholder {
-                    color: var(--color_grey_2);
-                    opacity: .4;
-                    font-weight: 500;
-                    font-size: 32px;
-
-                    @include max1024 {
-                        font-size: 20px;
-                    }
-                }
-            }
-            
-            .search-submit {
-                display: none !important;
-            }
-        }
+        @include search_form;
 
         .search-active & {
             visibility: visible;
@@ -2096,6 +2049,14 @@ footer {
 
         .mib-black-page & {
             color: var(--color_white);
+        }
+    }
+
+    &.section-404 {
+        margin-top: var(--block_spacing);
+
+        img {
+            margin-bottom: var(--block_spacing);
         }
     }
 
@@ -3546,6 +3507,7 @@ footer {
         }
     }
 
+    &.section-teachers,
     &.section-students {
 
         .container {
@@ -5085,6 +5047,55 @@ footer {
             i {
                 transform: scale(1.2);
             }
+        }
+    }
+}
+
+.single-teacher {
+    display: grid;
+    grid-template-columns: 31% 1fr;
+    gap: 32px var(--block_spacing);
+
+    @include mobile {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+    }
+
+    .single-teacher-header {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: var(--block_spacing);
+
+        h1 {
+            margin: 0;
+            border-left: 6px solid var(--color_primary);
+            padding-left: 12px;
+            line-height: 1;
+            font-size: 32px;
+        }
+
+        .position {
+            padding-left: 18px;
+            font-size: 15px;
+            color: rgba(0, 0, 0, .4);
+            letter-spacing: -0.6px;
+        }
+    }
+
+    .photo {
+        img {
+            width: 100%;
+        }
+    }
+
+    .content {
+        line-height: 1.4;
+
+        .wp-block-list {
+            padding: 32px;
+            background-color: var(--color_light_gray);
         }
     }
 }

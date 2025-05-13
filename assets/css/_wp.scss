@@ -279,6 +279,40 @@ ol.wp-block-list {
 }
 
 /* Button */
+
+.wp-block-file {
+    margin: var(--block_spacing) 0;
+    border: 1px solid var(--color_grey);
+    font-size: 18px;
+    font-weight: bold;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    a:not(.wp-block-file__button) {
+        font-size: 18px;
+    }
+
+    .wp-block-file__button {
+        all: unset;
+
+        display: inline-block;
+        transition: all .5s ease;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--color_primary);
+
+        &:hover {
+            color: var(--color_black);
+        }
+    }
+}
+
 .wp-block-button {
     margin-bottom: var(--block_spacing);
     

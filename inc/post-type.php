@@ -191,7 +191,7 @@ function create_custom_post_types_and_taxonomies() {
         'hierarchical'        => false,
         'supports'            => ['title', 'thumbnail', 'excerpt', 'editor'],
         'taxonomies'          => ['teacher_category', 'companies'],
-        'has_archive'         => true,
+        'has_archive'         => false,
         'rewrite'             => true,
         'query_var'           => true,
     ] );
@@ -222,7 +222,7 @@ function create_custom_post_types_and_taxonomies() {
         'hierarchical'        => false,
         'supports'            => ['title', 'thumbnail', 'excerpt', 'editor' ],
         'taxonomies'          => ['student_category', 'companies'],
-        'has_archive'         => true,
+        'has_archive'         => false,
         'rewrite'             => true,
         'query_var'           => true,
     ] );

@@ -270,7 +270,7 @@ function custom_posts_meta_data() {
         ->where( 'post_type', '=', 'teachers' )
         ->add_fields( array(
             Field::make( 'textarea', 'positions_in_companies', __( 'Positions in companies' ) ),
-            Field::make( 'textarea', 'teach_reviwe_message', __( 'Reviwe message' ) ),
+            Field::make( 'textarea', 'teach_review_message', __( 'Review message' ) ),
     ) );
 
     // ==== STUDENT post type
@@ -287,7 +287,7 @@ function custom_posts_meta_data() {
                 ->add_options( $members_cities_options )
                 ->set_width( 33 ),
             Field::make( 'textarea', 'st_positions_in_companies', __( 'Positions in companies' ) ),
-            Field::make( 'textarea', 'st_reviwe_message', __( 'Reviwe message' ) ),
+            Field::make( 'textarea', 'st_review_message', __( 'Review message' ) ),
     ) );
 
     // ==== ACCREDITATION post type

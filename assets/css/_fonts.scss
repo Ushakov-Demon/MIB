@@ -256,6 +256,7 @@
     font-display: block;
 }
 
+.wp-block-file__button::after,
 .accordion-header::after,
 .program-mission li::before,
 .item-time span::before,
@@ -393,6 +394,7 @@ a.button::after, .button::after, button[type=submit]::after, input[type=submit]:
     content: "\e913";
 }
 
+.wp-block-file__button::after,
 .section-link::after,
 .show-more-link::after,
 .icon-arrow-right:before {

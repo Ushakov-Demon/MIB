@@ -662,6 +662,39 @@ function custom_posts_gutenberg_blocks() {
             include_once __THEME_DIR__ . '/template-parts/sections/students-section.php';
     } );
 
+    // ==== Teachers Block
+    Block::make( 'teachers_block', __( 'Teachers' ) )
+    ->add_fields( array(
+        Field::make( 'separator', 'teachers_sep', __( 'Teachers' ) ),
+        Field::make( 'text', 'teachers_section_title', __( 'Section title' ) )
+            ->set_default_value( 'Вчителі' ),
+        Field::make( 'text', 'teachers_per_page', __( 'Teachers per page' ) )
+            ->set_width( 50 )
+            ->set_attribute( 'type', 'number' )
+            ->set_default_value( $def_per_page ),
+        Field::make( 'select', 'teachers_section_items_view_style', __( 'View style' ) )
+            ->add_options( array(
+                'grid'   => __( 'Grid' ),
+                'slider' => __( 'Slider' ),
+            ) )
+            ->set_width( 50 ),
+        Field::make( 'text', 'teachers_section_link_text', __( 'Section link text' ) )
+            ->set_width( 50 )
+            ->set_default_value( 'Всі вчителі' ),
+        Field::make( 'select', 'teachers_section_link_to', __( 'Page for link' ) )
+            ->set_width( 50 )
+            ->add_options( $pages_options ),
+    ) )
+    ->set_icon( 'groups' )
+    ->set_category( 'mib' )
+    ->set_mode( 'both' )
+    ->set_render_callback( function ( $fields, $attributes, $inner_blocks ) {
+        extract( $fields );
+        
+        // Include the template for rendering
+        include_once __THEME_DIR__ . '/template-parts/sections/teachers-section.php';
+    } );
+
     // ==== Contacts Block
     Block::make( 'contacts_block', __( 'Contacts' ) )
         ->add_fields( array(

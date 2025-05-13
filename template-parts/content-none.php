@@ -9,43 +9,19 @@
 
 ?>
 
-<section class="no-results not-found">
-	<header class="page-header">
-		<h1 class="page-title"><?php esc_html_e( 'Nothing Found', 'baza' ); ?></h1>
-	</header><!-- .page-header -->
-
-	<div class="page-content">
-		<?php
-		if ( is_home() && current_user_can( 'publish_posts' ) ) :
-
-			printf(
-				'<p>' . wp_kses(
-					/* translators: 1: link to WP admin new post page. */
-					__( 'Ready to publish your first post? <a href="%1$s">Get started here</a>.', 'baza' ),
-					array(
-						'a' => array(
-							'href' => array(),
-						),
-					)
-				) . '</p>',
-				esc_url( admin_url( 'post-new.php' ) )
-			);
-
-		elseif ( is_search() ) :
-			?>
-
-			<p><?php esc_html_e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'baza' ); ?></p>
-			<?php
-			get_search_form();
-
-		else :
-			?>
-
-			<p><?php esc_html_e( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'baza' ); ?></p>
-			<?php
-			get_search_form();
-
-		endif;
-		?>
-	</div><!-- .page-content -->
-</section><!-- .no-results -->
+<main id="main" class="site-main page-404">
+    <section class="section section-404">
+        <div class="container">
+            <div class="block-404">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/404.png" alt="">
+                <h1><?php pll_e('Page not found', 'baza'); ?></h1>
+                <p><?php pll_e('The address is incorrectly entered or this page no longer exists on the site', 'baza'); ?>.</p>
+                <div class="return-to">
+                    <a class="button go-home" href="<?php echo esc_url(home_url()); ?>">
+                        <?php pll_e('Return to main page', 'baza'); ?>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

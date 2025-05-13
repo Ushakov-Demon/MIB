@@ -114,6 +114,8 @@ function universal_add_breadcrumb_parent($links, $config = array()) {
             'events' => 155,
             'programs' => 148,
             'accreditations' => 521,
+            'teachers' => 20,
+            'students' => 22,
         );
     }
 

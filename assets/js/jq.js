@@ -285,6 +285,27 @@ jQuery(document).ready(function ($) {
 		autoplayHoverPause: true,
 	});
 
+	let carouselTeachersItems = $('#teachers-items');
+
+	carouselTeachersItems.owlCarousel({
+		items: 1,
+		navSpeed: 1000,
+		margin: 0,
+		nav: true,
+		dots: true,
+		loop: true,
+		navText: [nextPrevButton, nextPrevButton],
+		mouseDrag: true,
+		touchDrag: true,
+		dragEndSpeed: 1000,
+		dotsSpeed: 1000,
+		autoHeight: true,
+		autoplay: false,
+		autoplaySpeed: 1000,
+		autoplayTimeout: 2500,
+		autoplayHoverPause: true,
+	});
+
 	let carouselCompanyLogos = $('#company-logos-items');
 
 	carouselCompanyLogos.owlCarousel({

@@ -216,7 +216,7 @@ $search_counts = mib_get_search_counts($search_query);
                                         $image_alt = get_post_meta($image_id, '_wp_attachment_image_alt', true);
                                         $title = get_the_title();
                                         $position = get_post_meta($item_id, '_st_positions_in_companies', true);
-                                        $reviwe_message = get_post_meta($item_id, '_st_reviwe_message', true);
+                                        $reviwe_message = get_post_meta($item_id, '_st_review_message', true);
                                         $courses = apply_filters('mib_get_posts_relationships', array('post_type' => 'students', 'post_id' => $item_id, 'field' => 'tr_program_students'));
                                         $companies = wp_get_post_terms($item_id, 'companies');
                                         break;
