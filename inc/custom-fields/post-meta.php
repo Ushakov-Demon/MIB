@@ -78,7 +78,7 @@ function custom_posts_meta_data() {
                 ->set_width( 75 ),
          ) )
         ->add_tab( __( 'Members' ) , array(
-            Field::make( 'association', 'tr_program_teatchers', __( 'Teatchers' ) )
+            Field::make( 'association', 'tr_program_teachers', __( 'Teachers' ) )
                 ->set_types( array(
                     array(
                         'type'      => 'post',
@@ -296,12 +296,9 @@ function custom_posts_meta_data() {
     ->set_context('side')
     ->set_priority('high')
     ->add_fields( array(
-        Field::make( 'image', 'accr_white_logo', __( 'Certificate White Logo' ) )
-            ->set_width( 100 ),
-        // Field::make( 'image', 'accr_certificate', __( 'Certificate' ) )
-        //     ->set_width( 33 ),
-        // Field::make( 'text', 'accr_site_url', __( 'Site url' ) )
-        //     ->set_width( 100 ),
+        Field::make( 'image', 'accr_white_logo', __( 'Certificate White Logo' ) ),
+        Field::make( 'image', 'accr_certificate', __( 'Certificate' ) ),
+        Field::make( 'text', 'accr_site_url', __( 'Site url' ) ),
     ) );
 
     // ==== PAGE post type

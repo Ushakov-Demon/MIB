@@ -66,8 +66,8 @@
         //     include get_template_directory() . "/template-parts/program/tabs/blocks/$tab_type.php";
         // }
 
-        // echo '<pre>';
-        //     var_dump( $tab );
-        // echo '</pre>';
+        echo '<pre>';
+            var_dump( $tab );
+        echo '</pre>';
     }
 ?>
