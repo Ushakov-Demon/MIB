@@ -5256,34 +5256,44 @@ footer .footer-after .footer-after-col {
 .section.section-partners .container {
   gap: var(--block_spacing);
 }
-.section.section-partners .category:not([data-category=business-partner]) .items {
+.section.section-partners.active .category .item:not(.active) {
+  opacity: 0.4;
+}
+.section.section-partners .category {
+  border-bottom: 1px solid var(--color_grey);
+  padding-bottom: var(--block_spacing);
+}
+.section.section-partners .category .section-title {
+  margin-top: 0;
+}
+.section.section-partners .category:not(.has-business-partner) .items {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 32px;
 }
 @media (min-width: 768px) and (max-width: 1024px) {
-  .section.section-partners .category:not([data-category=business-partner]) .items {
+  .section.section-partners .category:not(.has-business-partner) .items {
     grid-template-columns: repeat(4, 1fr);
   }
 }
 @media (max-width: 767px) {
-  .section.section-partners .category:not([data-category=business-partner]) .items {
+  .section.section-partners .category:not(.has-business-partner) .items {
     grid-template-columns: repeat(2, 1fr);
   }
 }
-.section.section-partners .category:not([data-category=business-partner]) .items a:hover {
+.section.section-partners .category:not(.has-business-partner) .items a:hover {
   color: var(--color_primary);
 }
-.section.section-partners .category:not([data-category=business-partner]) .items .item {
+.section.section-partners .category:not(.has-business-partner) .items .item {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
-.section.section-partners .category:not([data-category=business-partner]) .items .item:hover .image img {
+.section.section-partners .category:not(.has-business-partner) .items .item:hover .image img {
   filter: grayscale(0);
   opacity: 1;
 }
-.section.section-partners .category:not([data-category=business-partner]) .items .item .image {
+.section.section-partners .category:not(.has-business-partner) .items .item .image {
   background-color: var(--color_light_gray_4);
   display: block;
   display: flex;
@@ -5292,41 +5302,41 @@ footer .footer-after .footer-after-col {
   padding: 16px;
   min-height: 100px;
 }
-.section.section-partners .category:not([data-category=business-partner]) .items .item .image img {
+.section.section-partners .category:not(.has-business-partner) .items .item .image img {
   width: auto;
   height: auto;
   filter: grayscale(100%);
   transition: all 0.5s ease;
   opacity: 0.5;
 }
-.section.section-partners .category:not([data-category=business-partner]) .items .item .name {
+.section.section-partners .category:not(.has-business-partner) .items .item .name {
   text-align: center;
   font-size: 15px;
 }
-.section.section-partners .category[data-category=business-partner] .items {
+.section.section-partners .category.has-business-partner .items {
   display: flex;
   flex-direction: column;
   gap: 56px;
 }
 @media (max-width: 767px) {
-  .section.section-partners .category[data-category=business-partner] .items {
+  .section.section-partners .category.has-business-partner .items {
     gap: 24px;
   }
 }
-.section.section-partners .category[data-category=business-partner] .items .item {
+.section.section-partners .category.has-business-partner .items .item.item-business-partner {
   display: flex;
   flex-direction: column;
   gap: var(--block_spacing);
 }
-.section.section-partners .category[data-category=business-partner] .items .item ul {
+.section.section-partners .category.has-business-partner .items .item.item-business-partner ul {
   list-style: none;
   padding: 0;
 }
-.section.section-partners .category[data-category=business-partner] .items .item ul li {
+.section.section-partners .category.has-business-partner .items .item.item-business-partner ul li {
   position: relative;
   padding-left: 22px;
 }
-.section.section-partners .category[data-category=business-partner] .items .item ul li::before {
+.section.section-partners .category.has-business-partner .items .item.item-business-partner ul li::before {
   display: block;
   content: "";
   width: 0;
@@ -5338,48 +5348,47 @@ footer .footer-after .footer-after-col {
   top: 6px;
   left: 0;
 }
-.section.section-partners .category[data-category=business-partner] .items .item ul li:not(:last-child) {
+.section.section-partners .category.has-business-partner .items .item.item-business-partner ul li:not(:last-child) {
   margin-bottom: 10px;
 }
-.section.section-partners .category[data-category=business-partner] .items .item .image img {
+.section.section-partners .category.has-business-partner .items .item.item-business-partner .image img {
   height: 35px;
 }
-.section.section-partners .category[data-category=business-partner] .items .item .name {
+.section.section-partners .category.has-business-partner .items .item.item-business-partner .name {
   font-size: 24px;
   font-weight: 600;
 }
-.section.section-partners .category[data-category=business-partner] .items .item .description h2, .section.section-partners .category[data-category=business-partner] .items .item .description h3, .section.section-partners .category[data-category=business-partner] .items .item .description h4, .section.section-partners .category[data-category=business-partner] .items .item .description h5, .section.section-partners .category[data-category=business-partner] .items .item .description h6 {
+.section.section-partners .category.has-business-partner .items .item.item-business-partner .description h2, .section.section-partners .category.has-business-partner .items .item.item-business-partner .description h3, .section.section-partners .category.has-business-partner .items .item.item-business-partner .description h4, .section.section-partners .category.has-business-partner .items .item.item-business-partner .description h5, .section.section-partners .category.has-business-partner .items .item.item-business-partner .description h6 {
   font-size: 16px;
   font-weight: bold;
 }
-.section.section-partners .category[data-category=business-partner] .items .item .info {
+.section.section-partners .category.has-business-partner .items .item.item-business-partner .info {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 32px;
-  padding: 32px 0;
-  border-top: 1px solid var(--color_grey);
-  border-bottom: 1px solid var(--color_grey);
+  padding: 32px;
+  border: 1px solid var(--color_grey);
 }
 @media (min-width: 768px) and (max-width: 1200px) {
-  .section.section-partners .category[data-category=business-partner] .items .item .info {
+  .section.section-partners .category.has-business-partner .items .item.item-business-partner .info {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 @media (max-width: 767px) {
-  .section.section-partners .category[data-category=business-partner] .items .item .info {
+  .section.section-partners .category.has-business-partner .items .item.item-business-partner .info {
     grid-template-columns: repeat(1, 1fr);
     gap: 16px;
   }
 }
-.section.section-partners .category[data-category=business-partner] .items .item .info .info-item {
+.section.section-partners .category.has-business-partner .items .item.item-business-partner .info .info-item {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
-.section.section-partners .category[data-category=business-partner] .items .item .info .info-item .label {
+.section.section-partners .category.has-business-partner .items .item.item-business-partner .info .info-item .label {
   font-weight: 600;
 }
-.section.section-partners .category[data-category=business-partner] .items .item .info .info-item .value {
+.section.section-partners .category.has-business-partner .items .item.item-business-partner .info .info-item .value {
   color: var(--color_grey_3);
 }
 

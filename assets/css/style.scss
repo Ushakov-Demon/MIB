@@ -3930,9 +3930,26 @@ footer {
             gap: var(--block_spacing);
         }
 
+        &.active {
+            .category {
+                .item {
+                    &:not(.active) {
+                        opacity: .4;
+                    }
+                }
+            }
+        }
+
         .category {
 
-            &:not([data-category="business-partner"]) {
+            border-bottom: 1px solid var(--color_grey);
+            padding-bottom: var(--block_spacing);
+
+            .section-title {
+                margin-top: 0;
+            }
+
+            &:not(.has-business-partner) {
                 .items {
                     display: grid;
                     grid-template-columns: repeat(6, 1fr);
@@ -3951,7 +3968,7 @@ footer {
                 }
             }
 
-            &[data-category="business-partner"] {
+            &.has-business-partner {
 
                 .items {
                     display: flex;
@@ -3962,7 +3979,7 @@ footer {
                         gap: 24px;
                     }
         
-                    .item {
+                    .item.item-business-partner {
                         display: flex;
                         flex-direction: column;
                         gap: var(--block_spacing);
@@ -3992,9 +4009,8 @@ footer {
                             display: grid;
                             grid-template-columns: repeat(4, 1fr);
                             gap: 32px;
-                            padding: 32px 0;
-                            border-top: 1px solid var(--color_grey);
-                            border-bottom: 1px solid var(--color_grey);
+                            padding: 32px;
+                            border: 1px solid var(--color_grey);
         
                             @include tablet {
                                 grid-template-columns: repeat(2, 1fr);

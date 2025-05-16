@@ -651,4 +651,5 @@ jQuery(document).ready(function ($) {
 			}).show();
 		}
 	});
+
 });

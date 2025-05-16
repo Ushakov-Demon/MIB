@@ -1,16 +1,40 @@
+<?php
+$author_id = get_the_author_meta('ID');
+
+$first_name = get_the_author_meta('first_name');
+$last_name = get_the_author_meta('last_name');
+
+if (!empty($first_name) && !empty($last_name)) {
+    $author_name = trim($first_name . ' ' . $last_name);
+} elseif (!empty($first_name)) {
+    $author_name = $first_name;
+} elseif (!empty($last_name)) {
+    $author_name = $last_name;
+} else {
+    $author_name = get_the_author_meta('display_name');
+    if (empty($author_name)) {
+        $author_name = get_the_author_meta('user_nicename');
+    }
+}
+
+$author_position = get_the_author_meta('description');
+$author_avatar = get_avatar_url($author_id, array('size' => 200));
+?>
+
 <div class="block block-author">
     <div class="block-title"><?php pll_e('Author', 'baza')?></div>
 
-    <!-- TODO: author -->
     <div class="author">
         <div class="image">
-            <img src="https://placehold.co/96x96" alt="">
+            <img src="<?php echo esc_url($author_avatar); ?>" alt="<?php echo esc_attr($author_name); ?>">
         </div>
 
         <div class="heading">
             <div class="title">
-                <span class="name">Тарасов Олександр</span>
-                <span class="position">Заступник генерального директора з маркетингу порталу robota.ua.</span>
+                <span class="name"><?php echo esc_html($author_name); ?></span>
+                <?php if (!empty($author_position)) : ?>
+                    <span class="position"><?php echo esc_html($author_position); ?></span>
+                <?php endif; ?>
             </div>
         </div>
     </div>

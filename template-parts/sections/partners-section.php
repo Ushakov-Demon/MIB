@@ -10,6 +10,34 @@ $args = [
 $terms = get_terms( $args );
 
 if ( empty( $terms ) ) return;
+
+$partner_categories = array(
+    'business-partner' => array(
+        'title' => pll__( 'Business partners' ),
+        'check_field' => '_is_business_partner',
+        'filter_class' => 'filter-business-partners'
+    ),
+    'business-school' => array(
+        'title' => pll__( 'Business schools' ),
+        'check_field' => '_is_business_school',
+        'filter_class' => 'filter-business-schools'
+    ),
+    'professional-association' => array(
+        'title' => pll__( 'Professional associations' ),
+        'check_field' => '_is_professional_association',
+        'filter_class' => 'filter-professional-associations'
+    ),
+    'company' => array(
+        'title' => pll__( 'Companies' ),
+        'check_field' => '_is_company',
+        'filter_class' => 'filter-companies'
+    ),
+    'partner' => array(
+        'title' => pll__( 'Partners' ),
+        'check_field' => '_is_partner',
+        'filter_class' => 'filter-partners'
+    ),
+);
 ?>
 
 <section class="section section-partners">
@@ -25,51 +53,77 @@ if ( empty( $terms ) ) return;
                 <li class="item filter-all active" data-target="all">
                     <a href="#" class="filter-link"><span><?php echo pll__( 'All' ); ?></span></a>
                 </li>
-                <li class="item filter-business-partners" data-target="business-partner">
-                    <a href="#" class="filter-link"><span><?php echo pll__( 'Business partners' ); ?></span></a>
-                </li>
-                <li class="item filter-partners" data-target="partner">
-                    <a href="#" class="filter-link"><span><?php echo pll__( 'Partners' ); ?></span></a>
-                </li>
-                <li class="item filter-business-schools" data-target="business-school">
-                    <a href="#" class="filter-link"><span><?php echo pll__( 'Business schools' ); ?></span></a>
-                </li>
-                <li class="item filter-professional-associations" data-target="professional-association">
-                    <a href="#" class="filter-link"><span><?php echo pll__( 'Professional associations' ); ?></span></a>
-                </li>
-                <li class="item filter-companies" data-target="company">
-                    <a href="#" class="filter-link"><span><?php echo pll__( 'Companies' ); ?></span></a>
-                </li>
+                <?php foreach ( $partner_categories as $category_key => $category_data ) : ?>
+                    <li class="item <?php echo esc_attr( $category_data['filter_class'] ); ?>" data-target="<?php echo esc_attr( $category_key ); ?>">
+                        <a href="#" class="filter-link"><span><?php echo esc_html( $category_data['title'] ); ?></span></a>
+                    </li>
+                <?php endforeach; ?>
             </ul>
         </div>
         
         <?php 
-        $partner_categories = array(
-            'partner' => array(
-                'title' => pll__( 'Partners' ),
-                'check_field' => '_is_partner'
-            ),
-            'business-partner' => array(
-                'title' => pll__( 'Business partners' ),
-                'check_field' => '_is_business_partner'
-            ),
-            'business-school' => array(
-                'title' => pll__( 'Business schools' ),
-                'check_field' => '_is_business_school'
-            ),
-            'professional-association' => array(
-                'title' => pll__( 'Professional associations' ),
-                'check_field' => '_is_professional_association'
-            ),
-            'company' => array(
-                'title' => pll__( 'Companies' ),
-                'check_field' => '_is_company'
-            )
-        );
-
         foreach ( $partner_categories as $category_key => $category_data ) :
+            
+            $has_items = false;
+            foreach ( $terms as $check_item ) {
+                $check_field = $category_data['check_field'];
+                $check_value = get_term_meta( $check_item->term_id, $check_field, true );
+                $logo_id = get_term_meta( $check_item->term_id, '_company_logo', true );
+                
+                if ( $check_value && ! empty( $logo_id ) ) {
+                    $has_items = true;
+                    break;
+                }
+            }
+            
+            if ( ! $has_items ) continue;
+            
+            $category_partner_types = [];
+            foreach ( $terms as $check_item ) {
+                $check_is_partner = get_term_meta( $check_item->term_id, '_is_partner', true );
+                $check_is_business_partner = get_term_meta( $check_item->term_id, '_is_business_partner', true );
+                $check_is_business_school = get_term_meta( $check_item->term_id, '_is_business_school', true );
+                $check_is_professional_association = get_term_meta( $check_item->term_id, '_is_professional_association', true );
+                $check_is_company = get_term_meta( $check_item->term_id, '_is_company', true );
+                
+                $check_belongs_to_category = false;
+                if ( $category_key === 'partner' && $check_is_partner ) {
+                    $check_belongs_to_category = true;
+                } elseif ( $category_key === 'business-partner' && $check_is_business_partner ) {
+                    $check_belongs_to_category = true;
+                } elseif ( $category_key === 'business-school' && $check_is_business_school ) {
+                    $check_belongs_to_category = true;
+                } elseif ( $category_key === 'professional-association' && $check_is_professional_association ) {
+                    $check_belongs_to_category = true;
+                } elseif ( $category_key === 'company' && $check_is_company ) {
+                    $check_belongs_to_category = true;
+                }
+                
+                if ( $check_belongs_to_category ) {
+
+                    if ( $category_key === 'business-partner' ) {
+                        if ( $check_is_partner ) $category_partner_types['partner'] = true;
+                        if ( $check_is_business_partner ) $category_partner_types['business-partner'] = true;
+                        if ( $check_is_business_school ) $category_partner_types['business-school'] = true;
+                        if ( $check_is_professional_association ) $category_partner_types['professional-association'] = true;
+                        if ( $check_is_company ) $category_partner_types['company'] = true;
+                    } else {
+
+                        if ( $check_is_partner ) $category_partner_types['partner'] = true;
+                        if ( $check_is_business_school ) $category_partner_types['business-school'] = true;
+                        if ( $check_is_professional_association ) $category_partner_types['professional-association'] = true;
+                        if ( $check_is_company ) $category_partner_types['company'] = true;
+                    }
+                }
+            }
+            
+            $category_classes = 'category';
+            foreach ( $category_partner_types as $type => $exists ) {
+                $category_classes .= ' has-' . $type;
+            }
+            
             ?>
-            <div class="category" data-category="<?php echo esc_attr( $category_key ); ?>">
+            <div class="<?php echo esc_attr( $category_classes ); ?>" data-category="<?php echo esc_attr( $category_key ); ?>">
                 <h3 class="section-title"><?php echo esc_html( $category_data['title'] ); ?></h3>
                 <div class="items">
                     <?php foreach ( $terms as $item ) :
@@ -111,13 +165,29 @@ if ( empty( $terms ) ) return;
                         
                         $logo_url = wp_get_attachment_image_url( $logo_id, 'medium' );
                         $logo_alt = get_post_meta( $logo_id, '_wp_attachment_image_alt', true ) ?: $item->name;
+                        
+                        $item_classes = 'item';
+                        if ( $is_partner ) {
+                            $item_classes .= ' item-partner';
+                        }
+                        if ( $is_business_partner ) {
+                            $item_classes .= ' item-business-partner';
+                        }
+                        if ( $is_business_school ) {
+                            $item_classes .= ' item-business-school';
+                        }
+                        if ( $is_professional_association ) {
+                            $item_classes .= ' item-professional-association';
+                        }
+                        if ( $is_company ) {
+                            $item_classes .= ' item-company';
+                        }
                         ?>
                         
-                        
                         <?php if ( ! empty( $url ) && ! $is_business_partner ) : ?>
-                            <a href="<?php echo esc_url( $url ); ?>" target="_blank" rel="noopener nofollow" class="item" data-category="<?php echo esc_attr( $data_category ); ?>">
+                            <a href="<?php echo esc_url( $url ); ?>" target="_blank" rel="noopener nofollow" class="<?php echo esc_attr( $item_classes ); ?>" data-category="<?php echo esc_attr( $data_category ); ?>">
                         <?php else : ?>
-                            <div class="item" data-category="<?php echo esc_attr( $data_category ); ?>">
+                            <div class="<?php echo esc_attr( $item_classes ); ?>" data-category="<?php echo esc_attr( $data_category ); ?>">
                         <?php endif; ?>
                             <div class="image">
                                 <img src="<?php echo esc_url( $logo_url ); ?>" alt="<?php echo esc_attr( $logo_alt ); ?>">
@@ -129,7 +199,7 @@ if ( empty( $terms ) ) return;
                                 </div>
                             <?php endif; ?>
 
-                            <?php if( $is_business_partner ): ?>
+                            <?php if( $is_business_partner && $category_key === 'business-partner' ): ?>
 
                                 <?php if ( ! empty( $item->description ) ) : ?>
                                     <div class="description">
