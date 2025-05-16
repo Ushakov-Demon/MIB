@@ -4,6 +4,7 @@
     $post_type                  = get_post_type( $post_id );
     $is_events_arhive           = $post_id == get_option( '_events_arhive_page' );
     $is_programs_archive        = $post_id == get_option( '_programs_arhive_page' );
+    $is_tax                     = is_tax();
     $main_top_heading_text      = ! empty( $main_top_heading_text ) ? $main_top_heading_text : get_the_title();
     $main_top_version          .= ($post_type === 'programs') ? ' version-program' : '';
 ?>
@@ -51,48 +52,52 @@
                         <?php
                     endif;
 
-                    if ( "programs" == $post_type ) {
+                    if ( "programs" == $post_type && ! $is_tax ) {
                         include_once get_template_directory() . '/template-parts/blocks/block-certificate-logo.php';
                     }
                 ?>
             </div>
 
-            <?php if ( "programs" !== $post_type || ! empty( $main_bottom_button_text ) && ! $is_events_arhive ) :
-                $processed_button_text = preg_replace( '/\*(.*?)\*/', '<span>$1</span>', $main_bottom_button_text );
-                ?>
-                <?php if ( ! empty( $processed_button_text ) ) : ?>
-                    <div class="buttons">
-                        <a href="<?php echo esc_url( $main_bottom_button_link ); ?>" class="button">
-                            <span><?php echo $processed_button_text; ?></span>
-                        </a>
-                    </div>
-                <?php endif; ?>
-                <?php
-                elseif ( $is_programs_archive ) :
-                    include_once get_template_directory() . '/template-parts/blocks/block-programs-categories-buttons.php';
-                elseif ( "programs" == $post_type ) :
-                    include_once get_template_directory() . '/template-parts/blocks/hero-single-program-bottom.php';
-                    ?>
-                    <div class="buttons">
-                        <a href="#form-request" class="button button-register">
-                            <span>
-                                <?php pll_e( 'Sign up for the program', 'baza' ); ?>
-                            </span>
-                        </a>
-                        <?php echo mib_get_course_price( $post_id ); ?>
-                    </div>
-                <?php
-            endif;
+            <?php if( ! $is_tax ): ?>
 
-            if ( ! empty( $main_bottom_second_text ) && ! $is_events_arhive ) :
-                $processed_second_text = preg_replace( '/\*(.*?)\*/', '<span>$1</span>', $main_bottom_second_text );
+                <?php if ( "programs" !== $post_type || ! empty( $main_bottom_button_text ) && ! $is_events_arhive ) :
+                    $processed_button_text = preg_replace( '/\*(.*?)\*/', '<span>$1</span>', $main_bottom_button_text );
+                    ?>
+                    <?php if ( ! empty( $processed_button_text ) ) : ?>
+                        <div class="buttons">
+                            <a href="<?php echo esc_url( $main_bottom_button_link ); ?>" class="button">
+                                <span><?php echo $processed_button_text; ?></span>
+                            </a>
+                        </div>
+                    <?php endif; ?>
+                    <?php
+                    elseif ( $is_programs_archive ) :
+                        include_once get_template_directory() . '/template-parts/blocks/block-programs-categories-buttons.php';
+                    elseif ( "programs" == $post_type ) :
+                        include_once get_template_directory() . '/template-parts/blocks/hero-single-program-bottom.php';
+                        ?>
+                        <div class="buttons">
+                            <a href="#form-request" class="button button-register">
+                                <span>
+                                    <?php pll_e( 'Sign up for the program', 'baza' ); ?>
+                                </span>
+                            </a>
+                            <?php echo mib_get_course_price( $post_id ); ?>
+                        </div>
+                    <?php
+                endif;
+
+                if ( ! empty( $main_bottom_second_text ) && ! $is_events_arhive ) :
+                    $processed_second_text = preg_replace( '/\*(.*?)\*/', '<span>$1</span>', $main_bottom_second_text );
+                    ?>
+                    <div class="text text-after">
+                        <?php echo $processed_second_text; ?>
+                    </div>
+                    <?php                    
+                endif;
                 ?>
-                <div class="text text-after">
-                    <?php echo $processed_second_text; ?>
-                </div>
-                <?php                    
-            endif;
-            ?>
+
+            <?php endif; ?>
         </div>
 
         <?php if ( ! empty( $main_top_heading_media ) ) : ?>

@@ -10,7 +10,7 @@ get_header();
 
     <?php display_breadcrumbs(); ?>
 
-    <div class="container-members">
+    <div class="container-member">
 
         <?php if ( has_post_thumbnail() ) : ?>
             <div class="photo">

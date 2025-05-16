@@ -1,9 +1,5 @@
 <?php
-/**
- * Template part for displaying the company logos section
- */
 
-// Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 $args = [
@@ -13,7 +9,6 @@ $args = [
 
 $terms = get_terms( $args );
 
-// Check if we have items
 if ( empty( $terms ) ) return;
 ?>
 
@@ -40,7 +35,7 @@ if ( empty( $terms ) ) return;
                 $tag_close = $has_url ? '</a>' : '</div>';
             ?>
                  <?php echo $tag_open; ?>
-                     <img src="<?php echo esc_url( $logo_url ); ?>" alt="<?php echo esc_attr( $logo_alt ); ?>" loading="lazy">
+                     <img src="<?php echo esc_url( $logo_url ); ?>" alt="<?php echo esc_attr( $logo_alt ); ?>">
                  <?php echo $tag_close; ?>
             <?php endforeach; ?>
         </div>

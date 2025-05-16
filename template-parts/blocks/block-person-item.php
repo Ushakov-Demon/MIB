@@ -1,21 +1,28 @@
+<?php 
+
+$permalink = isset($url) ? $url : get_the_permalink();
+if ( empty( $image_id ) ) {
+    $image_url = get_template_directory_uri() . '/assets/images/empty_avatar.svg';
+}
+?>
+
 <div class="item item-<?php echo $post_type; ?>">
-    <?php
-    if ( ! empty( $image_id ) ) :
-        ?>
-        <div class="image">
+
+    <div class="image">
+        <a href="<?php echo esc_url( $permalink ); ?>">
             <img src="<?php echo esc_attr( $image_url )?>" alt="<?php echo esc_attr( $image_alt )?>">
-        </div>
-        <?php
-    endif;
-    ?>
+        </a>
+    </div>
 
     <div class="heading">
         <div class="title">
-            <span class="name">
-                <?php
-                    echo wp_kses_post( $title );
-                ?>
-            </span>
+            <div class="name">
+                <a href="<?php echo esc_url( $permalink ); ?>">
+                    <?php
+                        echo wp_kses_post( $title );
+                    ?>
+                </a>
+            </div>
 
             <?php
             if ( ! empty( $position ) ) :
@@ -89,6 +96,6 @@
             ?>
         </div>
         
-        <a class="show-more-link" href="<?php echo get_permalink() ?>"><?php pll_e('More details', 'baza'); ?></a>
+        <a class="show-more-link" href="<?php echo esc_url( $permalink ); ?>"><?php pll_e('More details', 'baza'); ?></a>
     </div>
 </div>

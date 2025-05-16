@@ -248,14 +248,16 @@
 @font-face {
     font-family: 'mib';
     src:
-        url('../fonts/mib.ttf?hom2hb') format('truetype'),
-        url('../fonts/mib.woff?hom2hb') format('woff'),
-        url('../fonts/mib.svg?hom2hb#mib') format('svg');
+        url('../fonts/mib.ttf?n2zqai') format('truetype'),
+        url('../fonts/mib.woff?n2zqai') format('woff'),
+        url('../fonts/mib.svg?n2zqai#mib') format('svg');
     font-weight: normal;
     font-style: normal;
     font-display: block;
 }
 
+.wpc-button-inner::before,
+.wpc-filter-title::after,
 .wp-block-file__button::after,
 .accordion-header::after,
 .program-mission li::before,
@@ -286,10 +288,16 @@ a.button::after, .button::after, button[type=submit]::after, input[type=submit]:
     -moz-osx-font-smoothing: grayscale;
 }
 
+.wpc-button-inner::before,
+.icon-filter:before {
+    content: "\e91a";
+}
+
 .icon-file:before {
     content: "\e919";
 }
 
+.wpc-filter-title::after,
 .accordion-header::after,
 .icon-dropdown:before {
     content: "\e918";

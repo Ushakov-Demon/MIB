@@ -1,12 +1,13 @@
 .wpc-edit-filter-set,
 .wpc-widget-close-container,
 .wpc-filters-widget-controls-container,
-.wpc-filter-header,
 .wpc-filter-chips-list .wpc-filter-chip:not(.wpc-chip-reset-all),
 .wpc-custom-selected-terms,
 .wpc-filters-ul-list .wpc-label-item input,
 .wpc-chip-remove-icon,
-body:not(.wpc_is_filter_request) .wpc-filters-widget-top-container {
+.wpc-instead-of-posts-found,
+body:not(.wpc_is_filter_request) .wpc-filters-widget-top-container,
+.wpc-button-inner .wpc-icon-html-wrapper {
     display: none !important;
 }
 
@@ -107,6 +108,159 @@ body:not(.wpc_is_filter_request) .wpc-filters-widget-top-container {
                     }
                 }
             }
+        }
+    }
+}
+
+.wpc-filter-set-635 {
+    .wpc-filters-widget-top-container {
+        display: none !important;
+    }
+
+    .wpc-filters-widget-wrapper {
+        @include desktop {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+    }
+
+    .wpc-filters-section {
+        position: relative;
+
+        @include mobile {
+
+            &:not(:last-child) {
+                border-bottom: 1px solid var(--color_light_gray_3);
+            }
+        }
+
+        &.active {
+            .wpc-filter-content {
+                opacity: 1;
+                visibility: visible;
+
+                @include desktop {
+                    padding: 20px;
+                }
+
+                @include mobile {
+                    display: block;
+                }
+            }
+
+            .wpc-filter-header {
+                .wpc-filter-title {
+                    color: var(--color_primary);
+
+                    &::after {
+                        transform: rotate(180deg);
+                    }
+                }
+            }
+        }
+
+        .wpc-filter-header {
+            cursor: pointer;
+            transition: all .5s ease;
+
+            &:hover {
+                color: var(--color_primary);
+            }
+
+            .wpc-filter-title {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                font-size: 15px;
+                font-weight: 600;
+
+                @include mobile {
+                    padding: 16px 0;
+                }
+
+                &::after {
+                    line-height: 0;
+                    font-size: 10px;
+                    transition: all .5s var(--cubic_bezier);
+                }
+            }
+        }
+
+        .wpc-filter-content {
+            visibility: hidden;
+            opacity: 0;
+            padding: 0 20px;
+            margin: 20px 0 0;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.5s var(--cubic_bezier);
+
+            @include desktop {
+                position: absolute;
+                z-index: 9999;
+                left: 50%;
+                transform: translate(-50%, 0);
+                top: 100%;
+                border-radius: 16px;
+                background-color: var(--color_white);
+                box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.05);
+            }
+
+            @include mobile {
+                display: none;
+                padding: 0;
+                margin: 0 0 16px;
+            }
+        }
+
+        .wpc-filters-ul-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+
+            .wpc-checkbox-item {
+                @include checkbox;
+
+                input[type=checkbox] + label {
+                    &::before {
+                        top: unset;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.wpc-filters-widget-content {
+
+    &:not(.wpc-filters-widget-opened) {
+        @include mobile {
+            display: none !important;
+        }
+    }
+}
+
+.wpc-filters-open-button-container {
+    border-bottom: 1px solid var(--color_light_gray_3);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+
+    @include desktop {
+        display: none !important;
+    }
+
+    .wpc-button-inner {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        font-size: 18px;
+        font-weight: bold;
+
+        &::before {
+            line-height: 0;
+            position: relative;
+            top: -1px;
         }
     }
 }

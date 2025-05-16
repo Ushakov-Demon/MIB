@@ -22,7 +22,7 @@ if ( empty( $duc_documents_list ) ) {
             foreach( $duc_documents_list as $item ) :
                 $file_url = wp_get_attachment_url( $item['duc_item_file'] );
             ?>
-            <div class="item">
+            <a class="item" href="<?php echo esc_url( $file_url )?>" download>
                 <?php
                 if ( ! empty( $item['duc_item_name'] ) ) :
                     ?>
@@ -32,10 +32,10 @@ if ( empty( $duc_documents_list ) ) {
                     <?php
                 endif;
                 ?>
-                <a href="<?php echo esc_url( $file_url )?>" class="show-more-link" download>
+                <span class="show-more-link">
                     <?php echo pll__('Learn more', 'baza'); ?>
-                </a>
-            </div>
+                </span>
+            </a>
             <?php
             endforeach;
             ?>

@@ -221,7 +221,54 @@ function create_custom_post_types_and_taxonomies() {
         'menu_icon'           => get_icon_base64( "student" ),
         'hierarchical'        => false,
         'supports'            => ['title', 'thumbnail', 'excerpt', 'editor' ],
-        'taxonomies'          => ['student_category', 'companies'],
+        'taxonomies'          => ['program_category', 'student_category', 'companies'],
+        'has_archive'         => false,
+        'rewrite'             => true,
+        'query_var'           => true,
+    ] );
+
+    register_post_type( 'members', [
+        'label' => null,
+        'labels' => [
+            'name'                  => __( 'Учасники' ),
+            'singular_name'         => __( 'Учасник' ),
+            'menu_name'             => __( 'Учасники' ),
+            'name_admin_bar'        => __( 'Учасник' ),
+            'archives'              => __( 'Архів учасників' ),
+            'attributes'            => __( 'Атрибути учасника' ),
+            'parent_item_colon'     => __( 'Батьківський учасник:' ),
+            'all_items'             => __( 'Всі учасники' ),
+            'add_new_item'          => __( 'Додати нового учасника' ),
+            'add_new'               => __( 'Додати новий' ),
+            'new_item'              => __( 'Новий учасник' ),
+            'edit_item'             => __( 'Редагувати учасника' ),
+            'update_item'           => __( 'Оновити учасника' ),
+            'view_item'             => __( 'Переглянути учасника' ),
+            'view_items'            => __( 'Переглянути учасників' ),
+            'search_items'          => __( 'Пошук учасника' ),
+            'not_found'             => __( 'Не знайдено' ),
+            'not_found_in_trash'    => __( 'Не знайдено в кошику' ),
+            'featured_image'        => __( 'Зображення' ),
+            'set_featured_image'    => __( 'Встановити зображення' ),
+            'remove_featured_image' => __( 'Видалити зображення' ),
+            'use_featured_image'    => __( 'Використати як зображення' ),
+            'insert_into_item'      => __( 'Вставити в учасника' ),
+            'uploaded_to_this_item' => __( 'Завантажено для цього учасника' ),
+            'items_list'            => __( 'Список учасників' ),
+            'items_list_navigation' => __( 'Навігація по учасниках' ),
+            'filter_items_list'     => __( 'Фільтрувати список учасників' ),
+        ],
+        'description'         => '',
+        'public'              => true,
+        'publicly_queryable'  => true,
+        'show_in_menu'        => true,
+        'show_in_rest'        => true,
+        'rest_base'           => null,
+        'show_in_nav_menus'   => true,
+        'menu_icon'           => 'dashicons-groups',
+        'menu_position'       => 30,
+        'hierarchical'        => false,
+        'supports'            => ['title', 'thumbnail', 'excerpt', 'editor' ],
         'has_archive'         => false,
         'rewrite'             => true,
         'query_var'           => true,
@@ -229,7 +276,8 @@ function create_custom_post_types_and_taxonomies() {
 }
 
 function mib_register_taxomomies() {
-    register_taxonomy( 'program_category', ['programs'], [
+    
+    register_taxonomy( 'program_category', ['programs', 'students'], [
         'labels' => [
             'name'              => 'Категорії програм',
             'singular_name'     => 'Категорія програми',
@@ -247,7 +295,11 @@ function mib_register_taxomomies() {
         'hierarchical'        => true,
         'show_in_rest'        => true,
         'show_admin_column'   => true,
-        'rewrite'             => array('slug' => 'program-category'),
+        'rewrite'             => array(
+            'slug'                => 'program-category',
+            'with_front'          => false,
+            'hierarchical'        => true
+        ),
     ]);
 
     register_taxonomy( 'event_category', ['events'], [

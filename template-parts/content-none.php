@@ -10,10 +10,11 @@
 ?>
 
 <main id="main" class="site-main page-404">
+    <?php display_breadcrumbs(); ?>
+
     <section class="section section-404">
         <div class="container">
             <div class="block-404">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/404.png" alt="">
                 <h1><?php pll_e('Page not found', 'baza'); ?></h1>
                 <p><?php pll_e('The address is incorrectly entered or this page no longer exists on the site', 'baza'); ?>.</p>
                 <div class="return-to">

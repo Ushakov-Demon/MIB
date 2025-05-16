@@ -60,10 +60,23 @@ function remove_filter_everything_styles() {
     
     wp_dequeue_style('filter-everything.min.css');
     wp_deregister_style('filter-everything.min.css');
+
+    wp_dequeue_style('wpc-filter-everything-custom');
+    wp_deregister_style('wpc-filter-everything-custom');
+    
 }
 
 add_action('wp_enqueue_scripts', 'remove_filter_everything_styles', 100);
 add_action('wp_print_styles', 'remove_filter_everything_styles', 100);
+
+function remove_filter_everything_inline_styles() {
+    wp_add_inline_style('filter-everything', '');
+    ob_start(function($buffer) {
+        $pattern = '/<style[^>]*id=["\']filter-everything-inline[^>]*>.*?<\/style>/is';
+        return preg_replace($pattern, '', $buffer);
+    });
+}
+add_action('wp_head', 'remove_filter_everything_inline_styles', 1);
 
 // Images sizes
 function images_sizes() {
@@ -112,10 +125,11 @@ function universal_add_breadcrumb_parent($links, $config = array()) {
     if (empty($config)) {
         $config = array(
             'events' => 155,
-            'programs' => 148,
+            //'programs' => 148,
             'accreditations' => 521,
             'teachers' => 20,
             'students' => 22,
+            'members' => 77,
         );
     }
 
@@ -652,3 +666,30 @@ function remove_slug_field() {
     remove_meta_box('slugdiv', 'events', 'normal');
 }
 add_action('admin_menu', 'remove_slug_field');
+
+// Translate filter title
+function filter_title_translation($title) {
+    if (is_admin()) {
+        return false;
+    }
+
+    if (function_exists('pll__') && !empty($title)) {
+        return pll__($title);
+    }
+    return $title;
+}
+
+add_filter('wpc_filter_title', 'filter_title_translation');
+
+function filter_item_translation($term_name) {
+    if (is_admin()) {
+        return false;
+    }
+
+    if (function_exists('pll__') && !empty($term_name)) {
+        return pll__($term_name);
+    }
+    return $title;
+}
+
+add_filter('wpc_filter_post_meta_term_name', 'filter_item_translation', 1);

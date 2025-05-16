@@ -620,32 +620,32 @@ function custom_posts_gutenberg_blocks() {
         include_once __THEME_DIR__ . '/template-parts/sections/program_form-section.php';
     });
 
-    // ==== Team Block
-    Block::make('team_block', __('Team'))
+    // ==== Members Block
+    Block::make('members_block', __('Members'))
     ->add_fields(array(
-        Field::make('separator', 'team_sep', __('Team Section')),
-        Field::make('complex', 'team_members', __('Team Members'))
-            ->add_fields(array(
-                Field::make('image', 'avatar', __('Avatar'))
-                    ->set_width(30),
-                Field::make('text', 'name', __('Full Name'))
-                    ->set_width(35),
-                Field::make('text', 'position', __('Position'))
-                    ->set_width(35),
-                Field::make('text', 'linkedin', __('LinkedIn URL'))
-                    ->set_width(50),
-                Field::make('text', 'facebook', __('Facebook URL'))
-                    ->set_width(50),
-            ))
+        Field::make('separator', 'members_sep', __('Members')),
     ))
     ->set_inner_blocks(false)
     ->set_icon('groups')
     ->set_category('mib')
     ->set_mode('both')
     ->set_render_callback(function($fields, $attributes, $inner_blocks) {
-        extract($fields);
-        
-        include_once __THEME_DIR__ . '/template-parts/sections/team-section.php';
+
+        include_once __THEME_DIR__ . '/template-parts/sections/members-section.php';
+    });
+
+    // ==== Clients Block
+    Block::make('clients_block', __('Clients'))
+    ->add_fields(array(
+        Field::make('separator', 'clients_sep', __('Clients')),
+    ))
+    ->set_inner_blocks(false)
+    ->set_icon('groups')
+    ->set_category('mib')
+    ->set_mode('both')
+    ->set_render_callback(function($fields, $attributes, $inner_blocks) {
+
+        include_once __THEME_DIR__ . '/template-parts/sections/clients-section.php';
     });
 
     // ==== Accreditations Block

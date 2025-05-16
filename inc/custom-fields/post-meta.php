@@ -310,4 +310,16 @@ function custom_posts_meta_data() {
         ->add_fields( array(
             Field::make( 'checkbox', 'ps_black_page', __( 'Black Page Design' ) )
     ) );
+
+    // ==== MEBMBERS
+    Container::make('post_meta', __('Team Information'))
+        ->where('post_type', '=', 'members')
+        ->add_fields(array(
+            Field::make('text', 'position', __('Position'))
+                ->set_width(100),
+            Field::make('text', 'linkedin', __('LinkedIn URL'))
+                ->set_width(50),
+            Field::make('text', 'facebook', __('Facebook URL'))
+                ->set_width(50),
+    ));
 }

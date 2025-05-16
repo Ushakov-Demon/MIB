@@ -3,6 +3,11 @@ $programs = apply_filters( 'mib_get_posts', 'programs', $programs_per_page );
 ?>
 <section class="section section-programs">
     <div class="container">
+
+
+        <?php
+            if ( ! empty( $programs_section_title ) ) :
+        ?>
         <div class="section-heiding">
             <?php
             if ( ! empty( $programs_section_small_text ) ) :
@@ -14,19 +19,15 @@ $programs = apply_filters( 'mib_get_posts', 'programs', $programs_per_page );
             endif;
             ?>
 
-            <?php
-            if ( ! empty( $programs_section_title ) ) :
+            <div class="section-title">
+                <?php 
+                    $processed_heading = preg_replace('/\*(.*?)\*/', '<span>$1</span>', $programs_section_title);
+                    echo $processed_heading;
                 ?>
-                <div class="section-title">
-                    <?php 
-                        $processed_heading = preg_replace('/\*(.*?)\*/', '<span>$1</span>', $programs_section_title);
-                        echo $processed_heading;
-                    ?>
-                </div>
-                <?php
-            endif;
+            </div>
 
-            if ( ! empty( $programs_section_link_text ) && ! empty( $programs_section_link ) ) :
+            <?php
+                if ( ! empty( $programs_section_link_text ) && ! empty( $programs_section_link ) ) :
             ?>
                 <a href="<?php echo esc_url( get_permalink($programs_section_link) )?>" class="section-link">
                     <?php echo esc_html( $programs_section_link_text )?>
@@ -47,6 +48,9 @@ $programs = apply_filters( 'mib_get_posts', 'programs', $programs_per_page );
             endif;
             ?>
         </div>
+        <?php
+        endif;
+        ?>
 
         <div class="items-wrapper">
             <div class="items">

@@ -12,6 +12,7 @@
 /wp-content/themes/index.php
 /wp-includes/
 /vendor/
+vendor
 /license.txt
 /readme.html
 /wp-*.php
