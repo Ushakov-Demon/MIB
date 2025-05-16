@@ -1,12 +1,13 @@
 <?php
 $post_id               = get_the_ID();
-$per_page              = $actuality_posts_per_page;
+$per_page              = $actuality_posts_per_page ?? 4;
 $alternating_posts     = apply_filters( 'mib_get_alternating_posts', $per_page );
 $events_arhive_page    = get_option( '_events_arhive_page' );
 $is_events_achive      = $post_id == $events_arhive_page;
 $max_num_pages         = $alternating_posts['max_num_pages'];
 $current_page_num      = $alternating_posts['page'];
 $pagination_class      = isset( $actuality_posts_section_pagination ) && 'on' == $actuality_posts_section_pagination ? ' section-news-list': '';
+$actuality_posts_title = isset($actuality_posts_title) ? $actuality_posts_title : pll__('Actual');
 ?>
 
 <section class="section section-news<?php echo esc_attr( $pagination_class )?>"

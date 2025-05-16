@@ -628,4 +628,27 @@ jQuery(document).ready(function ($) {
             $(filterSection).removeClass('active');
         }
     });
+
+	let data_categgory = '[data-category]';
+
+	$('.section-filter .filter:not(#filter-news) .item .filter-link').on('click', function(e) {
+		e.preventDefault();
+	
+		let target = $(this).parent().data('target');
+		
+		$('.section-filter .filter .item').removeClass('active');
+		$(this).parent().addClass('active');
+		
+		if (target === 'all') {
+			$(data_categgory).show();
+		} else {
+			$(data_categgory).hide();
+			
+			$(data_categgory).filter(function() {
+				const categories = $(this).attr('data-category');
+				if (!categories) return false;
+				return categories.split(' ').includes(target);
+			}).show();
+		}
+	});
 });

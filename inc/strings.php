@@ -115,6 +115,17 @@ function register_customizer_strings_for_polylang() {
         'Production',
         'Retail',
         'Filter by programs',
+        'By programs',
+        'Open Programs Clients',
+        'Corporate Programs Clients',
+        'Graduate/Diploma Programs Clients',
+        'Business partners',
+        'Partners',
+        'Partner news',
+        'Business schools',
+        'Professional associations',
+        'Companies',
+        'Tel/Fax',
     );
     
     foreach ($strings as $string) {

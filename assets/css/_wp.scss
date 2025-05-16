@@ -557,3 +557,9 @@ ol.wp-block-list {
 .has-black-background-color {
     background-color: var(--color_black);
 }
+
+.wp-block-jetpack-layout-grid-editor, 
+.wp-block-jetpack-layout-grid {
+    padding-left: 0;
+    padding-right: 0;
+}

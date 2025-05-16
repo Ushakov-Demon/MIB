@@ -24,6 +24,12 @@ if ( empty( $terms ) ) return;
             <?php foreach ( $terms as $item ) :
                 $logo_id = get_term_meta( $item->term_id, '_company_logo', true );
                 $url     = get_term_meta( $item->term_id, '_company_url', true );
+                $is_partner          = get_term_meta( $item->term_id, '_is_partner', true );
+                $is_business_partner = get_term_meta( $item->term_id, '_is_business_partner', true );
+                $is_client           = get_term_meta( $item->term_id, '_is_client', true );
+                $is_slider           = get_term_meta( $item->term_id, '_is_slider', true );
+
+                if ( ! $is_slider ) continue;
                 
                 if ( empty( $logo_id ) ) continue;
                 

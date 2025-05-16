@@ -667,6 +667,21 @@ function remove_slug_field() {
 }
 add_action('admin_menu', 'remove_slug_field');
 
+// Admin menu add
+
+function add_companies_menu_item() {
+    add_menu_page(
+        'Компанії',
+        'Компанії',
+        'manage_categories',
+        'edit-tags.php?taxonomy=companies',
+        '',
+        'dashicons-building',
+        25
+    );
+}
+add_action('admin_menu', 'add_companies_menu_item');
+
 // Translate filter title
 function filter_title_translation($title) {
     if (is_admin()) {
@@ -689,7 +704,63 @@ function filter_item_translation($term_name) {
     if (function_exists('pll__') && !empty($term_name)) {
         return pll__($term_name);
     }
-    return $title;
+    return $term_name;
 }
 
 add_filter('wpc_filter_post_meta_term_name', 'filter_item_translation', 1);
+
+// Partners count shortcode
+function partners_count_shortcode( $atts ) {
+
+    $atts = shortcode_atts( array(
+        'wrapper_class' => 'partners-count-wrapper',
+    ), $atts );
+    
+    $terms = get_terms( array(
+        'taxonomy' => 'companies',
+        'hide_empty' => false,
+    ) );
+    
+    if ( empty( $terms ) || is_wp_error( $terms ) ) {
+        return '';
+    }
+    
+    $all_partners_ids = [];
+    $business_partner_ids = [];
+    
+    foreach ( $terms as $term ) {
+        $is_partner                  = get_term_meta( $term->term_id, '_is_partner', true );
+        $is_business_partner         = get_term_meta( $term->term_id, '_is_business_partner', true );
+        $is_business_school          = get_term_meta( $term->term_id, '_is_business_school', true );
+        $is_professional_association = get_term_meta( $term->term_id, '_is_professional_association', true );
+        $is_company                  = get_term_meta( $term->term_id, '_is_company', true );
+        
+        if ( $is_partner || $is_business_partner || $is_business_school || $is_professional_association || $is_company ) {
+            $all_partners_ids[] = $term->term_id;
+        }
+        
+        if ( $is_business_partner ) {
+            $business_partner_ids[] = $term->term_id;
+        }
+    }
+
+    $all_partners_count = count( array_unique( $all_partners_ids ) );
+    $business_partner_count = count( array_unique( $business_partner_ids ) );
+    
+    $output = '<div class="' . esc_attr( $atts['wrapper_class'] ) . '">';
+    
+    $output .= '<div class="item item-partners">';
+    $output .= '<div class="value">' . $all_partners_count . '</div>';
+    $output .= '<div class="label">' . pll__( 'Partners' ) . '</div>';
+    $output .= '</div>';
+    
+    $output .= '<div class="item item-business-partners">';
+    $output .= '<div class="value">' . $business_partner_count . '</div>';
+    $output .= '<div class="label">' . pll__( 'Business partners' ) . '</div>';
+    $output .= '</div>';
+    
+    $output .= '</div>';
+    
+    return $output;
+}
+add_shortcode( 'partners_count', 'partners_count_shortcode' );

@@ -190,7 +190,7 @@ function create_custom_post_types_and_taxonomies() {
         'menu_icon'           => get_icon_base64( "teachers" ),
         'hierarchical'        => false,
         'supports'            => ['title', 'thumbnail', 'excerpt', 'editor'],
-        'taxonomies'          => ['teacher_category', 'companies'],
+        'taxonomies'          => ['program_category', 'teacher_category', 'companies'],
         'has_archive'         => false,
         'rewrite'             => true,
         'query_var'           => true,
@@ -277,7 +277,7 @@ function create_custom_post_types_and_taxonomies() {
 
 function mib_register_taxomomies() {
     
-    register_taxonomy( 'program_category', ['programs', 'students'], [
+    register_taxonomy( 'program_category', ['programs', 'students', 'teachers'], [
         'labels' => [
             'name'              => 'Категорії програм',
             'singular_name'     => 'Категорія програми',
@@ -344,7 +344,7 @@ function mib_register_taxomomies() {
         'rewrite'             => array('slug' => 'accreditation-category'),
     ]);
 
-    register_taxonomy( 'teacher_category', ['teachers'], [
+    register_taxonomy( 'teacher_category', ['programs', 'teachers'], [
         'labels' => [
             'name'              => 'Категорії викладачів',
             'singular_name'     => 'Категорія викладача',

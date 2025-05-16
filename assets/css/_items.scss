@@ -256,3 +256,50 @@
         }
     }
 }
+
+@mixin item_company() {
+
+    a {
+        &:hover {
+            color: var(--color_primary);
+        }
+    }
+
+    .item {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        &:hover {
+            .image {
+                img {
+                    filter: grayscale(0);
+                    opacity: 1;
+                }
+            }
+        }
+
+        .image {
+            background-color: var(--color_light_gray_4);
+            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            min-height: 100px;
+
+            img {
+                width: auto;
+                height: auto;
+                filter: grayscale(100%);
+                transition: all .5s ease;
+                opacity: .5;
+            }
+        }
+
+        .name {
+            text-align: center;
+            font-size: 15px;
+        }
+    }
+}

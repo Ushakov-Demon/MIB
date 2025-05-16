@@ -141,8 +141,22 @@ function custom_posts_gutenberg_blocks() {
         ->set_render_callback( function ( $fields, $attributes, $inner_blocks ) {
             extract( $fields );
         
-        // Include the template for rendering
         include_once __THEME_DIR__ . '/template-parts/sections/company_logos-section.php';
+    } );
+
+    // ==== Company Partners Block
+    Block::make( 'partners_block', __( 'Our Partners' ) )
+        ->add_fields( array(
+            Field::make( 'separator', 'partners_sep', __( 'Our Partners' ) ),
+            Field::make( 'text', 'partners_heading', __( 'Partners Heading' ) )
+        ) )
+        ->set_icon( 'groups' )
+        ->set_category( 'mib' )
+        ->set_mode( 'both' )
+        ->set_render_callback( function ( $fields, $attributes, $inner_blocks ) {
+            extract( $fields );
+        
+        include_once __THEME_DIR__ . '/template-parts/sections/partners-section.php';
     } );
 
     // ==== Training programs
@@ -694,6 +708,27 @@ function custom_posts_gutenberg_blocks() {
             extract($fields);
         
         include_once __THEME_DIR__ . '/template-parts/banners/banner1120x125.php';
+    });
+
+    // ==== Repeater with Counter Block
+    Block::make('repeater_counter', __('Repeater with counter'))
+    ->add_fields(array(
+        Field::make('separator', 'repeater_counter_sep', __('Repeater with counter')),
+
+        Field::make('complex', 'repeater_counter_items', __('Items'))
+            ->add_fields(array(
+                Field::make('text', 'repeater_counter_item', __('Item'))
+                    ->set_width(100)
+                    ->set_required(true),
+            ))
+    ))
+    ->set_icon('grid-view')
+    ->set_category('mib')
+    ->set_mode('both')
+    ->set_render_callback(function($fields, $attributes, $inner_blocks) {
+        extract( $fields );
+
+        include_once __THEME_DIR__ . '/template-parts/blocks/block-repeater-counter.php';
     });
 
 }

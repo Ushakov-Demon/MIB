@@ -75,25 +75,28 @@ get_header();
             </div>
 
             <div class="student-info">
-                <div class="content">
+                <div class="items">
                     <?php if (!empty($activity)) : ?>
-                        <div class="student-activity">
+                        <div class="item student-activity">
+                            <i class="icon-suitcase"></i>
                             <div class="label"><?php echo pll__('Activity'); ?></div>
-                            <div class="value"><?php echo $activity; ?></div>
+                            <div class="value"><?php echo pll__($activity); ?></div>
                         </div>
                     <?php endif; ?>
 
                     <?php if (!empty($status)) : ?>
-                        <div class="student-status">
+                        <div class="item student-status">
+                            <i class="icon-user-tie"></i>
                             <div class="label"><?php echo pll__('Status'); ?></div>
-                            <div class="value"><?php echo $status; ?></div>
+                            <div class="value"><?php echo pll__($status); ?></div>
                         </div>
                     <?php endif; ?>
 
                     <?php if (!empty($city)) : ?>
-                        <div class="student-city">
+                        <div class="item student-city">
+                            <i class="icon-city"></i>
                             <div class="label"><?php echo pll__('City'); ?></div>
-                            <div class="value"><?php echo $city; ?></div>
+                            <div class="value"><?php echo pll__($city); ?></div>
                         </div>
                     <?php endif; ?>
                 </div>
@@ -104,6 +107,8 @@ get_header();
             <?php endif; ?>
 
             <?php echo share_article_buttons(); ?>
+
+            <?php include get_template_directory() . '/template-parts/sections/actuality_previews-section.php'; ?>
             
         </div>
     </div>
