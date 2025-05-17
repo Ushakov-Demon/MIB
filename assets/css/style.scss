@@ -2399,6 +2399,9 @@ footer {
         &.version-gray {
             background-color: #252421;
             background: url('../images/hero-black.svg'), radial-gradient(41.93% 131.75% at 62.19% 16.78%, #646059 0%, #252421 100%);
+            background-position: center center;
+            background-size: cover;
+            background-repeat: no-repeat;
 
             .section-title {
                 color: var(--color_white);
@@ -2609,7 +2612,9 @@ footer {
 
         &.version-program {
 
-            margin-bottom: 0;
+            + .program-tabs {
+                margin-top: calc(var(--block_spacing) * -1);
+            }
 
             .content-header {
                 display: grid;
@@ -2667,6 +2672,7 @@ footer {
                     strong {
                         color: var(--color_white);
                         font-size: 16px;
+                        display: block;
                     }
                 }
             }
@@ -3161,7 +3167,7 @@ footer {
                 flex-wrap: nowrap;
                 gap: 16px;
 
-                .page-template-programs & {
+                .tax-program_category & {
                     flex-direction: column;
                     flex-wrap: unset;
                     gap: 24px;
@@ -4508,9 +4514,9 @@ footer {
 
 .program-results-mission {
     display: grid;
-    grid-template-columns: 57% 1fr;
-    gap: 11.5%;
-    margin: calc(var(--block_spacing) * 2) 0;
+    grid-template-columns: 60% 1fr;
+    gap: var(--block_spacing);
+    margin: var(--block_spacing) 0;
 
     @include mobile {
         display: flex;
@@ -4602,11 +4608,18 @@ footer {
                 color: var(--color_primary);
             }
         }
+
+        @include ul_list;
+
+        ul {
+            gap: 8px;
+        }
     }
 
     .program-mission {
         background-color: rgba(204, 197, 168, .2);
         padding: 40px 32px;
+        align-self: flex-start;
 
         h2, h3, h4, h5 {
             font-size: 18px;
@@ -4616,6 +4629,20 @@ footer {
             @include mobile {
                 font-size: 18px;
             }
+        }
+    }
+}
+
+.taxonomy-description {
+    > * {
+        margin: 32px 0;
+
+        &:first-child {
+            margin-top: 0;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
         }
     }
 }

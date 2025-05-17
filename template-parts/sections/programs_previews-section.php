@@ -1,5 +1,5 @@
 <?php
-$programs     = apply_filters( 'mib_get_posts', 'programs', $programs_per_page );
+$programs = apply_filters( 'mib_get_posts', 'programs', $programs_per_page );
 
 if (is_tax()) {
     $current_taxonomy = get_queried_object();
@@ -33,7 +33,7 @@ if (is_tax()) {
             </div>
 
             <?php
-                if ( ! empty( $programs_section_link_text ) && ! empty( $programs_section_link ) ) :
+            if ( ! empty( $programs_section_link_text ) && ! empty( $programs_section_link ) ) :
             ?>
                 <a href="<?php echo esc_url( get_permalink($programs_section_link) )?>" class="section-link">
                     <?php echo esc_html( $programs_section_link_text )?>

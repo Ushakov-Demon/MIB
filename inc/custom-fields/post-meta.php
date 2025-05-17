@@ -66,18 +66,46 @@ function custom_posts_meta_data() {
         ->add_tab( __( 'Shedule & format' ), array(
             Field::make( 'date', 'tr_program_date_start', __( 'Date start' ) )
                 ->set_storage_format( $date_format )
-                ->set_width( 33 ),
+                ->set_width( 20 ),
             Field::make( 'text', 'tr_program_period_length', __( 'Course length' ) )
                 ->set_attribute( 'type', 'number' )
                 ->set_attribute( 'min', '1' )
                 ->set_default_value( 5 )
-                ->set_width( 33 ),
+                ->set_width( 20 ),
+            Field::make( 'text', 'tr_program_number_of_courses', __( 'Number of courses' ) )
+                ->set_attribute( 'type', 'number' )
+                ->set_width( 20 ),
             Field::make( 'select', 'tr_program_period', __( 'Period' ) )
                 ->add_options( $period_options )
                 ->set_default_value( 'months' )
-                ->set_width( 33 ),
+                ->set_width( 20 ),
             Field::make( 'text', 'tr_program_format',  __( 'Format' ) )
-                ->set_width( 75 ),
+                ->set_width( 20 ),
+         ) )
+         ->add_tab( __( 'Param stats' ), array(
+            Field::make( 'text', 'tr_program_stats_hours', __( 'Learning hours' ) )
+                ->set_attribute( 'type', 'number' )
+                ->set_width( 20 ),
+            Field::make( 'text', 'tr_program_stats_offline', __( 'Offline percentage' ) )
+                ->set_attribute( 'type', 'number' )
+                ->set_width( 20 ),
+            Field::make( 'text', 'tr_program_stats_teachers', __( 'Number of teachers' ) )
+                ->set_attribute( 'type', 'number' )
+                ->set_width( 20 ),
+            Field::make( 'text', 'tr_program_stats_cases', __( 'Number of real cases' ) )
+                ->set_attribute( 'type', 'number' )
+                ->set_width( 20 ),
+
+            Field::make( 'separator', 'tr_program_stats_separator', __( 'Labels for Stats' ) ),
+
+            Field::make( 'textarea', 'tr_program_stats_hours_label', __( 'Learning hours Text' ) )
+                ->set_width( 20 ),
+            Field::make( 'textarea', 'tr_program_stats_offline_label', __( 'Offline percentage Text' ) )
+                ->set_width( 20 ),
+            Field::make( 'textarea', 'tr_program_stats_teachers_label', __( 'Number of teachers Text' ) )
+                ->set_width( 20 ),
+            Field::make( 'textarea', 'tr_program_stats_cases_label', __( 'Number of real cases Text' ) )
+                ->set_width( 20 ),
          ) )
         ->add_tab( __( 'Members' ) , array(
             Field::make( 'association', 'tr_program_teachers', __( 'Teachers' ) )

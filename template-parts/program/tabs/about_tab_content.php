@@ -1,6 +1,6 @@
 <div id="tab-about-program" class="tab-content active">
     <?php
-        include get_template_directory() . '/template-parts/program/blocks/program_stats.php';
+        include get_template_directory() . '/template-parts/program/blocks/block-program-params-stats.php';
 
         foreach( $about_tab_content as $key => $block ) :
 

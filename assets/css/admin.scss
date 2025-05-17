@@ -101,3 +101,23 @@
         }
     }
 }
+
+.cf-complex__inserter-menu {
+    padding-left: 0 !important;
+    z-index: 999999 !important;
+}
+
+#edittag {
+    max-width: 100%;
+}
+
+.post-type-programs {
+    
+    .edit-post-layout__metaboxes {
+        order: 1;
+    }
+
+    .editor-visual-editor {
+        order: 2;
+    }
+}

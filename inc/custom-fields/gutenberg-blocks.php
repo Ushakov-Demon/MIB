@@ -716,4 +716,35 @@ function custom_posts_gutenberg_blocks() {
         include_once __THEME_DIR__ . '/template-parts/blocks/block-repeater-counter.php';
     });
 
+    // ==== Exam Contact Information Block
+    Block::make('exam_contact_info', __('Exam Contact Information'))
+    ->add_fields(array(
+        Field::make('separator', 'exam_contact_sep', __('Exam Contact Information')),
+
+        Field::make('text', 'exam_contact_title', __('Title'))
+            ->set_default_value(__('For inquiries about the exam, please contact the manager:'))
+            ->set_width(100),
+        
+        Field::make('text', 'exam_contact_address', __('Address and Name'))
+            ->set_help_text(__('Enter address and/or name of contact person'))
+            ->set_width(33),
+        
+        Field::make('text', 'exam_contact_phone_title', __('Phone Title'))
+            ->set_default_value(__('Phone:'))
+            ->set_help_text(__('Label for the phone number (e.g. "Phone:", "Contact:", etc.)'))
+            ->set_width(33),
+            
+        Field::make('text', 'exam_contact_phone', __('Phone Number'))
+            ->set_help_text(__('Enter contact phone number'))
+            ->set_width(33)
+    ))
+    ->set_icon('phone')
+    ->set_category('mib')
+    ->set_mode('both')
+    ->set_render_callback(function($fields, $attributes, $inner_blocks) {
+        extract($fields);
+        
+        include_once __THEME_DIR__ . '/template-parts/blocks/block-exam-contact-info.php';
+    });
+
 }

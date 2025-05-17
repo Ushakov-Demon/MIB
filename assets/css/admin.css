@@ -92,4 +92,20 @@
 .block-editor [data-type*=carbon-fields] .cf-radio__list-item input[type=checkbox]:checked + label:after {
   background-color: var(--color_primary);
   left: 18px;
+}
+
+.cf-complex__inserter-menu {
+  padding-left: 0 !important;
+  z-index: 999999 !important;
+}
+
+#edittag {
+  max-width: 100%;
+}
+
+.post-type-programs .edit-post-layout__metaboxes {
+  order: 1;
+}
+.post-type-programs .editor-visual-editor {
+  order: 2;
 }/*# sourceMappingURL=admin.css.map */

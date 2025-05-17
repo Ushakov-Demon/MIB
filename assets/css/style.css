@@ -3549,9 +3549,11 @@ footer .footer-after .footer-after-col {
   border-top: 4px solid transparent;
   border-bottom: 4px solid transparent;
   border-left: 6px solid var(--color_primary);
+  border-right: 0;
   position: absolute;
   top: 6px;
   left: 0;
+  border-radius: 0;
 }
 .section.section-main.version-hot-event .text.text-before ul li:not(:last-child), .section.section-main.version-hot-event .text.text-after ul li:not(:last-child), .section.section-main.version-events .text.text-before ul li:not(:last-child), .section.section-main.version-events .text.text-after ul li:not(:last-child), .section.section-main.version-black .text.text-before ul li:not(:last-child), .section.section-main.version-black .text.text-after ul li:not(:last-child), .section.section-main.version-white .text.text-before ul li:not(:last-child), .section.section-main.version-white .text.text-after ul li:not(:last-child), .section.section-main.version-gray .text.text-before ul li:not(:last-child), .section.section-main.version-gray .text.text-after ul li:not(:last-child) {
   margin-bottom: 10px;
@@ -3573,6 +3575,9 @@ footer .footer-after .footer-after-col {
 .section.section-main.version-gray {
   background-color: #252421;
   background: url("../images/hero-black.svg"), radial-gradient(41.93% 131.75% at 62.19% 16.78%, #646059 0%, #252421 100%);
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 .section.section-main.version-gray .section-title {
   color: var(--color_white);
@@ -3742,8 +3747,8 @@ footer .footer-after .footer-after-col {
   height: 40px;
   filter: brightness(0) invert(1);
 }
-.section.section-main.version-program {
-  margin-bottom: 0;
+.section.section-main.version-program + .program-tabs {
+  margin-top: calc(var(--block_spacing) * -1);
 }
 .section.section-main.version-program .content-header {
   display: grid;
@@ -3797,6 +3802,7 @@ footer .footer-after .footer-after-col {
 .section.section-main.version-program .hero-short-details .item strong {
   color: var(--color_white);
   font-size: 16px;
+  display: block;
 }
 .section.section-main.version-program .prices {
   display: flex;
@@ -4218,7 +4224,7 @@ footer .footer-after .footer-after-col {
     flex-wrap: nowrap;
     gap: 16px;
   }
-  .page-template-programs .section.section-programs .items {
+  .tax-program_category .section.section-programs .items {
     flex-direction: column;
     flex-wrap: unset;
     gap: 24px;
@@ -4240,7 +4246,7 @@ footer .footer-after .footer-after-col {
     padding-left: 16px;
     padding-right: 16px;
   }
-  .page-template-programs .section.section-programs .items .item {
+  .tax-program_category .section.section-programs .items .item {
     width: auto;
     max-width: 100%;
   }
@@ -5372,9 +5378,11 @@ footer .footer-after .footer-after-col {
   border-top: 4px solid transparent;
   border-bottom: 4px solid transparent;
   border-left: 6px solid var(--color_primary);
+  border-right: 0;
   position: absolute;
   top: 6px;
   left: 0;
+  border-radius: 0;
 }
 .section.section-partners .category.has-business-partner .items .item.item-business-partner ul li:not(:last-child) {
   margin-bottom: 10px;
@@ -5796,9 +5804,9 @@ footer .footer-after .footer-after-col {
 
 .program-results-mission {
   display: grid;
-  grid-template-columns: 57% 1fr;
-  gap: 11.5%;
-  margin: calc(var(--block_spacing) * 2) 0;
+  grid-template-columns: 60% 1fr;
+  gap: var(--block_spacing);
+  margin: var(--block_spacing) 0;
 }
 @media (max-width: 767px) {
   .program-results-mission {
@@ -5887,9 +5895,38 @@ footer .footer-after .footer-after-col {
 .program-results-mission .program-results h2 span, .program-results-mission .program-results h3 span, .program-results-mission .program-results h4 span, .program-results-mission .program-results h5 span {
   color: var(--color_primary);
 }
+.program-results-mission .program-results ul {
+  list-style: none;
+  padding: 0;
+}
+.program-results-mission .program-results ul li {
+  position: relative;
+  padding-left: 22px;
+}
+.program-results-mission .program-results ul li::before {
+  display: block;
+  content: "";
+  width: 0;
+  height: 0;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-left: 6px solid var(--color_primary);
+  border-right: 0;
+  position: absolute;
+  top: 6px;
+  left: 0;
+  border-radius: 0;
+}
+.program-results-mission .program-results ul li:not(:last-child) {
+  margin-bottom: 10px;
+}
+.program-results-mission .program-results ul {
+  gap: 8px;
+}
 .program-results-mission .program-mission {
   background-color: rgba(204, 197, 168, 0.2);
   padding: 40px 32px;
+  align-self: flex-start;
 }
 .program-results-mission .program-mission h2, .program-results-mission .program-mission h3, .program-results-mission .program-mission h4, .program-results-mission .program-mission h5 {
   font-size: 18px;
@@ -5900,6 +5937,16 @@ footer .footer-after .footer-after-col {
   .program-results-mission .program-mission h2, .program-results-mission .program-mission h3, .program-results-mission .program-mission h4, .program-results-mission .program-mission h5 {
     font-size: 18px;
   }
+}
+
+.taxonomy-description > * {
+  margin: 32px 0;
+}
+.taxonomy-description > *:first-child {
+  margin-top: 0;
+}
+.taxonomy-description > *:last-child {
+  margin-bottom: 0;
 }
 
 .section-program-benefits {
@@ -6217,9 +6264,11 @@ footer .footer-after .footer-after-col {
   border-top: 4px solid transparent;
   border-bottom: 4px solid transparent;
   border-left: 6px solid var(--color_primary);
+  border-right: 0;
   position: absolute;
   top: 6px;
   left: 0;
+  border-radius: 0;
 }
 .program-admission-requirements ul li:not(:last-child) {
   margin-bottom: 10px;
@@ -6493,9 +6542,11 @@ footer .footer-after .footer-after-col {
   border-top: 4px solid transparent;
   border-bottom: 4px solid transparent;
   border-left: 6px solid var(--color_primary);
+  border-right: 0;
   position: absolute;
   top: 6px;
   left: 0;
+  border-radius: 0;
 }
 .program-structure ul li:not(:last-child) {
   margin-bottom: 10px;
@@ -6610,7 +6661,7 @@ footer .footer-after .footer-after-col {
     padding-left: 16px;
     padding-right: 16px;
   }
-  .page-template-programs .search-container .search-programs-items .item {
+  .tax-program_category .search-container .search-programs-items .item {
     width: auto;
     max-width: 100%;
   }

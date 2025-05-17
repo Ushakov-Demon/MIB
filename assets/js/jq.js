@@ -103,7 +103,7 @@ jQuery(document).ready(function ($) {
 	);
 
 	$(window).on('scroll', function () {
-		$('body').css('--scroll', $(window).scrollTop() / ($(document).height() - $(window).height()));
+		$('body.home').css('--scroll', $(window).scrollTop() / ($(document).height() - $(window).height()));
 	});
 
 	// To top

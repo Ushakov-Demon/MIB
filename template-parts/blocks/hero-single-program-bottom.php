@@ -6,6 +6,7 @@
     $duration_period     = get_post_meta( $post_id, $prefix . '_period', true );
     $format              = get_post_meta( $post_id, $prefix . '_format', true );
     $language            = get_post_meta( $post_id, $prefix . '_language', true );
+    $number_of_courses   = get_post_meta( $post_id, $prefix . '_number_of_courses', true );
 
     $time_left = '';
 
@@ -42,6 +43,21 @@
 
 <div class="hero-short-details">
     <?php
+    if ( ! empty( $number_of_courses ) ):
+        ?>
+        <div class="item">
+            <?php
+                pll_e( 'Number of courses', 'baza' );
+            ?>
+            <strong>
+                <?php
+                    echo $number_of_courses;
+                ?>
+            </strong>
+        </div>
+        <?php
+    endif;
+
     if ( ! empty( $time_left ) ):
         ?>
         <div class="item">

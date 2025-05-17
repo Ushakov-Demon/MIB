@@ -468,9 +468,11 @@
                 border-top: 4px solid transparent;
                 border-bottom: 4px solid transparent;
                 border-left: 6px solid var(--color_primary);
+                border-right: 0;
                 position: absolute;
                 top: 6px;
                 left: 0;
+                border-radius: 0;
             }
 
             &:not(:last-child) {

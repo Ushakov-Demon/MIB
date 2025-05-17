@@ -140,6 +140,8 @@ function register_customizer_strings_for_polylang() {
         'Program language',
         'Price range',
         'Not scheduled',
+        'teachers',
+        'teacher',
     );
     
     foreach ($strings as $string) {

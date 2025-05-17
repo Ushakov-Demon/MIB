@@ -27,6 +27,8 @@ function custom_terms_meta_data() {
     Container::make( 'term_meta', __( 'Program data' ) )
         ->where( 'term_taxonomy', '=', 'program_category' )
         ->add_fields( array(
+            Field::make('rich_text', 'program_category_content', __('Program Category Content'))
+                ->set_help_text(__('Enter a detailed content for this program category')),
             Field::make('select', 'programs_columns', __('Number of Columns'))
                 ->set_options(array(
                     'column-1' => __('1 Column'),
