@@ -28,8 +28,7 @@ $time_difference     = ! empty( $sale_price_date_end ) ? mib_get_time_difference
 
                 $diff_sum_txt = preg_replace( '/(..)(?=(...)*$)/', '$1 ', $diff_sum );
 
-                $info_txt = sprintf( pll__( "<span>Увага!</span> Діють умови ранньої реєстрації на програму.<br>
-                Знижка %s грн до %s." ), $diff_sum_txt, $sale_price_date_end );
+                $info_txt = sprintf( pll__( "<span>Attention!</span> Early registration terms apply to the program.<br>A discount of %s UAH until %s." ), $diff_sum_txt, $sale_price_date_end );
             ?>
             <div class="price-info">
                 <?php echo $info_txt ?>

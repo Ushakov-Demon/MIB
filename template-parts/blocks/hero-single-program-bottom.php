@@ -10,11 +10,33 @@
     $time_left = '';
 
     if ( 0 < $differences['months'] ) {
-        $time_left = sprintf( '<strong>%s %s</strong>', $differences['months'],  pll__( 'months', 'baza' ) );
+
+        $months_text = '';
+        $months = $differences['months'];
+        
+        if ($months == 1) {
+            $months_text = pll__( 'month', 'baza' ); // 1 month
+        } else {
+            $months_text = pll__( 'months', 'baza' ); // 2+ months
+        }
+        
+        $time_left = sprintf( '<strong>%s %s</strong>', $months, $months_text );
+        
     } elseif ( 0 == $differences['months'] && 2 < $differences['days'] ) {
-        $time_left = sprintf( '<strong>%s %s</strong>', $differences['days'],  pll__( 'days', 'baza' ) );
+
+        $days_text = '';
+        $days = $differences['days'];
+        
+        if ($days == 1) {
+            $days_text = pll__( 'day', 'baza' ); // 1 day
+        } else {
+            $days_text = pll__( 'days', 'baza' ); // 2+ days
+        }
+        
+        $time_left = sprintf( '<strong>%s %s</strong>', $days, $days_text );
+        
     } elseif ( 1 <= $differences['days'] ) {
-        $time_left = '<stong>' . pll__( 'Tomorrow', 'baza' ) . '</strong>';
+        $time_left = '<strong>' . pll__( 'Tomorrow', 'baza' ) . '</strong>';
     }
 ?>
 

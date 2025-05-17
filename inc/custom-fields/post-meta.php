@@ -48,18 +48,20 @@ function custom_posts_meta_data() {
         ->add_tab( __( 'Prices' ), array(
             Field::make( 'text', 'tr_program_regular_price', __( 'Price' ) )
                 ->set_attribute( 'type', 'number' )
-                ->set_width( 33 ),
-            Field::make( 'text', 'tr_program_additional_price', __( 'Additional price' ) )
-                ->set_attribute( 'type', 'number' )
-                ->set_width( 33 ),
-            Field::make( 'select', 'tr_program_additional_price_currency', __( 'Currency (for Additional price)' ) )
-                ->set_width( 33 )
-                ->set_options( MIB_CURRENCIES ),
+                ->set_width( 20 ),
             Field::make( 'text', 'tr_program_sale_price', __( 'Sale price' ) )
                 ->set_attribute( 'type', 'number' )
-                ->set_width( 50 ),
+                ->set_width( 20 ),
+            Field::make( 'text', 'tr_program_additional_price', __( 'Additional price' ) )
+                ->set_attribute( 'type', 'number' )
+                ->set_width( 20 ),
+            Field::make( 'select', 'tr_program_additional_price_currency', __( 'Currency (for Additional price)' ) )
+                ->set_width( 20 )
+                ->set_options( MIB_CURRENCIES ),
             Field::make( 'date', 'tr_program_sale_price_date_end', __( 'Apply sale price before date' ) )
-                ->set_width( 50 ),
+                ->set_width( 20 ),
+            Field::make( 'text', 'tr_program_regular_price_info', __( 'Price info' ) )
+                ->set_width( 100 ),
         ) )
         ->add_tab( __( 'Shedule & format' ), array(
             Field::make( 'date', 'tr_program_date_start', __( 'Date start' ) )

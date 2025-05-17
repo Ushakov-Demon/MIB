@@ -119,13 +119,21 @@ function register_customizer_strings_for_polylang() {
         'Open Programs Clients',
         'Corporate Programs Clients',
         'Graduate/Diploma Programs Clients',
+        'Business partner',
         'Business partners',
+        'Partner',
         'Partners',
         'Partner news',
         'Business schools',
         'Professional associations',
         'Companies',
         'Tel/Fax',
+        'Tomorrow',
+        'day',
+        'days',
+        'month',
+        'months',
+        '<span>Attention!</span> Early registration terms apply to the program.<br>A discount of %s UAH until %s.'
     );
     
     foreach ($strings as $string) {

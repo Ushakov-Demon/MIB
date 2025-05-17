@@ -750,12 +750,16 @@ function partners_count_shortcode( $atts ) {
     
     $output .= '<div class="item item-partners">';
     $output .= '<div class="value">' . $all_partners_count . '</div>';
-    $output .= '<div class="label">' . pll__( 'Partners' ) . '</div>';
+    
+    $partners_label = ($all_partners_count == 1) ? pll__( 'Partner' ) : pll__( 'Partners' );
+    $output .= '<div class="label">' . $partners_label . '</div>';
     $output .= '</div>';
     
     $output .= '<div class="item item-business-partners">';
     $output .= '<div class="value">' . $business_partner_count . '</div>';
-    $output .= '<div class="label">' . pll__( 'Business partners' ) . '</div>';
+    
+    $business_partners_label = ($business_partner_count == 1) ? pll__( 'Business partner' ) : pll__( 'Business partners' );
+    $output .= '<div class="label">' . $business_partners_label . '</div>';
     $output .= '</div>';
     
     $output .= '</div>';

@@ -288,6 +288,7 @@ function mib_get_time_difference( string $date_from ) : array {
 
 function mib_get_course_price( int $course_id ) {
     $reg_price                  = get_post_meta( $course_id, '_tr_program_regular_price', true );
+    $reg_price_info             = get_post_meta( $course_id, '_tr_program_regular_price_info', true );
     $sale_price                 = get_post_meta( $course_id, '_tr_program_sale_price', true );
     $additional_price           = get_post_meta( $course_id, '_tr_program_additional_price', true );
     $excerpt                    = get_the_excerpt( $course_id );
@@ -300,10 +301,10 @@ function mib_get_course_price( int $course_id ) {
     $main_price = $reg_price;
     $old_price  = false;
 
-    $data_title = "";
+    $reg_price_info_title = "";
 
-    if ( ! empty( $excerpt ) ) {
-        $data_title = " data-title='{$excerpt}'";
+    if ( ! empty( $reg_price_info ) ) {
+        $reg_price_info_title = "<i class='icon-info' data-title='{$reg_price_info}'></i> ";
     }
 
     if ( ! empty( $sale_price ) &&
@@ -318,9 +319,8 @@ function mib_get_course_price( int $course_id ) {
     $old_price_html        = $old_price ? "<span class='old-price'>{$old_price} {$currensy}</span>" : '';
     $additional_price_html = ! empty ( $additional_price ) ? "<span class='additional-price'>+{$additional_price} {$additional_price_currency}</span>" : '';
 
-    // TODO: need add text class='icon-info' data-title
     $html = "<div class='prices'>
-                <div class='label'>{$label}<i class='icon-info'{$data_title}></i></div>
+                <div class='label'>{$label}{$reg_price_info_title}</div>
                 <div class='prices-items'>
                     {$price_html}
                     {$old_price_html}
