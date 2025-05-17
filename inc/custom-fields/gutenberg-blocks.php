@@ -201,17 +201,25 @@ function custom_posts_gutenberg_blocks() {
         ->add_fields( array(
             Field::make( 'separator', 'actuality_posts_sep', __( 'Mixed posts previews' ) ),
             Field::make( 'text', 'actuality_posts_per_page', __( 'Posts per page' ) )
-                ->set_width( 20 )
+                ->set_width( 33 )
                 ->set_attribute( 'type', 'number' )
                 ->set_default_value( $def_per_page ),
+                Field::make( 'select', 'actuality_post_type', __( 'Which posts to show?' ) )
+                    ->set_width( 33 )
+                    ->add_options( array(
+                        'mixed' => __( 'Mixed' ),
+                        'post'  => __( 'News' ),
+                        'events' => __( 'Events' ),
+                    ) )
+                    ->set_default_value( 'mixed' ),
             Field::make( 'select', 'actuality_posts_section_pagination', __( 'Pagination' ) )
-                ->set_width( 20 )
+                ->set_width( 33 )
                 ->add_options( array(
                     'off' => __( 'Off' ),
                     'on'  => __( 'On' ),
                 ) ),
             Field::make( 'text', 'actuality_posts_link_text', __( 'Link text' ) )
-                ->set_width( 30 )
+                ->set_width( 50 )
                 ->set_default_value( 'Всі записи' ),
             Field::make( 'select', 'actuality_posts_link', __( 'Link' ) )
                 ->set_width( 30 )
