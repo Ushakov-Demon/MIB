@@ -358,6 +358,7 @@ body:not(.wpc_is_filter_request) .wpc-filters-widget-top-container,
   padding: 0;
   margin: 0;
 }
+
 .wpc-filters-ul-list {
   list-style: none;
   padding: 0;
@@ -594,7 +595,7 @@ body:not(.wpc_is_filter_request) .wpc-filters-widget-top-container,
   font-size: 16px;
   text-indent: 0.5px;
 }
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   .wpc-filter-set-671 .wpc-filters-section .wpc-filters-ul-list .wpc-checkbox-item input[type=checkbox] + label,
   .wpc-filter-set-635 .wpc-filters-section .wpc-filters-ul-list .wpc-checkbox-item input[type=checkbox] + label {
     text-wrap: nowrap;
@@ -1746,7 +1747,9 @@ input[type=number]::-webkit-inner-spin-button {
 }
 
 input[type=number] {
-  -moz-appearance: textfield;
+  -webkit-appearance: textfield;
+     -moz-appearance: textfield;
+          appearance: textfield;
   text-align: center;
 }
 

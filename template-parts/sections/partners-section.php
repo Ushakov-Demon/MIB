@@ -80,11 +80,11 @@ $partner_categories = array(
             
             $category_partner_types = [];
             foreach ( $terms as $check_item ) {
-                $check_is_partner = get_term_meta( $check_item->term_id, '_is_partner', true );
-                $check_is_business_partner = get_term_meta( $check_item->term_id, '_is_business_partner', true );
-                $check_is_business_school = get_term_meta( $check_item->term_id, '_is_business_school', true );
+                $check_is_partner                  = get_term_meta( $check_item->term_id, '_is_partner', true );
+                $check_is_business_partner         = get_term_meta( $check_item->term_id, '_is_business_partner', true );
+                $check_is_business_school          = get_term_meta( $check_item->term_id, '_is_business_school', true );
                 $check_is_professional_association = get_term_meta( $check_item->term_id, '_is_professional_association', true );
-                $check_is_company = get_term_meta( $check_item->term_id, '_is_company', true );
+                $check_is_company                  = get_term_meta( $check_item->term_id, '_is_company', true );
                 
                 $check_belongs_to_category = false;
                 if ( $category_key === 'partner' && $check_is_partner ) {

@@ -292,14 +292,16 @@ function mib_register_taxomomies() {
             'menu_name'         => 'Категорії програм',
         ],
         'public'              => true,
+        'publicly_queryable'  => true,
         'hierarchical'        => true,
         'show_in_rest'        => true,
         'show_admin_column'   => true,
-        'rewrite'             => array(
-            'slug'                => 'program-category',
-            'with_front'          => false,
-            'hierarchical'        => true
-        ),
+        'query_var'           => true,
+        'rewrite'             => [
+            'slug'            => 'program-category', 
+            'with_front'      => true,
+            'hierarchical'    => false
+        ],
     ]);
 
     register_taxonomy( 'event_category', ['events'], [

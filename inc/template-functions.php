@@ -668,7 +668,6 @@ function remove_slug_field() {
 add_action('admin_menu', 'remove_slug_field');
 
 // Admin menu add
-
 function add_companies_menu_item() {
     add_menu_page(
         'Компанії',
