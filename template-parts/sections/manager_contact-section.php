@@ -2,11 +2,11 @@
 
 if (!defined('ABSPATH')) exit;
 
-$heading = $manager_contact_heading ?? '';
-$avatar_id = $manager_avatar ?? 0;
-$name = $manager_name ?? '';
-$position = $manager_position ?? '';
-$form_id = $contact_form_id ?? '';
+$heading   = get_option('_manager_contact_heading') ?? '';
+$avatar_id = get_option('_manager_avatar') ?? '';
+$name      = get_option('_manager_name') ?? '';
+$position  = get_option('_manager_position') ?? '';
+$form_id   = get_option('_contact_form_id') ?? '';
 
 if (empty($form_id)) return;
 ?>
@@ -17,23 +17,23 @@ if (empty($form_id)) return;
         <div class="manager-contact-wrapper">
             <div class="manager-info">
                 <?php 
-                $avatar_url = wp_get_attachment_image_url($avatar_id, 'thumbnail');
-                $avatar_alt = get_post_meta($avatar_id, '_wp_attachment_image_alt', true) ?: $name;
+                $avatar_url = wp_get_attachment_image_url( $avatar_id, 'thumbnail' );
+                $avatar_alt = get_post_meta( $avatar_id, '_wp_attachment_image_alt', true ) ?: $name;
                 ?>
                 <div class="manager-avatar">
                     <img src="<?php echo esc_url($avatar_url); ?>" alt="<?php echo esc_attr($avatar_alt); ?>" loading="lazy">
                 </div>
                 <div class="manager-details">
-                    <div class="manager-name"><?php echo esc_html($name); ?></div>
-                    <?php if (!empty($position)) : ?>
-                        <div class="manager-position"><?php echo esc_html($position); ?></div>
+                    <div class="manager-name"><?php echo __( esc_html( $name ), 'baza' ); ?></div>
+                    <?php if ( ! empty( $position ) ) : ?>
+                        <div class="manager-position"><?php echo __( esc_html( $position ), 'baza' ); ?></div>
                     <?php endif; ?>
                 </div>
             </div>
             
             <div class="manager-contact-form">
-                <?php if (!empty($heading)) : ?>
-                    <div class="section-title"><?php echo wp_kses_post($heading); ?></div>
+                <?php if ( ! empty( $heading ) ) : ?>
+                    <div class="section-title"><?php echo __( wp_kses_post( $heading ), 'baza' ); ?></div>
                 <?php endif; ?>
 
                 <?php 

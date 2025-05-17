@@ -767,3 +767,102 @@ function partners_count_shortcode( $atts ) {
     return $output;
 }
 add_shortcode( 'partners_count', 'partners_count_shortcode' );
+
+// Unregister sidebar/widget area
+function remove_sidebar_widget_area() {
+    unregister_sidebar('sidebar-1');
+}
+add_action('widgets_init', 'remove_sidebar_widget_area', 11);
+
+// Display program category taxonomy data summary 
+function mib_display_program_category_summary() {
+    if (!is_tax('program_category')) {
+        return '';
+    }
+    
+    $programs = apply_filters('mib_get_posts', 'programs', -1);
+    
+    if (!$programs || $programs->post_count === 0) {
+        return '';
+    }
+    
+    $count = $programs->post_count;
+    $nearest_start_date = null;
+    $languages = [];
+    $min_price = PHP_INT_MAX;
+    $max_price = 0;
+    
+    $current_time = current_time('timestamp');
+    
+    if ($programs->have_posts()) {
+        while ($programs->have_posts()) {
+            $programs->the_post();
+            $post_id = get_the_ID();
+            
+            $start_date = get_post_meta($post_id, '_tr_program_date_start', true);
+            if ($start_date) {
+                $start_timestamp = strtotime($start_date);
+                
+                if ($start_timestamp > $current_time) {
+                    if (is_null($nearest_start_date) || $start_timestamp < $nearest_start_date) {
+                        $nearest_start_date = $start_timestamp;
+                    }
+                }
+            }
+            
+            $language = get_post_meta($post_id, '_tr_program_language', true);
+            if ($language && !in_array($language, $languages)) {
+                $languages[] = $language;
+            }
+            
+            $regular_price = (int)get_post_meta($post_id, '_tr_program_regular_price', true);
+            $sale_price = (int)get_post_meta($post_id, '_tr_program_sale_price', true);
+            
+            $sale_end_date = get_post_meta($post_id, '_tr_program_sale_price_date_end', true);
+            $use_sale_price = false;
+            
+            if ($sale_price && $sale_end_date) {
+                $sale_end_timestamp = strtotime($sale_end_date);
+                if ($sale_end_timestamp > $current_time) {
+                    $use_sale_price = true;
+                }
+            }
+            
+            $actual_price = $use_sale_price && $sale_price > 0 ? $sale_price : $regular_price;
+            
+            if ($actual_price > 0 && $actual_price < $min_price) {
+                $min_price = $actual_price;
+            }
+            
+            if ($actual_price > $max_price) {
+                $max_price = $actual_price;
+            }
+        }
+    }
+    
+    wp_reset_postdata();
+    
+    $date_format = get_option('date_format');
+    $nearest_start_formatted = $nearest_start_date ? date_i18n($date_format, $nearest_start_date) : pll__('Not scheduled');
+    $languages_formatted = !empty($languages) ? implode(', ', $languages) : pll__('Not specified');
+    
+    $price_range = '';
+    if ($min_price < PHP_INT_MAX && $max_price > 0) {
+        if ($min_price === $max_price) {
+            $price_range = number_format($min_price) . ' ' . pll__('UAH');
+        } else {
+            $price_range = number_format($min_price) . ' - ' . number_format($max_price) . ' ' . pll__('UAH');
+        }
+    } else {
+        $price_range = pll__('Not specified');
+    }
+    
+    $output = '<div class="program-category-summary">';
+    $output .= '<div class="summary-item"><span class="label">' . pll__('Number of courses') . ':</span><span class="value">' . $count . '</span></div>';
+    $output .= '<div class="summary-item"><span class="label">' . pll__('Nearest start') . ':</span><span class="value">' . $nearest_start_formatted . '</span></div>';
+    $output .= '<div class="summary-item"><span class="label">' . pll__('Program language') . ':</span><span class="value">' . $languages_formatted . '</span></div>';
+    $output .= '<div class="summary-item"><span class="label">' . pll__('Price range') . ':</span><span class="value">' . $price_range . '</span></div>';
+    $output .= '</div>';
+    
+    return $output;
+}

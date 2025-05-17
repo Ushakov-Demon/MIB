@@ -66,6 +66,7 @@ function custom_posts_gutenberg_blocks() {
             ->add_options( array(
                 'white' => __( 'White', ),
                 'black' => __( 'Black', ),
+                'gray' => __( 'Gray', ),
                 'home' => __( 'Home' ),
             ) )
             ->set_default_value( 'white' ),
@@ -453,22 +454,6 @@ function custom_posts_gutenberg_blocks() {
     Block::make('manager_contact_block', __('Contact Manager'))
     ->add_fields(array(
         Field::make('separator', 'manager_contact_sep', __('Contact Manager')),
-        Field::make('text', 'manager_contact_heading', __('Section Heading'))
-            ->set_default_value(__('Contact our manager')),
-        Field::make('image', 'manager_avatar', __('Manager Avatar'))
-            ->set_width(30)
-            ->set_type(array('image'))
-            ->set_required(true),
-        Field::make('text', 'manager_name', __('Manager Name'))
-            ->set_width(35)
-            ->set_required(true),
-        Field::make('text', 'manager_position', __('Manager Position'))
-            ->set_width(35)
-            ->set_required(true),
-        Field::make('select', 'contact_form_id', __('Contact Form 7'))
-            ->add_options( $cf7_options )
-            ->set_required(true)
-            ->set_help_text(__('Select a Contact Form 7 form')),
     ))
     ->set_inner_blocks(false)
     ->set_description(__('A block to display manager contact with form'))

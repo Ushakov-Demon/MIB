@@ -18,7 +18,6 @@ vendor
 /wp-*.php
 /xmlrpc.php
 .DS_Store
-.gitignore
 
 # Configuration
 wp-config.php

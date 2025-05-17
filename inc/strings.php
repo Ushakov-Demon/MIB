@@ -133,7 +133,13 @@ function register_customizer_strings_for_polylang() {
         'days',
         'month',
         'months',
-        '<span>Attention!</span> Early registration terms apply to the program.<br>A discount of %s UAH until %s.'
+        '<span>Attention!</span> Early registration terms apply to the program.<br>A discount of %s UAH until %s.',
+        'Not specified',
+        'Number of courses',
+        'Nearest start',
+        'Program language',
+        'Price range',
+        'Not scheduled',
     );
     
     foreach ($strings as $string) {

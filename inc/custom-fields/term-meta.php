@@ -23,4 +23,25 @@ function custom_terms_meta_data() {
             Field::make( 'checkbox', 'is_professional_association', __( 'Professional Association' ) ),
             Field::make( 'checkbox', 'is_company', __( 'Company' ) ),
         ) );
+
+    Container::make( 'term_meta', __( 'Program data' ) )
+        ->where( 'term_taxonomy', '=', 'program_category' )
+        ->add_fields( array(
+            Field::make('select', 'programs_columns', __('Number of Columns'))
+                ->set_options(array(
+                    'column-1' => __('1 Column'),
+                    'column-2' => __('2 Columns'),
+                    'column-3' => __('3 Columns'),
+                ))
+                ->set_default_value('3')
+                ->set_help_text(__('Select how many columns to display programs in this category')),
+            Field::make( 'select', 'main_top_version', __('Select Main Top Version' ))
+                ->add_options( array(
+                    'white' => __( 'White', ),
+                    'black' => __( 'Black', ),
+                    'gray'  => __( 'Gray', ),
+                    'home'  => __( 'Home' ),
+                ) )
+                ->set_default_value( 'white' ),
+        ) );
 }

@@ -34,6 +34,18 @@ function mib_get_posts( $post_type = 'post', int $per_page = 0, int $page = 1, $
         $posts_q_args['lang'] = pll_current_language();
     }
 
+    if (is_tax()) {
+        $current_taxonomy_term = get_queried_object();
+        
+        $posts_q_args['tax_query'] = array(
+            array(
+                'taxonomy' => $current_taxonomy_term->taxonomy,
+                'field'    => 'term_id',
+                'terms'    => $current_taxonomy_term->term_id,
+            ),
+        );
+    }
+
     $posts = new WP_Query( $posts_q_args );
 
     wp_reset_postdata();

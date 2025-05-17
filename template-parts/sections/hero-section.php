@@ -5,6 +5,7 @@
     $is_events_arhive           = $post_id == get_option( '_events_arhive_page' );
     $is_programs_archive        = $post_id == get_option( '_programs_arhive_page' );
     $is_tax                     = is_tax();
+    $is_programs_tax            = is_tax('program_category');
     $main_top_heading_text      = ! empty( $main_top_heading_text ) ? $main_top_heading_text : get_the_title();
     $main_top_version          .= ($post_type === 'programs') ? ' version-program' : '';
 ?>
@@ -98,6 +99,11 @@
                 ?>
 
             <?php endif; ?>
+
+            <?php if( $is_programs_tax ): ?>
+                <?php echo mib_display_program_category_summary();  ?>
+            <?php endif; ?>
+
         </div>
 
         <?php if ( ! empty( $main_top_heading_media ) ) : ?>

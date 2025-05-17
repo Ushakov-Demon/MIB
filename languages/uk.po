@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: MIB\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-04-18 13:36+0000\n"
-"PO-Revision-Date: 2025-05-16 11:19+0000\n"
+"PO-Revision-Date: 2025-05-17 14:33+0000\n"
 "Last-Translator: \n"
 "Language-Team: Українська\n"
 "Language: uk\n"
@@ -75,6 +75,9 @@ msgctxt "list item separator"
 msgid ", "
 msgstr ""
 
+msgid "Manager"
+msgstr "Менеджер"
+
 #. Name of the theme
 msgid "MIB"
 msgstr ""
@@ -82,6 +85,13 @@ msgstr ""
 #. Author of the theme
 msgid "Navrocky"
 msgstr ""
+
+msgid ""
+"Not sure which program is right for you? Leave your phone number and our "
+"specialist will contact you."
+msgstr ""
+"Не знаєте, яка програма підійде вам? Залиште свій телефон і наш спеціаліст "
+"зв'яжеться з вами"
 
 #: template-parts/content-none.php:14
 msgid "Nothing Found"
@@ -142,6 +152,9 @@ msgid ""
 "Sorry, but nothing matched your search terms. Please try again with some "
 "different keywords."
 msgstr ""
+
+msgid "Streelkova Alexandra"
+msgstr "Стрелкова Александра"
 
 msgid "Study"
 msgstr "Навчання"
