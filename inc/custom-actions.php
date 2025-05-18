@@ -300,6 +300,7 @@ function mib_get_time_difference( string $date_from ) : array {
 
 function mib_get_course_price( int $course_id ) {
     $reg_price                  = get_post_meta( $course_id, '_tr_program_regular_price', true );
+    $price_label                = get_post_meta( $course_id, '_tr_program_regular_price_label', true );
     $reg_price_info             = get_post_meta( $course_id, '_tr_program_regular_price_info', true );
     $sale_price                 = get_post_meta( $course_id, '_tr_program_sale_price', true );
     $additional_price           = get_post_meta( $course_id, '_tr_program_additional_price', true );
@@ -319,6 +320,10 @@ function mib_get_course_price( int $course_id ) {
         $reg_price_info_title = "<i class='icon-info' data-title='{$reg_price_info}'></i> ";
     }
 
+    if ( ! empty( $price_label ) ) {
+        $price_label_html = "<span class='price-label'>{$price_label}</span>";
+    }
+
     if ( ! empty( $sale_price ) &&
          intval( $sale_price ) < intval( $reg_price ) &&
          0 < $time_difference['days']
@@ -335,6 +340,7 @@ function mib_get_course_price( int $course_id ) {
                 <div class='label'>{$label}{$reg_price_info_title}</div>
                 <div class='prices-items'>
                     {$price_html}
+                    {$price_label_html}
                     {$old_price_html}
                     {$additional_price_html}
                 </div>

@@ -2706,6 +2706,10 @@ footer {
                     flex-wrap: wrap;
                     gap: 16px;
                     line-height: 1;
+
+                    .price-label {
+                        display: none !important;
+                    }
                 }
 
                 .price {
@@ -4080,6 +4084,60 @@ footer {
     }
 }
 
+.exam-block {
+    padding: 40px 32px;
+    margin: 0 0 var(--block_spacing);
+    border: 1px solid rgba(0, 0, 0, .15);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    h1, h2, h3, h4, h5, h6 {
+        margin: 0;
+    }
+
+    .info {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+
+        @include mobile {
+            grid-template-columns: repeat(1, 1fr);
+        }
+    }
+
+    .item {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        .value {
+            font-weight: 600;
+        }
+    }
+
+    .buttons {
+        display: flex;
+        align-items: center;
+        gap: 32px;
+        border-top: 1px solid rgba(0, 0, 0, .15);
+        padding-top: 24px;
+
+        @include mobile {
+            flex-direction: column;
+        }
+
+        .link {
+            display: block;
+            color: var(--color_primary);
+            font-weight: 500;
+
+            &:hover {
+                color: var(--color_secondary);
+            }
+        }
+    }
+}
+
 .program-category-summary {
     display: flex;
     flex-wrap: wrap;
@@ -4450,13 +4508,10 @@ footer {
     background-color: var(--color_khaki);
     padding: 24px;
     gap: 8px 32px;
+    margin-bottom: 16px;
 
     &:hover {
         background-color: var(--color_primary);
-    }
-
-    + .program-accreditation {
-        margin-top: 16px;
     }
 
     @include max1024 {
@@ -4516,7 +4571,6 @@ footer {
     display: grid;
     grid-template-columns: 60% 1fr;
     gap: var(--block_spacing);
-    margin: var(--block_spacing) 0;
 
     @include mobile {
         display: flex;
@@ -4614,12 +4668,27 @@ footer {
         ul {
             gap: 8px;
         }
+
+        blockquote {
+            padding: 24px 40px;
+            background-color: var(--color_light_gray);
+            margin-left: 0;
+            margin-right: 0;
+        }
     }
 
     .program-mission {
         background-color: rgba(204, 197, 168, .2);
         padding: 40px 32px;
         align-self: flex-start;
+
+        p {
+            margin: 0 0 24px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
 
         h2, h3, h4, h5 {
             font-size: 18px;
@@ -4794,6 +4863,33 @@ footer {
 
         .accordion-content {
             opacity: 1;
+        }
+    }
+}
+
+.schedule-block {
+    margin: 0 0 var(--block_spacing);
+    background: url('../images/schedule-bg.svg'), linear-gradient(180deg, #1F2024 0%, #09090A 100%);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    padding: 40px 32px;
+    color: var(--color_grey_4);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    .title {
+        color: var(--color_white);
+        font-size: 32px;
+        font-weight: 500;
+    }
+
+    .button {
+        margin-top: 24px;
+
+        &::after {
+            display: none;
         }
     }
 }
@@ -5040,20 +5136,22 @@ footer {
     @include persons;
 }
 
-.tab-content {
+.tabs-container {
+    margin: var(--block_spacing) 0;
 
-    padding: var(--block_spacing) 0;
+    .tab-content {
 
-    &:not(.active) {
-        display: none !important;
-    }
+        &:not(.active) {
+            display: none !important;
+        }
 
-    .tab-title {
-        margin-top: 0;
-        font-size: 32px;
+        .tab-title {
+            margin-top: 0;
+            font-size: 32px;
 
-        @include mobile {
-            font-size: 28px;
+            @include mobile {
+                font-size: 28px;
+            }
         }
     }
 }
@@ -6148,6 +6246,15 @@ footer {
             flex-direction: column;
         }
 
+        h1, h2, h3, h4, h5, h6 {
+            grid-column: span 2;
+            margin: 0;
+        }
+
+        .field-text {
+            grid-column: span 2;
+        }
+
         span {
             display: block;
         }
@@ -6204,10 +6311,6 @@ footer {
     }
 
     .form-submit {
-        
-        @include desktop {
-            margin-top: 18px;
-        }
 
         @include mobile {
             text-align: center;
@@ -6438,6 +6541,20 @@ footer {
         transform: scale(1);
         filter: blur(0);
     }
+}
+
+.pum-theme-default-theme {
+  backdrop-filter: blur(2px);
+
+  .pum-container {
+
+    @include mobile {
+        padding: 40px 32px;
+    }
+  }
+
+  .pum-content {
+  }
 }
 
 .article-month,

@@ -68,9 +68,6 @@ $has_about = isset( $about_tab_content );
                 include get_template_directory() . '/template-parts/program/tabs/about_tab_content.php';
                 break;
         }
-        // echo '<pre>';
-        //     var_dump( $key );
-        // echo '</pre>';
     }
     ?>
 </div>

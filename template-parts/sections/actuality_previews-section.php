@@ -118,7 +118,7 @@ $current_page_num = $alternating_posts['page'];
                         include get_template_directory() . '/template-parts/blocks/block-show-more.php';
                     };
                 else:
-                    echo __( 'Items not found' );
+                    echo __( 'Items not found', 'baza' );
                 endif;
                 ?>
             </div>

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: MIB\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-04-18 13:36+0000\n"
-"PO-Revision-Date: 2025-05-17 14:33+0000\n"
+"PO-Revision-Date: 2025-05-18 10:53+0000\n"
 "Last-Translator: \n"
 "Language-Team: Українська\n"
 "Language: uk\n"
@@ -53,6 +53,9 @@ msgstr ""
 msgid "Edit <span class=\"screen-reader-text\">%s</span>"
 msgstr ""
 
+msgid "Events"
+msgstr "Події"
+
 #. URI of the theme
 msgid "http://bazadev.com.ua"
 msgstr ""
@@ -62,6 +65,9 @@ msgid ""
 "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps "
 "searching can help."
 msgstr ""
+
+msgid "Items not found"
+msgstr "Записів не знайдено"
 
 #. %s: post title
 #: inc/template-tags.php:83

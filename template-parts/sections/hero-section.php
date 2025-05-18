@@ -48,7 +48,7 @@
                         $processed_bottom_text = preg_replace( '/\*(.*?)\*/', '<span>$1</span>', $main_bottom_text );
                         ?>
                         <div class="text text-before">
-                            <?php echo $processed_bottom_text; ?>
+                            <?php echo wp_kses_post( $processed_bottom_text ); ?>
                         </div>
                         <?php
                     endif;
@@ -92,7 +92,7 @@
                     $processed_second_text = preg_replace( '/\*(.*?)\*/', '<span>$1</span>', $main_bottom_second_text );
                     ?>
                     <div class="text text-after">
-                        <?php echo $processed_second_text; ?>
+                        <?php echo wp_kses_post( $processed_second_text ); ?>
                     </div>
                     <?php                    
                 endif;

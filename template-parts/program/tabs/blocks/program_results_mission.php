@@ -20,8 +20,7 @@ if ( empty( $free_content ) && empty( $program_missions ) ) {
     <div class="program-mission">
         <?php
             echo $program_missions;
-            ?>
-        </div>
+        ?>
     </div>
     <?php
     endif;

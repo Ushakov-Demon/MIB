@@ -142,6 +142,12 @@ function register_customizer_strings_for_polylang() {
         'Not scheduled',
         'teachers',
         'teacher',
+        'Phone',
+        'Request a consultation',
+        'Ask a question',
+        'Completed studies',
+        'Enhanced qualifications',
+        'Download file',
     );
     
     foreach ($strings as $string) {

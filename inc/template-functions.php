@@ -815,10 +815,14 @@ function mib_display_program_category_summary() {
                 $languages[] = $language;
             }
             
-            $regular_price  = (int)get_post_meta($post_id, '_tr_program_regular_price', true);
-            $sale_price     = (int)get_post_meta($post_id, '_tr_program_sale_price', true);
-            $sale_end_date  = get_post_meta($post_id, '_tr_program_sale_price_date_end', true);
-            $use_sale_price = false;
+            $regular_price            = (int)get_post_meta($post_id, '_tr_program_regular_price', true);
+            $sale_price               = (int)get_post_meta($post_id, '_tr_program_sale_price', true);
+            $sale_end_date            = get_post_meta($post_id, '_tr_program_sale_price_date_end', true);
+            $completed_studies        = get_post_meta($post_id, '_tr_program_completed_studies', true);
+            $enhanced_qualifications  = get_post_meta($post_id, '_tr_program_enhanced_qualifications', true);
+            $total_completed_studies += $completed_studies;
+            $total_enhanced_qualifications += $enhanced_qualifications;
+            $use_sale_price           = false;
             
             if ($sale_price && $sale_end_date) {
                 $sale_end_timestamp = strtotime($sale_end_date);
@@ -842,8 +846,8 @@ function mib_display_program_category_summary() {
     wp_reset_postdata();
     
     $date_format             = get_option('date_format');
-    $nearest_start_formatted = $nearest_start_date ? date_i18n($date_format, $nearest_start_date) : pll__('Not scheduled');
-    $languages_formatted     = !empty($languages) ? implode(', ', $languages) : pll__('Not specified');
+    $nearest_start_formatted = $nearest_start_date ? date_i18n($date_format, $nearest_start_date) : '';
+    $languages_formatted     = !empty($languages) ? implode(', ', $languages) : '';
     
     $price_range = '';
     if ($min_price < PHP_INT_MAX && $max_price > 0) {
@@ -852,28 +856,51 @@ function mib_display_program_category_summary() {
         } else {
             $price_range = $min_price . ' - ' . $max_price . ' ' . pll__( 'UAH' );
         }
-    } else {
-        $price_range = pll__('Not specified');
     }
     
-    $output = '<div class="program-category-summary">
-        <div class="summary-item">
-            <span class="label">' . pll__('Number of courses') . ':</span>
-            <span class="value">' . $count . '</span>
-        </div>
-        <div class="summary-item">
+    $output = '<div class="program-category-summary">';
+
+    $output .= '<div class="summary-item">
+        <span class="label">' . pll__('Number of courses') . ':</span>
+        <span class="value">' . $count . '</span>
+    </div>';
+
+    if ( ! empty( $nearest_start_formatted ) ) {
+        $output .= '<div class="summary-item">
             <span class="label">' . pll__('Nearest start') . ':</span>
             <span class="value">' . $nearest_start_formatted . '</span>
-        </div>
-        <div class="summary-item">
+        </div>';
+    }
+    
+    if ( ! empty( $languages_formatted ) ) {
+        $output .= '<div class="summary-item">
             <span class="label">' . pll__('Program language') . ':</span>
             <span class="value">' . $languages_formatted . '</span>
-        </div>
-        <div class="summary-item">
+        </div>';
+    }
+    
+    if ( ! empty( $price_range ) ) {
+        $output .= '<div class="summary-item">
             <span class="label">' . pll__('Price range') . ':</span>
             <span class="value">' . $price_range . '</span>
-        </div>
-    </div>';
+        </div>';
+    }
+
+    if ( ! empty( $total_completed_studies ) ) {
+        $output .= '<div class="summary-item">
+            <span class="label">' . pll__('Completed studies') . ':</span>
+            <span class="value">' . $total_completed_studies . '</span>
+        </div>';
+    }
+    
+    if ( ! empty( $total_enhanced_qualifications ) ) {
+        $output .= '<div class="summary-item">
+            <span class="label">' . pll__('Enhanced qualifications') . ':</span>
+            <span class="value">' . $total_enhanced_qualifications . '</span>
+        </div>';
+    }
+    
+    $output .= '</div>';
     
     return $output;
 }

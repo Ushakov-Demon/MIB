@@ -75,8 +75,6 @@ if (is_tax()) {
                             include get_template_directory() . '/template-parts/blocks/block-item.php';
 
                         endwhile;
-                    else:
-                        echo __('Items not found');
                     endif;
                 ?>
             </div>

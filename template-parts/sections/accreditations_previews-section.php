@@ -34,7 +34,7 @@ $accreditations = apply_filters( 'mib_get_posts', 'accreditations', $accreditati
 
                     endwhile;
                 else:
-                    echo __( 'Items not found' );
+                    echo __( 'Items not found', 'baza' );
                 endif;
                 ?>
             </div>

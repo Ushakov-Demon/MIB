@@ -86,3 +86,55 @@ function mib_get_search_item_template($post_type) {
     
     return $templates[$post_type] ?? '/template-parts/blocks/default-item.php';
 }
+
+// Rename menu
+function rename_menu_items() {
+    global $menu, $submenu;
+    
+    foreach ($menu as $key => $item) {
+        if (isset($item[2]) && $item[2] === 'flamingo') {
+            $menu[$key][0] = 'Повідомлення';
+        }
+    }
+    
+    if (isset($submenu['flamingo'])) {
+        foreach ($submenu['flamingo'] as $key => $item) {
+            if ($item[2] === 'flamingo') {
+                $submenu['flamingo'][$key][0] = 'Вхідні';
+            }
+            if ($item[2] === 'flamingo_inbound') {
+                $submenu['flamingo'][$key][0] = 'Вхідні повідомлення';
+            }
+            if ($item[2] === 'flamingo_outbound') {
+                $submenu['flamingo'][$key][0] = 'Вихідні повідомлення';
+            }
+            if ($item[2] === 'flamingo_address') {
+                $submenu['flamingo'][$key][0] = 'Адресна книга';
+            }
+        }
+    }
+    
+    foreach ($menu as $key => $item) {
+        if (isset($item[2]) && $item[2] === 'wpcf7') {
+            $menu[$key][0] = 'Форми';
+        }
+    }
+
+    if (isset($submenu['wpcf7'])) {
+        foreach ($submenu['wpcf7'] as $key => $item) {
+            if ($item[2] === 'wpcf7') {
+                $submenu['wpcf7'][$key][0] = 'Усі форми';
+            }
+            if ($item[2] === 'wpcf7-new') {
+                $submenu['wpcf7'][$key][0] = 'Додати нову';
+            }
+            if ($item[2] === 'wpcf7-integration') {
+                $submenu['wpcf7'][$key][0] = 'Інтеграції';
+            }
+            if ($item[2] === 'wpcf7-settings') {
+                $submenu['wpcf7'][$key][0] = 'Налаштування';
+            }
+        }
+    }
+}
+add_action('admin_menu', 'rename_menu_items', 999);

@@ -422,7 +422,7 @@ function custom_posts_gutenberg_blocks() {
                 ) )
                 ->add_fields( 'course_teachers', array(
                     Field::make( 'text', 'course_teachers_count', __( 'Per page' ) )
-                        ->set_attribute( 'type', '=', 'number' )
+                        ->set_attribute( 'type', 'number' )
                         ->set_default_value( 2 )
                         ->set_width( 25 ),
                     Field::make( 'text', 'course_teachers_block_title', __( 'Block title' ) )
@@ -730,21 +730,19 @@ function custom_posts_gutenberg_blocks() {
         Field::make('separator', 'exam_contact_sep', __('Exam Contact Information')),
 
         Field::make('text', 'exam_contact_title', __('Title'))
-            ->set_default_value(__('For inquiries about the exam, please contact the manager:'))
             ->set_width(100),
         
-        Field::make('text', 'exam_contact_address', __('Address and Name'))
-            ->set_help_text(__('Enter address and/or name of contact person'))
-            ->set_width(33),
-        
-        Field::make('text', 'exam_contact_phone_title', __('Phone Title'))
-            ->set_default_value(__('Phone:'))
-            ->set_help_text(__('Label for the phone number (e.g. "Phone:", "Contact:", etc.)'))
-            ->set_width(33),
+        Field::make('text', 'exam_contact_address', __('Address'))
+            ->set_width(50),
             
         Field::make('text', 'exam_contact_phone', __('Phone Number'))
-            ->set_help_text(__('Enter contact phone number'))
-            ->set_width(33)
+            ->set_width(50),
+
+        Field::make('text', 'exam_contact_address_label', __('Address Title'))
+            ->set_width(50),
+            
+        Field::make('text', 'exam_contact_phone_label', __('Phone Number Title'))
+            ->set_width(50),
     ))
     ->set_icon('phone')
     ->set_category('mib')
@@ -753,6 +751,31 @@ function custom_posts_gutenberg_blocks() {
         extract($fields);
         
         include_once __THEME_DIR__ . '/template-parts/blocks/block-exam-contact-info.php';
+    });
+
+    // ==== Schedule Block
+    Block::make('schedule_block', __('Schedule'))
+    ->add_fields(array(
+        Field::make('separator', 'schedule_sep', __('Schedule Information')),
+
+        Field::make('text', 'schedule_title', __('Title'))
+            ->set_width(100),
+        
+        Field::make('textarea', 'schedule_description', __('Description'))
+            ->set_width(100),
+            
+        Field::make('file', 'schedule_file', __('Schedule File'))
+            ->set_type(array('application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'))
+            ->set_width(100)
+            ->set_help_text(__('Upload PDF or Word document with schedule details')),
+    ))
+    ->set_icon('calendar')
+    ->set_category('mib')
+    ->set_mode('both')
+    ->set_render_callback(function($fields, $attributes, $inner_blocks) {
+        extract($fields);
+        
+        include_once __THEME_DIR__ . '/template-parts/blocks/block-schedule.php';
     });
 
 }

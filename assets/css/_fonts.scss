@@ -256,6 +256,7 @@
     font-display: block;
 }
 
+.pum-close::before,
 .wpc-button-inner::before,
 .wpc-filter-title::after,
 .wp-block-file__button::after,
@@ -287,6 +288,7 @@ a.button::after, .button::after, button[type=submit]::after, input[type=submit]:
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+
 .icon-city:before {
     content: "\e91b";
 }
@@ -368,6 +370,7 @@ a.button::after, .button::after, button[type=submit]::after, input[type=submit]:
     content: "\e901";
 }
 
+.pum-close::before,
 .icon-close:before {
     content: "\e902";
 }
