@@ -575,41 +575,41 @@ jQuery(document).ready(function ($) {
 					}, 500);
 				}
 				
-				// if (history.pushState) {
-				// 	history.pushState(null, null, '#' + tabId);
-				// } else {
-				// 	location.hash = '#' + tabId;
-				// }
+				if (history.pushState) {
+					history.pushState(null, null, '#' + tabId);
+				} else {
+					location.hash = '#' + tabId;
+				}
 			}
 		}
 		
-		// function checkUrlHash() {
-		// 	if (window.location.hash) {
-		// 		let tabId = window.location.hash.replace('#', '');
+		function checkUrlHash() {
+			if (window.location.hash) {
+				let tabId = window.location.hash.replace('#', '');
 				
-		// 		if ($('#' + tabId).length > 0 && $('#' + tabId).hasClass('tab-content')) {
-		// 			activateTab(tabId);
-		// 			return true;
-		// 		}
-		// 	}
-		// 	return false;
-		// }
+				if ($('#' + tabId).length > 0 && $('#' + tabId).hasClass('tab-content')) {
+					activateTab(tabId);
+					return true;
+				}
+			}
+			return false;
+		}
 		
-		// let hashActivated = checkUrlHash();
+		let hashActivated = checkUrlHash();
 		
-		// if (!hashActivated) {
-		// 	if ($('.tabs li.active a').length > 0) {
-		// 		let tabId = $('.tabs li.active a').attr('href').replace('#', '');
-		// 		activateTab(tabId, false);
-		// 	} else if ($('.tabs li:first a').length > 0) {
-		// 		let tabId = $('.tabs li:first a').attr('href').replace('#', '');
-		// 		activateTab(tabId, false);
-		// 	}
-		// }
+		if (!hashActivated) {
+			if ($('.tabs li.active a').length > 0) {
+				let tabId = $('.tabs li.active a').attr('href').replace('#', '');
+				activateTab(tabId, false);
+			} else if ($('.tabs li:first a').length > 0) {
+				let tabId = $('.tabs li:first a').attr('href').replace('#', '');
+				activateTab(tabId, false);
+			}
+		}
 		
-		// $(window).on('hashchange', function() {
-		// 	checkUrlHash();
-		// });
+		$(window).on('hashchange', function() {
+			checkUrlHash();
+		});
 	}
 	
 	initTabs();

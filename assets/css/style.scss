@@ -4510,6 +4510,10 @@ footer {
     gap: 8px 32px;
     margin-bottom: 16px;
 
+    &:last-of-type {
+        margin-bottom: var(--block_spacing);
+    }
+
     &:hover {
         background-color: var(--color_primary);
     }

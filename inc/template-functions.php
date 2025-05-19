@@ -101,6 +101,11 @@ function display_breadcrumbs() {
     }
 }
 
+function translate_home_breadcrumb($links) {
+    $links[0]['text'] = __('Home', 'baza');
+    return $links;
+}
+add_filter('wpseo_breadcrumb_links', 'translate_home_breadcrumb');
 add_filter('wpseo_breadcrumb_links', 'universal_add_breadcrumb_parent');
 
 function yoast_search_breadcrumb($links) {
@@ -904,3 +909,22 @@ function mib_display_program_category_summary() {
     
     return $output;
 }
+
+function fix_program_category_404() {
+    $uri = $_SERVER['REQUEST_URI'];
+    
+    if (preg_match('|^/program-category/([^/]+)/?$|', $uri, $matches)) {
+        $slug = $matches[1];
+        $term = get_term_by('slug', $slug, 'program_category');
+        
+        if ($term) {
+            global $wp_query;
+            $wp_query->is_404 = false;
+            $wp_query->is_tax = true;
+            $wp_query->is_archive = true;
+            $wp_query->queried_object = $term;
+            $wp_query->queried_object_id = $term->term_id;
+        }
+    }
+}
+add_action('template_redirect', 'fix_program_category_404', 5);

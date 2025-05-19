@@ -5798,6 +5798,9 @@ footer .footer-after .footer-after-col {
   gap: 8px 32px;
   margin-bottom: 16px;
 }
+.program-accreditation:last-of-type {
+  margin-bottom: var(--block_spacing);
+}
 .program-accreditation:hover {
   background-color: var(--color_primary);
 }
