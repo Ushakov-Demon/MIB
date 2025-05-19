@@ -69,6 +69,16 @@ function remove_filter_everything_styles() {
 add_action('wp_enqueue_scripts', 'remove_filter_everything_styles', 100);
 add_action('wp_print_styles', 'remove_filter_everything_styles', 100);
 
+function disable_mobile_zoom() {
+    remove_action('wpseo_head', array(YoastSEO()->meta, 'viewport'), 1);
+    add_action('wp_head', 'add_custom_viewport_meta', 1);
+}
+add_action('wp', 'disable_mobile_zoom');
+
+function add_custom_viewport_meta() {
+    echo '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />';
+}
+
 function remove_filter_everything_inline_styles() {
     wp_add_inline_style('filter-everything', '');
     ob_start(function($buffer) {
@@ -130,7 +140,7 @@ function universal_add_breadcrumb_parent($links, $config = array()) {
     if (empty($config)) {
         $config = array(
             'events' => 155,
-            //'programs' => 148,
+            'programs' => 148,
             'accreditations' => 521,
             'teachers' => 20,
             'students' => 22,
@@ -162,25 +172,13 @@ function universal_add_breadcrumb_parent($links, $config = array()) {
     return $links;
 }
 
-/**
- * Add all favicon and app icon related tags to the site header
- */
+// Add all favicon and app icon related tags to the site header
 function add_complete_favicons() {
     $img_path = trailingslashit(get_stylesheet_directory_uri()) . 'assets/images/';
-    
-    // SVG favicon (modern browsers)
     echo '<link rel="icon" href="' . $img_path . 'favicon.svg" type="image/svg+xml" />' . "\n";
-    
-    // Traditional favicon
     echo '<link rel="shortcut icon" href="' . $img_path . 'favicon.ico" />' . "\n";
-    
-    // Various sizes for different devices
     echo '<link rel="icon" type="image/png" sizes="96x96" href="' . $img_path . 'favicon-96x96.png" />' . "\n";
-    
-    // Apple Touch Icons
     echo '<link rel="apple-touch-icon" href="' . $img_path . 'apple-touch-icon.png" />' . "\n";
-    
-    // Web App Manifest for PWA
     echo '<link rel="manifest" href="' . $img_path . 'site.webmanifest" />' . "\n";
 }
 add_action('wp_head', 'add_complete_favicons');
@@ -914,20 +912,28 @@ function mib_display_program_category_summary() {
     return $output;
 }
 
+// Fix program category 404
 function fix_program_category_404() {
-    $uri = $_SERVER['REQUEST_URI'];
+    $uri        = $_SERVER['REQUEST_URI'];
+    $taxonomies = get_taxonomies(array('public' => true), 'objects');
     
-    if (preg_match('|^/program-category/([^/]+)/?$|', $uri, $matches)) {
-        $slug = $matches[1];
-        $term = get_term_by('slug', $slug, 'program_category');
+    foreach ($taxonomies as $taxonomy) {
+
+        $taxonomy_slug = isset($taxonomy->rewrite['slug']) ? $taxonomy->rewrite['slug'] : $taxonomy->name;
         
-        if ($term) {
-            global $wp_query;
-            $wp_query->is_404            = false;
-            $wp_query->is_tax            = true;
-            $wp_query->is_archive        = true;
-            $wp_query->queried_object    = $term;
-            $wp_query->queried_object_id = $term->term_id;
+        if (preg_match('|^/' . $taxonomy_slug . '/([^/]+)/?$|', $uri, $matches)) {
+            $term_slug = $matches[1];
+            $term      = get_term_by('slug', $term_slug, $taxonomy->name);
+            
+            if ($term && $taxonomy->name === 'program_category') {
+                global $wp_query;
+                $wp_query->is_404            = false;
+                $wp_query->is_tax            = true;
+                $wp_query->is_archive        = true;
+                $wp_query->queried_object    = $term;
+                $wp_query->queried_object_id = $term->term_id;
+                break;
+            }
         }
     }
 }

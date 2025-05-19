@@ -158,6 +158,18 @@
   font-style: normal;
   font-display: block;
 }
+a[href$=".pdf"]::before,
+a[href$=".doc"]::before,
+a[href$=".docx"]::before,
+a[href$=".xls"]::before,
+a[href$=".xlsx"]::before,
+a[href$=".ppt"]::before,
+a[href$=".pptx"]::before,
+a[href$=".txt"]::before,
+a[href$=".csv"]::before,
+a[href$=".zip"]::before,
+a[href$=".rar"]::before,
+a[href$=".7z"]::before,
 .pum-close::before,
 .wpc-button-inner::before,
 .wpc-filter-title::after,
@@ -208,6 +220,18 @@ a.button::after, .button::after, button[type=submit]::after, input[type=submit]:
   content: "\e91a";
 }
 
+a[href$=".pdf"]::before,
+a[href$=".doc"]::before,
+a[href$=".docx"]::before,
+a[href$=".xls"]::before,
+a[href$=".xlsx"]::before,
+a[href$=".ppt"]::before,
+a[href$=".pptx"]::before,
+a[href$=".txt"]::before,
+a[href$=".csv"]::before,
+a[href$=".zip"]::before,
+a[href$=".rar"]::before,
+a[href$=".7z"]::before,
 .icon-file:before {
   content: "\e919";
 }
@@ -969,6 +993,10 @@ ol.wp-block-list li::marker {
 .wp-block-button .wp-block-button__link::after {
   content: "\e90a";
 }
+.wp-block-button .wp-block-button__link::before {
+  position: relative;
+  margin: -2px 0;
+}
 .wp-block-button .wp-block-button__link:focus, .wp-block-button .wp-block-button__link:hover {
   background-color: var(--color_primary_2);
   border-color: var(--color_primary_2);
@@ -1706,6 +1734,54 @@ button {
   font-family: var(--font);
 }
 
+a[href$=".pdf"],
+a[href$=".doc"],
+a[href$=".docx"],
+a[href$=".xls"],
+a[href$=".xlsx"],
+a[href$=".ppt"],
+a[href$=".pptx"],
+a[href$=".txt"],
+a[href$=".csv"],
+a[href$=".zip"],
+a[href$=".rar"],
+a[href$=".7z"] {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color_primary);
+}
+a[href$=".pdf"]:hover,
+a[href$=".doc"]:hover,
+a[href$=".docx"]:hover,
+a[href$=".xls"]:hover,
+a[href$=".xlsx"]:hover,
+a[href$=".ppt"]:hover,
+a[href$=".pptx"]:hover,
+a[href$=".txt"]:hover,
+a[href$=".csv"]:hover,
+a[href$=".zip"]:hover,
+a[href$=".rar"]:hover,
+a[href$=".7z"]:hover {
+  color: var(--color_black);
+}
+a[href$=".pdf"]::before,
+a[href$=".doc"]::before,
+a[href$=".docx"]::before,
+a[href$=".xls"]::before,
+a[href$=".xlsx"]::before,
+a[href$=".ppt"]::before,
+a[href$=".pptx"]::before,
+a[href$=".txt"]::before,
+a[href$=".csv"]::before,
+a[href$=".zip"]::before,
+a[href$=".rar"]::before,
+a[href$=".7z"]::before {
+  position: relative;
+  font-size: 21px;
+  top: -1px;
+}
+
 textarea {
   min-height: 128px;
   resize: vertical;
@@ -1836,6 +1912,13 @@ a.button::after,
 button[type=submit]::after,
 input[type=submit]::after {
   content: "\e90a";
+}
+a.button::before,
+.button::before,
+button[type=submit]::before,
+input[type=submit]::before {
+  position: relative;
+  margin: -2px 0;
 }
 a.button:focus, a.button:hover,
 .button:focus,
@@ -5841,7 +5924,8 @@ footer .footer-after .footer-after-col {
   }
 }
 .program-accreditation .logo img {
-  width: auto;
+  display: block;
+  width: 100%;
   height: 40px;
   filter: brightness(0) invert(1);
 }
@@ -6058,7 +6142,7 @@ footer .footer-after .footer-after-col {
 }
 @media (min-width: 1200px) {
   .section-program-benefits .content {
-    padding-left: 96px;
+    padding-left: 5%;
   }
 }
 .section-program-benefits .content h2, .section-program-benefits .content h3, .section-program-benefits .content h4, .section-program-benefits .content h5 {
@@ -6308,35 +6392,14 @@ footer .footer-after .footer-after-col {
 }
 
 .program-admission-requirements {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 32px;
+  display: flex;
+  flex-direction: column;
 }
-@media (max-width: 767px) {
-  .program-admission-requirements {
-    display: flex;
-    flex-direction: column;
-  }
-}
-.program-admission-requirements .col > * {
+.program-admission-requirements p {
   margin: 0 0 24px;
 }
-.program-admission-requirements .col > *:last-child {
+.program-admission-requirements p:last-child {
   margin-bottom: 0;
-}
-.program-admission-requirements a[download] {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--color_primary);
-}
-.program-admission-requirements a[download]:hover {
-  color: var(--color_black);
-}
-.program-admission-requirements a[download] i {
-  position: relative;
-  font-size: 21px;
-  top: -1px;
 }
 .program-admission-requirements ul {
   list-style: none;

@@ -411,6 +411,7 @@ function custom_posts_gutenberg_blocks() {
                                 ->set_width( 75 ),
                             Field::make( 'textarea', 'course_content_item_desc', __( 'Item content' ) ),
                         ) )
+                        ->set_header_template( '<%- course_content_item_title %>' )
                         ->setup_labels( array(
                             'plural_name'   => 'Content items',
                             'singular_name' => 'Content item',

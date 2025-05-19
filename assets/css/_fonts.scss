@@ -256,6 +256,18 @@
     font-display: block;
 }
 
+a[href$=".pdf"]::before, 
+a[href$=".doc"]::before, 
+a[href$=".docx"]::before,
+a[href$=".xls"]::before,
+a[href$=".xlsx"]::before,
+a[href$=".ppt"]::before,
+a[href$=".pptx"]::before,
+a[href$=".txt"]::before,
+a[href$=".csv"]::before,
+a[href$=".zip"]::before,
+a[href$=".rar"]::before,
+a[href$=".7z"]::before,
 .pum-close::before,
 .wpc-button-inner::before,
 .wpc-filter-title::after,
@@ -306,6 +318,18 @@ a.button::after, .button::after, button[type=submit]::after, input[type=submit]:
     content: "\e91a";
 }
 
+a[href$=".pdf"]::before, 
+a[href$=".doc"]::before, 
+a[href$=".docx"]::before,
+a[href$=".xls"]::before,
+a[href$=".xlsx"]::before,
+a[href$=".ppt"]::before,
+a[href$=".pptx"]::before,
+a[href$=".txt"]::before,
+a[href$=".csv"]::before,
+a[href$=".zip"]::before,
+a[href$=".rar"]::before,
+a[href$=".7z"]::before,
 .icon-file:before {
     content: "\e919";
 }

@@ -214,6 +214,11 @@
         content: "\e90a";
     }
 
+    &::before {
+        position: relative;
+        margin: -2px 0;
+    }
+
     &:focus,
     &:hover {
         background-color: var(--color_primary_2);
