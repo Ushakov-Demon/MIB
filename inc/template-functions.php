@@ -791,12 +791,16 @@ function mib_display_program_category_summary() {
         return '';
     }
     
-    $count              = $programs->post_count;
-    $nearest_start_date = null;
-    $languages          = [];
-    $min_price          = PHP_INT_MAX;
-    $max_price          = 0;
-    
+    $count                   = $programs->post_count;
+    $nearest_start_date      = null;
+    $languages               = [];
+    $min_price               = PHP_INT_MAX;
+    $max_price               = 0;
+    $completed_studies       = 0;
+    $enhanced_qualifications = 0;
+    $total_completed_studies = 0;
+    $total_enhanced_qualifications = 0;
+
     $current_time = current_time('timestamp');
     
     if ($programs->have_posts()) {
@@ -819,9 +823,6 @@ function mib_display_program_category_summary() {
             if ($language && !in_array($language, $languages)) {
                 $languages[] = $language;
             }
-
-            $completed_studies       = 0;
-            $enhanced_qualifications = 0;
 
             $regular_price            = (int)get_post_meta($post_id, '_tr_program_regular_price', true);
             $sale_price               = (int)get_post_meta($post_id, '_tr_program_sale_price', true);
@@ -922,10 +923,10 @@ function fix_program_category_404() {
         
         if ($term) {
             global $wp_query;
-            $wp_query->is_404 = false;
-            $wp_query->is_tax = true;
-            $wp_query->is_archive = true;
-            $wp_query->queried_object = $term;
+            $wp_query->is_404            = false;
+            $wp_query->is_tax            = true;
+            $wp_query->is_archive        = true;
+            $wp_query->queried_object    = $term;
             $wp_query->queried_object_id = $term->term_id;
         }
     }
