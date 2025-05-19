@@ -4,7 +4,9 @@ $programs = apply_filters( 'mib_get_posts', 'programs', $programs_per_page );
 if (is_tax()) {
     $current_taxonomy = get_queried_object();
     $columns          = get_term_meta( $current_taxonomy->term_id, '_programs_columns', true );
-    $items_columns    = (!empty( $columns )) ? intval( $columns ) : 'column-3';
+    $items_columns    = ( ! empty( $columns )) ? intval( $columns ) : 'column-3';
+} else {
+    $columns = 'column-3';
 }
 
 ?>
