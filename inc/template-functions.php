@@ -819,12 +819,15 @@ function mib_display_program_category_summary() {
             if ($language && !in_array($language, $languages)) {
                 $languages[] = $language;
             }
-            
+
+            $completed_studies       = 0;
+            $enhanced_qualifications = 0;
+
             $regular_price            = (int)get_post_meta($post_id, '_tr_program_regular_price', true);
             $sale_price               = (int)get_post_meta($post_id, '_tr_program_sale_price', true);
             $sale_end_date            = get_post_meta($post_id, '_tr_program_sale_price_date_end', true);
-            $completed_studies        = get_post_meta($post_id, '_tr_program_completed_studies', true);
-            $enhanced_qualifications  = get_post_meta($post_id, '_tr_program_enhanced_qualifications', true);
+            $completed_studies        = (int)get_post_meta($post_id, '_tr_program_completed_studies', true);
+            $enhanced_qualifications  = (int)get_post_meta($post_id, '_tr_program_enhanced_qualifications', true);
             $total_completed_studies += $completed_studies;
             $total_enhanced_qualifications += $enhanced_qualifications;
             $use_sale_price           = false;
