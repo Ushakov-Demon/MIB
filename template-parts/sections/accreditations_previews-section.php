@@ -1,5 +1,5 @@
 <?php
-$accreditations = apply_filters( 'mib_get_posts', 'accreditations', $accreditations_posts_per_page );
+$accreditations = mib_get_posts( 'accreditations', $accreditations_posts_per_page );
 ?>
 <section class="section section-accreditations">
     <div class="container">

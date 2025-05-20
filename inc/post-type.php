@@ -409,4 +409,4 @@ function mib_register_taxomomies() {
     ]);
 }
 
-add_action('init', 'create_custom_post_types_and_taxonomies', 0);
+add_action('init', 'create_custom_post_types_and_taxonomies', 10);

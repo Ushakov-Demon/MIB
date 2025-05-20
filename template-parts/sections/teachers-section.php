@@ -2,7 +2,7 @@
 $is_slider  = 'slider' == $teachers_section_items_view_style;
 $view_class = $is_slider ? ' owl-carousel' : '';
 $wrap_id    = $is_slider ? 'teachers-items' : 'teachers-items-list';
-$teachers   = apply_filters( 'mib_get_posts', 'teachers', $teachers_per_page );
+$teachers   = mib_get_posts( 'teachers', $teachers_per_page );
 ?>
 <section class="section section-teachers">
     <div class="container">

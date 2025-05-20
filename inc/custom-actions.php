@@ -1,5 +1,5 @@
 <?php
-add_filter( 'mib_get_posts'                         , 'mib_get_posts', 10 );
+// add_filter( 'mib_get_posts'                         , 'mib_get_posts', 10 );
 add_filter( 'mib_get_alternating_posts'             , 'mib_get_alternating_posts', 10 );
 add_action( 'wp_ajax_custom_post_type_filter'       , 'mib_custom_post_type_filter' );
 add_action( 'wp_ajax_nopriv_custom_post_type_filter', 'mib_custom_post_type_filter' );
@@ -14,9 +14,12 @@ add_filter( 'mib_get_array_by_option'               , 'mib_get_array_by_option',
  * @param int $per_page optional. Defaut 'posts_per_page' option.
  * @param int $page optional. Default 1.
  * 
+ * @param array $tax_params. Must by contains array params for tax_query
+ * @see https://developer.wordpress.org/reference/classes/wp_query/#taxonomy-parameters
+ * 
  * @return object WP_Query
  */
-function mib_get_posts( $post_type = 'post', int $per_page = 0, int $page = 1, $post_status = 'publish' ) {
+function mib_get_posts( $post_type = 'post', int $per_page = 0, int $page = 1, array $tax_params = [], $post_status = 'publish' ) {
     if ( 0 == $per_page ) {
         $per_page = get_option( 'posts_per_page' );
     }
@@ -34,7 +37,7 @@ function mib_get_posts( $post_type = 'post', int $per_page = 0, int $page = 1, $
         $posts_q_args['lang'] = pll_current_language();
     }
 
-    if (is_tax()) {
+    if ( is_tax() ) {
         $current_taxonomy_term = get_queried_object();
         
         $posts_q_args['tax_query'] = array(
@@ -45,6 +48,10 @@ function mib_get_posts( $post_type = 'post', int $per_page = 0, int $page = 1, $
             ),
         );
     }
+
+    if ( ! empty( $tax_params ) ) {
+        $posts_q_args['tax_query'] = $tax_params;
+    };
 
     $posts = new WP_Query( $posts_q_args );
 
@@ -348,4 +355,14 @@ function mib_get_course_price( int $course_id ) {
             </div>";
 
     return $html;  
+}
+
+function mib_get_course_categories_options() {
+    $out = [
+        '' => __( '-- Select category --' ),
+    ];
+
+    $cats = mib_get_course_categories();
+
+    return $cats;
 }

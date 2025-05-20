@@ -783,7 +783,8 @@ function mib_display_program_category_summary() {
         return '';
     }
     
-    $programs = apply_filters('mib_get_posts', 'programs', -1);
+    $programs = mib_get_posts( 'programs', -1 );
+
     
     if (!$programs || $programs->post_count === 0) {
         return '';

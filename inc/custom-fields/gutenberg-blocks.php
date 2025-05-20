@@ -2,21 +2,21 @@
 use Carbon_Fields\Block;
 use Carbon_Fields\Field;
 
-add_action( 'carbon_fields_register_fields', 'custom_posts_gutenberg_blocks' );
+add_action( 'carbon_fields_register_fields', 'custom_posts_gutenberg_blocks', 99 );
 
 function custom_posts_gutenberg_blocks() {
     $post_id               = isset( $_GET['post'] ) ? intval( $_GET['post'] ) : false;
     $events_arhive_page    = get_option( '_events_arhive_page' );
     $programs_arhive_page  = get_option( '_programs_arhive_page' );
 
-    $def_per_page  = get_option( 'posts_per_page' );
-    $home_url      = home_url();
-    $blog_page     = get_option( 'page_for_posts' );
-    $blog_page_url = ! is_null( $blog_page ) && ! empty( $blog_page ) ? get_the_permalink( $blog_page ) : $home_url;
-    $current_lang  = function_exists('pll_current_language') ? pll_current_language() : '';
-    $pages_options = apply_filters( 'mib_get_posts_list_options', 'page' );
+    $def_per_page   = get_option( 'posts_per_page' );
+    $home_url       = home_url();
+    $blog_page      = get_option( 'page_for_posts' );
+    $blog_page_url  = ! is_null( $blog_page ) && ! empty( $blog_page ) ? get_the_permalink( $blog_page ) : $home_url;
+    $current_lang   = function_exists('pll_current_language') ? pll_current_language() : '';
+    $pages_options  = apply_filters( 'mib_get_posts_list_options', 'page' );
     $events_options = apply_filters( 'mib_get_posts_list_options', 'events' );
-    $cf7_options   = apply_filters( 'mib_get_cf7_forms_options', [] );
+    $cf7_options    = apply_filters( 'mib_get_cf7_forms_options', [] );
 
     // ==== Main top Variative
     Block::make( 'main_top_variative',  __( 'Main HERO' ) )
@@ -168,15 +168,22 @@ function custom_posts_gutenberg_blocks() {
         ->add_fields( array(
             Field::make( 'separator', 'programs_previews_sep', __( 'Training programs' ) ),
             Field::make( 'text', 'programs_per_page', __( 'Posts per page' ) )
-                ->set_width( 33 )
+                ->set_width( 20 )
                 ->set_attribute( 'type', 'number' )
                 ->set_default_value( $def_per_page ),
+            Field::make( 'association', 'programs_target_category', __( 'Programs Category' ) )
+                ->set_width( 80 )
+                ->set_types( array(
+                    array(
+                        'type'     => 'term',
+                        'taxonomy' => 'program_category',
+                    )
+                ) ),
             Field::make( 'text', 'programs_section_link_text', __( 'Link text' ) )
-                ->set_width( 33 )
+                ->set_width( 50 )
                 ->set_default_value( 'Всі програми' ),
-
             Field::make( 'select', 'programs_section_link', __( 'Link' ) )
-                ->set_width( 33 )
+                ->set_width( 50 )
                 ->add_options( $pages_options ),
 
             Field::make( 'text', 'programs_section_small_text', __( 'Section small text' ) )
@@ -193,6 +200,7 @@ function custom_posts_gutenberg_blocks() {
         include_once __THEME_DIR__ . '/template-parts/sections/programs_previews-section.php';
     } );
 
+    // ==== Mixed posts previews
     Block::make( 'actuality_posts_section', __( 'Mixed posts previews' ) )
         ->set_inner_blocks( false )
         ->set_category( 'mib' )
@@ -234,6 +242,7 @@ function custom_posts_gutenberg_blocks() {
         include_once __THEME_DIR__ . '/template-parts/sections/actuality_previews-section.php';
     } );
 
+    // ==== Accreditations previews
     Block::make( 'accreditations_posts_section', __( 'Accreditations previews' ) )
         ->set_inner_blocks( false )
         ->set_category( 'mib' )
@@ -260,6 +269,7 @@ function custom_posts_gutenberg_blocks() {
         include_once __THEME_DIR__ . '/template-parts/sections/accreditations_previews-section.php';
     } );
 
+    // ==== Program Page tabs
     Block::make( 'program_page_tabs', __( 'Program page tabs' ) )
         ->set_inner_blocks( false )
         ->set_category( 'mib' )

@@ -1,7 +1,28 @@
 <?php
-$programs = apply_filters( 'mib_get_posts', 'programs', $programs_per_page );
+$tax_params = [];
 
-if (is_tax()) {
+if ( isset( $programs_target_category ) && ! empty ( $programs_target_category ) ) {
+    $taxonomy  = $programs_target_category[0]['subtype'];
+    $terms_ids = [];
+
+    foreach ( $programs_target_category as $term ) {
+        array_push( $terms_ids, $term['id'] );
+    }
+
+    $params = [
+        'taxonomy' => $taxonomy,
+        'terms'    => $terms_ids,
+        'field'    => 'term_id',
+        'operator' => 'IN',
+    ];
+
+    array_push( $tax_params, $params );
+}
+
+$programs = mib_get_posts( 'programs', $programs_per_page, 1, $tax_params );
+
+
+if ( is_tax() ) {
     $current_taxonomy = get_queried_object();
     $columns          = get_term_meta( $current_taxonomy->term_id, '_programs_columns', true );
     $items_columns    = ( ! empty( $columns )) ? intval( $columns ) : 'column-3';

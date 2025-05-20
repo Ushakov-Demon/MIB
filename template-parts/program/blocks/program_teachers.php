@@ -1,7 +1,7 @@
 <div class="program-teachers">
     <div class="items">
         <?php 
-            $teachers = apply_filters( 'mib_get_posts', 'teachers');
+            $teachers = mib_get_posts( 'teachers' );
             
             if ( $teachers->have_posts() ) {
                 while ( $teachers->have_posts() ) {
