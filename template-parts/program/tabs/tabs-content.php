@@ -100,9 +100,9 @@ $has_listeners = ! empty( $listners_tab_content ) || ! empty( $listners_tab_repe
                 };
                 break;
             case 'program_structure_tab_content':
-                if ( ! empty( $field ) ) {
+                //if ( ! empty( $field ) ) {
                     include get_template_directory() . '/template-parts/program/tabs/program-structure-tab.php';
-                };
+                //};
                 break;
             case 'use_admission_conditions':
                 include get_template_directory() . '/template-parts/program/blocks/program_admission_requirements.php';

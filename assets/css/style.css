@@ -6391,40 +6391,8 @@ footer .footer-after .footer-after-col {
   display: none !important;
 }
 
-.program-admission-requirements {
-  display: flex;
-  flex-direction: column;
-}
-.program-admission-requirements p {
-  margin: 0 0 24px;
-}
-.program-admission-requirements p:last-child {
-  margin-bottom: 0;
-}
-.program-admission-requirements ul {
-  list-style: none;
-  padding: 0;
-}
-.program-admission-requirements ul li {
-  position: relative;
-  padding-left: 22px;
-}
-.program-admission-requirements ul li::before {
-  display: block;
-  content: "";
-  width: 0;
-  height: 0;
-  border-top: 4px solid transparent;
-  border-bottom: 4px solid transparent;
-  border-left: 6px solid var(--color_primary);
-  border-right: 0;
-  position: absolute;
-  top: 6px;
-  left: 0;
-  border-radius: 0;
-}
-.program-admission-requirements ul li:not(:last-child) {
-  margin-bottom: 10px;
+.program-content .program-content-text {
+  margin: 0 0 var(--block_spacing);
 }
 
 .program-content-items {
@@ -6636,6 +6604,46 @@ footer .footer-after .footer-after-col {
 
 .tabs-container {
   margin: var(--block_spacing) 0;
+}
+.tabs-container .tab-content .tab-title {
+  margin: 0 0 var(--block_spacing);
+}
+.tabs-container .tab-content p {
+  margin: 0 0 24px;
+}
+.tabs-container .tab-content p:last-child {
+  margin-bottom: 0;
+}
+.tabs-container .tab-content .tab-content-wrapper h2 {
+  font-size: 24px;
+}
+.tabs-container .tab-content .tab-content-wrapper h2:first-child {
+  margin-top: 0;
+}
+.tabs-container .tab-content ul {
+  list-style: none;
+  padding: 0;
+}
+.tabs-container .tab-content ul li {
+  position: relative;
+  padding-left: 22px;
+}
+.tabs-container .tab-content ul li::before {
+  display: block;
+  content: "";
+  width: 0;
+  height: 0;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-left: 6px solid var(--color_primary);
+  border-right: 0;
+  position: absolute;
+  top: 6px;
+  left: 0;
+  border-radius: 0;
+}
+.tabs-container .tab-content ul li:not(:last-child) {
+  margin-bottom: 10px;
 }
 .tabs-container .tab-content:not(.active) {
   display: none !important;

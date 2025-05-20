@@ -5075,19 +5075,11 @@ footer {
     }
 }
 
-.program-admission-requirements {
-    display: flex;
-    flex-direction: column;
+.program-content {
 
-    p {
-        margin: 0 0 24px;
-
-        &:last-child {
-            margin-bottom: 0;
-        }
+    .program-content-text {
+        margin: 0 0 var(--block_spacing);
     }
-
-    @include ul_list;
 }
 
 .program-content-items {
@@ -5148,6 +5140,30 @@ footer {
     margin: var(--block_spacing) 0;
 
     .tab-content {
+
+        .tab-title {
+            margin: 0 0 var(--block_spacing);
+        }
+
+        p {
+            margin: 0 0 24px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        .tab-content-wrapper {
+            h2 {
+                font-size: 24px;
+
+                &:first-child {
+                    margin-top: 0;
+                }
+            }
+        }
+
+        @include ul_list;
 
         &:not(.active) {
             display: none !important;

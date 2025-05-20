@@ -71,7 +71,7 @@
 
     if ( ! empty( $start_str ) ) :
         ?>
-        <div class="item start-date"> <!-- add class start-date for adding icon in Event post type -->
+        <div class="item start-date">
             <?php
             if ( "programs" == $post_type ) {
                 pll_e( 'Start of the program', 'baza' );
@@ -80,12 +80,14 @@
 
             <strong>
                 <?php
-                    echo $start_str;
-                    if ( "programs" !== $post_type ) {
-                        $day_week = date( 'l', $differences['unix_input_date'] );
-                        echo ' (' . pll__( $day_week, 'baza' ) . ')';
-                    }
-                    ?>
+                $date_format = get_option('date_format');
+                $formatted_date = date_i18n($date_format, $differences['unix_input_date']);
+                echo $formatted_date;
+                if ("programs" !== $post_type) {
+                    $day_week = date_i18n('l', $differences['unix_input_date']);
+                    echo ' (' . pll__($day_week, 'baza') . ')';
+                }
+                ?>
             </strong>
         </div>
         <?php

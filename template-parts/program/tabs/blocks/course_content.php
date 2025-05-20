@@ -21,7 +21,9 @@ if ( empty( $course_content_items ) ) {
             <?php
             if( ! empty( $course_content_desc ) ) :
                 ?>
-                <p><?php pll_e( $course_content_desc, 'baza' )?></p>
+                <div class="program-content-text">
+                    <?php pll_e( $course_content_desc, 'baza' )?>
+                </div>
                 <?php
             endif;
             ?>

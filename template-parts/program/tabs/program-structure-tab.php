@@ -23,6 +23,13 @@ if ( ! $has_structure ) {
                 <?php
             endif;
             ?>
+
+            <div class="program-content">
+
+                <div class="program-content-text">
+                    <?php pll_e( $course_content_desc, 'baza' )?>
+                </div>
+
                 <div class="program-content-items">
                     <?php
                     foreach( $course_content_items as $item ) :
@@ -59,6 +66,7 @@ if ( ! $has_structure ) {
                     endforeach;
                     ?>
                 </div>
+            </div>
             <?php
         endif;
         ?>
