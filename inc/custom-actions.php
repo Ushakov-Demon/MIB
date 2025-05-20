@@ -315,6 +315,7 @@ function mib_get_course_price( int $course_id ) {
     $old_price  = false;
 
     $reg_price_info_title = "";
+    $price_label_html     = "";
 
     if ( ! empty( $reg_price_info ) ) {
         $reg_price_info_title = "<i class='icon-info' data-title='{$reg_price_info}'></i> ";

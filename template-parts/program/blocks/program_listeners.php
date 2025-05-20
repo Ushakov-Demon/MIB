@@ -1,8 +1,29 @@
-<div class="program-listeners">
-    <div class="item"><img src="/wp-content/themes/mib/assets/images/MainChart.png" alt=""></div>
-    <div class="item"><img src="/wp-content/themes/mib/assets/images/MainChart.png" alt=""></div>
-    <div class="item"><img src="/wp-content/themes/mib/assets/images/MainChart.png" alt=""></div>
-    <div class="item"><img src="/wp-content/themes/mib/assets/images/MainChart.png" alt=""></div>
-</div>
+<?php
+if ( ! $has_listeners ) {
+    return;
+}
+?>
+<div id="tab-listeners" class="tab-content">
+    <?php
+    if ( ! empty( $listners_tab_repeater ) ) :
+        ?>
+        <div class="program-listeners">
+            <?php
+            foreach ( $listners_tab_repeater as $item ) :
+                $image_src = wp_get_attachment_image_url( $item['listners_image'], 'large' );
+                ?>
+                <div class="item">
+                    <img src="<?php echo esc_url( $image_src )?>" alt="">
+                </div>
+                <?php
+            endforeach;
+            ?>
+        </div>
+        <?php
+    endif;
 
-<p>У кожній генерації слухачів різний склад групи. Нижче представлений портрет слухача програми Executive MBA в цифрах на основі статистики про слухачів МІБ, що поступили в 2020 році: посади, базова освіта, сфери діяльності компаній і т.д.</p>
+    if ( ! empty( $listners_tab_content ) ) :
+        echo $listners_tab_content;
+    endif;
+    ?>
+</div>

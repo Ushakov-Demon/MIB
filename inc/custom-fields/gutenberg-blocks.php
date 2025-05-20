@@ -21,86 +21,86 @@ function custom_posts_gutenberg_blocks() {
     // ==== Main top Variative
     Block::make( 'main_top_variative',  __( 'Main HERO' ) )
         ->add_fields( array (
-        Field::make( 'separator', 'main_top_variative_sep', __( 'Main HERO' ) ),
-        Field::make( 'text', 'current_page_id' )
-            ->set_default_value( $post_id )
-            ->set_attribute( 'readOnly', true ),
-        Field::make( 'file', 'main_top_heading_media_before_text', __( 'Hending media before all text' ) )
-            ->set_width( 33 )
-            ->set_type( 
-                array( 'image' )
-            )
-            ->set_conditional_logic( array(
-                array(
-                    'field' => 'main_top_version',
-                    'value' => array('home'),
-                    'compare' => 'IN'
+            Field::make( 'separator', 'main_top_variative_sep', __( 'Main HERO' ) ),
+            Field::make( 'text', 'current_page_id' )
+                ->set_default_value( $post_id )
+                ->set_attribute( 'readOnly', true ),
+            Field::make( 'file', 'main_top_heading_media_before_text', __( 'Hending media before all text' ) )
+                ->set_width( 33 )
+                ->set_type( 
+                    array( 'image' )
                 )
-            ) ),
-        Field::make( 'file', 'main_top_heading_media', __( 'Hending media' ) )
-            ->set_width( 33 )
-            ->set_type( 
-                array( 'image' )
-            )
-            ->set_conditional_logic( array(
-                array(
-                    'field' => 'main_top_version',
-                    'value' => array('home'),
-                    'compare' => 'IN'
+                ->set_conditional_logic( array(
+                    array(
+                        'field' => 'main_top_version',
+                        'value' => array('home'),
+                        'compare' => 'IN'
+                    )
+                ) ),
+            Field::make( 'file', 'main_top_heading_media', __( 'Hending media' ) )
+                ->set_width( 33 )
+                ->set_type( 
+                    array( 'image' )
                 )
-            ) ),
-        Field::make( 'file', 'main_top_heading_bg', __( 'Background' ) )
-            ->set_width( 33 )
-            ->set_type( 
-                array( 'image' )
-            )
-            ->set_conditional_logic( array(
-                array(
-                    'field' => 'main_top_version',
-                    'value' => array('home'),
-                    'compare' => 'IN'
+                ->set_conditional_logic( array(
+                    array(
+                        'field' => 'main_top_version',
+                        'value' => array('home'),
+                        'compare' => 'IN'
+                    )
+                ) ),
+            Field::make( 'file', 'main_top_heading_bg', __( 'Background' ) )
+                ->set_width( 33 )
+                ->set_type( 
+                    array( 'image' )
                 )
-            ) ),
-        Field::make( 'textarea', 'main_top_heading_text', __( 'Title' ) ),
-        Field::make( 'select', 'main_top_version', __('Select Version' ))
-            ->add_options( array(
-                'white' => __( 'White', ),
-                'black' => __( 'Black', ),
-                'gray' => __( 'Gray', ),
-                'home' => __( 'Home' ),
-            ) )
-            ->set_default_value( 'white' ),
-        Field::make( 'rich_text', 'main_bottom_text', __( 'Description text' ) ),
-        Field::make( 'rich_text', 'main_bottom_second_text', __( 'Second text' ) )
-            ->set_conditional_logic( array(
-                'relation' => 'OR',
-                array(
-                    'field'   => 'current_page_id',
-                    'value'   => $events_arhive_page,
-                    'compare' => '!=',
-                ),
-                array(
-                    'field'   => 'current_page_id',
-                    'value'   => $programs_arhive_page,
-                    'compare' => '!=',
-                ),
-            ) ),
-        Field::make( 'text', 'main_bottom_button_text', __( 'Button text' ) )
-            ->set_conditional_logic( array(
-                'relation' => 'OR',
-                array(
-                    'field'   => 'current_page_id',
-                    'value'   => $events_arhive_page,
-                    'compare' => '!=',
-                ),
-                array(
-                    'field'   => 'current_page_id',
-                    'value'   => $programs_arhive_page,
-                    'compare' => '!=',
-                )
-            ) )    
-            ->set_width( 50 ),
-        Field::make( 'text', 'main_bottom_button_link', __( 'Button link' ) )
+                ->set_conditional_logic( array(
+                    array(
+                        'field' => 'main_top_version',
+                        'value' => array('home'),
+                        'compare' => 'IN'
+                    )
+                ) ),
+            Field::make( 'textarea', 'main_top_heading_text', __( 'Title' ) ),
+            Field::make( 'select', 'main_top_version', __('Select Version' ))
+                ->add_options( array(
+                    'white' => __( 'White', ),
+                    'black' => __( 'Black', ),
+                    'gray' => __( 'Gray', ),
+                    'home' => __( 'Home' ),
+                ) )
+                ->set_default_value( 'white' ),
+            Field::make( 'rich_text', 'main_bottom_text', __( 'Description text' ) ),
+            Field::make( 'rich_text', 'main_bottom_second_text', __( 'Second text' ) )
+                ->set_conditional_logic( array(
+                    'relation' => 'OR',
+                    array(
+                        'field'   => 'current_page_id',
+                        'value'   => $events_arhive_page,
+                        'compare' => '!=',
+                    ),
+                    array(
+                        'field'   => 'current_page_id',
+                        'value'   => $programs_arhive_page,
+                        'compare' => '!=',
+                    ),
+                ) ),
+            Field::make( 'text', 'main_bottom_button_text', __( 'Button text' ) )
+                ->set_conditional_logic( array(
+                    'relation' => 'OR',
+                    array(
+                        'field'   => 'current_page_id',
+                        'value'   => $events_arhive_page,
+                        'compare' => '!=',
+                    ),
+                    array(
+                        'field'   => 'current_page_id',
+                        'value'   => $programs_arhive_page,
+                        'compare' => '!=',
+                    )
+                ) )    
+                ->set_width( 50 ),
+            Field::make( 'text', 'main_bottom_button_link', __( 'Button link' ) )
             ->set_conditional_logic( array(
                 'relation' => 'OR',
                 array(
@@ -115,16 +115,16 @@ function custom_posts_gutenberg_blocks() {
                 )
             ) )      
             ->set_width( 50 ),
-    ) )
-    ->set_inner_blocks( false )
-    ->set_description( __( 'This a block for inner in Hero section page' ) )
-    ->set_icon( 'cover-image' )
-    ->set_category( 'mib', __( 'MIB' ), 'smiley' )
-    ->set_mode( 'both' )
-    ->set_render_callback( function ( $fields, $attributes, $inner_blocks ) {
-        extract( $fields );
+        ) )
+        ->set_inner_blocks( false )
+        ->set_description( __( 'This a block for inner in Hero section page' ) )
+        ->set_icon( 'cover-image' )
+        ->set_category( 'mib', __( 'MIB' ), 'smiley' )
+        ->set_mode( 'both' )
+        ->set_render_callback( function ( $fields, $attributes, $inner_blocks ) {
+            extract( $fields );
 
-        include_once __THEME_DIR__ . '/template-parts/sections/hero-section.php';
+            include_once __THEME_DIR__ . '/template-parts/sections/hero-section.php';
     } );
 
     // ==== Company Logos Repeater Block
@@ -265,6 +265,7 @@ function custom_posts_gutenberg_blocks() {
         ->set_category( 'mib' )
         ->set_mode( 'both' )
         ->set_icon( 'welcome-write-blog' )
+        // About ****
         ->add_tab( __( 'About tab' ), array(
             Field::make( 'complex', 'about_tab_content' )
                 ->add_fields( 'accriditation_block', array(
@@ -435,6 +436,8 @@ function custom_posts_gutenberg_blocks() {
                     'singular_name' => 'Section',
                 ) )
         ) )
+
+        // Titchers ****
         ->add_tab( __( 'Titchers tab' ), array(
             Field::make( 'checkbox', 'show_titchers', __( 'Show titchers' ) )
                 ->help_text( __( 'The list of teachers set in the Training course data->Members->Teatchers section will be displayed.' ) )
@@ -443,8 +446,10 @@ function custom_posts_gutenberg_blocks() {
             Field::make( 'text', 'titchers_tab_title', __( 'Title' ) )
                 ->set_default_value( 'Викладачі' )
                 ->set_width( 75 ),
-         ) )
-         ->add_tab( __( 'Students tab' ), array(
+        ) )
+
+        // Students ****
+        ->add_tab( __( 'Students tab' ), array(
             Field::make( 'checkbox', 'show_students', __( 'Show students' ) )
                 ->help_text( __( 'The list of teachers set in the Training course data->Members->Students section will be displayed.' ) )
                 ->set_default_value( 'yes' )
@@ -452,27 +457,94 @@ function custom_posts_gutenberg_blocks() {
             Field::make( 'text', 'students_tab_title', __( 'Title' ) )
                 ->set_default_value( 'Випускники' )
                 ->set_width( 75 ),
-         ) )
+        ) )
+
+        // Program structure ****
+        ->add_tab( __( 'Program structure' ), array(
+            Field::make( 'select', 'use_program_content', __( 'Use Course Content' ) )
+                ->add_options( array(
+                    'yes' => __( 'Yes' ),
+                    'no'  => __( 'No' ),
+                ) )
+                ->help_text( __( 'Use content from "About tab" (if filled in)' ) ),
+            Field::make( 'text', 'program_structure_tab_title', __( 'Title' ) )
+                ->set_default_value( 'Program structure' )
+                ->set_conditional_logic( array(
+                    array(
+                        'field'     => 'use_program_content',
+                        'value'     => 'no',
+                        'compare'   => '=',
+                    )
+                ) ),
+            Field::make( 'rich_text', 'program_structure_tab_content', __( 'Content' ) )
+                ->set_conditional_logic( array(
+                    array(
+                        'field'     => 'use_program_content',
+                        'value'     => 'no',
+                        'compare'   => '=',
+                    )
+                ) )
+        ) )
+
+        // Admission requirements ****
+        ->add_tab( __( 'Admission requirements' ), array(
+            Field::make( 'select', 'use_admission_conditions', __( 'Use Admission Conditions' ) )
+                ->add_options( array(
+                    'yes' => __( 'Yes' ),
+                    'no'  => __( 'No' ),
+                ) )
+                ->help_text( __( 'Use content from "About tab" (if filled in)' ) ),
+            Field::make( 'text', 'admission_requirements_tab_title', __( 'Title' ) )
+                ->set_conditional_logic( array(
+                    array(
+                        'field'     => 'use_admission_conditions',
+                        'value'     => 'no',
+                        'compare'   => '=',
+                    )
+                ) ),
+            Field::make( 'rich_text', 'admission_requirements_tab_content', __( 'Tab content' ) )
+                ->set_conditional_logic( array(
+                    array(
+                        'field'     => 'use_admission_conditions',
+                        'value'     => 'no',
+                        'compare'   => '=',
+                    )
+                ) )
+        ) )
+
+        // Listeners ****
+        ->add_tab( __( 'Listeners tab' ), array(
+            Field::make( 'complex', 'listners_tab_repeater', __( 'Items repeater' ) )
+                ->set_collapsed( true )
+                ->add_fields( array(
+                    Field::make( 'image', 'listners_image', __( 'Item image' ) )
+                ) )
+                ->setup_labels( array(
+                    'plural_name'   => 'Items',
+                    'singular_name' => 'Item',
+                ) ),
+                Field::make( 'rich_text', 'listners_tab_content', __( 'Content' ) )
+        ) )
         ->set_render_callback( function ( $fields, $attributes, $inner_blocks ) {
             extract( $fields );
         
             include_once __THEME_DIR__ . '/template-parts/program/tabs/tabs-content.php';
-        } );
+    } );
 
     // ==== Manager Contact Block
     Block::make('manager_contact_block', __('Contact Manager'))
-    ->add_fields(array(
-        Field::make('separator', 'manager_contact_sep', __('Contact Manager')),
-    ))
-    ->set_inner_blocks(false)
-    ->set_description(__('A block to display manager contact with form'))
-    ->set_icon('businessman')
-    ->set_category('mib')
-    ->set_mode('both')
-    ->set_render_callback(function($fields, $attributes, $inner_blocks) {
-        extract($fields);
-        
-        include_once __THEME_DIR__ . '/template-parts/sections/manager_contact-section.php';
+        ->add_fields(array(
+            Field::make('separator', 'manager_contact_sep', __('Contact Manager')),
+        ))
+        ->set_inner_blocks(false)
+        ->set_description(__('A block to display manager contact with form'))
+        ->set_icon('businessman')
+        ->set_category('mib')
+        ->set_mode('both')
+        ->set_render_callback(function($fields, $attributes, $inner_blocks) {
+            extract($fields);
+            
+            include_once __THEME_DIR__ . '/template-parts/sections/manager_contact-section.php';
     });
 
     // ==== Students Block
@@ -510,35 +582,35 @@ function custom_posts_gutenberg_blocks() {
 
     // ==== Teachers Block
     Block::make( 'teachers_block', __( 'Teachers' ) )
-    ->add_fields( array(
-        Field::make( 'separator', 'teachers_sep', __( 'Teachers' ) ),
-        Field::make( 'text', 'teachers_section_title', __( 'Section title' ) )
-            ->set_default_value( 'Вчителі' ),
-        Field::make( 'text', 'teachers_per_page', __( 'Teachers per page' ) )
-            ->set_width( 50 )
-            ->set_attribute( 'type', 'number' )
-            ->set_default_value( $def_per_page ),
-        Field::make( 'select', 'teachers_section_items_view_style', __( 'View style' ) )
-            ->add_options( array(
-                'grid'   => __( 'Grid' ),
-                'slider' => __( 'Slider' ),
-            ) )
-            ->set_width( 50 ),
-        Field::make( 'text', 'teachers_section_link_text', __( 'Section link text' ) )
-            ->set_width( 50 )
-            ->set_default_value( 'Всі вчителі' ),
-        Field::make( 'select', 'teachers_section_link_to', __( 'Page for link' ) )
-            ->set_width( 50 )
-            ->add_options( $pages_options ),
-    ) )
-    ->set_icon( 'groups' )
-    ->set_category( 'mib' )
-    ->set_mode( 'both' )
-    ->set_render_callback( function ( $fields, $attributes, $inner_blocks ) {
-        extract( $fields );
-        
-        // Include the template for rendering
-        include_once __THEME_DIR__ . '/template-parts/sections/teachers-section.php';
+        ->add_fields( array(
+            Field::make( 'separator', 'teachers_sep', __( 'Teachers' ) ),
+            Field::make( 'text', 'teachers_section_title', __( 'Section title' ) )
+                ->set_default_value( 'Вчителі' ),
+            Field::make( 'text', 'teachers_per_page', __( 'Teachers per page' ) )
+                ->set_width( 50 )
+                ->set_attribute( 'type', 'number' )
+                ->set_default_value( $def_per_page ),
+            Field::make( 'select', 'teachers_section_items_view_style', __( 'View style' ) )
+                ->add_options( array(
+                    'grid'   => __( 'Grid' ),
+                    'slider' => __( 'Slider' ),
+                ) )
+                ->set_width( 50 ),
+            Field::make( 'text', 'teachers_section_link_text', __( 'Section link text' ) )
+                ->set_width( 50 )
+                ->set_default_value( 'Всі вчителі' ),
+            Field::make( 'select', 'teachers_section_link_to', __( 'Page for link' ) )
+                ->set_width( 50 )
+                ->add_options( $pages_options ),
+        ) )
+        ->set_icon( 'groups' )
+        ->set_category( 'mib' )
+        ->set_mode( 'both' )
+        ->set_render_callback( function ( $fields, $attributes, $inner_blocks ) {
+            extract( $fields );
+            
+            // Include the template for rendering
+            include_once __THEME_DIR__ . '/template-parts/sections/teachers-section.php';
     } );
 
     // ==== Contacts Block
@@ -557,39 +629,39 @@ function custom_posts_gutenberg_blocks() {
 
     // ==== Company History Block
     Block::make('company_history', __('Company History'))
-    ->add_fields(array(
-        Field::make('separator', 'history_sep', __('Company History Block')),
-        
-        Field::make('text', 'history_title', __('Title'))
-            ->set_width(100),
+        ->add_fields(array(
+            Field::make('separator', 'history_sep', __('Company History Block')),
             
-        Field::make('rich_text', 'history_description', __('Description'))
-            ->set_width(100),
-            
-        Field::make('complex', 'history_items', __('History Timeline'))
-            ->add_fields(array(
-                Field::make('text', 'history_item_year', __('Year'))
-                    ->set_width(15)
-                    ->set_required(true),
-                    
-                Field::make('image', 'history_item_image', __('Image'))
-                    ->set_width(25)
-                    ->set_type(array('image')),
-                    
-                Field::make('rich_text', 'history_item_description', __('Description'))
-                    ->set_width(60)
-                    ->set_required(true),
-            ))
-            ->set_header_template('<%- history_item_year %>')
-            ->set_layout('tabbed-vertical')
-    ))
-    ->set_icon('calendar')
-    ->set_category('mib')
-    ->set_mode('both')
-    ->set_render_callback(function($fields, $attributes, $inner_blocks) {
-        extract( $fields );
+            Field::make('text', 'history_title', __('Title'))
+                ->set_width(100),
+                
+            Field::make('rich_text', 'history_description', __('Description'))
+                ->set_width(100),
+                
+            Field::make('complex', 'history_items', __('History Timeline'))
+                ->add_fields(array(
+                    Field::make('text', 'history_item_year', __('Year'))
+                        ->set_width(15)
+                        ->set_required(true),
+                        
+                    Field::make('image', 'history_item_image', __('Image'))
+                        ->set_width(25)
+                        ->set_type(array('image')),
+                        
+                    Field::make('rich_text', 'history_item_description', __('Description'))
+                        ->set_width(60)
+                        ->set_required(true),
+                ))
+                ->set_header_template('<%- history_item_year %>')
+                ->set_layout('tabbed-vertical')
+        ))
+        ->set_icon('calendar')
+        ->set_category('mib')
+        ->set_mode('both')
+        ->set_render_callback(function($fields, $attributes, $inner_blocks) {
+            extract( $fields );
 
-        include_once __THEME_DIR__ . '/template-parts/sections/company_history-section.php';
+            include_once __THEME_DIR__ . '/template-parts/sections/company_history-section.php';
     });
 
     // ==== Actuality Event
@@ -610,74 +682,74 @@ function custom_posts_gutenberg_blocks() {
 
     // ==== Program Form Registration Block
     Block::make('program_form_registration_block', __('Registration for the program'))
-    ->add_fields(array(
-        Field::make('separator', 'program_form_registration_sep', __('Registration for the program')),
-        Field::make('text', 'program_form_registration_heading', __('Section Heading')),
-        Field::make('select', 'contact_form_id', __('Contact Form 7'))
-            ->add_options( $cf7_options )
-            ->set_required(true)
-            ->set_help_text(__('Select a Contact Form 7 form')),
-    ))
-    ->set_inner_blocks(false)
-    ->set_icon('businessman')
-    ->set_category('mib')
-    ->set_mode('both')
-    ->set_render_callback(function($fields, $attributes, $inner_blocks) {
-        extract($fields);
-        
-        include_once __THEME_DIR__ . '/template-parts/sections/program_form-section.php';
+        ->add_fields(array(
+            Field::make('separator', 'program_form_registration_sep', __('Registration for the program')),
+            Field::make('text', 'program_form_registration_heading', __('Section Heading')),
+            Field::make('select', 'contact_form_id', __('Contact Form 7'))
+                ->add_options( $cf7_options )
+                ->set_required(true)
+                ->set_help_text(__('Select a Contact Form 7 form')),
+        ))
+        ->set_inner_blocks(false)
+        ->set_icon('businessman')
+        ->set_category('mib')
+        ->set_mode('both')
+        ->set_render_callback(function($fields, $attributes, $inner_blocks) {
+            extract($fields);
+            
+            include_once __THEME_DIR__ . '/template-parts/sections/program_form-section.php';
     });
 
     // ==== Members Block
     Block::make('members_block', __('Members'))
-    ->add_fields(array(
-        Field::make('separator', 'members_sep', __('Members')),
-    ))
-    ->set_inner_blocks(false)
-    ->set_icon('groups')
-    ->set_category('mib')
-    ->set_mode('both')
-    ->set_render_callback(function($fields, $attributes, $inner_blocks) {
+        ->add_fields(array(
+            Field::make('separator', 'members_sep', __('Members')),
+        ))
+        ->set_inner_blocks(false)
+        ->set_icon('groups')
+        ->set_category('mib')
+        ->set_mode('both')
+        ->set_render_callback(function($fields, $attributes, $inner_blocks) {
 
-        include_once __THEME_DIR__ . '/template-parts/sections/members-section.php';
+            include_once __THEME_DIR__ . '/template-parts/sections/members-section.php';
     });
 
     // ==== Clients Block
     Block::make('clients_block', __('Clients'))
-    ->add_fields(array(
-        Field::make('separator', 'clients_sep', __('Clients')),
-    ))
-    ->set_inner_blocks(false)
-    ->set_icon('groups')
-    ->set_category('mib')
-    ->set_mode('both')
-    ->set_render_callback(function($fields, $attributes, $inner_blocks) {
+        ->add_fields(array(
+            Field::make('separator', 'clients_sep', __('Clients')),
+        ))
+        ->set_inner_blocks(false)
+        ->set_icon('groups')
+        ->set_category('mib')
+        ->set_mode('both')
+        ->set_render_callback(function($fields, $attributes, $inner_blocks) {
 
-        include_once __THEME_DIR__ . '/template-parts/sections/clients-section.php';
+            include_once __THEME_DIR__ . '/template-parts/sections/clients-section.php';
     });
 
     // ==== Accreditations Block
     Block::make('accreditations_block', __('Accreditations'))
-    ->add_fields(array(
-        Field::make('separator', 'accreditations_sep', __('Accreditations')),
-        Field::make('image', 'certificate_image', __('Certificate Image'))
-            ->set_width(100)
-            ->set_help_text(__('Upload PNG or JPG certificate')),
-        Field::make('rich_text', 'accreditation_text', __('Accreditation Text'))
-            ->set_width(100),
-        Field::make('text', 'accreditation_info', __('Additional Info'))
-            ->set_width(100),
-        Field::make('text', 'accreditation_url', __('Accreditation URL'))
-            ->set_width(100)
-    ))
-    ->set_inner_blocks(false)
-    ->set_icon('awards')
-    ->set_category('mib')
-    ->set_mode('both')
-    ->set_render_callback(function($fields, $attributes, $inner_blocks) {
-        extract($fields);
-        
-        include_once __THEME_DIR__ . '/template-parts/sections/accreditations_single-section.php';
+        ->add_fields(array(
+            Field::make('separator', 'accreditations_sep', __('Accreditations')),
+            Field::make('image', 'certificate_image', __('Certificate Image'))
+                ->set_width(100)
+                ->set_help_text(__('Upload PNG or JPG certificate')),
+            Field::make('rich_text', 'accreditation_text', __('Accreditation Text'))
+                ->set_width(100),
+            Field::make('text', 'accreditation_info', __('Additional Info'))
+                ->set_width(100),
+            Field::make('text', 'accreditation_url', __('Accreditation URL'))
+                ->set_width(100)
+        ))
+        ->set_inner_blocks(false)
+        ->set_icon('awards')
+        ->set_category('mib')
+        ->set_mode('both')
+        ->set_render_callback(function($fields, $attributes, $inner_blocks) {
+            extract($fields);
+            
+            include_once __THEME_DIR__ . '/template-parts/sections/accreditations_single-section.php';
     });
 
     // ==== Banner 1120x125
@@ -706,77 +778,77 @@ function custom_posts_gutenberg_blocks() {
 
     // ==== Repeater with Counter Block
     Block::make('repeater_counter', __('Repeater with counter'))
-    ->add_fields(array(
-        Field::make('separator', 'repeater_counter_sep', __('Repeater with counter')),
+        ->add_fields(array(
+            Field::make('separator', 'repeater_counter_sep', __('Repeater with counter')),
 
-        Field::make('complex', 'repeater_counter_items', __('Items'))
-            ->add_fields(array(
-                Field::make('text', 'repeater_counter_item', __('Item'))
-                    ->set_width(100)
-                    ->set_required(true),
-            ))
-    ))
-    ->set_icon('grid-view')
-    ->set_category('mib')
-    ->set_mode('both')
-    ->set_render_callback(function($fields, $attributes, $inner_blocks) {
-        extract( $fields );
+            Field::make('complex', 'repeater_counter_items', __('Items'))
+                ->add_fields(array(
+                    Field::make('text', 'repeater_counter_item', __('Item'))
+                        ->set_width(100)
+                        ->set_required(true),
+                ))
+        ))
+        ->set_icon('grid-view')
+        ->set_category('mib')
+        ->set_mode('both')
+        ->set_render_callback(function($fields, $attributes, $inner_blocks) {
+            extract( $fields );
 
-        include_once __THEME_DIR__ . '/template-parts/blocks/block-repeater-counter.php';
+            include_once __THEME_DIR__ . '/template-parts/blocks/block-repeater-counter.php';
     });
 
     // ==== Exam Contact Information Block
     Block::make('exam_contact_info', __('Exam Contact Information'))
-    ->add_fields(array(
-        Field::make('separator', 'exam_contact_sep', __('Exam Contact Information')),
+        ->add_fields(array(
+            Field::make('separator', 'exam_contact_sep', __('Exam Contact Information')),
 
-        Field::make('text', 'exam_contact_title', __('Title'))
-            ->set_width(100),
-        
-        Field::make('text', 'exam_contact_address', __('Address'))
-            ->set_width(50),
+            Field::make('text', 'exam_contact_title', __('Title'))
+                ->set_width(100),
             
-        Field::make('text', 'exam_contact_phone', __('Phone Number'))
-            ->set_width(50),
+            Field::make('text', 'exam_contact_address', __('Address'))
+                ->set_width(50),
+                
+            Field::make('text', 'exam_contact_phone', __('Phone Number'))
+                ->set_width(50),
 
-        Field::make('text', 'exam_contact_address_label', __('Address Title'))
-            ->set_width(50),
+            Field::make('text', 'exam_contact_address_label', __('Address Title'))
+                ->set_width(50),
+                
+            Field::make('text', 'exam_contact_phone_label', __('Phone Number Title'))
+                ->set_width(50),
+        ))
+        ->set_icon('phone')
+        ->set_category('mib')
+        ->set_mode('both')
+        ->set_render_callback(function($fields, $attributes, $inner_blocks) {
+            extract($fields);
             
-        Field::make('text', 'exam_contact_phone_label', __('Phone Number Title'))
-            ->set_width(50),
-    ))
-    ->set_icon('phone')
-    ->set_category('mib')
-    ->set_mode('both')
-    ->set_render_callback(function($fields, $attributes, $inner_blocks) {
-        extract($fields);
-        
-        include_once __THEME_DIR__ . '/template-parts/blocks/block-exam-contact-info.php';
+            include_once __THEME_DIR__ . '/template-parts/blocks/block-exam-contact-info.php';
     });
 
     // ==== Schedule Block
     Block::make('schedule_block', __('Schedule'))
-    ->add_fields(array(
-        Field::make('separator', 'schedule_sep', __('Schedule Information')),
+        ->add_fields(array(
+            Field::make('separator', 'schedule_sep', __('Schedule Information')),
 
-        Field::make('text', 'schedule_title', __('Title'))
-            ->set_width(100),
-        
-        Field::make('textarea', 'schedule_description', __('Description'))
-            ->set_width(100),
+            Field::make('text', 'schedule_title', __('Title'))
+                ->set_width(100),
             
-        Field::make('file', 'schedule_file', __('Schedule File'))
-            ->set_type(array('application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'))
-            ->set_width(100)
-            ->set_help_text(__('Upload PDF or Word document with schedule details')),
-    ))
-    ->set_icon('calendar')
-    ->set_category('mib')
-    ->set_mode('both')
-    ->set_render_callback(function($fields, $attributes, $inner_blocks) {
-        extract($fields);
-        
-        include_once __THEME_DIR__ . '/template-parts/blocks/block-schedule.php';
+            Field::make('textarea', 'schedule_description', __('Description'))
+                ->set_width(100),
+                
+            Field::make('file', 'schedule_file', __('Schedule File'))
+                ->set_type(array('application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'))
+                ->set_width(100)
+                ->set_help_text(__('Upload PDF or Word document with schedule details')),
+        ))
+        ->set_icon('calendar')
+        ->set_category('mib')
+        ->set_mode('both')
+        ->set_render_callback(function($fields, $attributes, $inner_blocks) {
+            extract($fields);
+            
+            include_once __THEME_DIR__ . '/template-parts/blocks/block-schedule.php';
     });
 
 }
