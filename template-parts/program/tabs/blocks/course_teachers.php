@@ -18,9 +18,7 @@ if ( empty( $teachers ) ) {
             <div class="items">
                 <?php
                     foreach ( $teachers as $key => $teacher ) :
-
                         if ( intval( $per_page ) > $key ) {
-
                             $post_type      = get_post_type();
                             $item_id        = $teacher['id'];
                             $image_id       = get_post_thumbnail_id( $item_id );
