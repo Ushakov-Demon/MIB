@@ -441,6 +441,24 @@ function custom_posts_gutenberg_blocks() {
                         ->set_default_value( 'Teachers' )
                         ->set_width( 75 ),
                 ) )
+                ->add_fields( 'course_stutents', array(
+                    Field::make( 'text', 'course_stutents_count', __( 'Per page' ) )
+                        ->set_attribute( 'type', 'number' )
+                        ->set_default_value( 2 )
+                        ->set_width( 25 ),
+                    Field::make( 'text', 'course_stutents_block_title', __( 'Block title' ) )
+                        ->set_default_value( 'Graduates' )
+                        ->set_width( 75 )
+                ) )
+                ->add_fields( 'course_listerens', array(
+                    Field::make( 'text', 'course_listerens_count', __( 'Per page' ) )
+                        ->set_attribute( 'type', 'number' )
+                        ->set_default_value( 2 )
+                        ->set_width( 25 ),
+                    Field::make( 'text', 'course_listerens_block_title', __( 'Block title' ) )
+                        ->set_default_value( 'Listerens' )
+                        ->set_width( 75 ),
+                ) )
                 ->setup_labels( array(
                     'plural_name'   => 'Sections',
                     'singular_name' => 'Section',
