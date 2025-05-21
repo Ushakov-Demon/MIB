@@ -5,7 +5,7 @@ $has_teachers  = isset( $show_titchers ) && "yes" == $show_titchers;
 $has_students  = isset( $show_students ) && "yes" == $show_students;
 // $has_structure = isset( $program_structure_tab_content ) && ! empty( $program_structure_tab_content );
 $has_structure = true;
-$has_listeners = ! empty( $listners_tab_content ) || ! empty( $listners_tab_repeater );
+$has_listeners = isset( $use_course_listeners ) || ! empty( $use_course_listeners );
 ?>
 
 <div class="program-tabs">
@@ -107,11 +107,8 @@ $has_listeners = ! empty( $listners_tab_content ) || ! empty( $listners_tab_repe
             case 'use_admission_conditions':
                 include get_template_directory() . '/template-parts/program/blocks/program_admission_requirements.php';
                 break;
-            case 'listners_tab_content':
-            case 'listners_tab_repeater':
-                if ( ! empty( $field ) ) {
-                    include get_template_directory() . '/template-parts/program/blocks/program_listeners.php';
-                };
+            case 'use_course_listeners':
+                    include get_template_directory() . '/template-parts/program/tabs/listeners_tab.php';
                 break;
         }
     }

@@ -450,14 +450,19 @@ function custom_posts_gutenberg_blocks() {
                         ->set_default_value( 'Graduates' )
                         ->set_width( 75 )
                 ) )
-                ->add_fields( 'course_listerens', array(
-                    Field::make( 'text', 'course_listerens_count', __( 'Per page' ) )
-                        ->set_attribute( 'type', 'number' )
-                        ->set_default_value( 2 )
-                        ->set_width( 25 ),
-                    Field::make( 'text', 'course_listerens_block_title', __( 'Block title' ) )
-                        ->set_default_value( 'Listerens' )
-                        ->set_width( 75 ),
+                ->add_fields( 'course_listeners', array(
+                    Field::make( 'text', 'listenrs_block_title', __( 'Title' ) )
+                        ->set_default_value( 'Listeners' ),
+                    Field::make( 'complex', 'lesteners_items_repeater', __( 'Items' ) )
+                        ->set_collapsed( true )
+                        ->add_fields( array(
+                            Field::make( 'image', 'listeners_item_image', __( 'Image' ) )
+                        ) )
+                        ->setup_labels( array(
+                            'plural_name'   => 'Items',
+                            'singular_name' => 'Item',
+                        ) ),
+                    Field::make( 'rich_text', 'listenrs_block_content', __( 'Free content' ) )
                 ) )
                 ->setup_labels( array(
                     'plural_name'   => 'Sections',
@@ -542,16 +547,20 @@ function custom_posts_gutenberg_blocks() {
 
         // Listeners ****
         ->add_tab( __( 'Listeners tab' ), array(
-            Field::make( 'complex', 'listners_tab_repeater', __( 'Items repeater' ) )
-                ->set_collapsed( true )
-                ->add_fields( array(
-                    Field::make( 'image', 'listners_image', __( 'Item image' ) )
+            Field::make( 'select', 'use_course_listeners', __( 'Use Course Listeners' ) )
+                ->add_options( array(
+                    'yes' => __( 'Yes' ),
+                    'no'  => __( 'No' ),
                 ) )
-                ->setup_labels( array(
-                    'plural_name'   => 'Items',
-                    'singular_name' => 'Item',
-                ) ),
-                Field::make( 'rich_text', 'listners_tab_content', __( 'Content' ) )
+                ->help_text( __( 'Use content from "About tab" (if filled in)' ) ),
+            Field::make( 'rich_text', 'listeners_tab_content', __( 'Tab content' ) )
+                ->set_conditional_logic( array(
+                    array(
+                        'field'     => 'use_course_listeners',
+                        'value'     => 'no',
+                        'compare'   => '=',
+                    )
+                ) )
         ) )
         ->set_render_callback( function ( $fields, $attributes, $inner_blocks ) {
             extract( $fields );
