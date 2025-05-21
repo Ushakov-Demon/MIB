@@ -3690,6 +3690,9 @@ footer .footer-after .footer-after-col {
 .section.section-main.version-hot-event .text, .section.section-main.version-events .text, .section.section-main.version-black .text {
   color: var(--color_grey_4);
 }
+.section.section-main.version-hot-event .text h1, .section.section-main.version-hot-event .text h2, .section.section-main.version-hot-event .text h3, .section.section-main.version-hot-event .text h4, .section.section-main.version-hot-event .text h5, .section.section-main.version-hot-event .text h6, .section.section-main.version-events .text h1, .section.section-main.version-events .text h2, .section.section-main.version-events .text h3, .section.section-main.version-events .text h4, .section.section-main.version-events .text h5, .section.section-main.version-events .text h6, .section.section-main.version-black .text h1, .section.section-main.version-black .text h2, .section.section-main.version-black .text h3, .section.section-main.version-black .text h4, .section.section-main.version-black .text h5, .section.section-main.version-black .text h6 {
+  color: var(--color_white);
+}
 .section.section-main.version-hot-event .image, .section.section-main.version-events .image, .section.section-main.version-black .image {
   position: absolute;
   z-index: 0;
@@ -5976,7 +5979,6 @@ footer .footer-after .footer-after-col {
 .program-results-mission .program-results ol li,
 .program-results-mission .program-mission ol li {
   display: flex;
-  justify-content: space-between;
   gap: 16px;
   counter-increment: counter;
 }
@@ -6058,8 +6060,9 @@ footer .footer-after .footer-after-col {
 .program-results-mission .program-results ul li:not(:last-child) {
   margin-bottom: 10px;
 }
+.program-results-mission .program-results ol,
 .program-results-mission .program-results ul {
-  gap: 8px;
+  gap: 0;
 }
 .program-results-mission .program-results blockquote {
   padding: 24px 40px;
@@ -6277,11 +6280,15 @@ footer .footer-after .footer-after-col {
 .program-documents .item {
   display: flex;
   flex-direction: column;
+  align-items: unset;
   padding: 32px;
   gap: 16px;
   counter-increment: counter;
   border: 1px solid var(--color_grey);
   transition: all 0.3s ease;
+}
+.program-documents .item::before {
+  display: none !important;
 }
 .program-documents .item:hover {
   background-color: var(--color_primary);
@@ -6436,12 +6443,29 @@ footer .footer-after .footer-after-col {
   grid-template-columns: repeat(2, 1fr);
   gap: 32px;
 }
+.program-listeners .item {
+  line-height: 1;
+}
 @media (max-width: 767px) {
   .program-listeners {
     gap: 16px;
     display: flex;
     flex-direction: column;
   }
+}
+
+.program-listeners-desctiprion {
+  margin-top: 40px;
+}
+
+.program-admission-requirements ul a,
+.program-admission-requirements ol a {
+  color: var(--color_primary);
+  text-decoration: underline;
+}
+.program-admission-requirements ul a:hover,
+.program-admission-requirements ol a:hover {
+  text-decoration: none;
 }
 
 .program-teachers .items.owl-carousel,
@@ -7655,6 +7679,11 @@ footer .footer-after .footer-after-col {
   min-width: 36px;
   height: 36px;
   border-radius: 50%;
+}
+.block-share-article .share-buttons a.copy-link-btn {
+  background: transparent !important;
+  width: auto;
+  line-height: 1;
 }
 .block-share-article .share-buttons a:hover {
   background-color: var(--color_grey);

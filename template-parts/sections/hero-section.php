@@ -61,16 +61,23 @@
 
             <?php if( ! $is_tax ): ?>
 
-                <?php if ( "programs" !== $post_type || ! empty( $main_bottom_button_text ) && ! $is_events_arhive ) :
-                    $processed_button_text = preg_replace( '/\*(.*?)\*/', '<span>$1</span>', $main_bottom_button_text );
+                <?php 
+                    if ( "programs" !== $post_type && ! $is_events_arhive ) : 
                     ?>
-                    <?php if ( ! empty( $processed_button_text ) ) : ?>
+
+                    <?php if( ! empty( $main_bottom_buttons ) ): ?>
                         <div class="buttons">
-                            <a href="<?php echo esc_url( $main_bottom_button_link ); ?>" class="button">
-                                <span><?php echo $processed_button_text; ?></span>
-                            </a>
+                            <?php foreach ( $main_bottom_buttons as $button ) : 
+                                $button_text = isset( $button['button_text'] ) ? $button['button_text'] : '';
+                                $button_link = isset( $button['button_link'] ) ? $button['button_link'] : '#';
+                            ?>
+                                <a href="<?php echo esc_url( $button_link ); ?>" class="button">
+                                    <span><?php echo esc_html( $button_text ); ?></span>
+                                </a>
+                            <?php endforeach; ?>
                         </div>
                     <?php endif; ?>
+
                     <?php
                     elseif ( $is_programs_archive ) :
                         include_once get_template_directory() . '/template-parts/blocks/block-programs-categories-buttons.php';

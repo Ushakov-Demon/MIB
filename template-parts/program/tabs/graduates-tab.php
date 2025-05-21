@@ -10,6 +10,7 @@ $students = carbon_get_post_meta( $post_id, 'tr_program_students' );
                 if ( ! empty( $students ) ) {
                     foreach ( $students as $item ) {
                         $item_id        = $item['id'];
+                        $post_type      = get_post_type( $item_id );
                         $image_id       = get_post_thumbnail_id( $item_id );
                         $image_url      = wp_get_attachment_url( $image_id );
                         $image_alt      = get_post_meta( $image_id, '_wp_attachment_image_alt', true );

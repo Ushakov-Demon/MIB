@@ -12,8 +12,8 @@ if ( empty ( $teachers ) ) {
                 foreach ( $teachers as $key => $teacher ) :
                     if ( intval( $per_page ) > $key ) {
 
-                        $post_type      = get_post_type();
                         $item_id        = $teacher['id'];
+                        $post_type      = get_post_type( $item_id );
                         $image_id       = get_post_thumbnail_id( $item_id );
                         $image_url      = wp_get_attachment_url( $image_id );
                         $image_alt      = get_post_meta( $image_id, '_wp_attachment_image_alt', true );

@@ -31,7 +31,7 @@ if ( is_tax() ) {
 }
 
 ?>
-<section class="section section-programs">
+<section class="section section-programs" id="programs-<?php echo sanitize_title($programs_section_title); ?>">
     <div class="container">
 
         <?php

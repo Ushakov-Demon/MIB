@@ -115,6 +115,13 @@ function custom_posts_gutenberg_blocks() {
                 )
             ) )      
             ->set_width( 50 ),
+            Field::make( 'complex', 'main_bottom_buttons', __( 'Buttons' ) )
+                ->add_fields( array(
+                    Field::make( 'text', 'button_text', __( 'Button text' ) )
+                        ->set_width( 50 ),
+                    Field::make( 'text', 'button_link', __( 'Button link' ) )
+                        ->set_width( 50 ),
+                ) ),
         ) )
         ->set_inner_blocks( false )
         ->set_description( __( 'This a block for inner in Hero section page' ) )

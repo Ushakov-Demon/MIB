@@ -35,8 +35,8 @@ $teachers   = mib_get_posts( 'teachers', $teachers_per_page );
                 if ( $teachers->have_posts() ) {
                     while ( $teachers->have_posts() ) {
                         $teachers->the_post();
-                        $post_type      = get_post_type();
                         $item_id        = get_the_ID();
+                        $post_type      = get_post_type( $item_id );
                         $image_id       = get_post_thumbnail_id();
                         $image_url      = wp_get_attachment_url( $image_id );
                         $image_alt      = get_post_meta( $image_id, '_wp_attachment_image_alt', true );

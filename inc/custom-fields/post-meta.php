@@ -78,12 +78,12 @@ function custom_posts_meta_data() {
                 ->set_attribute( 'min', '1' )
                 ->set_default_value( 5 )
                 ->set_width( 20 ),
-            Field::make( 'text', 'tr_program_number_of_courses', __( 'Number of courses' ) )
-                ->set_attribute( 'type', 'number' )
-                ->set_width( 20 ),
             Field::make( 'select', 'tr_program_period', __( 'Period' ) )
                 ->add_options( $period_options )
                 ->set_default_value( 'months' )
+                ->set_width( 20 ),
+            Field::make( 'text', 'tr_program_number_of_courses', __( 'Number of courses' ) )
+                ->set_attribute( 'type', 'number' )
                 ->set_width( 20 ),
             Field::make( 'text', 'tr_program_format',  __( 'Format' ) )
                 ->set_width( 20 ),

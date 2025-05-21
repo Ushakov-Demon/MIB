@@ -19,8 +19,8 @@ if ( empty( $teachers ) ) {
                 <?php
                     foreach ( $teachers as $key => $teacher ) :
                         if ( intval( $per_page ) > $key ) {
-                            $post_type      = get_post_type();
                             $item_id        = $teacher['id'];
+                            $post_type      = get_post_type( $item_id );
                             $image_id       = get_post_thumbnail_id( $item_id );
                             $image_url      = wp_get_attachment_url( $image_id );
                             $image_alt      = get_post_meta( $image_id, '_wp_attachment_image_alt', true );
@@ -38,7 +38,7 @@ if ( empty( $teachers ) ) {
         </div>
 
         <div class="program-content-all">
-            <a href="#tab-teachers" class="show-more-link"><?php echo pll__('View all teachers'); ?></a>
+            <a href="<?php echo get_permalink( 20 ) ?>" class="show-more-link" target="_blank"><?php echo pll__('View all teachers'); ?></a>
         </div>
     </div>
 </div>

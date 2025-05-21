@@ -28,9 +28,12 @@
         </div><!-- .program-listeners -->
 
         <?php
-        if ( ! empty( $listenrs_block_content ) ) :
-            echo $listenrs_block_content;
-        endif;
+        if ( ! empty( $listenrs_block_content ) ) : ?>
+            <div class="program-listeners-desctiprion">
+                <?php echo $listenrs_block_content; ?>
+            </div>
+            <?php
+            endif;
         ?>
     </div><!-- .accordion-content -->
 </div><!-- .accordion-item -->
