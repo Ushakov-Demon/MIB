@@ -5128,6 +5128,8 @@ footer {
 
     @include mobile {
         gap: 16px;
+        display: flex;
+        flex-direction: column;
     }
 }
 
@@ -5143,6 +5145,11 @@ footer {
 
         .tab-title {
             margin: 0 0 var(--block_spacing);
+            font-size: 32px;
+
+            @include mobile {
+                font-size: 28px;
+            }
         }
 
         p {
@@ -5167,15 +5174,6 @@ footer {
 
         &:not(.active) {
             display: none !important;
-        }
-
-        .tab-title {
-            margin-top: 0;
-            font-size: 32px;
-
-            @include mobile {
-                font-size: 28px;
-            }
         }
     }
 }
@@ -5214,6 +5212,12 @@ footer {
     }
 
     @include ul_list;
+}
+
+#tab-program-content {
+    .program-structure {
+        margin: 0;
+    }
 }
 
 .search-container {
@@ -5845,6 +5849,12 @@ footer {
             min-width: 36px;
             height: 36px;
             border-radius: 50%;
+
+            &.copy-link-btn {
+                background: transparent !important;
+                width: auto;
+                line-height: 1
+            }
 
             &:hover {
                 background-color: var(--color_grey);

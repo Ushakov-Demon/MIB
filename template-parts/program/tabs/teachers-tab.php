@@ -1,5 +1,7 @@
 <div id="tab-teachers" class="tab-content">
     <div class="program-teachers">
+        <h3 class="tab-title"><?php echo pll__('Teachers'); ?></h3>
+        
         <div class="items">
             <?php
                 foreach ( $teachers as $key => $teacher ) :

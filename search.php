@@ -46,7 +46,7 @@ function get_post_type_page_url($page_id, $post_type) {
 
 // Function to get "Show more" URL for specific post type
 function get_show_more_url($search_query, $post_type) {
-    return home_url('/search/?s=' . urlencode($search_query) . '&post_type=' . $post_type);
+    return home_url('/?s=' . urlencode($search_query) . '&post_type=' . $post_type);
 }
 
 // Get search parameters
@@ -77,7 +77,7 @@ $search_counts = mib_get_search_counts($search_query);
                         <h3><?php echo pll__('Filter by type'); ?></h3>
                         <ul class="filter-list">
                             <li>
-                                <a href="<?php echo home_url('/search/?s=' . urlencode($search_query)); ?>" 
+                                <a href="<?php echo home_url('/?s=' . urlencode($search_query)); ?>" 
                                    class="filter-link<?php echo ($current_post_type === 'all') ? ' active' : ''; ?>">
                                     <?php echo pll__('All results', 'baza'); ?>
                                     <span class="filter-count">
@@ -88,7 +88,7 @@ $search_counts = mib_get_search_counts($search_query);
                             <?php foreach ($search_counts as $post_type => $data) : ?>
                                 <?php if ($data['count'] > 0) : ?>
                                     <li>
-                                        <a href="<?php echo home_url('/search/?s=' . urlencode($search_query) . '&post_type=' . $post_type); ?>" 
+                                        <a href="<?php echo home_url('/?s=' . urlencode($search_query) . '&post_type=' . $post_type); ?>" 
                                            class="filter-link<?php echo ($current_post_type === $post_type) ? ' active' : ''; ?>">
                                             <?php echo $data['label']; ?>
                                             <span class="filter-count"><?php echo $data['count']; ?></span>

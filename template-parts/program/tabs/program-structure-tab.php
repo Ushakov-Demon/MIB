@@ -9,7 +9,7 @@ if ( ! $has_structure ) {
         if ( 'no' == $use_program_content ) :
             if ( isset( $program_structure_tab_title ) && ! empty( $program_structure_tab_title ) ) :
                 ?>
-                <h3><?php echo pll__( $program_structure_tab_title ); ?>:</h3>
+                <h3 class="tab-title"><?php echo pll__( $program_structure_tab_title ); ?>:</h3>
                 <?php
             endif;
 
@@ -17,7 +17,7 @@ if ( ! $has_structure ) {
         elseif ( 'yes' == $use_program_content && ! empty ( $course_content_items ) ) :
             if ( ! empty( $course_content_title ) ) :
                 ?>
-                <h3>
+                <h3 class="tab-title">
                     <?php echo pll__( $course_content_title, 'baza' ); ?>
                 </h3>
                 <?php

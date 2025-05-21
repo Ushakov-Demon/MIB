@@ -1,6 +1,7 @@
 <?php
 
 $members_query = apply_filters('mib_get_posts', 'members', -1);
+
 if ($members_query->have_posts()) : 
     ?>
     <section class="section section-members">

@@ -1,5 +1,5 @@
 <?php
-// add_filter( 'mib_get_posts'                         , 'mib_get_posts', 10 );
+add_filter( 'mib_get_posts'                         , 'mib_get_posts', 10 );
 add_filter( 'mib_get_alternating_posts'             , 'mib_get_alternating_posts', 10 );
 add_action( 'wp_ajax_custom_post_type_filter'       , 'mib_custom_post_type_filter' );
 add_action( 'wp_ajax_nopriv_custom_post_type_filter', 'mib_custom_post_type_filter' );

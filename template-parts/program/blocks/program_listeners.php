@@ -4,6 +4,8 @@ if ( ! $has_listeners ) {
 }
 ?>
 <div id="tab-listeners" class="tab-content">
+    <h3 class="tab-title"><?php echo pll__('Listeners', 'baza'); ?></h3>
+    
     <?php
     if ( ! empty( $listners_tab_repeater ) ) :
         ?>

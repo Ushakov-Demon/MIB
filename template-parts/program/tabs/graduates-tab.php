@@ -3,6 +3,8 @@ $students = carbon_get_post_meta( $post_id, 'tr_program_students' );
 ?>
 <div id="tab-graduates" class="tab-content">
     <div class="program-graduates">
+        <h3 class="tab-title"><?php echo pll__('Students'); ?></h3>
+
         <div class="items">
             <?php 
                 if ( ! empty( $students ) ) {

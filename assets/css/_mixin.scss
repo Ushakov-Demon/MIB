@@ -368,7 +368,7 @@
 
         &.owl-carousel {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr auto;
             gap: 40px;
 
             .owl-stage-outer {

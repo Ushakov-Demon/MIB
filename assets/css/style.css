@@ -4804,7 +4804,7 @@ footer .footer-after .footer-after-col {
 }
 .section.section-teachers .items.owl-carousel, .section.section-students .items.owl-carousel {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr auto;
   gap: 40px;
 }
 .section.section-teachers .items.owl-carousel .owl-stage-outer, .section.section-students .items.owl-carousel .owl-stage-outer {
@@ -6439,13 +6439,15 @@ footer .footer-after .footer-after-col {
 @media (max-width: 767px) {
   .program-listeners {
     gap: 16px;
+    display: flex;
+    flex-direction: column;
   }
 }
 
 .program-teachers .items.owl-carousel,
 .program-graduates .items.owl-carousel {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr auto;
   gap: 40px;
 }
 .program-teachers .items.owl-carousel .owl-stage-outer,
@@ -6607,6 +6609,12 @@ footer .footer-after .footer-after-col {
 }
 .tabs-container .tab-content .tab-title {
   margin: 0 0 var(--block_spacing);
+  font-size: 32px;
+}
+@media (max-width: 767px) {
+  .tabs-container .tab-content .tab-title {
+    font-size: 28px;
+  }
 }
 .tabs-container .tab-content p {
   margin: 0 0 24px;
@@ -6647,15 +6655,6 @@ footer .footer-after .footer-after-col {
 }
 .tabs-container .tab-content:not(.active) {
   display: none !important;
-}
-.tabs-container .tab-content .tab-title {
-  margin-top: 0;
-  font-size: 32px;
-}
-@media (max-width: 767px) {
-  .tabs-container .tab-content .tab-title {
-    font-size: 28px;
-  }
 }
 
 .program-teaching-methods {
@@ -6711,6 +6710,10 @@ footer .footer-after .footer-after-col {
 }
 .program-structure ul li:not(:last-child) {
   margin-bottom: 10px;
+}
+
+#tab-program-content .program-structure {
+  margin: 0;
 }
 
 .search-container {
