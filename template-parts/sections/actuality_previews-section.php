@@ -11,7 +11,7 @@ $actuality_posts_title = isset( $actuality_posts_title ) ? $actuality_posts_titl
 if ( "mixed" == $actuality_post_type ) {
     $alternating_posts = apply_filters( 'mib_get_alternating_posts', $per_page );
 } else {
-    $posts_query = mib_get_posts( $actuality_post_type, $per_page );
+    $posts_query = mib_get_posts( $actuality_post_type, $per_page, 1 );
 
     $alternating_posts['posts']         = $posts_query->posts;
     $alternating_posts['max_num_pages'] = $posts_query->max_num_pages;
@@ -20,7 +20,7 @@ if ( "mixed" == $actuality_post_type ) {
 }
 
 $max_num_pages    = $alternating_posts['max_num_pages'];
-$current_page_num = $alternating_posts['page'];
+$current_page_num = $alternating_posts['page'] ?? 2;
 ?>
 
 <section class="section section-news<?php echo esc_attr( $pagination_class )?>"
