@@ -1,9 +1,10 @@
 <?php
 get_header();
 
-$actuality_posts_per_page = 2;
-$actuality_posts_title = pll__('Current', 'baza');
-$alternating_posts = apply_filters( 'mib_get_alternating_posts', $actuality_posts_per_page, 2 );
+$actuality_posts_per_page = 4;
+$actuality_posts_title    = pll__('Current', 'baza');
+$alternating_posts        = mib_get_alternating_posts( $actuality_posts_per_page, 2 );
+
 ?>
 
 	<main id="primary" class="site-main">
@@ -43,9 +44,9 @@ $alternating_posts = apply_filters( 'mib_get_alternating_posts', $actuality_post
 
 							<div class="items items-last-events">
 								<?php
-									if ( ! empty( $alternating_posts ) ) :
-										foreach ( $alternating_posts as $item ) :
-									
+									if ( ! empty( $alternating_posts["posts"] ) ) :
+										foreach ( $alternating_posts["posts"] as $item ) :
+
 											$post_ID      = $item->ID;
 											$post_type    = $item->post_type;
 											$shedule_date = ( $post_type === 'events' ) ? get_post_meta( $post_ID, '_event_shedule_date', true ) : '';
