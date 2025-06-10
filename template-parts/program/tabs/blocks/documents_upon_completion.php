@@ -20,9 +20,17 @@ if ( empty( $duc_documents_list ) ) {
         <div class="program-documents">
             <?php
             foreach( $duc_documents_list as $item ) :
-                $file_url = wp_get_attachment_url( $item['duc_item_file'] );
+                $href           = $item['duc_item_file'];
+                $download_attr  = '';
+
+                if ( 'download' == $item['duc_link_type'] ) {
+                    $href          = wp_get_attachment_url( $item['duc_item_file'] );
+                    $download_attr = ' download';
+                } else {
+                    $page_url = get_the_permalink( $item['duc_item_document_page'] );
+                }
             ?>
-            <a class="item program-documents-link" href="<?php echo esc_url( $file_url )?>" download>
+            <a class="item program-documents-link" href="<?php echo esc_url( $href )?>"<?php echo $download_attr?>>
                 <?php
                 if ( ! empty( $item['duc_item_name'] ) ) :
                     ?>

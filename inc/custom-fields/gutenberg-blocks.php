@@ -369,10 +369,33 @@ function custom_posts_gutenberg_blocks() {
                     Field::make( 'complex', 'duc_documents_list', __( 'Documents' ) )
                         ->set_collapsed( true )
                         ->add_fields( array(
+                            Field::make( 'select', 'duc_link_type', __( 'Link type' ) )
+                                ->add_options( array(
+                                    'page' => __( 'Page' ),
+                                    'download' => __( 'Download document' ),
+                                ) )
+                                ->set_width( 20 ),
                             Field::make( 'file', 'duc_item_file', __( 'Doc file' ) )
-                                ->set_width( 25 ),
+                                ->set_width( 40 )
+                                ->set_conditional_logic( array(
+                                    array(
+                                        'field'   => 'duc_link_type',
+                                        'value'   => 'download',
+                                        'compare' => '=',
+                                    )
+                                ) ),
+                            Field::make( 'select', 'duc_item_document_page', __( 'Select page' ) )
+                                ->set_width( 40 )
+                                ->add_options( $pages_options )
+                                ->set_conditional_logic( array(
+                                    array(
+                                        'field'   => 'duc_link_type',
+                                        'value'   => 'download',
+                                        'compare' => '!=',
+                                    )
+                                ) ),    
                             Field::make( 'text', 'duc_item_name', __( 'Name' ) )
-                                ->set_width( 75 ),
+                                ->set_width( 40 ),
                         ) )
                         ->set_header_template( '
                             <% if (duc_item_name) { %>
