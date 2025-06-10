@@ -17,6 +17,14 @@ function custom_posts_meta_data() {
     $members_cities_options     = apply_filters( 'mib_get_array_by_option', 'cities_list', 'city_item' );
 
     // ==== PROGRAMS post type
+    Container::make( 'post_meta', __( 'Turn on remaining date' ) )
+        ->where( 'post_type', '=', 'programs' )
+        ->set_context( 'side' )
+        ->set_priority( 'high' )
+        ->add_fields( array(
+            Field::make( 'checkbox', 'show_remaining_date', __( 'Show remaining' ) ),
+    ) );
+
     Container::make( 'post_meta', __( 'Training course icon' ) )
         ->where( 'post_type', '=', 'programs' )
         ->set_context( 'side' )
@@ -87,8 +95,8 @@ function custom_posts_meta_data() {
                 ->set_width( 20 ),
             Field::make( 'text', 'tr_program_format',  __( 'Format' ) )
                 ->set_width( 20 ),
-         ) )
-         ->add_tab( __( 'Param stats' ), array(
+        ) )
+        ->add_tab( __( 'Param stats' ), array(
             Field::make( 'text', 'tr_program_stats_hours', __( 'Learning hours' ) )
                 ->set_attribute( 'type', 'number' )
                 ->set_width( 20 ),
@@ -112,7 +120,7 @@ function custom_posts_meta_data() {
                 ->set_width( 20 ),
             Field::make( 'textarea', 'tr_program_stats_cases_label', __( 'Number of real cases Text' ) )
                 ->set_width( 20 ),
-         ) )
+        ) )
         ->add_tab( __( 'Members' ) , array(
             Field::make( 'association', 'tr_program_teachers', __( 'Teachers' ) )
                 ->set_types( array(
@@ -299,7 +307,7 @@ function custom_posts_meta_data() {
                                 <%- plan_item_time_topic %>
                             <% } %>
                         ' ),
-        ) );
+    ) );
 
     // ==== TEATCHERS post type
     Container::make( 'post_meta', __( 'Teatcher data' ) )
