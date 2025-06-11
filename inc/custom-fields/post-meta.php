@@ -321,6 +321,14 @@ function custom_posts_meta_data() {
     Container::make( 'post_meta', __( 'Student data' ) )
         ->where( 'post_type', '=', 'students' )
         ->add_fields( array(
+            Field::make( 'select', 'st_gender', __( 'Gender' ) )
+                ->add_options( array(
+                    'man' => __( 'Man' ),
+                    'woman' => __( 'Woman' ),
+                ) )
+                ->set_width( 50 ),
+            Field::make( 'text', 'st_year_graduation', __( 'Year of graduation' ) )
+                ->set_width( 50 ),
             Field::make( 'select', 'st_activity', __( 'Activity' ) )
                 ->add_options( $members_activities_options )
                 ->set_width( 33 ),
