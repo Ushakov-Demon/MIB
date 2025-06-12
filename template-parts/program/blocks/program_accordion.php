@@ -57,7 +57,7 @@
             ?>
 
             <div class="program-content-all">
-                <a href="#tab-teachers" class="show-more-link"><?php echo pll__('View all teachers'); ?></a>
+                <a href="#teachers" class="show-more-link"><?php echo pll__('View all teachers'); ?></a>
             </div>
             
         </div>

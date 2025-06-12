@@ -15,6 +15,8 @@ function theme_options_fields(){
                 ->add_options( $pages_options ),
             Field::make( 'select', 'programs_arhive_page', __( 'Programs arhive page' ) )
                 ->add_options( $pages_options ),
+            Field::make( 'select', 'thank_you_page_redirect', __( 'Thank you page redirect' ) )
+                ->add_options( $pages_options ),
             Field::make( 'separator', 'members_vars_sep', __( 'Members attributes' ) ),
             Field::make( 'complex', 'activity_list', __( 'Fields of activity' ) )
                 ->add_fields( array(

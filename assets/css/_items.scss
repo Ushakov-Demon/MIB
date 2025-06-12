@@ -176,6 +176,12 @@
                     transform: scale(1.2);
                 }
             }
+
+            .title {
+                span {
+                    color: var(--color_primary);
+                }
+            }
         }
 
         &.pending {
@@ -210,18 +216,14 @@
             line-height: 1.1;
             margin: 0;
 
-            span,
-            a {
+            span {
                 display: block;
                 font-size: 28px;
                 color: var(--color_link);
+                transition: all .5s ease;
 
                 @include mobile {
                     font-size: 24px;
-                }
-
-                &:hover {
-                    color: var(--color_primary);
                 }
             }
         }
@@ -244,6 +246,7 @@
 
             .show-more-link {
                 color: var(--color_primary);
+                transition: all .5s ease;
 
                 &:hover {
                     color: var(--color_black);

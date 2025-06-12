@@ -137,15 +137,27 @@ ol.wp-block-list {
 /* Quote */
 .wp-block-quote {
     background-color: var(--color_khaki_2);
-    padding: 32px;
-    display: flex;
-    gap: 28px;
+    padding: 32px 32px 32px 82px;
     font-size: 15px;
     line-height: 1.5;
     margin-left: 0;
     margin-right: 0;
     margin-top: var(--block_spacing);
     margin-bottom: var(--block_spacing);
+    position: relative;
+
+    > * {
+        margin-bottom: 16px;
+        margin-top: 0;
+
+        @include mobile {
+            margin-bottom: 16px;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
 
     @include mobile {
         font-size: 15px;
@@ -156,6 +168,9 @@ ol.wp-block-list {
     &::before {
         content: "\e90b";
         font-size: 18px;
+        position: absolute;
+        left: 32px;
+        top: 32px;
     }
     
     cite {

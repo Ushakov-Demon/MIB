@@ -371,9 +371,12 @@ function custom_posts_gutenberg_blocks() {
                         ->set_collapsed( true )
                         ->add_fields( array(
                             Field::make( 'file', 'duc_item_file', __( 'Doc file' ) )
-                                ->set_width( 25 ),
+                                ->set_width( 20 ),
                             Field::make( 'text', 'duc_item_name', __( 'Name' ) )
-                                ->set_width( 75 ),
+                                ->set_width( 40 ),
+                            Field::make( 'select', 'duc_item_url', __( 'Link' ) )
+                                ->set_width( 40 )
+                                ->add_options( $pages_options ),
                         ) )
                         ->set_header_template( '
                             <% if (duc_item_name) { %>

@@ -3,7 +3,7 @@ if ( ! $has_listeners ) {
     return;
 }
 ?>
-<div id="tab-listeners" class="tab-content">
+<div id="listeners" class="tab-content">
     <?php
     if ( 'yes' == $use_course_listeners ) :
         ?>

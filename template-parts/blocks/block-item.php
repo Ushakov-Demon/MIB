@@ -11,7 +11,7 @@ if ( ! isset( $announcing ) ) {
     $announcing = '';
 }
 ?>
-<div class="item<?php echo $announcing?>">
+<a class="item<?php echo $announcing?>" href="<?php echo esc_url( $post_permalink ); ?>">
     <?php if ($image): ?>
         <div class="image">
             <?php 
@@ -29,11 +29,9 @@ if ( ! isset( $announcing ) ) {
     <?php endif; ?>
     
     <h2 class="title">
-        <?php 
-        echo $title_text_tag_before;
-            echo esc_html($title);
-        echo $title_text_tag_after;
-        ?>
+        <span>
+            <?php echo esc_html($title); ?>
+        </span>
     </h2>
     
     <?php if ( ! empty( $desc )): ?>
@@ -46,16 +44,16 @@ if ( ! isset( $announcing ) ) {
     if ( ! isset( $is_announcing ) || ! $is_announcing ) :
     ?>
     <div class="item-footer">
-        <a href="<?php echo esc_url( $post_permalink ); ?>" class="show-more-link">
+        <span class="show-more-link">
             <?php
                 if ( ! empty( $button_text ) ) :
                     pll_e( $button_text, 'baza' );
                 else:
                     pll_e( 'Learn more', 'baza' );
             endif; ?>
-        </a>
+        </span>
     </div>
     <?php
     endif;
     ?>
-</div>
+</a>

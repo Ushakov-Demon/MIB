@@ -176,8 +176,8 @@ function universal_add_breadcrumb_parent($links, $config = array()) {
 // Add all favicon and app icon related tags to the site header
 function add_complete_favicons() {
     $img_path = trailingslashit(get_stylesheet_directory_uri()) . 'assets/images/';
+    //echo '<link rel="shortcut icon" href="' . $img_path . 'favicon.ico" />' . "\n";
     echo '<link rel="icon" href="' . $img_path . 'favicon.svg" type="image/svg+xml" />' . "\n";
-    echo '<link rel="shortcut icon" href="' . $img_path . 'favicon.ico" />' . "\n";
     echo '<link rel="icon" type="image/png" sizes="96x96" href="' . $img_path . 'favicon-96x96.png" />' . "\n";
     echo '<link rel="apple-touch-icon" href="' . $img_path . 'apple-touch-icon.png" />' . "\n";
     echo '<link rel="manifest" href="' . $img_path . 'site.webmanifest" />' . "\n";
@@ -827,6 +827,7 @@ function mib_display_program_category_summary() {
             $regular_price            = (int)get_post_meta($post_id, '_tr_program_regular_price', true);
             $sale_price               = (int)get_post_meta($post_id, '_tr_program_sale_price', true);
             $sale_end_date            = get_post_meta($post_id, '_tr_program_sale_price_date_end', true);
+            
             $completed_studies        = (int)get_post_meta($post_id, '_tr_program_completed_studies', true);
             $enhanced_qualifications  = (int)get_post_meta($post_id, '_tr_program_enhanced_qualifications', true);
             $total_completed_studies += $completed_studies;
@@ -944,3 +945,31 @@ function fix_program_category_404() {
     }
 }
 add_action('template_redirect', 'fix_program_category_404', 5);
+
+// CF7 redirect after submit
+function cf7_redirect_jquery_script() {
+    $thank_you_page_id = get_option('_thank_you_page_redirect');
+    
+    if (!$thank_you_page_id) {
+        return;
+    }
+    
+    $translated_page_id = get_translated_page_id($thank_you_page_id);
+    $thank_you_url = get_permalink($translated_page_id);
+    
+    if (!$thank_you_url) {
+        return;
+    }
+    ?>
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $(document).on('wpcf7mailsent', function(event) {
+                setTimeout(function() {
+                    window.location.href = '<?php echo esc_url($thank_you_url); ?>';
+                }, 200);
+            });
+        });
+    </script>
+    <?php
+}
+add_action('wp_footer', 'cf7_redirect_jquery_script');

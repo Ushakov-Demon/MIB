@@ -307,6 +307,7 @@ function mib_get_time_difference( string $date_from ) : array {
 
 function mib_get_course_price( int $course_id ) {
     $reg_price                  = get_post_meta( $course_id, '_tr_program_regular_price', true );
+    $price_currency             = get_post_meta( $course_id, '_tr_program_price_currency', true );
     $price_label                = get_post_meta( $course_id, '_tr_program_regular_price_label', true );
     $reg_price_info             = get_post_meta( $course_id, '_tr_program_regular_price_info', true );
     $sale_price                 = get_post_meta( $course_id, '_tr_program_sale_price', true );
@@ -316,7 +317,7 @@ function mib_get_course_price( int $course_id ) {
     $additional_price_currency  = get_post_meta( $course_id, '_tr_program_additional_price_currency', true );
     $time_difference            = ! empty( $sale_price_date_end ) ? mib_get_time_difference( $sale_price_date_end ) : ['days' => -1] ;
     $label                      = pll__( 'Total amount', 'baza' );
-    $currensy                   = pll__( 'UAH', 'baza' );
+    $currensy                   = get_post_meta( $course_id, '_tr_program_price_currency', true ) ?? __( 'UAH', 'baza' );
     
     $main_price = $reg_price;
     $old_price  = false;

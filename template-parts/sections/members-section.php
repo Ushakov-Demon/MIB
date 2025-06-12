@@ -14,6 +14,7 @@ if ($members_query->have_posts()) :
                     $position  = get_post_meta( $item_id, '_position', true );
                     $linkedin  = get_post_meta( $item_id, '_linkedin', true );
                     $facebook  = get_post_meta( $item_id, '_facebook', true );
+                    $show_link = get_post_meta( $item_id, '_member_show_link', true );
                     $name      = get_the_title();
                     $permalink = get_permalink();
                     $image_id  = get_post_thumbnail_id();
@@ -24,20 +25,37 @@ if ($members_query->have_posts()) :
                     $image_height = $image_data[2] ?? '';
                     
                     $image_alt = get_post_meta( $image_id, '_wp_attachment_image_alt', true );
+
+                    $tag_before = '';
+                    $tag_after = '';
+                    
+                    if ( $show_link == 'yes' ) {
+                        $tag_before = '<a href="' . esc_url($permalink) . '">';
+                        $tag_after = '</a>';
+                    } else {
+                        $tag_before = '<span>';
+                        $tag_after = '</span>';
+                    }
                 ?>
                     <div class="item">
                         <?php if ( $image_id ): ?>
-                            <a href="<?php echo esc_url($permalink); ?>" class="image">
-                                <img src="<?php echo esc_url($image_url); ?>" 
-                                     alt="<?php echo esc_attr($image_alt); ?>"
-                                     width="<?php echo esc_attr($image_width); ?>"
-                                     height="<?php echo esc_attr($image_height); ?>">
-                            </a>
+                            <div class="image">
+                                <?php echo $tag_before; ?>
+                                    <img src="<?php echo esc_url($image_url); ?>" 
+                                        alt="<?php echo esc_attr($image_alt); ?>"
+                                        width="<?php echo esc_attr($image_width); ?>"
+                                        height="<?php echo esc_attr($image_height); ?>">
+                                <?php echo $tag_after; ?>
+                            </div>
                         <?php endif; ?>
 
                         <div class="content">
                             <?php if (!empty($name)): ?>
-                                <h3 class="name"><a href="<?php echo esc_url($permalink); ?>"><?php echo esc_html($name); ?></a></h3>
+                                <h3 class="name">
+                                    <?php echo $tag_before; ?>
+                                        <?php echo esc_html($name); ?>
+                                    <?php echo $tag_after; ?>
+                                </h3>
                             <?php endif; ?>
 
                             <?php if (!empty($position)): ?>

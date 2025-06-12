@@ -3,7 +3,7 @@ if ( ! $has_structure ) {
     return;
 }
 ?>
-<div id="tab-program-content" class="tab-content">
+<div id="program-content" class="tab-content">
     <div class="program-structure">
         <?php
         if ( 'no' == $use_program_content ) :

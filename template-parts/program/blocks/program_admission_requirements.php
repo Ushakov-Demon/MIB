@@ -4,7 +4,7 @@ if ( 'yes' == $use_admission_conditions &&  empty( $conditions_list ) ||
         return;
      }
 ?>
-<div id="tab-admission-requirements" class="tab-content">
+<div id="admission-requirements" class="tab-content">
     <div class="program-admission-requirements">
         <?php
         if ( 'yes' == $use_admission_conditions &&  ! empty( $conditions_list ) ):

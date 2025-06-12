@@ -55,7 +55,12 @@ $image_alt = get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true) ?: $
     </h3>
     
     <?php if (!empty($excerpt)): ?>
-        <div class="excerpt"><?php echo wp_kses_post($excerpt); ?></div>
+        <div class="excerpt">
+            <?php 
+                $clean_excerpt = str_replace( '&nbsp;', ' ', wp_strip_all_tags( $excerpt ) );
+                echo esc_html( wp_trim_words($clean_excerpt, 20, '...') );
+            ?>
+        </div>
     <?php endif; ?>
 
     <div class="item-footer">

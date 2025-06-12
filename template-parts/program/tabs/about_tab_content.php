@@ -1,4 +1,4 @@
-<div id="tab-about-program" class="tab-content active">
+<div id="about-program" class="tab-content active">
     <?php
         include get_template_directory() . '/template-parts/program/blocks/block-program-params-stats.php';
 

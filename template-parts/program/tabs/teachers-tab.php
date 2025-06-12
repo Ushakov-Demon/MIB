@@ -3,7 +3,7 @@ if ( empty ( $teachers ) ) {
     return;
 }
 ?>
-<div id="tab-teachers" class="tab-content">
+<div id="teachers" class="tab-content">
     <div class="program-teachers">
         <h3 class="tab-title"><?php echo pll__('Teachers'); ?></h3>
         

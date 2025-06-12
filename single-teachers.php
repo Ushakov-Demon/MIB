@@ -43,7 +43,7 @@ get_header();
                 ?>
                 <div class="completed">
                     <div class="label">
-                        <?php pll_e('Courses', 'baza'); ?>:
+                        <?php pll_e('Programs', 'baza'); ?>:
                     </div>
 
                     <div class="completed-items">

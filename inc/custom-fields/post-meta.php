@@ -49,6 +49,9 @@ function custom_posts_meta_data() {
             Field::make( 'text', 'tr_program_regular_price', __( 'Price' ) )
                 ->set_attribute( 'type', 'number' )
                 ->set_width( 33 ),
+            Field::make( 'select', 'tr_program_price_currency', __( 'Currency (for price)' ) )
+                ->set_width( 33 )
+                ->set_options( MIB_CURRENCIES ),
             Field::make( 'text', 'tr_program_regular_price_label', __( 'Price label' ) )
                 ->set_width( 33 ),
             Field::make( 'text', 'tr_program_sale_price', __( 'Sale price' ) )
@@ -68,6 +71,8 @@ function custom_posts_meta_data() {
                 ->set_width( 33 ),
             Field::make( 'text', 'tr_program_enhanced_qualifications', __( 'Enhanced qualifications' ) )
                 ->set_width( 33 ),
+            Field::make( 'checkbox', 'tr_program_show_time_left', __( 'Show time left' ) )
+                ->set_width( 100 ),
         ) )
         ->add_tab( __( 'Shedule & format' ), array(
             Field::make( 'date', 'tr_program_date_start', __( 'Date start' ) )
@@ -344,7 +349,7 @@ function custom_posts_meta_data() {
         ->set_context( 'side' )
         ->set_priority( 'high' )
         ->add_fields( array(
-            Field::make( 'checkbox', 'ps_black_page', __( 'Black Page Design' ) )
+            Field::make( 'checkbox', 'ps_black_page', __( 'Black Page Design' ) ),
     ) );
 
     // ==== MEBMBERS
@@ -357,5 +362,6 @@ function custom_posts_meta_data() {
                 ->set_width(50),
             Field::make('text', 'facebook', __('Facebook URL'))
                 ->set_width(50),
+            Field::make( 'checkbox', 'member_show_link', __( 'Show link?' ) ),
     ));
 }

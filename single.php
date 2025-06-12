@@ -47,6 +47,8 @@ $alternating_posts = apply_filters( 'mib_get_alternating_posts', $actuality_post
 										foreach ( $alternating_posts as $item ) :
 									
 											$post_ID      = $item->ID;
+											if ( get_the_ID() === $post_ID ) continue; 
+											
 											$post_type    = $item->post_type;
 											$shedule_date = ( $post_type === 'events' ) ? get_post_meta( $post_ID, '_event_shedule_date', true ) : '';
 											$title        = get_the_title( $post_ID );
