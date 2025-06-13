@@ -62,7 +62,7 @@
         <?php
     endif;
 
-    if ( ! empty( $time_left ) ):
+    if ( $show_remaining_date && ! empty( $time_left ) ):
         ?>
         <div class="item">
             <?php

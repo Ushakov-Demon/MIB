@@ -8,15 +8,14 @@ function custom_posts_gutenberg_blocks() {
     $post_id               = isset( $_GET['post'] ) ? intval( $_GET['post'] ) : false;
     $events_arhive_page    = get_option( '_events_arhive_page' );
     $programs_arhive_page  = get_option( '_programs_arhive_page' );
-
-    $def_per_page   = get_option( 'posts_per_page' );
-    $home_url       = home_url();
-    $blog_page      = get_option( 'page_for_posts' );
-    $blog_page_url  = ! is_null( $blog_page ) && ! empty( $blog_page ) ? get_the_permalink( $blog_page ) : $home_url;
-    $current_lang   = function_exists('pll_current_language') ? pll_current_language() : '';
-    $pages_options  = apply_filters( 'mib_get_posts_list_options', 'page' );
-    $events_options = apply_filters( 'mib_get_posts_list_options', 'events' );
-    $cf7_options    = apply_filters( 'mib_get_cf7_forms_options', [] );
+    $def_per_page          = get_option( 'posts_per_page' );
+    $home_url              = home_url();
+    $blog_page             = get_option( 'page_for_posts' );
+    $blog_page_url         = ! is_null( $blog_page ) && ! empty( $blog_page ) ? get_the_permalink( $blog_page ) : $home_url;
+    $current_lang          = function_exists('pll_current_language') ? pll_current_language() : '';
+    $pages_options         = apply_filters( 'mib_get_posts_list_options', 'page' );
+    $events_options        = apply_filters( 'mib_get_posts_list_options', 'events' );
+    $cf7_options           = apply_filters( 'mib_get_cf7_forms_options', [] );
 
     // ==== Main top Variative
     Block::make( 'main_top_variative',  __( 'Main HERO' ) )

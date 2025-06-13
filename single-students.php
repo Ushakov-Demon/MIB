@@ -11,12 +11,14 @@
 // $companies              = wp_get_post_terms( $post_ID, 'companies' );
 // $content                = apply_filters( 'the_content', get_the_content() );
 
-$post_ID  = get_the_ID();
-$position = get_post_meta( $post_ID, '_st_positions_in_companies', true );
-$courses  = apply_filters( 'mib_get_posts_relationships', array( 'post_type' => 'students', 'post_id' => $post_ID, 'field' => 'tr_program_students' ) );
-$activity = get_post_meta( $post_ID, '_st_activity', true );
-$status   = get_post_meta( $post_ID, '_st_status', true );
-$city     = get_post_meta( $post_ID, '_st_city', true );
+$post_ID           = get_the_ID();
+$position          = get_post_meta( $post_ID, '_st_positions_in_companies', true );
+$courses           = apply_filters( 'mib_get_posts_relationships', array( 'post_type' => 'students', 'post_id' => $post_ID, 'field' => 'tr_program_students' ) );
+$gender            = get_post_meta( $post_ID, '_st_gender', true );
+$year_graduation   = get_post_meta( $post_ID, '_st_year_graduation', true );
+$activity          = get_post_meta( $post_ID, '_st_activity', true );
+$status            = get_post_meta( $post_ID, '_st_status', true );
+$city              = get_post_meta( $post_ID, '_st_city', true );
 
 get_header();
 ?>
@@ -50,7 +52,14 @@ get_header();
                         if ( ! empty( $courses ) ) :
                             ?>
                             <div class="label">
-                                <?php pll_e('Completed', 'baza'); ?>:
+                                <?php
+                                if ( 'man' == $gender ) {
+                                    pll_e('Completed', 'baza');
+                                } else {
+                                    pll_e( 'She graduated', 'baza' );
+                                }
+                                ?>
+                                :
                             </div>
 
                             <div class="completed-items">
@@ -65,6 +74,14 @@ get_header();
                                     </a>
                                     <?php
                                 endforeach;
+
+                                if ( ! empty( $year_graduation ) ) :
+                                ?>
+                                <span class="year_graduation">
+                                    <?php echo $year_graduation . ' ' . pll__( 'year', 'baza' )?>.
+                                </span>
+                                <?php
+                                endif;
                                 ?>
                             </div>
                             <?php

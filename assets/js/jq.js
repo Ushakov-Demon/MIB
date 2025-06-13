@@ -412,13 +412,14 @@ jQuery(document).ready(function ($) {
 	});
 
 	function ajaxResponsePosts(element) {
-		section = element.closest('.section-news');
-		filterTaget = section.find('#filter-news .active').data('target');
-		pageId = section.data('page_id');
-		perPage = section.data('per-page');
-		maxPages = section.data('max-pages');
-		pageNum = section.data('current-page_num');
-		isPaginavi = section.hasClass('pagination');
+		section 	= element.closest('.section-news');
+		filterTaget = section.data('type');
+		pageId 		= section.data('page_id');
+		perPage 	= section.data('per-page');
+		maxPages 	= section.data('max-pages');
+		pageNum 	= section.data('current-page_num');
+		nextPageNum = parseInt( pageNum )+1;
+		isPaginavi 	= section.hasClass('pagination');
 		
 		const isLoadMore = element.closest('.more-posts').length > 0;
 		
@@ -433,7 +434,7 @@ jQuery(document).ready(function ($) {
 				filterTaget: filterTaget,
 				pageId: pageId,
 				perPage: perPage,
-				pageNum: pageNum,
+				pageNum: nextPageNum,
 				maxPages: maxPages,
 				isPaginavi: isPaginavi,
 				isLoadMore: isLoadMore
@@ -481,7 +482,7 @@ jQuery(document).ready(function ($) {
 						section.find('.more-posts').hide();
 					}
 				}
-				
+				section.data('current-page_num', nextPageNum);
 				section.removeClass('loading');
 			},
 			error: function() {
