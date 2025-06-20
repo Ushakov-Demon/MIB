@@ -42,7 +42,7 @@
             ?>
 
             <div class="program-content-all">
-                <a href="#tab-program-content" class="show-more-link"><?php echo pll__('View all'); ?></a>
+                <a href="#program-content" class="show-more-link"><?php echo pll__('View all'); ?></a>
             </div>
             
         </div>
@@ -72,7 +72,7 @@
             ?>
 
             <div class="program-content-all">
-                <a href="#tab-graduates" class="show-more-link"><?php echo pll__('View all graduates'); ?></a>
+                <a href="#graduates" class="show-more-link"><?php echo pll__('View all graduates'); ?></a>
             </div>
             
         </div>

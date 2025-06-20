@@ -73,9 +73,9 @@ if ( ! $has_structure ) {
             ?>
             <div class="program-methods">
                 <?php
-                if ( ! empty( $program_structure_tab_title ) ) :
+                if ( ! empty( $program_structure_tab_methods_title ) ) :
                 ?>
-                <h3><?php pll_e( $program_structure_tab_title, 'baza' )?></h3>
+                <h3><?php pll_e( $program_structure_tab_methods_title, 'baza' )?></h3>
                 <?php
                 endif;
                 ?>

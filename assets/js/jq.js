@@ -607,14 +607,23 @@ jQuery(document).ready(function ($) {
 	});
 
 	function initTabs() {
-		$('.tabs li a').on('click', function(e) {
+		$('.tabs li a, .program-content-all a').on('click', function(e) {
 			e.preventDefault();
 			
 			let tabId = $(this).attr('href').replace('#', '');
-			activateTab(tabId, false);
+			activateTab(tabId, true);
 		});
 		
-		function activateTab(tabId) {
+		checkHashOnLoad();
+		
+		$(window).on('hashchange', function() {
+			let hash = window.location.hash.replace('#', '');
+			if (hash) {
+				triggerTabClick(hash);
+			}
+		});
+		
+		function activateTab(tabId, updateUrl = false) {
 			let tabLink = $('.tabs li a[href="#' + tabId + '"]');
 			
 			if (tabLink.length) {
@@ -623,11 +632,29 @@ jQuery(document).ready(function ($) {
 				
 				$('.tab-content').removeClass('active');
 				$('#' + tabId).addClass('active');
+				
+				if (updateUrl) {
+					window.history.pushState(null, null, '#' + tabId);
+				}
 			}
 		}
-	}
-	
-	initTabs();
+		
+		function triggerTabClick(tabId) {
+			let tabLink = $('.tabs li a[href="#' + tabId + '"]');
+			if (tabLink.length) {
+				tabLink.trigger('click');
+			}
+		}
+    
+    function checkHashOnLoad() {
+        let hash = window.location.hash.replace('#', '');
+        if (hash) {
+            triggerTabClick(hash);
+        }
+    }
+}
+
+initTabs();
 
 	let filterSection = '.wpc-filters-section',
 		filterHeader  = '.wpc-filter-header';

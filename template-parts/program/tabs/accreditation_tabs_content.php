@@ -1,11 +1,11 @@
 <div class="program-tabs">
     <ul class="tabs">
         <li class="active"><a href="#about-program"><i class="icon-star"></i><?php echo pll__('About the program', 'baza'); ?></a></li>
-        <li><a href="#tab-teachers"><i class="icon-chalkboard"></i><?php echo pll__('Teachers', 'baza'); ?></a></li>
-        <li><a href="#tab-graduates"><i class="icon-graduates"></i><?php echo pll__('Graduates', 'baza'); ?></a></li>
-        <li><a href="#tab-program-content"><i class="icon-ballot-check"></i><?php echo pll__('Program content', 'baza'); ?></a></li>
-        <li><a href="#tab-admission-requirements"><i class="icon-landmark"></i><?php echo pll__('Admission requirements', 'baza'); ?></a></li>
-        <li><a href="#tab-listeners"><i class="icon-users"></i><?php echo pll__('Listeners', 'baza'); ?></a></li>
+        <li><a href="#teachers"><i class="icon-chalkboard"></i><?php echo pll__('Teachers', 'baza'); ?></a></li>
+        <li><a href="#graduates"><i class="icon-graduates"></i><?php echo pll__('Graduates', 'baza'); ?></a></li>
+        <li><a href="#program-content"><i class="icon-ballot-check"></i><?php echo pll__('Program content', 'baza'); ?></a></li>
+        <li><a href="#admission-requirements"><i class="icon-landmark"></i><?php echo pll__('Admission requirements', 'baza'); ?></a></li>
+        <li><a href="#listeners"><i class="icon-users"></i><?php echo pll__('Listeners', 'baza'); ?></a></li>
     </ul>
 </div>
 
