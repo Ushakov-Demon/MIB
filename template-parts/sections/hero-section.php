@@ -85,7 +85,7 @@
                         include_once get_template_directory() . '/template-parts/blocks/hero-single-program-bottom.php';
                         ?>
                         <div class="buttons">
-                            <a href="#form-request" class="button button-register" data-ps2id-offset="140">
+                            <a href="#form-request" class="button button-register" data-ps2id-offset="123">
                                 <span>
                                     <?php pll_e( 'Sign up for the program', 'baza' ); ?>
                                 </span>
