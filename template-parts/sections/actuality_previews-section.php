@@ -7,6 +7,7 @@ $events_arhive_page    = get_option( '_events_arhive_page' );
 $is_events_achive      = $post_id == $events_arhive_page;
 $pagination_class      = isset( $actuality_posts_section_pagination ) && 'on' == $actuality_posts_section_pagination ? ' section-news-list': '';
 $actuality_posts_title = isset( $actuality_posts_title ) ? $actuality_posts_title : pll__( 'Actual' );
+$data_filter_params    = '';
 
 if ( "mixed" == $actuality_post_type ) {
     $alternating_posts = apply_filters( 'mib_get_alternating_posts', $per_page );
@@ -27,6 +28,9 @@ if ( "mixed" == $actuality_post_type ) {
                 'operator' => $q_action,
             ],
         ];
+
+        $data_filter_params .= "data-q-terms=" . esc_attr( $actuality_posts_query_categories );
+        $data_filter_params .= " data-q-operator=" . esc_attr( $q_action );
     }
 
     $posts_query = mib_get_posts( $actuality_post_type, $per_page, 1, $additional_q_params );
@@ -46,7 +50,9 @@ $current_page_num = $alternating_posts['page'] ?? 2;
          data-type="<?php echo $actuality_post_type?>"
          data-per-page="<?php echo esc_attr( $actuality_posts_per_page )?>"
          data-max-pages="<?php echo esc_attr( $max_num_pages )?>"
-         data-current-page_num="<?php echo esc_attr( $current_page_num )?>">
+         data-current-page_num="<?php echo esc_attr( $current_page_num )?>"
+         <?php echo $data_filter_params?>
+         >
     <div class="container">
 
         <?php

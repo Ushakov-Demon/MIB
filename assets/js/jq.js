@@ -420,6 +420,10 @@ jQuery(document).ready(function ($) {
 		pageNum 	= section.data('current-page_num');
 		nextPageNum = parseInt( pageNum )+1;
 		isPaginavi 	= section.hasClass('pagination');
+		filterCats  = {
+				'term' : section.data('q-terms'),
+				'operator' : section.data('q-operator'),
+			};
 		
 		const isLoadMore = element.closest('.more-posts').length > 0;
 		
@@ -437,7 +441,8 @@ jQuery(document).ready(function ($) {
 				pageNum: nextPageNum,
 				maxPages: maxPages,
 				isPaginavi: isPaginavi,
-				isLoadMore: isLoadMore
+				isLoadMore: isLoadMore,
+				filterCats: filterCats,
 			},
 			success: function(response) {
 				if (isLoadMore) {

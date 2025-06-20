@@ -148,7 +148,16 @@ function mib_custom_post_type_filter(){
     }
 
     if ( $post_type ) {
-        $query = mib_get_posts( $post_type, $per_page, $page_num );
+        $cats_param = [];
+        if ( isset( $_POST['filterCats'] ) && isset( $_POST['filterCats']['term'] ) && isset( $_POST['filterCats']['operator'] ) ) {
+            $cats_param = [
+                'taxonomy' => 'category',
+                'field'    => 'term_id',
+                'terms'    => [intval( $_POST['filterCats']['term'] )],
+                'operator' => $_POST['filterCats']['operator'],
+            ];
+        }
+        $query = mib_get_posts( $post_type, $per_page, $page_num, $cats_param );
 
         if ( $query->have_posts() ) {
             $posts = $query->posts;
