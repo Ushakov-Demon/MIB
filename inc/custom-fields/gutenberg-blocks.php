@@ -518,14 +518,23 @@ function custom_posts_gutenberg_blocks() {
                         'compare'   => '=',
                     )
                 ) ),
-            Field::make( 'rich_text', 'program_structure_tab_content', __( 'Content' ) )
-                ->set_conditional_logic( array(
-                    array(
-                        'field'     => 'use_program_content',
-                        'value'     => 'no',
-                        'compare'   => '=',
-                    )
+            Field::make( 'text', 'program_structure_tab_methods_title', __( 'Program Methods tab title' ) )
+                ->set_default_value( 'Teaching methods:' ),    
+            Field::make( 'complex', 'program_structure_tab_methods', __( 'Program methods' ) )
+                ->set_collapsed( true )
+                ->add_fields( array(
+                    Field::make( 'text', 'program_method', __( 'Method' ) )
                 ) )
+                ->setup_labels( array(
+                    'plural_name'   => 'Methods',
+                    'singular_name' => 'Method',
+                ) )
+                ->set_header_template( '
+                    <% if (program_method) { %>
+                        <%- program_method %>
+                    <% } %>
+                ' ),
+            Field::make( 'rich_text', 'program_structure_tab_content', __( 'Content' ) )
         ) )
 
         // Admission requirements ****

@@ -6,15 +6,14 @@ if ( ! $has_structure ) {
 <div id="program-content" class="tab-content">
     <div class="program-structure">
         <?php
-        if ( 'no' == $use_program_content ) :
-            if ( isset( $program_structure_tab_title ) && ! empty( $program_structure_tab_title ) ) :
-                ?>
-                <h3 class="tab-title"><?php echo pll__( $program_structure_tab_title ); ?>:</h3>
-                <?php
-            endif;
+        if ( 'no' == $use_program_content && isset( $program_structure_tab_title ) && ! empty( $program_structure_tab_title ) ) :
+            ?>
+            <h3 class="tab-title"><?php echo pll__( $program_structure_tab_title, 'baza' ); ?>:</h3>
+            <?php
+        endif;
 
-            echo $program_structure_tab_content;
-        elseif ( 'yes' == $use_program_content && ! empty ( $course_content_items ) ) :
+        // echo $program_structure_tab_content;
+        if ( 'no' !== $use_program_content && ! empty ( $course_content_items ) ) :
             if ( ! empty( $course_content_title ) ) :
                 ?>
                 <h3 class="tab-title">
@@ -69,6 +68,31 @@ if ( ! $has_structure ) {
             </div>
             <?php
         endif;
+
+        if ( ! empty( $program_structure_tab_methods ) ) :
+            ?>
+            <div class="program-methods">
+                <?php
+                if ( ! empty( $program_structure_tab_title ) ) :
+                ?>
+                <h3><?php pll_e( $program_structure_tab_title, 'baza' )?></h3>
+                <?php
+                endif;
+                ?>
+                <div class="methods-container">
+                    <?php
+                    foreach ( $program_structure_tab_methods as $method ) :
+                        ?>
+                        <div class="item"><?php pll_e( $method['program_method'], 'baza' )?></div>
+                        <?php
+                    endforeach;
+                    ?>
+                </div>
+            </div>
+            <?php
+        endif;    
+
+        echo $program_structure_tab_content;
         ?>
     </div>
 </div>
