@@ -38,20 +38,28 @@ if ( empty( $image_id ) ) {
         </div>
         
         <?php
-        if ( ! empty( $companies ) ) :
-            ?>
-            <div class="logo">
-                <?php
-                    foreach ( $companies as $company ) :
-                        $company_logo_id = get_term_meta( $company->term_id, '_company_logo', true );
-                        $logo_src        = wp_get_attachment_image_url( $company_logo_id );
-                        ?>
-                        <img src="<?php echo esc_url( $logo_src )?>" alt="<?php echo esc_attr( $company->name )?>">
-                        <?php
-                    endforeach;
-                ?>
-            </div>
-            <?php
+        $company = null;
+
+        if ( function_exists( 'yoast_get_primary_term_id' ) ) :
+            $primary_company_id = yoast_get_primary_term_id( 'companies' );
+            if ( $primary_company_id ) :
+                $company = get_term( $primary_company_id );
+            endif;
+        endif;
+
+        if ( ! $company && ! empty( $companies ) ) :
+            $company = $companies[0];
+        endif;
+
+        if ( $company && ! is_wp_error( $company ) ) :
+            $company_logo_id = get_term_meta( $company->term_id, '_company_logo', true );
+            $logo_src = wp_get_attachment_image_url( $company_logo_id );
+            
+            if ( $logo_src ) : ?>
+                <div class="logo">
+                    <img src="<?php echo esc_url( $logo_src )?>" alt="<?php echo esc_attr( $company->name )?>">
+                </div>
+            <?php endif;
         endif;
         ?>
     </div>

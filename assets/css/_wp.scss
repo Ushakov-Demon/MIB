@@ -137,7 +137,7 @@ ol.wp-block-list {
 /* Quote */
 .wp-block-quote {
     background-color: var(--color_khaki_2);
-    padding: 32px 32px 32px 82px;
+    padding: 32px 32px 32px 70px;
     font-size: 15px;
     line-height: 1.5;
     margin-left: 0;
@@ -157,12 +157,6 @@ ol.wp-block-list {
         &:last-child {
             margin-bottom: 0;
         }
-    }
-
-    @include mobile {
-        font-size: 15px;
-        padding: 32px 16px;
-        gap: 16px;
     }
 
     &::before {

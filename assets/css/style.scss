@@ -214,16 +214,6 @@ body {
         @include max1024 {
             padding-top: 80px;
         }
-
-        &.admin-bar {
-            @include min1024 {
-                padding-top: 100px;
-            }
-
-            @include max1024 {
-                padding-top: 80px;
-            }
-        }
     }
 }
 
@@ -411,7 +401,6 @@ h5 {
     display: flex;
     flex-direction: column;
     padding: 0 !important;
-    overflow: hidden;
 }
 
 .site-main {
@@ -2149,6 +2138,7 @@ footer {
                 display: flex;
                 flex-direction: column;
                 gap: 32px;
+                position: relative;
 
                 @include mobile {
                     display: none !important;
@@ -2169,6 +2159,8 @@ footer {
             }
 
             .content {
+                position: relative;
+                
                 > *:last-child {
                     margin-bottom: 0 !important;
                 }
@@ -4462,7 +4454,7 @@ footer {
     position: relative;
     left: 50%;
     transform: translate(-50%, 0);
-    padding: 30px calc(var(--container_padding) * 2) 0;
+    padding: 14px calc(var(--container_padding) * 2) 0;
     background-color: var(--color_light_gray_5);
     transition: padding .3s ease;
 
@@ -4475,7 +4467,6 @@ footer {
             z-index: 98;
             top: 80px;
             margin: 0;
-            padding-top: 10px;
         }
 
         .admin-bar & {
@@ -4536,7 +4527,7 @@ footer {
                 
                 i {
                     position: relative;
-                    top: -1px;
+                    top: -0.5px;
                     font-size: 20px;
                     line-height: 1;
                 }
@@ -5650,10 +5641,28 @@ footer {
         gap: 32px;
         margin-top: 0;
 
+        @include mobile {
+            display: flex;
+            flex-direction: column;
+        }
+
         .single-header-content {
             display: flex;
             flex-direction: column;
             gap: 8px;
+
+            .logos {
+                display: flex;
+                flex-wrap: wrap;
+                gap: var(--gap_m);
+                padding-left: 18px;
+                margin-top: calc(var(--block_spacing) / 2);
+                
+                img {
+                    width: auto;
+                    height: 30px;
+                }
+            }
         }
 
         .photo {
@@ -6001,15 +6010,15 @@ footer {
 .block-last-events {
     @include desktop {
         position: sticky;
-        top: var(--block_spacing);
+        top: calc(80px + var(--block_spacing));
         bottom: var(--block_spacing);
-        z-index: 99;
+        z-index: 0;
     }
 
     .admin-bar & {
 
         @include desktop {
-            top: calc(var(--block_spacing) + 32px);
+            top: calc(var(--block_spacing) + 112px);
             bottom: var(--block_spacing);
         }
     }

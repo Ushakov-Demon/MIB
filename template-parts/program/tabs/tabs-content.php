@@ -14,7 +14,7 @@ $has_listeners = isset( $use_course_listeners ) || ! empty( $use_course_listener
         if ( $has_about ) :
             ?>
             <li class="active">
-                <a href="#about-program" data-ps2id-offset="160">
+                <a href="#about-program" data-ps2id-offset="164">
                     <i class="icon-star"></i>
 
                     <?php echo pll__('About the program'); ?>
@@ -26,7 +26,7 @@ $has_listeners = isset( $use_course_listeners ) || ! empty( $use_course_listener
         if ( $has_teachers ) :
         ?>
         <li>
-            <a href="#teachers" data-ps2id-offset="160">
+            <a href="#teachers" data-ps2id-offset="164">
                 <i class="icon-chalkboard"></i>
 
                 <?php echo pll__('Teachers'); ?>
@@ -38,7 +38,7 @@ $has_listeners = isset( $use_course_listeners ) || ! empty( $use_course_listener
         if ( $has_students ) :
         ?>
         <li>
-            <a href="#graduates" data-ps2id-offset="160">
+            <a href="#graduates" data-ps2id-offset="164">
                 <i class="icon-graduates"></i>
 
                 <?php echo pll__('Graduates'); ?>
@@ -50,7 +50,7 @@ $has_listeners = isset( $use_course_listeners ) || ! empty( $use_course_listener
         if ( $has_structure ) :
         ?>
         <li>
-            <a href="#program-content" data-ps2id-offset="160">
+            <a href="#program-content" data-ps2id-offset="164">
                 <i class="icon-ballot-check"></i>
 
                 <?php echo pll__('Program content'); ?>
@@ -60,7 +60,7 @@ $has_listeners = isset( $use_course_listeners ) || ! empty( $use_course_listener
         endif;
         ?>
         <li>
-            <a href="#admission-requirements" data-ps2id-offset="160">
+            <a href="#admission-requirements" data-ps2id-offset="164">
                 <i class="icon-landmark"></i>
 
                 <?php echo pll__('Admission requirements'); ?>
@@ -70,7 +70,7 @@ $has_listeners = isset( $use_course_listeners ) || ! empty( $use_course_listener
         if ( $has_listeners ) :
         ?>
         <li>
-            <a href="#listeners" data-ps2id-offset="160">
+            <a href="#listeners" data-ps2id-offset="164">
                 <i class="icon-users"></i>
 
                 <?php echo pll__('Listeners'); ?>

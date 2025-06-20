@@ -5,9 +5,10 @@
 // $reviwe_message         = get_post_meta( $post_ID, '_teach_review_message', true );
 // $content                = apply_filters( 'the_content', get_the_content() );
 
-$post_ID  = get_the_ID();
-$position = get_post_meta( $post_ID, '_positions_in_companies', true );
-$courses  = apply_filters( 'mib_get_posts_relationships', array( 'post_type' => 'teachers', 'post_id' => $post_ID, 'field' => 'tr_program_teachers' ) );
+$post_ID   = get_the_ID();
+$position  = get_post_meta( $post_ID, '_positions_in_companies', true );
+$courses   = apply_filters( 'mib_get_posts_relationships', array( 'post_type' => 'teachers', 'post_id' => $post_ID, 'field' => 'tr_program_teachers' ) );
+$companies = get_the_terms( $post_ID, 'companies' );
 
 get_header();
 ?>
@@ -33,6 +34,23 @@ get_header();
                     <?php if($position): ?>
                         <div class="position">
                             <?php echo $position; ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <?php
+
+                    if ( ! empty( $companies ) && ! is_wp_error( $companies ) ) : ?>
+                        <div class="logos">
+                            <?php
+                            foreach ( $companies as $company ) :
+                                $company_logo_id = get_term_meta( $company->term_id, '_company_logo', true );
+                                $logo_src = wp_get_attachment_image_url( $company_logo_id );
+                                
+                                if ( $logo_src ) : ?>
+                                    <img src="<?php echo esc_url( $logo_src )?>" alt="<?php echo esc_attr( $company->name )?>">
+                                <?php endif;
+                            endforeach;
+                            ?>
                         </div>
                     <?php endif; ?>
                 </div>

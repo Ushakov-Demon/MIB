@@ -667,4 +667,11 @@ jQuery(document).ready(function ($) {
 		}
 	});
 
+	if ($('.wp-block-file a').length) {
+        $('.wp-block-file a').attr({
+            'target': '_blank',
+            'rel': 'noopener'
+        });
+    }
+
 });
