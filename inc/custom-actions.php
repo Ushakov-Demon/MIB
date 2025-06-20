@@ -248,8 +248,17 @@ function mib_has_gutenberg_block( string $content, string $block_name ) {
 
 function mib_get_course_categories() {
     $args = [
-        'hide_empty' => false,
+        'hide_empty' => true,
         'taxonomy'   => 'program_category',
+    ];
+
+    return get_terms( $args );
+}
+
+function mib_get_posts_categories() {
+    $args = [
+        'hide_empty' => true,
+        'taxonomy'   => 'category',
     ];
 
     return get_terms( $args );
@@ -366,4 +375,18 @@ function mib_get_course_categories_options() {
     $cats = mib_get_course_categories();
 
     return $cats;
+}
+
+function mib_get_posts_categories_options() {
+    $cats = mib_get_posts_categories();
+
+    $out = [
+        '' => __( '-- Select category --' ),
+    ];
+
+    foreach ( $cats as $term ) {
+        $out[$term->term_id] = $term->name;
+    }
+
+    return $out;
 }

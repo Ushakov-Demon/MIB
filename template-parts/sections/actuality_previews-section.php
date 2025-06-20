@@ -11,7 +11,25 @@ $actuality_posts_title = isset( $actuality_posts_title ) ? $actuality_posts_titl
 if ( "mixed" == $actuality_post_type ) {
     $alternating_posts = apply_filters( 'mib_get_alternating_posts', $per_page );
 } else {
-    $posts_query = mib_get_posts( $actuality_post_type, $per_page, 1 );
+    $additional_q_params = [];
+    if ( "post" == $actuality_post_type && ! empty( $actuality_posts_query_categories ) ) {
+        $q_action = 'IN';
+
+        if ( isset( $actuality_posts_query_categories_action ) && 'exclude' == $actuality_posts_query_categories_action ) {
+            $q_action = 'NOT IN';
+        }
+
+        $additional_q_params = [
+            [
+                'taxonomy' => 'category',
+                'field'    => 'term_id',
+                'terms'    => [intval( $actuality_posts_query_categories )],
+                'operator' => $q_action,
+            ],
+        ];
+    }
+
+    $posts_query = mib_get_posts( $actuality_post_type, $per_page, 1, $additional_q_params );
 
     $alternating_posts['posts']         = $posts_query->posts;
     $alternating_posts['max_num_pages'] = $posts_query->max_num_pages;

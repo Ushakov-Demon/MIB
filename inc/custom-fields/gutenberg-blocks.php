@@ -15,6 +15,7 @@ function custom_posts_gutenberg_blocks() {
     $current_lang          = function_exists('pll_current_language') ? pll_current_language() : '';
     $pages_options         = apply_filters( 'mib_get_posts_list_options', 'page' );
     $events_options        = apply_filters( 'mib_get_posts_list_options', 'events' );
+    $posts_cats_options    = mib_get_posts_categories_options();
     $cf7_options           = apply_filters( 'mib_get_cf7_forms_options', [] );
 
     // ==== Main top Variative
@@ -231,7 +232,30 @@ function custom_posts_gutenberg_blocks() {
                 ->add_options( array(
                     'off' => __( 'Off' ),
                     'on'  => __( 'On' ),
+                ) ),    
+            Field::make( 'select', 'actuality_posts_query_categories', __( 'Categories' ) )
+                ->set_width( 50 )
+                ->add_options( $posts_cats_options )
+                ->set_conditional_logic( array(
+                    array(
+                        'field'   => 'actuality_post_type',
+                        'value'   => 'post',
+                        'compare' => '='
+                    )
                 ) ),
+            Field::make( 'select', 'actuality_posts_query_categories_action', __( 'Action with selected categories' ) )
+                ->set_width( 50 )
+                ->add_options( array(
+                    'include' => __( 'Include selected' ),
+                    'exclude' => __( 'Exclude selected' ),
+                ) )
+                ->set_conditional_logic( array(
+                    array(
+                        'field'   => 'actuality_post_type',
+                        'value'   => 'post',
+                        'compare' => '='
+                    )
+                ) ),    
             Field::make( 'text', 'actuality_posts_link_text', __( 'Link text' ) )
                 ->set_width( 50 )
                 ->set_default_value( 'Всі записи' ),
