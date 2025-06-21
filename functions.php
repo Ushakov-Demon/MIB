@@ -208,3 +208,5 @@ require get_template_directory() . '/inc/custom-fields/index.php';
 require get_template_directory() . '/inc/strings.php';
 
 require get_template_directory() . '/inc/search-functions.php';
+
+require get_template_directory() . '/inc/redirects.php';
