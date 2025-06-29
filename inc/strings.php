@@ -149,6 +149,7 @@ function register_customizer_strings_for_polylang() {
         'Enhanced qualifications',
         'Download file',
         'City',
+        'She graduated'
     );
     
     foreach ($strings as $string) {

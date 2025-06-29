@@ -256,7 +256,7 @@ jQuery(document).ready(function ($) {
 		margin: 0,
 		nav: false,
 		dots: false,
-		loop: true,
+		loop: false,
 		navText: [nextPrevButton, nextPrevButton],
 		mouseDrag: true,
 		touchDrag: true,

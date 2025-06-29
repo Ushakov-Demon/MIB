@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: MIB\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-04-18 13:36+0000\n"
-"PO-Revision-Date: 2025-05-19 21:38+0000\n"
+"PO-Revision-Date: 2025-06-29 15:16+0000\n"
 "Last-Translator: \n"
 "Language-Team: Українська\n"
 "Language: uk\n"
@@ -158,6 +158,9 @@ msgstr "Рітейл"
 
 msgid "Section"
 msgstr "Розділ"
+
+msgid "She graduated"
+msgstr "Закінчила"
 
 #: functions.php:131
 msgid "Sidebar"

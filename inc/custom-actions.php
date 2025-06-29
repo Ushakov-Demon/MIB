@@ -190,17 +190,45 @@ function mib_custom_post_type_filter(){
     wp_send_json( $output );
 }
 
-function mib_get_posts_list_options( $post_type ) {
-    $posts = mib_get_posts( $post_type, -1 );
-    $out   = [
+function mib_get_posts_list_options( $post_types ) {
+
+    $post_types = ['page', 'programs', 'accreditations', 'teachers', 'students', 'members'];
+
+    if ( is_string( $post_types ) ) {
+        $post_types = array_map( 'trim', explode( ',', $post_types ) );
+    }
+    
+    if ( ! is_array( $post_types ) ) {
+        $post_types = [ $post_types ];
+    }
+    
+    $out = [
         '' => __( 'Select page' ),
     ];
-    if ( $posts->posts && ! empty( $posts->posts ) ) {
-        foreach( $posts->posts as $post ) {
-            $out[$post->ID] = $post->post_title;
+    
+    foreach ( $post_types as $post_type ) {
+        $post_type = trim( $post_type );
+        
+        if ( empty( $post_type ) ) {
+            continue;
+        }
+        
+        $posts = mib_get_posts( $post_type, -1 );
+        
+        if ( $posts->posts && ! empty( $posts->posts ) ) {
+            $post_type_object = get_post_type_object( $post_type );
+            $post_type_label = $post_type_object ? $post_type_object->labels->singular_name : ucfirst( $post_type );
+            
+            foreach( $posts->posts as $post ) {
+                $out[$post->ID] = sprintf( 
+                    __( '%s: %s' ), 
+                    $post_type_label, 
+                    $post->post_title 
+                );
+            }
         }
     }
-
+    
     return $out;
 }
 

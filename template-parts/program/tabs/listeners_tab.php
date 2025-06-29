@@ -6,7 +6,14 @@ if ( ! $has_listeners ) {
 <div id="listeners" class="tab-content">
     <?php
     if ( 'yes' == $use_course_listeners ) :
+        if ( ! empty( $listenrs_block_content ) ) : ?>
+            <div class="program-listeners-desctiprion">
+                <?php echo $listenrs_block_content; ?>
+            </div>
+            <?php
+        endif;
         ?>
+
         <div class="program-listeners">
             <?php
             if ( ! empty( $lesteners_items_repeater ) ) :
@@ -23,13 +30,6 @@ if ( ! $has_listeners ) {
         </div>
 
         <?php
-        if ( ! empty( $listenrs_block_content ) ) : ?>
-            <div class="program-listeners-desctiprion">
-                <?php echo $listenrs_block_content; ?>
-            </div>
-            <?php
-        endif;
-    
     elseif ( 'no' == $use_course_listeners && ! empty( $listeners_tab_content ) ) :
         echo $listeners_tab_content;
     endif;

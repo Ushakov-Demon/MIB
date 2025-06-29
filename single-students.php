@@ -20,77 +20,44 @@ $activity          = get_post_meta( $post_ID, '_st_activity', true );
 $status            = get_post_meta( $post_ID, '_st_status', true );
 $city              = get_post_meta( $post_ID, '_st_city', true );
 
+$main_top_heading_text = false;
+$main_top_version      = 'white version-teachers';
+
+if ( has_post_thumbnail() ) {
+    $main_top_heading_media_before_text = get_post_thumbnail_id();
+}
+
+$main_bottom_text .= '<div class="section-title">' . get_the_title() . '</div>';
+$main_bottom_text .= '<div class="position">' . $position. '</div>';
+
+if ( ! empty( $courses ) ) {
+    $main_bottom_second_text .= '<div class="completed">';
+    $main_bottom_second_text .= '<div class="label">' . 
+    ( 'man' == $gender ? pll__('Completed', 'baza') : pll__( 'She graduated', 'baza' ) ) . 
+    ':</div>';
+    $main_bottom_second_text .= '<div class="completed-items">';
+
+    foreach ( $courses as $course ) {
+        $course_href = get_the_permalink( $course->ID );
+        $course_title = $course->post_title;
+
+        $main_bottom_second_text .= '<a class="completed-item" href="' . esc_url( $course_href ) . '">'
+                            . esc_html( $course_title ) . '</a>';
+    }
+
+    $main_bottom_second_text .= '</div></div>';
+}
+
 get_header();
 ?>
 
 <main id="primary" class="site-main">
 
-    <?php display_breadcrumbs(); ?>
+    <?php include get_template_directory() . '/template-parts/sections/hero-section.php'; ?>
 
     <div class="container-student">
 
         <div class="content">
-
-            <div class="single-header">
-                <?php if ( has_post_thumbnail() ) : ?>
-                    <div class="photo">
-                        <?php the_post_thumbnail( 'medium' ); ?>
-                    </div>
-                <?php endif; ?>
-
-                <div class="single-header-content">
-                    <h1><?php echo get_the_title(); ?></h1>
-
-                    <?php if($position): ?>
-                        <div class="position">
-                            <?php echo $position; ?>
-                        </div>
-                    <?php endif; ?>
-
-                    <div class="completed">
-                        <?php
-                        if ( ! empty( $courses ) ) :
-                            ?>
-                            <div class="label">
-                                <?php
-                                if ( 'man' == $gender ) {
-                                    pll_e('Completed', 'baza');
-                                } else {
-                                    pll_e( 'She graduated', 'baza' );
-                                }
-                                ?>
-                                :
-                            </div>
-
-                            <div class="completed-items">
-                                <?php
-                                foreach ( $courses as $course ) :
-                                    $course_href = get_the_permalink( $course->ID );
-                                    ?>
-                                    <a class="completed-item" href="<?php echo $course_href?>">
-                                        <?php
-                                        echo $course->post_title;
-                                        ?>
-                                    </a>
-                                    <?php
-                                endforeach;
-
-                                if ( ! empty( $year_graduation ) ) :
-                                ?>
-                                <span class="year_graduation">
-                                    <?php echo $year_graduation . ' ' . pll__( 'year', 'baza' )?>.
-                                </span>
-                                <?php
-                                endif;
-                                ?>
-                            </div>
-                            <?php
-                        endif;
-                        ?>
-                    </div>
-                </div>
-            </div>
-
             <div class="student-info">
                 <div class="items">
                     <?php if (!empty($activity)) : ?>

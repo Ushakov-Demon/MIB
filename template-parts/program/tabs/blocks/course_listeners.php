@@ -12,6 +12,15 @@
     </div><!-- .accordion-header -->
 
     <div class="accordion-content">
+        <?php
+        if ( ! empty( $listenrs_block_content ) ) : ?>
+            <div class="program-listeners-desctiprion">
+                <?php echo $listenrs_block_content; ?>
+            </div>
+            <?php
+            endif;
+        ?>
+        
         <div class="program-listeners">
             <?php
             if ( ! empty( $lesteners_items_repeater ) ) :
@@ -26,14 +35,5 @@
             endif;
             ?>
         </div><!-- .program-listeners -->
-
-        <?php
-        if ( ! empty( $listenrs_block_content ) ) : ?>
-            <div class="program-listeners-desctiprion">
-                <?php echo $listenrs_block_content; ?>
-            </div>
-            <?php
-            endif;
-        ?>
     </div><!-- .accordion-content -->
 </div><!-- .accordion-item -->

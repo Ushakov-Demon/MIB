@@ -2125,14 +2125,11 @@ footer {
         }
 
         .content-wrapper {
-            display: grid;
-            grid-template-columns: 1fr 66%;
+            // display: grid;
+            // grid-template-columns: 1fr 66%;
+            display: flex;
+            flex-direction: column;
             gap: 32px;
-
-            @include mobile {
-                display: flex;
-                flex-direction: column;
-            }
 
             .side {
                 display: flex;
@@ -2781,6 +2778,84 @@ footer {
                     color: var(--color_white);
                     font-size: 16px;
                 }
+            }
+        }
+
+        &.version-students,
+        &.version-teachers {
+            .content-header {
+                display: grid;
+                grid-template-columns: 160px 1fr;
+                gap: 32px;
+                margin-top: 0;
+
+                @include desktop {
+                    align-items: center;
+                }
+
+                @include mobile {
+                    display: flex;
+                    flex-direction: column;
+                }
+            }
+
+            .section-title {
+                margin-bottom: 10px;
+            }
+
+            .position {
+                @include min1200 {
+                    max-width: 60%;
+                }
+            }
+
+            .image-before {
+                line-height: 1;
+
+                img {
+                    object-fit: cover;
+                    border-radius: 50%;
+                    aspect-ratio: 1;
+
+                    @include mobile {
+                        border-radius: 0;
+                    }
+                }
+            }
+
+            .logos {
+                display: flex;
+                flex-wrap: wrap;
+                gap: var(--gap_m);
+                margin-top: calc(var(--block_spacing) / 2);
+
+                img {
+                    width: auto;
+                    height: 30px;
+                }
+            }
+
+            .completed {
+                gap: 16px;
+
+                @include desktop {
+                    flex-direction: row;
+                    align-items: center;
+                }
+
+                .label {
+                    font-weight: 600;
+                    color: var(--color_secondary);
+                }
+
+                .completed-items {
+                    flex: 1;
+                }
+            }
+
+            .text-before,
+            .text-after {
+                max-width: 100%;
             }
         }
     }
@@ -5245,7 +5320,7 @@ footer {
 }
 
 .program-listeners-desctiprion {
-    margin-top: 40px;
+    margin-bottom: 40px;
 }
 
 .program-admission-requirements {
@@ -5948,6 +6023,10 @@ footer {
                 flex-direction: column;
                 gap: 5px;
 
+                .author-link {
+                    text-decoration: none;
+                }
+
                 .name {
                     font-size: 18px;
                     font-weight: bold;
@@ -5956,6 +6035,8 @@ footer {
                     display: flex;
                     align-items: center;
                     gap: 12px;
+                    color: var(--color_secondary);
+                    
                 }
 
                 .position {

@@ -82,7 +82,7 @@ if ( empty( $image_id ) ) {
             if ( ! empty( $courses ) ) :
                 ?>
                 <div class="label">
-                    <?php pll_e('Completed', 'baza'); ?>:
+                    <?php pll_e( 'man' == $gender ? 'Completed' : 'She graduated', 'baza' ); ?>:
                 </div>
 
                 <div class="completed-items">

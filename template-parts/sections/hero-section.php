@@ -6,7 +6,11 @@
     $is_programs_archive        = $post_id == get_option( '_programs_arhive_page' );
     $is_tax                     = is_tax();
     $is_programs_tax            = is_tax('program_category');
-    $main_top_heading_text      = ! empty( $main_top_heading_text ) ? $main_top_heading_text : get_the_title();
+    if ($main_top_heading_text === false) {
+        $main_top_heading_text = '';
+    } else {
+        $main_top_heading_text = !empty($main_top_heading_text) ? $main_top_heading_text : get_the_title();
+    }
     $main_top_version          .= ($post_type === 'programs') ? ' version-program' : '';
 ?>
 <section class="section section-main<?php if ( !empty( $main_top_version ) ) : ?> version-<?php echo $main_top_version; ?><?php endif; ?>">

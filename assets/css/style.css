@@ -3371,15 +3371,9 @@ footer .footer-after .footer-after-col {
   }
 }
 .section.section-single .content-wrapper {
-  display: grid;
-  grid-template-columns: 1fr 66%;
+  display: flex;
+  flex-direction: column;
   gap: 32px;
-}
-@media (max-width: 767px) {
-  .section.section-single .content-wrapper {
-    display: flex;
-    flex-direction: column;
-  }
 }
 .section.section-single .content-wrapper .side {
   display: flex;
@@ -3955,6 +3949,76 @@ footer .footer-after .footer-after-col {
 .section.section-main.version-program .prices .additional-price {
   color: var(--color_white);
   font-size: 16px;
+}
+.section.section-main.version-students .content-header, .section.section-main.version-teachers .content-header {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 32px;
+  margin-top: 0;
+}
+@media (min-width: 768px) {
+  .section.section-main.version-students .content-header, .section.section-main.version-teachers .content-header {
+    align-items: center;
+  }
+}
+@media (max-width: 767px) {
+  .section.section-main.version-students .content-header, .section.section-main.version-teachers .content-header {
+    display: flex;
+    flex-direction: column;
+  }
+}
+.section.section-main.version-students .section-title, .section.section-main.version-teachers .section-title {
+  margin-bottom: 10px;
+}
+@media (min-width: 1200px) {
+  .section.section-main.version-students .position, .section.section-main.version-teachers .position {
+    max-width: 60%;
+  }
+}
+.section.section-main.version-students .image-before, .section.section-main.version-teachers .image-before {
+  line-height: 1;
+}
+.section.section-main.version-students .image-before img, .section.section-main.version-teachers .image-before img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
+  aspect-ratio: 1;
+}
+@media (max-width: 767px) {
+  .section.section-main.version-students .image-before img, .section.section-main.version-teachers .image-before img {
+    border-radius: 0;
+  }
+}
+.section.section-main.version-students .logos, .section.section-main.version-teachers .logos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap_m);
+  margin-top: calc(var(--block_spacing) / 2);
+}
+.section.section-main.version-students .logos img, .section.section-main.version-teachers .logos img {
+  width: auto;
+  height: 30px;
+}
+.section.section-main.version-students .completed, .section.section-main.version-teachers .completed {
+  gap: 16px;
+}
+@media (min-width: 768px) {
+  .section.section-main.version-students .completed, .section.section-main.version-teachers .completed {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+.section.section-main.version-students .completed .label, .section.section-main.version-teachers .completed .label {
+  font-weight: 600;
+  color: var(--color_secondary);
+}
+.section.section-main.version-students .completed .completed-items, .section.section-main.version-teachers .completed .completed-items {
+  flex: 1;
+}
+.section.section-main.version-students .text-before,
+.section.section-main.version-students .text-after, .section.section-main.version-teachers .text-before,
+.section.section-main.version-teachers .text-after {
+  max-width: 100%;
 }
 .section.section-about-talk {
   text-align: center;
@@ -6550,7 +6614,7 @@ footer .footer-after .footer-after-col {
 }
 
 .program-listeners-desctiprion {
-  margin-top: 40px;
+  margin-bottom: 40px;
 }
 
 .program-admission-requirements ul a,
@@ -7747,6 +7811,9 @@ footer .footer-after .footer-after-col {
   flex-direction: column;
   gap: 5px;
 }
+.block-author .author .heading .title .author-link {
+  text-decoration: none;
+}
 .block-author .author .heading .title .name {
   font-size: 18px;
   font-weight: bold;
@@ -7755,6 +7822,7 @@ footer .footer-after .footer-after-col {
   display: flex;
   align-items: center;
   gap: 12px;
+  color: var(--color_secondary);
 }
 .block-author .author .heading .title .position {
   font-size: 15px;

@@ -19,6 +19,8 @@ if (!empty($first_name) && !empty($last_name)) {
 
 $author_position = get_the_author_meta('description');
 $author_avatar = get_avatar_url($author_id, array('size' => 200));
+$author_url = get_the_author_meta('user_url');
+$has_valid_url = !empty($author_url) && filter_var($author_url, FILTER_VALIDATE_URL);
 ?>
 
 <div class="block block-author">
@@ -26,12 +28,25 @@ $author_avatar = get_avatar_url($author_id, array('size' => 200));
 
     <div class="author">
         <div class="image">
-            <img src="<?php echo esc_url($author_avatar); ?>" alt="<?php echo esc_attr($author_name); ?>">
+            <?php if ($has_valid_url) : ?>
+                <a href="<?php echo esc_url($author_url); ?>" target="_blank" rel="noopener noreferrer">
+                    <img src="<?php echo esc_url($author_avatar); ?>" alt="<?php echo esc_attr($author_name); ?>">
+                </a>
+            <?php else : ?>
+                <img src="<?php echo esc_url($author_avatar); ?>" alt="<?php echo esc_attr($author_name); ?>">
+            <?php endif; ?>
         </div>
 
         <div class="heading">
             <div class="title">
-                <span class="name"><?php echo esc_html($author_name); ?></span>
+                <?php if ($has_valid_url) : ?>
+                    <a href="<?php echo esc_url($author_url); ?>" target="_blank" rel="noopener noreferrer" class="author-link">
+                        <span class="name"><?php echo esc_html($author_name); ?></span>
+                    </a>
+                <?php else : ?>
+                    <span class="name"><?php echo esc_html($author_name); ?></span>
+                <?php endif; ?>
+                
                 <?php if (!empty($author_position)) : ?>
                     <span class="position"><?php echo esc_html($author_position); ?></span>
                 <?php endif; ?>
