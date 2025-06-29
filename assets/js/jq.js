@@ -501,11 +501,12 @@ jQuery(document).ready(function ($) {
 	$(document).on('click', '#filter-news .item', function(e) {
 		e.preventDefault();
 	
+		let target = $(this).data( 'target' );
 		if ($(this).hasClass('active')) return;
 	
 		$(this).parent().find('.active').removeClass('active');
 		$(this).addClass('active');
-
+		$(this).closest('.section-news').data('type', target);
 		$(this).closest('.section-news').data('current-page_num', 1);
 	
 		ajaxResponsePosts($(this));
