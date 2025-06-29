@@ -157,6 +157,7 @@ function mib_custom_post_type_filter(){
                 'operator' => $_POST['filterCats']['operator'],
             ];
         }
+        
         $query = mib_get_posts( $post_type, $per_page, $page_num, $cats_param );
 
         if ( $query->have_posts() ) {
