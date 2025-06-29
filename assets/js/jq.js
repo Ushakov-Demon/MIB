@@ -612,54 +612,74 @@ jQuery(document).ready(function ($) {
 	});
 
 	function initTabs() {
+		const cookieName = 'activeTab';
+
 		$('.tabs li a, .program-content-all a').on('click', function(e) {
 			e.preventDefault();
-			
-			let tabId = $(this).attr('href').replace('#', '');
+			const tabId = $(this).attr('href').replace('#', '');
 			activateTab(tabId, true);
 		});
-		
+
 		checkHashOnLoad();
-		
+
 		$(window).on('hashchange', function() {
-			let hash = window.location.hash.replace('#', '');
+			const hash = window.location.hash.replace('#', '');
 			if (hash) {
 				triggerTabClick(hash);
 			}
 		});
-		
+
 		function activateTab(tabId, updateUrl = false) {
-			let tabLink = $('.tabs li a[href="#' + tabId + '"]');
-			
+			const tabLink = $('.tabs li a[href="#' + tabId + '"]');
+
 			if (tabLink.length) {
 				$('.tabs li').removeClass('active');
 				tabLink.parent('li').addClass('active');
-				
+
 				$('.tab-content').removeClass('active');
 				$('#' + tabId).addClass('active');
-				
+
 				if (updateUrl) {
 					window.history.pushState(null, null, '#' + tabId);
 				}
+
+				// Сохраняем активный tab в cookie (на 7 дней)
+				document.cookie = cookieName + '=' + tabId + '; path=/; max-age=' + (60 * 60 * 24 * 7);
 			}
 		}
-		
+
 		function triggerTabClick(tabId) {
-			let tabLink = $('.tabs li a[href="#' + tabId + '"]');
+			const tabLink = $('.tabs li a[href="#' + tabId + '"]');
 			if (tabLink.length) {
 				tabLink.trigger('click');
 			}
 		}
-    
-    function checkHashOnLoad() {
-        let hash = window.location.hash.replace('#', '');
-        if (hash) {
-            triggerTabClick(hash);
-        }
-    }
-}
 
-initTabs();
+		function checkHashOnLoad() {
+			const hash = window.location.hash.replace('#', '');
+			if (hash) {
+				triggerTabClick(hash);
+			} else {
+				// Если нет хеша — пробуем взять таб из cookie
+				const tabFromCookie = getCookie(cookieName);
+				if (tabFromCookie) {
+					triggerTabClick(tabFromCookie);
+				} else {
+					// Иначе — активируем первый таб
+					const firstTab = $('.tabs li:first-child a').attr('href').replace('#', '');
+					activateTab(firstTab, true);
+				}
+			}
+		}
+
+		function getCookie(name) {
+			const value = "; " + document.cookie;
+			const parts = value.split("; " + name + "=");
+			if (parts.length === 2) return parts.pop().split(";").shift();
+		}
+	}
+
+	initTabs();
 
 	let filterSection = '.wpc-filters-section',
 		filterHeader  = '.wpc-filter-header';

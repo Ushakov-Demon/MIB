@@ -11,7 +11,12 @@ if ( ! isset( $announcing ) ) {
     $announcing = '';
 }
 ?>
+<?php if ( ! isset( $is_announcing ) || ! $is_announcing ) :?>
 <a class="item<?php echo $announcing?>" href="<?php echo esc_url( $post_permalink ); ?>">
+<?php else : ?>
+<div class="item pending">
+<?php endif; ?>
+
     <?php if ($image): ?>
         <div class="image">
             <?php 
@@ -56,4 +61,8 @@ if ( ! isset( $announcing ) ) {
     <?php
     endif;
     ?>
+<?php if ( ! isset( $is_announcing ) || ! $is_announcing ) :?>
 </a>
+<?php else : ?>
+</div>
+<?php endif; ?>

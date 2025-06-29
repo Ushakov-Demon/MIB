@@ -4490,6 +4490,9 @@ footer .footer-after .footer-after-col {
   line-height: 1.4;
   transition: all 0.5s ease;
 }
+.section.section-accreditations .items .item * {
+  transition: all 0.5s ease;
+}
 @media (max-width: 767px) {
   .section.section-accreditations .items .item {
     width: 60vw;
@@ -6419,6 +6422,7 @@ footer .footer-after .footer-after-col {
   align-items: center;
   gap: 8px;
   color: var(--color_grey_5);
+  order: 1;
 }
 .program-cost .prices .label i {
   line-height: 1;
@@ -6434,10 +6438,12 @@ footer .footer-after .footer-after-col {
   flex-direction: column;
   gap: 8px;
   line-height: 1;
+  order: 2;
 }
 .program-cost .prices .price {
   font-size: 40px;
   font-weight: 600;
+  order: 2;
 }
 .program-cost .prices .price sup {
   opacity: 0.2;
@@ -6446,9 +6452,13 @@ footer .footer-after .footer-after-col {
   text-decoration: line-through;
   font-size: 16px;
   color: var(--color_grey_3);
+  order: 3;
 }
 .program-cost .prices .additional-price {
-  display: none !important;
+  order: 4;
+}
+.program-cost .prices .price-label {
+  order: 10;
 }
 
 .program-content .program-content-items,

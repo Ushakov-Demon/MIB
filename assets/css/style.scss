@@ -3287,6 +3287,10 @@ footer {
                 line-height: 1.4;
                 transition: all .5s ease;
 
+                * {
+                    transition: all .5s ease;
+                }
+
                 @include mobile {
                     width: 60vw;
                     min-width: 60vw;
@@ -5096,6 +5100,7 @@ footer {
             align-items: center;
             gap: 8px;
             color: var(--color_grey_5);
+            order: 1;
 
             i {
                 line-height: 1;
@@ -5114,11 +5119,13 @@ footer {
             flex-direction: column;
             gap: 8px;
             line-height: 1;
+            order: 2;
         }
 
         .price {
             font-size: 40px;
             font-weight: 600;
+            order: 2;
 
             sup {
                 opacity: .2;
@@ -5129,10 +5136,15 @@ footer {
             text-decoration: line-through;
             font-size: 16px;
             color: var(--color_grey_3);
+            order: 3;
         }
 
         .additional-price {
-            display: none !important;
+            order: 4;
+        }
+
+        .price-label {
+            order: 10;
         }
     }
 }
