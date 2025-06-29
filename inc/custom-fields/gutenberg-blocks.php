@@ -390,6 +390,7 @@ function custom_posts_gutenberg_blocks() {
                 ) )
                 ->add_fields( 'documents_upon_completion', array(
                     Field::make( 'text', 'duc_title', __( 'Title' ) ),
+                    Field::make( 'image', 'duc_image', __( 'Bottom banner' ) ),
                     Field::make( 'complex', 'duc_documents_list', __( 'Documents' ) )
                         ->set_collapsed( true )
                         ->add_fields( array(
