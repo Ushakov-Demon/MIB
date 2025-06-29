@@ -436,11 +436,12 @@ function custom_posts_gutenberg_blocks() {
                         ) )
                 ) )
                 ->add_fields( 'companies', array(
+                    Field::make( 'text', 'cousre_companies_title', __( 'Title block' ) ),
                     Field::make( 'association', 'cousre_companies_list', __( 'Companies list' ) )
                         ->set_types( array(
                             array(
-                                'type'      => 'post',
-                                'post_type' => 'companies',
+                                'type'      => 'term',
+                                'taxonomy'  => 'companies',
                             )
                         ) )
                 ) )
