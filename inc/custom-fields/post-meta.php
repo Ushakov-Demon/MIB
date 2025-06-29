@@ -126,7 +126,7 @@ function custom_posts_meta_data() {
             Field::make( 'textarea', 'tr_program_stats_cases_label', __( 'Number of real cases Text' ) )
                 ->set_width( 20 ),
         ) )
-        ->add_tab( __( 'Members' ) , array(
+        ->add_tab( __( 'Members' ), array(
             Field::make( 'association', 'tr_program_teachers', __( 'Teachers' ) )
                 ->set_types( array(
                     array(
@@ -141,6 +141,38 @@ function custom_posts_meta_data() {
                         'post_type' => 'students',
                     )
                 ) ),
+        ) )
+        ->add_tab( __( 'Units' ), array(
+            Field::make( 'complex', 'tr_program_units', __( 'Units program' ) )
+                ->set_collapsed( true )
+                ->add_fields( array(
+                    Field::make( 'text', 'unit_name', __( 'Unit name' ) ),
+                    Field::make( 'complex', 'unit_modules', __( 'Modules' ) )
+                        ->set_collapsed( true )
+                        ->add_fields( array(
+                            Field::make( 'text', 'module_name', __( 'Module name' ) ),
+                            Field::make( 'text', 'module_shedule', __( 'Shedule text' ) ),
+                            Field::make( 'rich_text', 'module_content', __( 'Content' ) )
+                        ) )
+                    ->set_header_template( '
+                        <% if (module_name) { %>
+                            <%- module_name %>
+                        <% } %>
+                    ' )
+                    ->setup_labels( array(
+                        'plural_name'   => 'Modules',
+                        'singular_name' => 'Module',
+                    ) )                        
+                ) )
+                ->set_header_template( '
+                    <% if (unit_name) { %>
+                        <%- unit_name %>
+                    <% } %>
+                ' )
+                ->setup_labels( array(
+                    'plural_name'   => 'Units',
+                    'singular_name' => 'Unit',
+                ) )
         ) );
 
     // ==== EVENTS post type

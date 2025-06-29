@@ -6,6 +6,7 @@ $has_students  = isset( $show_students ) && "yes" == $show_students;
 // $has_structure = isset( $program_structure_tab_content ) && ! empty( $program_structure_tab_content );
 $has_structure = true;
 $has_listeners = isset( $use_course_listeners ) || ! empty( $use_course_listeners );
+$units         = carbon_get_post_meta( $post_id, 'tr_program_units' );
 $offset        = is_admin_bar_showing() ? 196 : 164;
 ?>
 
@@ -79,6 +80,18 @@ $offset        = is_admin_bar_showing() ? 196 : 164;
         </li>
         <?php
         endif;
+
+        if ( !empty( $units[0]['unit_modules'] ) ) :
+        ?>
+            <li>
+                <a href="#units" data-ps2id-offset="<?php echo $offset; ?>">
+                    <i class="icon-users"></i>
+
+                    <?php echo pll__('Units'); ?>
+                </a>
+            </li>
+        <?php
+        endif;
         ?>
     </ul>
 </div>
@@ -112,6 +125,10 @@ $offset        = is_admin_bar_showing() ? 196 : 164;
                     include get_template_directory() . '/template-parts/program/tabs/listeners_tab.php';
                 break;
         }
+
+        if ( !empty( $units[0]['unit_modules'] ) ) :
+            include get_template_directory() . '/template-parts/program/tabs/units_tab.php';
+        endif;    
     }
     ?>
 </div>

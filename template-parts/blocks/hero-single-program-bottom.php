@@ -7,6 +7,7 @@
     $format              = get_post_meta( $post_id, $prefix . '_format', true );
     $language            = get_post_meta( $post_id, $prefix . '_language', true );
     $number_of_courses   = get_post_meta( $post_id, $prefix . '_number_of_courses', true );
+    $show_remaining_date = get_post_meta( $post_id, '_show_remaining_date', true );
     $show_time_left      = get_post_meta( $post_id, '_tr_program_show_time_left', true );
 
     if ( $show_time_left == 'yes' ) {
@@ -62,7 +63,7 @@
         <?php
     endif;
 
-    if ( $show_remaining_date && ! empty( $time_left ) ):
+    if ( $show_remaining_date && 'yes' == $show_remaining_date && ! empty( $time_left ) ):
         ?>
         <div class="item">
             <?php
