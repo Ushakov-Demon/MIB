@@ -21,8 +21,8 @@ if ( empty( $duc_documents_list ) ) {
             <?php
             foreach( $duc_documents_list as $item ) :
                 $doc_url = '';
-                $file_url = wp_get_attachment_url( $item['duc_item_file'] );
-                $link_url = get_permalink( $item['duc_item_url'] );
+                $file_url = isset( $item['duc_item_file'] ) && ! empty( $item['duc_item_file'] ) ? wp_get_attachment_url( $item['duc_item_file'] ) : "";
+                $link_url = isset( $item['duc_item_url'] ) && ! empty( $item['duc_item_url'] ) ? get_permalink( $item['duc_item_url'] ) : "";
 
                 if ( ! empty( $file_url ) ) {
                     $doc_url = 'href="' . esc_url( $file_url ) . '" download';
@@ -49,5 +49,15 @@ if ( empty( $duc_documents_list ) ) {
             endforeach;
             ?>
         </div>
+        <?php
+        if ( isset( $duc_image ) && ! empty( $duc_image ) ) :
+            $src = esc_url( wp_get_attachment_url( $duc_image, 'large' ) );
+        ?>
+        <div class="block-banner">
+            <img src="<?php echo $src?>" alt="">
+        </div>
+        <?php
+        endif;
+        ?>
     </div>
 </div>
