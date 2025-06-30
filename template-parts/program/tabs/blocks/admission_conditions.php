@@ -3,7 +3,7 @@ if ( empty( $conditions_list ) ) {
     return;
 }
 ?>
-<div class="accordion-item">
+<div class="accordion-item" id="accordion-conditions-list">
     <div class="accordion-header">
         <?php
         if( ! empty( $conditions_block_title ) ) :

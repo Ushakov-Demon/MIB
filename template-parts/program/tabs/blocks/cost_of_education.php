@@ -3,7 +3,7 @@ $sale_price          = get_post_meta( $post_id, '_tr_program_sale_price', true )
 $sale_price_date_end = get_post_meta( $post_id, '_tr_program_sale_price_date_end', true );
 $time_difference     = ! empty( $sale_price_date_end ) ? mib_get_time_difference( $sale_price_date_end ) : ['days' => -1] ; 
 ?>
-<div class="accordion-item">
+<div class="accordion-item" id="accordion-program-cost">
     <div class="accordion-header">
         <?php
         if ( ! empty( $cod_title ) ) :

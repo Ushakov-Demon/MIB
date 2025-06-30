@@ -62,6 +62,7 @@ function register_customizer_strings_for_polylang() {
         'Start of the program',
         'Duration',
         'Program format',
+        'View',
         'View all',
         'View all graduates',
         'View all teachers',
@@ -151,6 +152,10 @@ function register_customizer_strings_for_polylang() {
         'City',
         'She graduated',
         'Units',
+        'Next unit',
+        'Our clients',
+        'Module',
+        'Result',
     );
     
     foreach ($strings as $string) {

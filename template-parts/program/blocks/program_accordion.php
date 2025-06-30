@@ -12,6 +12,17 @@
     </div>
 
     <div class="accordion-item">
+        <div class="accordion-header"><div class="accordion-title"><?php echo pll__('Result'); ?></div></div>
+        <div class="accordion-content">
+
+            <?php 
+                include get_template_directory() . '/template-parts/program/blocks/program_result.php';
+            ?>
+
+        </div>
+    </div>
+
+    <div class="accordion-item">
         <div class="accordion-header"><div class="accordion-title"><?php echo pll__('Cost of education'); ?></div></div>
         <div class="accordion-content">
             

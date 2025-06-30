@@ -1,15 +1,15 @@
-<div class="accordion-item">
+<div class="accordion-item" id="accordion-program-listeners">
     <div class="accordion-header">
         <?php
         if ( ! empty( $listenrs_block_title ) ) :
             ?>
             <div class="accordion-title">
                 <?php echo pll__( $listenrs_block_title ); ?>
-            </div><!-- .accordion-title -->
+            </div>
             <?php
         endif;
         ?>
-    </div><!-- .accordion-header -->
+    </div>
 
     <div class="accordion-content">
         <?php
@@ -34,6 +34,6 @@
                 endforeach;
             endif;
             ?>
-        </div><!-- .program-listeners -->
-    </div><!-- .accordion-content -->
-</div><!-- .accordion-item -->
+        </div>
+    </div>
+</div>

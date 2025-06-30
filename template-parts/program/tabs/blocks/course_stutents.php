@@ -6,7 +6,7 @@
         return;
     }
 ?>
-<div class="accordion-item">
+<div class="accordion-item" id="accordion-stutents">
     <div class="accordion-header">
         <?php
         if ( ! empty( $course_stutents_block_title ) ) :

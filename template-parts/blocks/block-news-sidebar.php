@@ -6,7 +6,7 @@
         </div>
 
         <div class="items items-last-events">
-            <?php /*
+            <?php
                 if ( ! empty( $alternating_posts["posts"] ) ) :
                     foreach ( $alternating_posts["posts"] as $item ) :
 
@@ -22,8 +22,7 @@
                     endforeach;
                 else :
                     echo __( 'Items not found', 'baza' );
-                endif;	
-                */								
+                endif;							
             ?>
         </div>
     </div>

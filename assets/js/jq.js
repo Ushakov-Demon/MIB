@@ -594,28 +594,48 @@ jQuery(document).ready(function ($) {
 
 	animateCount();
 
-	$('.accordion-header').click(function () {
-		let item = $(this).closest('.accordion-item');
-		let text = item.find('.accordion-content');
+	function handleAccordion() {
+		$('.accordion-header').click(function () {
+			let item = $(this).closest('.accordion-item');
+			let text = item.find('.accordion-content');
+			let openAccordions = JSON.parse(localStorage.getItem('openAccordions')) || [];
 
-		if (!item.hasClass('active')) {
-			$('.accordion-item.active')
-				.removeClass('active')
-				.find('.accordion-content')
-				.slideUp(300);
+			if (!item.hasClass('active')) {
+				$('.accordion-item.active')
+					.removeClass('active')
+					.find('.accordion-content')
+					.slideUp(300);
 
+				item.addClass('active');
+				text.slideDown(300);
+
+				openAccordions = [item.attr('id')];
+				localStorage.setItem('openAccordions', JSON.stringify(openAccordions));
+			} else {
+				item.removeClass('active');
+				text.slideUp(300);
+
+				openAccordions = [];
+				localStorage.setItem('openAccordions', JSON.stringify(openAccordions));
+			}
+		});
+
+		let openAccordions = JSON.parse(localStorage.getItem('openAccordions')) || [];
+		openAccordions.forEach(id => {
+			let item = $('#' + id);
+			let text = item.find('.accordion-content');
 			item.addClass('active');
 			text.slideDown(300);
-		} else {
-			item.removeClass('active');
-			text.slideUp(300);
-		}
-	});
+		});
+	}
+
+	handleAccordion();
 
 	function initTabs() {
-		const cookieName = 'activeTab';
+		const storageKey = 'tabsHistory';
+		const maxHistorySize = 50;
 
-		$('.tabs li a, .program-content-all a').on('click', function(e) {
+		$('.tabs li a, .program-content-all a, .unit-module-link').on('click', function(e) {
 			e.preventDefault();
 			const tabId = $(this).attr('href').replace('#', '');
 			activateTab(tabId, true);
@@ -644,8 +664,7 @@ jQuery(document).ready(function ($) {
 					window.history.pushState(null, null, '#' + tabId);
 				}
 
-				// Сохраняем активный tab в cookie (на 7 дней)
-				document.cookie = cookieName + '=' + tabId + '; path=/; max-age=' + (60 * 60 * 24 * 7);
+				saveTabAction(tabId);
 			}
 		}
 
@@ -661,23 +680,96 @@ jQuery(document).ready(function ($) {
 			if (hash) {
 				triggerTabClick(hash);
 			} else {
-				// Если нет хеша — пробуем взять таб из cookie
-				const tabFromCookie = getCookie(cookieName);
-				if (tabFromCookie) {
-					triggerTabClick(tabFromCookie);
+				const lastActiveTab = getLastActiveTab();
+				if (lastActiveTab) {
+					triggerTabClick(lastActiveTab);
 				} else {
-					// Иначе — активируем первый таб
 					const firstTab = $('.tabs li:first-child a').attr('href').replace('#', '');
 					activateTab(firstTab, true);
 				}
 			}
 		}
 
-		function getCookie(name) {
-			const value = "; " + document.cookie;
-			const parts = value.split("; " + name + "=");
-			if (parts.length === 2) return parts.pop().split(";").shift();
+		function saveTabAction(tabId) {
+			try {
+				let history = getTabsHistory();
+				
+				history.unshift(tabId);
+
+				if (history.length > maxHistorySize) {
+					history = history.slice(0, maxHistorySize);
+				}
+
+				localStorage.setItem(storageKey, JSON.stringify(history));
+				localStorage.setItem('lastActiveTab', tabId);
+				
+			} catch (error) {}
 		}
+
+		function getTabsHistory() {
+			try {
+				const history = localStorage.getItem(storageKey);
+				return history ? JSON.parse(history) : [];
+			} catch (error) {
+				return [];
+			}
+		}
+
+		function getLastActiveTab() {
+			try {
+				return localStorage.getItem('lastActiveTab');
+			} catch (error) {
+				return null;
+			}
+		}
+
+		window.tabsManager = {
+			getHistory: function() {
+				return getTabsHistory();
+			},
+
+			getHistoryByDate: function(startDate, endDate) {
+				return [];
+			},
+
+			getTabsStats: function() {
+				const history = getTabsHistory();
+				const stats = {};
+				
+				history.forEach(tabId => {
+					if (stats[tabId]) {
+						stats[tabId]++;
+					} else {
+						stats[tabId] = 1;
+					}
+				});
+				
+				return stats;
+			},
+
+			clearHistory: function() {
+				try {
+					localStorage.removeItem(storageKey);
+					localStorage.removeItem('lastActiveTab');
+				} catch (error) {}
+			},
+
+			exportHistory: function() {
+				const history = getTabsHistory();
+				const dataStr = JSON.stringify(history, null, 2);
+				const dataBlob = new Blob([dataStr], {type: 'application/json'});
+				
+				const link = document.createElement('a');
+				link.href = URL.createObjectURL(dataBlob);
+				link.download = 'tabs-history-' + new Date().toISOString().split('T')[0] + '.json';
+				link.click();
+			},
+
+			getRecentActions: function(count = 10) {
+				const history = getTabsHistory();
+				return history.slice(0, count);
+			}
+		};
 	}
 
 	initTabs();
@@ -726,5 +818,74 @@ jQuery(document).ready(function ($) {
             'rel': 'noopener'
         });
     }
+
+	function updateUnit(unitId) {
+		let $activeUnit = $('#units .unit.active');
+		let currentUnitId = $activeUnit.attr('id');
+		let nextUnitId = 'unit-' + (parseInt(currentUnitId.split('-')[1]) + 1);
+		let $nextUnit = $('#' + nextUnitId);
+		let $nextBtn = $('#next-unit-button');
+		
+		if ($nextUnit.length > 0) {
+			let nextTitle = $nextUnit.data('unit-title');
+			$('#next-unit-title').text(nextTitle);
+			$nextBtn.show();
+		} else {
+			let $firstUnit = $('#units .unit').first();
+			let firstTitle = $firstUnit.data('unit-title');
+			$('#next-unit-title').text(firstTitle);
+			$nextBtn.show();
+		}
+	}
+
+	$('#next-unit-button').click(function() {
+		let $activeUnit = $('#units .unit.active');
+		let currentUnitId = $activeUnit.attr('id');
+		let nextUnitId = 'unit-' + (parseInt(currentUnitId.split('-')[1]) + 1);
+		let $nextUnit = $('#' + nextUnitId);
+		
+		if ($nextUnit.length > 0) {
+			$activeUnit.removeClass('active');
+			$nextUnit.addClass('active');
+			updateUnit(nextUnitId);
+		} else {
+			let $firstUnit = $('#units .unit').first();
+			$activeUnit.removeClass('active');
+			$firstUnit.addClass('active');
+			updateUnit($firstUnit.attr('id'));
+		}
+	});
+
+	$('.unit-module-link').click(function(event) {
+		event.preventDefault();
+
+		let unitId = $(this).data('unit'),
+			moduleId = $(this).data('module'),
+			offset = $(this).data('ps2id-offset'),
+			$unitToActivate = $('#' + unitId);
+
+		if ($unitToActivate.length > 0) {
+			$('#units .unit.active').removeClass('active');
+			$unitToActivate.addClass('active');
+
+			let targetId = '#' + unitId + '-' + moduleId;
+
+			setTimeout(function() {
+				if ($.mPageScroll2id && typeof $.mPageScroll2id === 'function') {
+					$.mPageScroll2id('scrollTo', targetId, {
+						offset: offset,
+						speed: 1500,
+						easing: 'easeOutQuint'
+					});
+				} else {
+					$('html, body').animate({
+						scrollTop: $(targetId).offset().top - offset
+					}, 1500);
+				}
+			}, 200);
+		}
+	});
+    
+    updateUnit();
 
 });

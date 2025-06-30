@@ -3,7 +3,7 @@ if ( empty( $course_content_items ) ) {
     return;
 }
 ?>
-<div class="accordion-item">
+<div class="accordion-item" id="accordion-program-content">
     <div class="accordion-header">
         <?php
         if ( ! empty( $course_content_title ) ) :

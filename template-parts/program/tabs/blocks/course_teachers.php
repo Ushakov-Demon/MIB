@@ -6,7 +6,7 @@ if ( empty( $teachers ) ) {
     return;
 }
 ?>
-<div class="accordion-item">
+<div class="accordion-item" id="accordion-teachers">
     <div class="accordion-header">
         <div class="accordion-title">
             <?php echo pll__('Teachers'); ?>

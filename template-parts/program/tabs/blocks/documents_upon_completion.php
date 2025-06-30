@@ -3,7 +3,7 @@ if ( empty( $duc_documents_list ) ) {
     return;
 }
 ?>
-<div class="accordion-item">
+<div class="accordion-item" id="accordion-documents">
     <div class="accordion-header">
         <?php
         if ( ! empty( $duc_title ) ) :
@@ -51,10 +51,11 @@ if ( empty( $duc_documents_list ) ) {
         </div>
         <?php
         if ( isset( $duc_image ) && ! empty( $duc_image ) ) :
-            $src = esc_url( wp_get_attachment_url( $duc_image, 'large' ) );
+            $src      = esc_url( wp_get_attachment_url( $duc_image, 'large' ) );
+            $alt_text = get_post_meta( $duc_image, '_wp_attachment_image_alt', true );
         ?>
         <div class="block-banner">
-            <img src="<?php echo $src?>" alt="">
+            <img src="<?php echo $src?>" alt="<?php echo esc_attr( $alt_text ); ?>">
         </div>
         <?php
         endif;

@@ -8,10 +8,10 @@ $hours_label    = get_post_meta( $post_id, '_tr_program_stats_hours_label', true
 $offline_label  = get_post_meta( $post_id, '_tr_program_stats_offline_label', true );
 $teachers_label = get_post_meta( $post_id, '_tr_program_stats_teachers_label', true );
 $cases_label    = get_post_meta( $post_id, '_tr_program_stats_cases_label', true );
+$show_stats     = get_post_meta( $post_id, '_tr_program_stats_show', true );
+$has_stats      = !empty( $hours ) || !empty( $offline ) || !empty( $teachers ) || !empty( $cases );
 
-$has_stats = !empty( $hours ) || !empty( $offline ) || !empty( $teachers ) || !empty( $cases );
-
-if ( $has_stats ) :
+if ( $has_stats && $show_stats ) :
 ?>
 <div class="program-stats">
     <?php if ( !empty( $hours ) ) : ?>

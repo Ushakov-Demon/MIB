@@ -309,7 +309,7 @@ function custom_posts_gutenberg_blocks() {
         ->add_tab( __( 'About tab' ), array(
             Field::make( 'complex', 'about_tab_content' )
                 ->add_fields( 'accriditation_block', array(
-                    Field::make( 'checkbox', 'add_accriditation_block', __( 'Add Accrititation block' ) )
+                    Field::make( 'checkbox', 'add_accriditation_block', __( 'Add Accreditation block' ) )
                         ->set_default_value( 'yes' )
                         ->help_text( __( 'Add Accreditation block installed in Training course data->Main->Accreditation.' ) ),
                 ) )
@@ -341,14 +341,20 @@ function custom_posts_gutenberg_blocks() {
                 ->add_fields( 'results_course', array(
                     Field::make( 'text', 'results_course_title', __( 'Title' ) )
                         ->set_width( 75 ),
+                    Field::make( 'rich_text', 'results_course_desc', __( 'Description' ) )
+                        ->set_width( 100 ),
+                    Field::make( 'checkbox', 'results_course_show_accreditation', __( 'Add Accreditations List' ) )
+                        ->set_default_value( 'no' ),
+                        
                     Field::make( 'image', 'results_course_block_image', __( 'Bottom image block' ) )
                         ->set_width( 25 ),
                     Field::make( 'complex', 'results_diplomas', __( 'Diplomas' ) )
                         ->set_collapsed( true )
                         ->add_fields( array(
-                            Field::make( 'file', 'sample_diploma', __( 'Sample diploma' ) )
-                                ->set_width( 25 ),
-                            Field::make( 'textarea', 'diploma_desc', __( 'Description' ) )
+                            Field::make( 'select', 'diplom_url', __( 'Link' ) )
+                                ->set_width( 25 )
+                                ->add_options( $pages_options ),
+                            Field::make( 'text', 'diplom_title', __( 'Title' ) )
                                 ->set_width( 75 ),
                         ) )
                         ->setup_labels( array(

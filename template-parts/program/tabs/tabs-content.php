@@ -85,7 +85,7 @@ $offset        = is_admin_bar_showing() ? 196 : 164;
         ?>
             <li>
                 <a href="#units" data-ps2id-offset="<?php echo $offset; ?>">
-                    <i class="icon-users"></i>
+                    <i class="icon-unit"></i>
 
                     <?php echo pll__('Units'); ?>
                 </a>

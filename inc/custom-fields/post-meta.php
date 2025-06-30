@@ -125,6 +125,8 @@ function custom_posts_meta_data() {
                 ->set_width( 20 ),
             Field::make( 'textarea', 'tr_program_stats_cases_label', __( 'Number of real cases Text' ) )
                 ->set_width( 20 ),
+            Field::make( 'checkbox', 'tr_program_stats_show', __( 'Show param stats' ) )
+                ->set_width( 100 ),
         ) )
         ->add_tab( __( 'Members' ), array(
             Field::make( 'association', 'tr_program_teachers', __( 'Teachers' ) )
@@ -387,7 +389,7 @@ function custom_posts_meta_data() {
     ->add_fields( array(
         Field::make( 'image', 'accr_white_logo', __( 'Certificate White Logo' ) ),
         Field::make( 'image', 'accr_certificate', __( 'Certificate' ) ),
-        Field::make( 'text', 'accr_site_url', __( 'Site url' ) ),
+        // Field::make( 'text', 'accr_site_url', __( 'Site url' ) ),
     ) );
 
     // ==== PAGE post type

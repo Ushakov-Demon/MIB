@@ -486,3 +486,106 @@
         }
     }
 }
+
+@mixin accreditaion_item() {
+    .item {
+        padding: 30px 32px;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        line-height: 1.4;
+        transition: all .5s ease;
+
+        * {
+            transition: all .5s ease;
+        }
+
+        @include mobile {
+            width: 60vw;
+            min-width: 60vw;
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+
+        &:hover {
+            @include desktop {
+                box-shadow: 0px 8px 18px -6px rgba(0, 0, 0, 0.12), 0px 12px 42px -4px rgba(0, 0, 0, 0.12);
+            }
+        }
+
+        &.pending {
+            justify-content: flex-end;
+
+            .title {
+                span {
+                    color: var(--color_black);
+
+                    &:hover {
+                        color: var(--color_black);
+                    }
+                }
+            }
+
+            .item-footer {
+                display: none !important;
+            }
+        }
+
+        .image {
+            margin-bottom: 135px;
+            align-self: flex-start;
+            transition: all 2s var(--cubic_bezier);
+            display: block;
+            line-height: 0;
+            flex: 1;
+
+            @include mobile {
+                margin-bottom: 32px;
+            }
+
+            img,
+            svg {
+                height: 42px;
+                width: auto;
+                min-width: 100%;
+            }
+        }
+        
+        .title {
+            line-height: 1.1;
+            margin: 0;
+
+            span,
+            a {
+                display: block;
+                font-size: 24px;
+                color: var(--color_link);
+
+                @include mobile {
+                    font-size: 24px;
+                }
+
+                &:hover {
+                    color: var(--color_primary);
+                }
+            }
+        }
+
+        .excerpt {
+            font-size: 15px;
+            opacity: .6;
+
+            @include mobile {
+                font-size: 14px;
+            }
+        }
+
+        .item-footer {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            margin-top: 18px;
+        }
+    }
+}
