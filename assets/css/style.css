@@ -153,7 +153,7 @@
 }
 @font-face {
   font-family: "mib";
-  src: url("../fonts/mib.ttf?w4aqor") format("truetype"), url("../fonts/mib.woff?w4aqor") format("woff"), url("../fonts/mib.svg?w4aqor#mib") format("svg");
+  src: url("../fonts/mib.ttf?fytn5p") format("truetype"), url("../fonts/mib.woff?fytn5p") format("woff"), url("../fonts/mib.svg?fytn5p#mib") format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -201,6 +201,10 @@ a.button::after, .button::after, button[type=submit]::after, input[type=submit]:
   line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-unit:before {
+  content: "\e91e";
 }
 
 .icon-city:before {
