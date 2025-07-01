@@ -6537,21 +6537,19 @@ footer .footer-after .footer-after-col {
 .program-cost .price-info span {
   color: var(--color_error);
 }
-.program-cost .contract-info {
+.program-cost .price-info-description {
   grid-column: span 2;
   opacity: 0.8;
   position: relative;
-  display: flex;
-  gap: 8px;
 }
-.program-cost .contract-info p {
+.program-cost .price-info-description p {
   margin: 0;
 }
-.program-cost .contract-info sup {
+.program-cost .price-info-description sup {
   font-size: 18px;
   line-height: inherit;
 }
-.program-cost .contract-info span {
+.program-cost .price-info-description span {
   font-weight: 600;
 }
 .program-cost .prices {

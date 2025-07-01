@@ -5137,12 +5137,10 @@ footer {
         }
     }
 
-    .contract-info {
+    .price-info-description {
         grid-column: span 2;
         opacity: .8;
         position: relative;
-        display: flex;
-        gap: 8px;
 
         p {
             margin: 0;

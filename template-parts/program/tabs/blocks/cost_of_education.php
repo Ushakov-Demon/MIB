@@ -38,9 +38,7 @@ $time_difference     = ! empty( $sale_price_date_end ) ? mib_get_time_difference
 
             if ( ! empty( $cod_description ) ) :
             ?>
-            <div class="contract-info">
-                <sup>*</sup>
-
+            <div class="price-info-description">
                 <?php
                 pll_e( $cod_description, 'baza' );
                 ?>
