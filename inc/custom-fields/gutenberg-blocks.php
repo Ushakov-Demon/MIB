@@ -377,6 +377,44 @@ function custom_posts_gutenberg_blocks() {
                             'singular_name' => 'Result',
                         ) )
                 ) )
+                ->add_fields( 'results_course_multiple', array(
+                    Field::make( 'text', 'results_course_m_title', __( 'Title block' ) ),
+                    Field::make( 'text', 'results_course_m_subtitle', __( 'Small title block' ) ),
+                    Field::make( 'complex', 'results_course_items', __( 'Items' ) )
+                        ->add_fields( array(
+                            Field::make( 'text', 'results_course_item_first_title', __( 'Item top title' ) ),
+                            Field::make( 'rich_text', 'results_course_item_first_part', __( 'Item top content' ) ),
+                            Field::make( 'text', 'results_course_item_second_title', __( 'Item bottom title' ) ),
+                            Field::make( 'rich_text', 'results_course_item_second_part', __( 'Item bottom content' ) ),
+                            Field::make( 'complex', 'results_course_m_short_infos', __( 'Short infos' ) )
+                                ->set_collapsed( true )
+                                ->add_fields( array(
+                                    Field::make( 'image', 'rcm_fact_icon', __( 'Fact icon' ) )
+                                        ->set_width( 20 ),
+                                    Field::make( 'text', 'rcm_fact_name', __( 'Fact name' ) )
+                                        ->set_width( 80 ),
+                                    Field::make( 'textarea', 'rcm_fact_content', __( 'Comtent' ) ),
+                                ) )
+                                ->set_header_template( '
+                                    <% if (rcm_fact_name) { %>
+                                        <%- rcm_fact_name %>
+                                    <% } %>
+                                ' )
+                                ->setup_labels( array(
+                                    'plural_name'   => 'Facts',
+                                    'singular_name' => 'Fact',
+                                ) )
+                        ) )
+                        ->set_header_template( '
+                            <% if (results_course_item_first_title) { %>
+                                <%- results_course_item_first_title %>
+                            <% } %>
+                        ' )
+                        ->setup_labels( array(
+                            'plural_name'   => 'Items',
+                            'singular_name' => 'Item',
+                        ) ),
+                ) )
                 ->add_fields( 'program_content', array(
                     Field::make( 'text', 'program_content_title', __( 'Title' ) ),
                     Field::make( 'text', 'program_content_subtitle', __( 'Subtitle' ) ),
