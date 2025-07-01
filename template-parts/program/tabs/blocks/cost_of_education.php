@@ -45,6 +45,15 @@ $time_difference     = ! empty( $sale_price_date_end ) ? mib_get_time_difference
             </div>
             <?php
             endif;
+            if ( ! empty( $cod_included_in_coast ) ) :
+            ?>
+            <div class="price-info-description">
+                <?php
+                pll_e( $cod_included_in_coast, 'baza' );
+                ?>
+            </div>
+            <?php
+            endif;
             ?>
         </div>
     </div>

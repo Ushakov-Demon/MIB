@@ -256,6 +256,7 @@
     font-display: block;
 }
 
+#accordion-course-results blockquote::before,
 a[href$=".pdf"]::before, 
 a[href$=".doc"]::before, 
 a[href$=".docx"]::before,
@@ -368,6 +369,7 @@ a[href$=".7z"]::before,
     content: "\e917";
 }
 
+#accordion-course-results blockquote::before,
 .icon-info:before {
     content: "\e90f";
 }

@@ -4957,6 +4957,46 @@ footer {
             > * + * {
                 margin-top: var(--block_spacing);
             }
+
+            blockquote {
+                padding: 16px 16px 16px 64px;
+                background-color: var(--color_light_gray_4);
+                margin: 0;
+                position: relative;
+                font-size: 14px;
+
+                &::before {
+                    position: absolute;
+                    left: 16px;
+                    top: 16px;
+                    font-size: 32px;
+                    color: var(--text_color);
+                }
+            }
+        }
+    }
+
+    &.disabled-accordion {
+        border: 0;
+        margin: var(--block_spacing) 0;
+
+        .accordion-content {
+            display: block !important;
+            opacity: 1;
+        }
+
+        .accordion-header {
+            cursor: default;
+
+            &::after {
+                display: none;
+            }
+
+            &:hover {
+                .accordion-title {
+                    color: var(--text_color);
+                }
+            }
         }
     }
     
@@ -5142,6 +5182,10 @@ footer {
         opacity: .8;
         position: relative;
 
+        > *:first-child {
+            margin-top: 0;
+        }
+
         p {
             margin: 0;
         }
@@ -5211,6 +5255,137 @@ footer {
 
         .price-label {
             order: 10;
+        }
+    }
+}
+
+.program-results-course-multiple {
+    margin: var(--block_spacing) 0;
+
+    .program-results-course-multiple-title {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        .title {
+            margin: 0;
+        }
+
+        margin-bottom: var(--block_spacing);
+    }
+
+    .program-results-courses {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+
+        .item {
+            background-color: var(--color_light_gray_4);
+            padding: 40px 32px;
+
+            > * {
+                margin-bottom: 32px;
+
+                &:first-child {
+                    margin-top: 0;
+                }
+            }
+        }
+    }
+
+    .short-info {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        margin-top: var(--block_spacing);
+        margin-bottom: 0 !important;
+
+        @include mobile {
+            display: flex;
+            flex-direction: column;
+            margin-top: calc(var(--block_spacing) / 2);
+        }
+
+        .short-info-item {
+            display: grid;
+            grid-template-columns: 32px 1fr;
+            gap: 12px;
+            padding-right: var(--block_spacing);
+
+            @include mobile {
+                padding: calc(var(--block_spacing) / 2) 0;
+                border-bottom: 1px solid rgba(0, 0, 0, .05);
+            }
+
+            &:nth-child(even) {
+                border-left: 1px solid rgba(0, 0, 0, .05);
+                padding-left: var(--block_spacing);
+                padding-right: 0;
+
+                @include mobile {
+                    padding-left: 0;
+                }
+            }
+
+            &:last-child {
+                @include mobile {
+                    border: 0;
+                    padding-bottom: 0;
+                }
+            }
+
+            .short-info-text {
+                .short-info-name {
+                    opacity: .4;
+                    margin-bottom: 4px;
+                }
+            }
+        }
+    }
+
+    .accordion-item {
+        border: 0;
+
+        .accordion-header {
+            padding: 0;
+            cursor: pointer;
+
+            .accordion-title {
+                font-size: 18px;
+            }
+        }
+
+        .accordion-content {
+            padding-top: calc(var(--block_spacing) / 2);
+        }
+    }
+}
+
+.program-diplomas-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+
+    @include mobile {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .item {
+        padding: 32px;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        transition: all .5s ease;
+        font-size: var(--font_size_h4);
+        font-weight: 600;
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+
+        * {
+            transition: all .5s ease;
+        }
+
+        &:hover {
+            border-color: var(--color_primary);
         }
     }
 }

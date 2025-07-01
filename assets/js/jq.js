@@ -596,7 +596,7 @@ jQuery(document).ready(function ($) {
 
 	function handleAccordion() {
 		$('.accordion-header').click(function () {
-			let item = $(this).closest('.accordion-item');
+			let item = $(this).closest('.accordion-item:not(.disabled-accordion)');
 			let text = item.find('.accordion-content');
 			let openAccordions = JSON.parse(localStorage.getItem('openAccordions')) || [];
 

@@ -345,6 +345,8 @@ function custom_posts_gutenberg_blocks() {
                         ->set_width( 100 ),
                     Field::make( 'checkbox', 'results_course_show_accreditation', __( 'Add Accreditations List' ) )
                         ->set_default_value( 'no' ),
+                    Field::make( 'checkbox', 'results_course_disable_accordion', __( 'Disable Accordion' ) )
+                        ->set_default_value( 'no' ),
                         
                     Field::make( 'image', 'results_course_block_image', __( 'Bottom image block' ) )
                         ->set_width( 25 ),
@@ -357,6 +359,11 @@ function custom_posts_gutenberg_blocks() {
                             Field::make( 'text', 'diplom_title', __( 'Title' ) )
                                 ->set_width( 75 ),
                         ) )
+                        ->set_header_template( '
+                            <% if (diplom_title) { %>
+                                <%- diplom_title %>
+                            <% } %>
+                        ' )
                         ->setup_labels( array(
                             'plural_name'   => 'Diplomas',
                             'singular_name' => 'Diploma',

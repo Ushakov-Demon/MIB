@@ -1,9 +1,11 @@
 <?php
 $has_accreditation = isset( $results_course_show_accreditation ) && "yes" == $results_course_show_accreditation; 
+$disable_accordion = isset( $results_course_disable_accordion ) && "yes" == $results_course_disable_accordion; 
+$accordion_class   = $disable_accordion ? 'disabled-accordion' : '';
 $post_id           = get_the_ID();
 ?>
 
-<div class="accordion-item" id="accordion-course-results">
+<div class="accordion-item <?php echo $accordion_class; ?>" id="accordion-course-results">
     <div class="accordion-header">
         <?php
         if ( ! empty( $results_course_title ) ) :
@@ -27,6 +29,22 @@ $post_id           = get_the_ID();
         <?php
         endif;
         ?>
+
+        <?php 
+        if ( ! empty( $results_diplomas ) && is_array( $results_diplomas ) ) :
+        ?>
+        <div class="program-diplomas-list">
+            <?php foreach ( $results_diplomas as $diploma ) : 
+                $diplom_url = $diploma['diplom_url'] ?? '';
+                $diplom_title = $diploma['diplom_title'] ?? '';
+            ?>
+            <a class="item" href="<?php echo esc_url( get_permalink( $diplom_url ) ); ?>">
+                <span class="name"><?php echo esc_html( $diplom_title ); ?></span>
+                <span class="show-more-link"><?php pll_e('Show more'); ?></span>
+            </a>
+            <?php endforeach; ?>
+        </div>
+        <?php endif; ?>
 
         <?php 
             if ( $has_accreditation ) :
