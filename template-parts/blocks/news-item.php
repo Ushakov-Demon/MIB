@@ -45,6 +45,10 @@ $image_alt = get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true) ?: $
                 <span class="category">
                     <?php pll_e('News', 'baza'); ?>
                 </span>
+
+                <div class="date">
+                    <?php echo esc_html( get_the_date( '', $post_ID ) ); ?>
+                </div>
         <?php endif; ?>
     </div>
     

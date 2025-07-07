@@ -119,7 +119,8 @@ function custom_posts_gutenberg_blocks() {
                 ->add_fields( array(
                     Field::make( 'text', 'button_text', __( 'Button text' ) )
                         ->set_width( 50 ),
-                    Field::make( 'text', 'button_link', __( 'Button link' ) )
+                    Field::make( 'select', 'button_link', __( 'Button link' ) )
+                        ->add_options( $pages_options )
                         ->set_width( 50 ),
                 ) ),
         ) )

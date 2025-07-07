@@ -60,57 +60,57 @@ if ( empty( $results_course_items ) && empty( $results_course_m_title ) ) {
                 ?>
                 <div class="accordion-content">
                     <?php
-                        pll_e( $item['results_course_item_second_part'], 'baza' );
-                    ?>
-                </div>
-            </div>
-            <?php
-            endif;
+                    pll_e( $item['results_course_item_second_part'], 'baza' );
 
-            if ( ! empty( $item['results_course_m_short_infos'] ) ) :
-            ?>
-            <div class="short-info">
-                <?php
-                foreach( $item['results_course_m_short_infos'] as $info_item ) :
-                ?>
-                <div class="short-info-item">
-                    <?php
-                    if ( ! empty( $info_item['rcm_fact_icon'] ) ) :
-                        $icon_src = esc_url( wp_get_attachment_image_url( $info_item['rcm_fact_icon'] ) );
+                    if ( ! empty( $item['results_course_m_short_infos'] ) ) :
                     ?>
-                    <div class="short-info-image">
-                        <img src="<?php echo $icon_src?>" alt="<?php pll_e( $info_item['rcm_fact_name'], 'baza' ); ?>">
-                    </div>
-                    <?php
-                    endif;
-                    ?>
-                    <div class="short-info-text">
-                    <?php
-                    if ( ! empty( $info_item['rcm_fact_name'] ) ) :
-                    ?>
-                    <div class="short-info-name">
+                    <div class="short-info">
                         <?php
-                        pll_e( $info_item['rcm_fact_name'], 'baza' );
+                        foreach( $item['results_course_m_short_infos'] as $info_item ) :
+                        ?>
+                        <div class="short-info-item">
+                            <?php
+                            if ( ! empty( $info_item['rcm_fact_icon'] ) ) :
+                                $icon_src = esc_url( wp_get_attachment_image_url( $info_item['rcm_fact_icon'] ) );
+                            ?>
+                            <div class="short-info-image">
+                                <img src="<?php echo $icon_src?>" alt="<?php pll_e( $info_item['rcm_fact_name'], 'baza' ); ?>">
+                            </div>
+                            <?php
+                            endif;
+                            ?>
+                            <div class="short-info-text">
+                            <?php
+                            if ( ! empty( $info_item['rcm_fact_name'] ) ) :
+                            ?>
+                            <div class="short-info-name">
+                                <?php
+                                pll_e( $info_item['rcm_fact_name'], 'baza' );
+                                ?>
+                            </div>
+                            <?php
+                            endif;
+
+                            if ( ! empty( $info_item['rcm_fact_content'] ) ):
+                            ?>
+                            <p>
+                                <?php
+                                pll_e( $info_item['rcm_fact_content'], 'baza' );
+                                ?>
+                            </p>
+                            <?php
+                            endif;
+                            ?>
+                            </div>
+                        </div>
+                        <?php
+                        endforeach;
                         ?>
                     </div>
                     <?php
                     endif;
-
-                    if ( ! empty( $info_item['rcm_fact_content'] ) ):
                     ?>
-                    <p>
-                        <?php
-                        pll_e( $info_item['rcm_fact_content'], 'baza' );
-                        ?>
-                    </p>
-                    <?php
-                    endif;
-                    ?>
-                    </div>
                 </div>
-                <?php
-                endforeach;
-                ?>
             </div>
             <?php
             endif;

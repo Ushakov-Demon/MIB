@@ -6,8 +6,10 @@ $offset  = is_admin_bar_showing() ? 196 : 164;
 if ( empty( $free_content ) && empty( $program_missions ) ) {
     return;
 }
+
+$is_sidebar = ( !empty( $units[0]['unit_modules'] ) || !empty( $program_missions ) );
 ?>
-<div class="program-content-row">
+<div class="program-content-row<?php if ( $is_sidebar ) : ?> issidebar<?php endif; ?>">
     <?php
     if ( ! empty( $free_content ) ) :
     ?>
@@ -16,13 +18,13 @@ if ( empty( $free_content ) && empty( $program_missions ) ) {
         echo $free_content;
         ?>
     </div>
+    <?php
+    endif;
+    ?>
 
-    <div class="program-sidebar">
+    <?php if ( $is_sidebar ) : ?><div class="program-sidebar"><?php endif; ?>
 
-        <?php
-        endif;
-    
-        if ( !empty( $units[0]['unit_modules'] ) ) : ?>
+        <?php if ( !empty( $units[0]['unit_modules'] ) ) : ?>
 
             <div class="units">
 
@@ -65,6 +67,7 @@ if ( empty( $free_content ) && empty( $program_missions ) ) {
             <?php
             endforeach; ?>
         </div>
+
         <?php 
         endif; 
 
@@ -79,5 +82,5 @@ if ( empty( $free_content ) && empty( $program_missions ) ) {
         endif;
         ?>
 
-    </div>
+    <?php if ( $is_sidebar ) : ?></div><?php endif; ?>
 </div>

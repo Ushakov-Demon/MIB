@@ -13,6 +13,11 @@ $alternating_posts        = mib_get_alternating_posts( $actuality_posts_per_page
 
 		<section class="section section-single">
 			<div class="container">
+
+                <div class="date">
+                    <?php echo esc_html( get_the_date() ); ?>
+                </div>
+
 				<h1><?php the_title(); ?></h1>
 				
 				<?php if (has_post_thumbnail()) : ?>

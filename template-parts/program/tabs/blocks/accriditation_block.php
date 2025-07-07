@@ -23,9 +23,9 @@ foreach ( $accriditations as $item ) :
     if ( ! empty( $logo_id ) ) :
         $logo_url = wp_get_attachment_image_url( $logo_id, 'full' );
         ?>
-        <div class="logo">
+        <!-- <div class="logo">
             <img src="<?php echo esc_url( $logo_url ) ?>" alt="<?php echo esc_attr( $name ) ?>" class="accreditation-logo">
-        </div>
+        </div> -->
         <?php
     endif;
     ?>

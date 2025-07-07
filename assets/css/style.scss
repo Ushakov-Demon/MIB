@@ -2125,6 +2125,10 @@ footer {
         color: var(--color_secondary);
         border-bottom: 1px solid var(--color_light_gray_3);
 
+        .date {
+            margin-bottom: calc(var(--block_spacing) / 2);
+        }
+
         @include mobile {
             padding-top: 32px;
             padding-bottom: 32px;
@@ -4659,9 +4663,16 @@ footer {
 }
 
 .program-content-row {
-    display: grid;
-    grid-template-columns: 60% 1fr;
+    display: flex;
+    flex-direction: column;
     gap: var(--block_spacing);
+
+    @include min1200 {
+        &.issidebar {
+            display: grid;
+            grid-template-columns: 60% 1fr;
+        }
+    }
 
     + .accordion-item {
         margin-top: var(--block_spacing);
@@ -5296,6 +5307,10 @@ footer {
                 &:first-child {
                     margin-top: 0;
                 }
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
             }
         }
     }
@@ -5305,6 +5320,7 @@ footer {
         grid-template-columns: repeat(2, 1fr);
         margin-top: var(--block_spacing);
         margin-bottom: 0 !important;
+        gap: var(--gap_m) 0;
 
         @include mobile {
             display: flex;
