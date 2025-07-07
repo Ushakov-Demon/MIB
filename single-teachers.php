@@ -10,6 +10,9 @@ $position  = get_post_meta( $post_ID, '_positions_in_companies', true );
 $courses   = apply_filters( 'mib_get_posts_relationships', array( 'post_type' => 'teachers', 'post_id' => $post_ID, 'field' => 'tr_program_teachers' ) );
 $companies = get_the_terms( $post_ID, 'companies' );
 
+$main_bottom_text = '';
+$main_bottom_second_text = '';
+
 $main_top_heading_text = false;
 $main_top_version      = 'white version-teachers';
 
@@ -25,7 +28,7 @@ if ( ! empty( $companies ) && ! is_wp_error( $companies ) ) {
 
     foreach ( $companies as $company ) {
         $company_logo_id = get_term_meta( $company->term_id, '_company_logo', true );
-        $logo_src = wp_get_attachment_image_url( $company_logo_id );
+        $logo_src = wp_get_attachment_image_url( $company_logo_id, 'full' );
 
         if ( $logo_src ) {
             $main_bottom_text .= '<img src="' . esc_url( $logo_src ) . '" alt="' . esc_attr( $company->name ) . '">';

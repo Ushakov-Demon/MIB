@@ -70,8 +70,10 @@ add_action('wp_enqueue_scripts', 'remove_filter_everything_styles', 100);
 add_action('wp_print_styles', 'remove_filter_everything_styles', 100);
 
 function disable_mobile_zoom() {
-    remove_action('wpseo_head', array(YoastSEO()->meta, 'viewport'), 1);
-    add_action('wp_head', 'add_custom_viewport_meta', 1);
+    if (class_exists('WPSEO_Options') || function_exists('YoastSEO')) {
+        remove_action('wpseo_head', array(YoastSEO()->meta, 'viewport'), 1);
+        add_action('wp_head', 'add_custom_viewport_meta', 1);
+    }
 }
 add_action('wp', 'disable_mobile_zoom');
 

@@ -20,6 +20,9 @@ $activity          = get_post_meta( $post_ID, '_st_activity', true );
 $status            = get_post_meta( $post_ID, '_st_status', true );
 $city              = get_post_meta( $post_ID, '_st_city', true );
 
+$main_bottom_text = '';
+$main_bottom_second_text = '';
+
 $main_top_heading_text = false;
 $main_top_version      = 'white version-teachers';
 

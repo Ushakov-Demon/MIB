@@ -450,26 +450,26 @@ jQuery(document).ready(function ($) {
 
 					let newItems = section.find('.more-posts').prev();
                 
-					if (newItems.length) {
-						let tempId = 'temp-scroll-target-' + Math.floor(Math.random() * 10000);
-						newItems.attr('id', tempId);
+					// if (newItems.length) {
+					// 	let tempId = 'temp-scroll-target-' + Math.floor(Math.random() * 10000);
+					// 	newItems.attr('id', tempId);
 						
-						if ($.mPageScroll2id && typeof $.mPageScroll2id === 'function') {
-							$.mPageScroll2id('scrollTo', '#' + tempId, {
-								offset: 100,
-								speed: 1500,
-								easing: 'easeOutQuint'
-							});
-						} else {
-							$('html, body').animate({
-								scrollTop: newItems.offset().top - 100
-							}, 1500);
-						}
+					// 	if ($.mPageScroll2id && typeof $.mPageScroll2id === 'function') {
+					// 		$.mPageScroll2id('scrollTo', '#' + tempId, {
+					// 			offset: 100,
+					// 			speed: 1500,
+					// 			easing: 'easeOutQuint'
+					// 		});
+					// 	} else {
+					// 		$('html, body').animate({
+					// 			scrollTop: newItems.offset().top - 100
+					// 		}, 1500);
+					// 	}
 						
-						setTimeout(function() {
-							newItems.removeAttr('id');
-						}, 2000);
-					}
+					// 	setTimeout(function() {
+					// 		newItems.removeAttr('id');
+					// 	}, 2000);
+					// }
 					
 					if (pageNum >= maxPages - 1) {
 						section.find('.more-posts').hide();
@@ -632,8 +632,8 @@ jQuery(document).ready(function ($) {
 	handleAccordion();
 
 	function initTabs() {
-		const storageKey = 'tabsHistory';
-		const maxHistorySize = 50;
+		const pageIdentifier = window.location.pathname + window.location.search;
+		const lastActiveTabKey = 'lastActiveTab_' + btoa(pageIdentifier).replace(/[^a-zA-Z0-9]/g, '');
 
 		$('.tabs li a, .program-content-all a, .unit-module-link').on('click', function(e) {
 			e.preventDefault();
@@ -677,97 +677,37 @@ jQuery(document).ready(function ($) {
 
 		function checkHashOnLoad() {
 			const hash = window.location.hash.replace('#', '');
+			
 			if (hash) {
 				triggerTabClick(hash);
 			} else {
-				const lastActiveTab = getLastActiveTab();
-				if (lastActiveTab) {
-					triggerTabClick(lastActiveTab);
-				} else {
-					const firstTab = $('.tabs li:first-child a').attr('href').replace('#', '');
-					activateTab(firstTab, true);
+				const firstTab = $('.tabs li:first-child a').attr('href');
+				if (firstTab) {
+					const firstTabId = firstTab.replace('#', '');
+					activateTab(firstTabId, true);
 				}
 			}
 		}
 
 		function saveTabAction(tabId) {
 			try {
-				let history = getTabsHistory();
-				
-				history.unshift(tabId);
-
-				if (history.length > maxHistorySize) {
-					history = history.slice(0, maxHistorySize);
-				}
-
-				localStorage.setItem(storageKey, JSON.stringify(history));
-				localStorage.setItem('lastActiveTab', tabId);
-				
+				localStorage.setItem(lastActiveTabKey, tabId);
 			} catch (error) {}
-		}
-
-		function getTabsHistory() {
-			try {
-				const history = localStorage.getItem(storageKey);
-				return history ? JSON.parse(history) : [];
-			} catch (error) {
-				return [];
-			}
 		}
 
 		function getLastActiveTab() {
 			try {
-				return localStorage.getItem('lastActiveTab');
+				return localStorage.getItem(lastActiveTabKey);
 			} catch (error) {
 				return null;
 			}
 		}
 
 		window.tabsManager = {
-			getHistory: function() {
-				return getTabsHistory();
-			},
-
-			getHistoryByDate: function(startDate, endDate) {
-				return [];
-			},
-
-			getTabsStats: function() {
-				const history = getTabsHistory();
-				const stats = {};
-				
-				history.forEach(tabId => {
-					if (stats[tabId]) {
-						stats[tabId]++;
-					} else {
-						stats[tabId] = 1;
-					}
-				});
-				
-				return stats;
-			},
-
 			clearHistory: function() {
 				try {
-					localStorage.removeItem(storageKey);
-					localStorage.removeItem('lastActiveTab');
+					localStorage.removeItem(lastActiveTabKey);
 				} catch (error) {}
-			},
-
-			exportHistory: function() {
-				const history = getTabsHistory();
-				const dataStr = JSON.stringify(history, null, 2);
-				const dataBlob = new Blob([dataStr], {type: 'application/json'});
-				
-				const link = document.createElement('a');
-				link.href = URL.createObjectURL(dataBlob);
-				link.download = 'tabs-history-' + new Date().toISOString().split('T')[0] + '.json';
-				link.click();
-			},
-
-			getRecentActions: function(count = 10) {
-				const history = getTabsHistory();
-				return history.slice(0, count);
 			}
 		};
 	}

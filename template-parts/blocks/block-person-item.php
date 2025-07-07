@@ -53,7 +53,7 @@ if ( empty( $image_id ) ) {
 
         if ( $company && ! is_wp_error( $company ) ) :
             $company_logo_id = get_term_meta( $company->term_id, '_company_logo', true );
-            $logo_src = wp_get_attachment_image_url( $company_logo_id );
+            $logo_src = wp_get_attachment_image_url( $company_logo_id, 'full' );
             
             if ( $logo_src ) : ?>
                 <div class="logo">
@@ -82,7 +82,13 @@ if ( empty( $image_id ) ) {
             if ( ! empty( $courses ) ) :
                 ?>
                 <div class="label">
-                    <?php pll_e( 'man' == $gender ? 'Completed' : 'She graduated', 'baza' ); ?>:
+                    <?php 
+                        if (isset($gender)) {
+                            pll_e('man' == $gender ? 'Completed' : 'She graduated', 'baza');
+                        } else {
+                            pll_e('Completed', 'baza');
+                        }
+                    ?>
                 </div>
 
                 <div class="completed-items">

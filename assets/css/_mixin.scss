@@ -305,8 +305,9 @@
                 svg,
                 img {
                     display: block;
-                    height: 30px;
-                    max-width: 122px;
+                    height: auto;
+                    width: 100%;
+                    max-width: 100px;
                 }
             }
         }
@@ -320,6 +321,9 @@
             .completed {
                 @include desktop {
                     padding-left: 120px;
+                    flex-direction: row;
+                    align-items: center;
+                    gap: 16px;
                 }
             }
 

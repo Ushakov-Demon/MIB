@@ -11,7 +11,7 @@ if ( ! empty( $cousre_companies_title ) && isset( $cousre_companies_list ) && em
         </div>
     </div>
     <div class="accordion-content">
-        <div class="program-clients">
+        <div class="program-company">
             <div class="items">
             <?php
             foreach ( $cousre_companies_list as $item ) :

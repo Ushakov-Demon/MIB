@@ -18,7 +18,14 @@ if (!empty($first_name) && !empty($last_name)) {
 }
 
 $author_position = get_the_author_meta('description');
-$author_avatar = get_avatar_url($author_id, array('size' => 200));
+
+$user_logo_id = get_user_meta($author_id, 'user_logo', true);
+if ($user_logo_id) {
+    $author_avatar = wp_get_attachment_image_url($user_logo_id, 'thumbnail');
+} else {
+    $author_avatar = get_avatar_url($author_id, array('size' => 200));
+}
+
 $author_url = get_the_author_meta('user_url');
 $has_valid_url = !empty($author_url) && filter_var($author_url, FILTER_VALIDATE_URL);
 ?>

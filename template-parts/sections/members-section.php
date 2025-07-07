@@ -1,6 +1,6 @@
 <?php
 
-$members_query = apply_filters('mib_get_posts', 'members', -1);
+$members_query = mib_get_posts('members', -1);
 
 if ($members_query->have_posts()) : 
     ?>

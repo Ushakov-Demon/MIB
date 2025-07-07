@@ -1283,7 +1283,7 @@ ol.wp-block-list li::marker {
 @media (max-width: 767px) {
   :root {
     --container_padding: 24px;
-    --header_height: 88px;
+    --header_height: 80px;
     --font_size_h1: 21px;
   }
 }
@@ -3559,6 +3559,11 @@ footer .footer-after .footer-after-col {
   color: var(--color_white);
   margin: 0;
 }
+@media (min-width: 1200px) {
+  .section.section-main.version-home .section-title {
+    font-size: 50px;
+  }
+}
 .section.section-main.version-home .section-title span {
   color: var(--color_primary);
 }
@@ -3962,6 +3967,9 @@ footer .footer-after .footer-after-col {
   color: var(--color_white);
   font-size: 16px;
 }
+.section.section-main.version-students, .section.section-main.version-teachers {
+  padding-bottom: var(--block_spacing);
+}
 .section.section-main.version-students .content-header, .section.section-main.version-teachers .content-header {
   display: grid;
   grid-template-columns: 160px 1fr;
@@ -4009,7 +4017,7 @@ footer .footer-after .footer-after-col {
 }
 .section.section-main.version-students .logos img, .section.section-main.version-teachers .logos img {
   width: auto;
-  height: 30px;
+  height: 40px;
 }
 .section.section-main.version-students .completed, .section.section-main.version-teachers .completed {
   gap: 16px;
@@ -4991,8 +4999,9 @@ footer .footer-after .footer-after-col {
 .section.section-teachers .items .item .heading .logo img, .section.section-students .items .item .heading .logo svg,
 .section.section-students .items .item .heading .logo img {
   display: block;
-  height: 30px;
-  max-width: 122px;
+  height: auto;
+  width: 100%;
+  max-width: 100px;
 }
 .section.section-teachers .items .item .item-footer, .section.section-students .items .item .item-footer {
   display: flex;
@@ -5003,6 +5012,9 @@ footer .footer-after .footer-after-col {
 @media (min-width: 768px) {
   .section.section-teachers .items .item .item-footer .completed, .section.section-students .items .item .item-footer .completed {
     padding-left: 120px;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
   }
 }
 .section.section-teachers .items .item .item-footer .label, .section.section-students .items .item .item-footer .label {
@@ -5283,7 +5295,7 @@ footer .footer-after .footer-after-col {
 .section.section-event-plan .items .item .item-content .heading .logo svg,
 .section.section-event-plan .items .item .item-content .heading .logo img {
   display: block;
-  height: 30px;
+  height: 40px;
   max-width: 122px;
 }
 .section.section-event-plan .items .item .item-content .item-footer {
@@ -6839,34 +6851,34 @@ footer .footer-after .footer-after-col {
   }
 }
 
-.program-clients .items {
+.program-company .items {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 32px;
 }
 @media (min-width: 768px) and (max-width: 1024px) {
-  .program-clients .items {
+  .program-company .items {
     grid-template-columns: repeat(4, 1fr);
   }
 }
 @media (max-width: 767px) {
-  .program-clients .items {
+  .program-company .items {
     grid-template-columns: repeat(3, 1fr);
   }
 }
-.program-clients .items a:hover {
+.program-company .items a:hover {
   color: var(--color_primary);
 }
-.program-clients .items .item {
+.program-company .items .item {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
-.program-clients .items .item:hover .image img {
+.program-company .items .item:hover .image img {
   filter: grayscale(0);
   opacity: 1;
 }
-.program-clients .items .item .image {
+.program-company .items .item .image {
   background-color: var(--color_light_gray_4);
   display: block;
   display: flex;
@@ -6875,14 +6887,14 @@ footer .footer-after .footer-after-col {
   padding: 16px;
   min-height: 100px;
 }
-.program-clients .items .item .image img {
+.program-company .items .item .image img {
   width: auto;
   height: auto;
   filter: grayscale(100%);
   transition: all 0.5s ease;
   opacity: 0.5;
 }
-.program-clients .items .item .name {
+.program-company .items .item .name {
   text-align: center;
   font-size: 15px;
 }
@@ -7007,8 +7019,9 @@ footer .footer-after .footer-after-col {
 .program-graduates .items .item .heading .logo svg,
 .program-graduates .items .item .heading .logo img {
   display: block;
-  height: 30px;
-  max-width: 122px;
+  height: auto;
+  width: 100%;
+  max-width: 100px;
 }
 .program-teachers .items .item .item-footer,
 .program-graduates .items .item .item-footer {
@@ -7021,6 +7034,9 @@ footer .footer-after .footer-after-col {
   .program-teachers .items .item .item-footer .completed,
   .program-graduates .items .item .item-footer .completed {
     padding-left: 120px;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
   }
 }
 .program-teachers .items .item .item-footer .label,
@@ -7785,8 +7801,9 @@ footer .footer-after .footer-after-col {
 .search-container .search-teachers-items .item .heading .logo svg,
 .search-container .search-teachers-items .item .heading .logo img {
   display: block;
-  height: 30px;
-  max-width: 122px;
+  height: auto;
+  width: 100%;
+  max-width: 100px;
 }
 .search-container .search-students-items .item .item-footer,
 .search-container .search-teachers-items .item .item-footer {
@@ -7799,6 +7816,9 @@ footer .footer-after .footer-after-col {
   .search-container .search-students-items .item .item-footer .completed,
   .search-container .search-teachers-items .item .item-footer .completed {
     padding-left: 120px;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
   }
 }
 .search-container .search-students-items .item .item-footer .label,
@@ -7991,6 +8011,11 @@ footer .footer-after .footer-after-col {
 .container-teacher .content > *:not(.single-header),
 .container-member .content > *:not(.single-header) {
   margin: var(--block_spacing) 0;
+}
+.container-student .content > *:first-child,
+.container-teacher .content > *:first-child,
+.container-member .content > *:first-child {
+  margin-top: 0;
 }
 .container-student .content .wp-block-list,
 .container-teacher .content .wp-block-list,

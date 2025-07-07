@@ -75,7 +75,7 @@
 
     @include mobile {
         --container_padding: 24px;
-        --header_height: 88px;
+        --header_height: 80px;
 
         --font_size_h1: 21px;
     }
@@ -2320,6 +2320,10 @@ footer {
             .section-title {
                 color: var(--color_white);
                 margin: 0;
+
+                @include min1200 {
+                    font-size: 50px;
+                }
     
                 span {
                     color: var(--color_primary);
@@ -2668,7 +2672,7 @@ footer {
                 margin-bottom: 0;
 
                 .section-title {
-                        font-size: calc(var(--font_size_h1) + 20px);
+                    font-size: calc(var(--font_size_h1) + 20px);
                 }
             }
 
@@ -2789,6 +2793,9 @@ footer {
 
         &.version-students,
         &.version-teachers {
+
+            padding-bottom: var(--block_spacing);
+
             .content-header {
                 display: grid;
                 grid-template-columns: 160px 1fr;
@@ -2837,7 +2844,7 @@ footer {
 
                 img {
                     width: auto;
-                    height: 30px;
+                    height: 40px;
                 }
             }
 
@@ -3804,7 +3811,7 @@ footer {
                             svg,
                             img {
                                 display: block;
-                                height: 30px;
+                                height: 40px;
                                 max-width: 122px;
                             }
                         }
@@ -5485,7 +5492,7 @@ footer {
     }
 }
 
-.program-clients {
+.program-company {
     .items {
         display: grid;
         grid-template-columns: repeat(6, 1fr);
@@ -6032,6 +6039,10 @@ footer {
 
         > *:not(.single-header) {
             margin: var(--block_spacing) 0;
+        }
+
+        > *:first-child {
+            margin-top: 0;
         }
 
         .wp-block-list {
