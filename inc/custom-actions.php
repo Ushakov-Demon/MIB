@@ -27,7 +27,7 @@ function mib_get_posts( $post_type = 'post', int $per_page = 0, int $page = 1, a
     $posts_q_args = [
         'post_type'      => $post_type,
         'post_status'    => $post_status,
-        'orderby'       => 'date',
+        'orderby'        => 'date',
         'order'          => 'DESC',
         'posts_per_page' => $per_page,
         'paged'          => $page,
