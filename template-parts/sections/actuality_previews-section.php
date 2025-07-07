@@ -42,7 +42,7 @@ if ( "mixed" == $actuality_post_type ) {
 }
 
 $max_num_pages    = $alternating_posts['max_num_pages'];
-$current_page_num = $alternating_posts['page'] ?? 2;
+$current_page_num = $alternating_posts['page'] ?? 1;
 ?>
 
 <section class="section section-news<?php echo esc_attr( $pagination_class )?>"

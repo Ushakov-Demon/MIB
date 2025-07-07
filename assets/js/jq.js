@@ -418,7 +418,7 @@ jQuery(document).ready(function ($) {
 		perPage 	= section.data('per-page');
 		maxPages 	= section.data('max-pages');
 		pageNum 	= section.data('current-page_num');
-		nextPageNum = parseInt( pageNum )+1;
+		nextPageNum = parseInt( pageNum );
 		isPaginavi 	= section.hasClass('pagination');
 		filterCats  = {
 				'term' : section.data('q-terms'),
