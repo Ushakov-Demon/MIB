@@ -5,7 +5,7 @@ if ( ! $has_listeners ) {
 ?>
 <div id="listeners" class="tab-content">
     <?php
-    if ( 'yes' == $use_course_listeners ) :
+    if ( 'no' != $use_course_listeners ) :
         if ( ! empty( $listenrs_block_content ) ) : ?>
             <div class="program-listeners-desctiprion">
                 <?php echo $listenrs_block_content; ?>

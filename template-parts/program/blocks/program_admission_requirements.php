@@ -1,5 +1,5 @@
 <?php
-if ( 'yes' == $use_admission_conditions &&  empty( $conditions_list ) ||
+if ( 'no' != $use_admission_conditions &&  empty( $conditions_list ) ||
      'no' == $use_admission_conditions && empty( $admission_requirements_tab_content )  ) {
         return;
      }
@@ -7,7 +7,7 @@ if ( 'yes' == $use_admission_conditions &&  empty( $conditions_list ) ||
 <div id="admission-requirements" class="tab-content">
     <div class="program-admission-requirements">
         <?php
-        if ( 'yes' == $use_admission_conditions &&  ! empty( $conditions_list ) ):
+        if ( 'no' != $use_admission_conditions &&  ! empty( $conditions_list ) ):
 
             if( ! empty( $conditions_block_title ) ) :
                 ?>
