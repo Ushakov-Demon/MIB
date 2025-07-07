@@ -100,7 +100,8 @@ function custom_posts_gutenberg_blocks() {
                     )
                 ) )    
                 ->set_width( 50 ),
-            Field::make( 'text', 'main_bottom_button_link', __( 'Button link' ) )
+            Field::make( 'select', 'main_bottom_button_link', __( 'Button link' ) )
+            ->add_options( $pages_options )
             ->set_conditional_logic( array(
                 'relation' => 'OR',
                 array(
