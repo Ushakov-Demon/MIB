@@ -944,3 +944,24 @@ function cf7_redirect_jquery_script() {
     <?php
 }
 add_action('wp_footer', 'cf7_redirect_jquery_script');
+
+function disable_admin_bar_on_mobile() {
+    if (wp_is_mobile()) {
+        show_admin_bar(false);
+    }
+}
+add_action('init', 'disable_admin_bar_on_mobile');
+
+function add_events_landing_body_class( $classes ) {
+    if ( is_single() && get_post_type() === 'events' ) {
+        global $post;
+        $is_landing = carbon_get_post_meta( $post->ID, 'event_landing' );
+        
+        if ( $is_landing ) {
+            $classes[] = 'single-event-landing';
+        }
+    }
+    
+    return $classes;
+}
+add_filter( 'body_class', 'add_events_landing_body_class' );

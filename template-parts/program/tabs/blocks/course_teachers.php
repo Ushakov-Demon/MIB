@@ -38,7 +38,7 @@ if ( empty( $teachers ) ) {
         </div>
 
         <div class="program-content-all">
-            <a href="<?php echo get_permalink( 20 ) ?>" class="show-more-link" target="_blank"><?php echo pll__('View all teachers'); ?></a>
+            <a href="<?php echo get_permalink(); ?>#teachers" class="show-more-link skip-scroll"><?php echo pll__('View all teachers'); ?></a>
         </div>
     </div>
 </div>

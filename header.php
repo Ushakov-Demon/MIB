@@ -9,6 +9,12 @@
 	if( function_exists( 'pll_current_language' ) ) {
 		$current_lang = pll_current_language();
 	}
+
+	$is_disable_header = carbon_get_post_meta( $page_id, 'disable_header' );
+
+	if ( $is_disable_header ) {
+		$body_class .= ' disable-header';
+	}
 ?>
 
  <!doctype html>
@@ -23,6 +29,8 @@
  <?php wp_body_open(); ?>
 
  <div id="page" class="site">
+
+	<?php if ( ! $is_disable_header ) : ?>
 	 
 	 <header class="site-header">
 
@@ -107,4 +115,6 @@
  
 		 </div>
 	 </header>
+
+	<?php endif; ?>
  

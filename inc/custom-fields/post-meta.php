@@ -185,11 +185,13 @@ function custom_posts_meta_data() {
         ->add_fields( array(
             Field::make( 'date_time', 'event_shedule_date', __( 'Choice date and time' ) ),
             Field::make( 'select', 'event_format', __( 'Online || Offline' ) )
-            ->set_width( 25 )
             ->add_options( array(
                 'online'  => __( 'Online' ),
                 'offline' => __( 'Offline' ),
-            ) )
+            ) ),
+            Field::make( 'checkbox', 'event_landing', __( 'Is Landing Page' ) ),
+            Field::make( 'checkbox', 'disable_header', __( 'Disable Header?' ) ),
+            Field::make( 'checkbox', 'disable_footer', __( 'Disable Footer?' ) )
     ) );
 
     Container::make( 'post_meta', __( 'Event data' ) )
@@ -197,11 +199,14 @@ function custom_posts_meta_data() {
         ->add_fields( array(
             // About talk block
             Field::make( 'separator', 'about_talk_sep', __( 'About talk' ) ),
-            Field::make( 'textarea', 'about_talk_title', __( 'Title block' ) ),
+            Field::make( 'text', 'about_talk_title', __( 'Title block' ) ),
+            Field::make( 'rich_text', 'about_talk_text', __( 'Text block' ) ),
             Field::make( 'complex', 'about_talk_list', __( 'Topics' ) )
                 ->set_collapsed( true )
                 ->add_fields( array(
-                    Field::make( 'text', 'about_talk_topic', __( 'Single topic' ) )
+                    Field::make( 'image', 'about_talk_topic_icon', __( 'Single topic icon' ) ),
+                    Field::make( 'text', 'about_talk_topic', __( 'Single topic' ) ),
+                    Field::make( 'rich_text', 'about_talk_topic_text', __( 'Single topic text' ) )
                 ) )
                 ->set_header_template( '
                     <% if (about_talk_topic) { %>
@@ -346,6 +351,13 @@ function custom_posts_meta_data() {
                                 <%- plan_item_time_topic %>
                             <% } %>
                         ' ),
+                Field::make( 'association', 'tr_progaram_accriditation', __( 'Accriditation' ) )
+                    ->set_types( array(
+                        array(
+                            'type'      => 'post',
+                            'post_type' => 'accreditations',
+                        )
+                    ) )
     ) );
 
     // ==== TEATCHERS post type

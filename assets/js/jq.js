@@ -411,6 +411,10 @@ jQuery(document).ready(function ($) {
 		}
 	});
 
+	$(document).on('initialized.owl.carousel changed.owl.carousel dragged.owl.carousel translated.owl.carousel', '.owl-carousel', function() {
+        $(this).trigger('stop.owl.autoplay');
+    });
+
 	function ajaxResponsePosts(element) {
 		section 	= element.closest('.section-news');
 		filterTaget = section.data('type');
@@ -635,7 +639,7 @@ jQuery(document).ready(function ($) {
 		const pageIdentifier = window.location.pathname + window.location.search;
 		const lastActiveTabKey = 'lastActiveTab_' + btoa(pageIdentifier).replace(/[^a-zA-Z0-9]/g, '');
 
-		$('.tabs li a, .program-content-all a, .unit-module-link').on('click', function(e) {
+		$('.tabs li a, .program-content-all a:not(.show-more-link), .unit-module-link').on('click', function(e) {
 			e.preventDefault();
 			const tabId = $(this).attr('href').replace('#', '');
 			activateTab(tabId, true);
